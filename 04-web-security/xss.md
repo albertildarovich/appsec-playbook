@@ -1,64 +1,172 @@
-# XSS (Cross-Site Scripting)
+# Cross-Site Scripting (XSS)
 
 ## Определение
 
-XSS (Cross-Site Scripting) — тип инъекции, при котором злоумышленник внедряет клиентский скрипт (JavaScript) в веб-страницу, которая затем выполняется в браузере жертвы.
+Cross-Site Scripting (XSS) — это уязвимость, при которой злоумышленник добивается выполнения произвольного JavaScript-кода в браузере пользователя.
 
 - **CWE**: CWE-79 — Improper Neutralization of Input During Web Page Generation
 - **OWASP Top 10 (2021)**: A03: Injection
-- **Риск**: Кража сессий, редирект на фишинг, deface, кража данных
+- **Риск**: Кража сессий, редирект на фишинг, deface, кража данных, выполнение действий от имени пользователя
 
 ## Причина возникновения
 
-Основная причина — вывод пользовательского ввода в HTML/JS контексте без корректного экранирования (encoding).
+Основная причина — **отображение недоверенных пользовательских данных в HTML, JavaScript, CSS или HTML-атрибутах без корректной обработки** (Output Encoding или Sanitization).
 
 Уязвимый пример (ОПАСНО):
-```python
-# Python / Flask
-return f"<div>Привет, {user_input}</div>"
+```javascript
+// JavaScript
+const name = new URLSearchParams(location.search).get("name");
+document.getElementById("welcome").innerHTML = "Hello " + name;
 ```
 
-```tsx
-// React — dangerouslySetInnerHTML
-<div dangerouslySetInnerHTML={{ __html: userComment }} />
+```python
+# Python / Flask (без экранирования)
+return f"<div>Привет, {user_input}</div>"
 ```
 
 ```php
 <?php echo "Search: " . $_GET['q']; ?>
 ```
 
-Безопасная реализация:
-```python
-from flask import escape
-return f"<div>Привет, {escape(user_input)}</div>"
+Пользовательские данные попадают в `innerHTML` (или echo), который интерпретирует их как HTML.
+Ввод: `<img src=x onerror=alert(1)>` → выполнится JavaScript.
+
+### Почему innerHTML опасен?
+1. **Парсит строку как HTML** — все теги и скрипты становятся частью DOM
+2. **Не экранирует данные** — любая HTML-разметка из строки выполняется
+3. **Разница с textContent** — `textContent` интерпретирует данные как текст, а не как HTML
+
+## Основные типы XSS
+
+| Тип | Описание | Пример |
+|-----|----------|--------|
+| **Reflected XSS** | Payload передаётся в HTTP-запросе и сразу отражается в ответе приложения | `/search?q=<script>alert(1)</script>` |
+| **Stored XSS** | Payload сохраняется на сервере (БД) и выполняется при открытии страницы другими пользователями | Комментарии, отзывы, сообщения форума, профиль пользователя |
+| **DOM XSS** | Уязвимость возникает полностью на стороне клиента, сервер не участвует | `location.hash` → `innerHTML` |
+
+```
+Reflected XSS:
+
+Клиент ── HTTP Request ──▶ Сервер
+          ◀── HTML с payload ──
+          ▼
+Браузер выполняет JavaScript
+
+Stored XSS:
+
+Атакующий ──▶ Сервер (БД) ──▶ Жертва
+                    │
+     Payload сохраняется и
+     отдаётся всем пользователям
 ```
 
-```tsx
-// React — экранирует по умолчанию
-<div>{userInput}</div>
+**Stored XSS** обычно считается наиболее опасным типом, так как:
+- не требует social engineering (жертве не нужно переходить по ссылке);
+- поражает всех, кто открывает страницу;
+- может накапливаться и поражать администраторов в панели управления.
+
+### DOM XSS — детальнее
+
+DOM XSS не требует передачи данных на сервер. Уязвимость живёт во frontend-коде.
+
+```
+Источник (Source) ──▶ Поток данных ──▶ Опасная операция (Sink)
+
+Пример:
+location.search ──▶ name ──▶ innerHTML
 ```
 
-```php
-<?= htmlspecialchars($_GET['q'], ENT_QUOTES, 'UTF-8') ?>
+## Источники (Source)
+
+Наиболее распространённые источники пользовательских данных:
+
+| Источник | Описание |
+|----------|----------|
+| `location.search` | Query-параметры URL |
+| `location.hash` | Фрагмент URL (всё после #) |
+| `location.href` | Полный URL |
+| `document.URL` | Текущий URL страницы |
+| `document.cookie` | Cookie (без HttpOnly) |
+| `window.name` | Имя окна |
+| `postMessage()` | Сообщения из других окон/iframe |
+| `localStorage` | Локальное хранилище |
+| `sessionStorage` | Сессионное хранилище |
+
+## Опасные операции (Sink)
+
+Наиболее распространённые sink (опасные API):
+
+| Sink | Описание |
+|------|----------|
+| `innerHTML` | Устанавливает HTML-содержимое элемента |
+| `outerHTML` | Заменяет элемент и его содержимое |
+| `document.write()` | Записывает HTML в документ |
+| `insertAdjacentHTML()` | Вставляет HTML в指定 позицию |
+| `eval()` | Выполняет произвольный JavaScript |
+| `setTimeout(string)` | Выполняет строку как JavaScript |
+| `setInterval(string)` | Выполняет строку как JavaScript циклически |
+| `new Function()` | Создаёт функцию из строки |
+
+> Использование пользовательского ввода в этих API требует особой осторожности.
+
+### Безопасные альтернативы
+
+Вместо:
+```javascript
+element.innerHTML = userInput;
 ```
+
+использовать:
+```javascript
+element.textContent = userInput;
+// или
+element.innerText = userInput;
+```
+
+Если **отображение HTML действительно необходимо**, использовать **санитизацию** (см. ниже).
+
+## Sanitizer
+
+Если приложение должно отображать HTML (например, редактор комментариев, WYSIWYG), следует использовать специализированные библиотеки.
+
+Рекомендуемый инструмент: **[DOMPurify](https://github.com/cure53/DOMPurify)**
+
+```javascript
+const safe = DOMPurify.sanitize(userInput);
+element.innerHTML = safe;
+```
+
+**Что важно проверить:**
+- [ ] Используется ли надежная библиотека (DOMPurify — от Cure53)
+- [ ] Актуальна ли версия (обновления безопасности)
+- [ ] Безопасна ли конфигурация (разрешённые теги/атрибуты)
 
 ## Как это обнаружить
 
 ### SAST (Static Analysis)
 
-Большинство SAST-инструментов используют **Taint Analysis**:
+Большинство SAST-инструментов используют **Taint Analysis**
 
+Типичный поток данных:
 ```
-Source (GET/POST/input)
-  |
-Поток данных (конкатенация, манипуляции)
-  |
-Sink (echo, innerHTML, dangerouslySetInnerHTML, render_template_string)
+Source (location.search, document.cookie, GET[param])
+  │
+Поток данных (присваивание, конкатенация)
+  │
+Sink (innerHTML, document.write, dangerouslySetInnerHTML)
 ```
 
-Если есть путь Source → Sink и нет Sanitizer (htmlspecialchars, escape, encoding) — инструмент сообщит о XSS.
+Если **отсутствует корректный Sanitizer** (DOMPurify, htmlspecialchars, escape) — инструмент сообщает о потенциальной XSS.
 
-**Semgrep правило:**
+**Что проверять при анализе SAST findings:**
+- [ ] Источник пользовательских данных (Source)
+- [ ] Путь распространения данных (Taint Flow)
+- [ ] Используется ли безопасный Sanitizer
+- [ ] Какой именно Sink используется
+- [ ] Действительно ли пользовательский ввод достигает Sink
+- [ ] Является ли срабатывание истинным (True Positive) или ложноположительным (False Positive)
+
+**Semgrep правило (пример):**
 ```yaml
 rules:
   - id: react-dangerouslySetInnerHTML
@@ -71,10 +179,16 @@ rules:
 
 ### DAST (Dynamic Analysis)
 
-DAST отправляет тестовые payloads и анализирует ответы:
+DAST не анализирует код, а проверяет приложение извне.
 
+**Типичный процесс:**
+1. Отправка XSS-пейлоадов
+2. Анализ HTML-ответа (отразился ли payload)
+3. Проверка выполнения JavaScript (через headless browser)
+4. Анализ изменений DOM
+
+**Типичные payload:**
 ```html
-<!-- Базовые payloads -->
 <script>alert(1)</script>
 <img src=x onerror=alert(1)>
 <svg onload=alert(1)>
@@ -86,120 +200,161 @@ javascript:alert(1)
 {{constructor.constructor('alert(1)')()}}
 ```
 
-**Что анализирует DAST:**
-- Наличие неэкранированных payloads в ответе
-- Выполнение JavaScript (через headless browser)
-- Content-Type (text/html vs application/json)
-
 ### Code Review
 
 ```bash
 # Что искать
 grep -rn "innerHTML" src/
-grep -rn "dangerouslySetInnerHTML" src/
+grep -rn "outerHTML" src/
 grep -rn "document.write" src/
 grep -rn "eval(" src/
-grep -rn "htmlspecialchars" src/  # проверить, что используется везде
+grep -rn "dangerouslySetInnerHTML" src/
+grep -rn "insertAdjacentHTML" src/
+grep -rn "setTimeout.*location" src/   # setTimeout с данными из URL
+grep -rn "htmlspecialchars" src/       # проверить, что используется везде
 ```
-
-## Типы XSS
-
-| Тип | Описание | Источник | Пример |
-|-----|----------|----------|--------|
-| **Stored (Persistent)** | Скрипт сохраняется на сервере (БД, файл) | Сервер | Комментарий, профиль, сообщение |
-| **Reflected (Non-persistent)** | Скрипт отражается в ответе сервера | Запрос (URL, param) | Поиск, error page |
-| **DOM-based** | Уязвимость на клиенте, сервер не участвует | URL hash, fragment | `document.write`, `eval` с location.hash |
 
 ## Способы предотвращения
 
-### Обязательно:
+### 1. Output Encoding (основной механизм защиты)
 
-1. **Context-aware encoding** (основной метод):
+Пользовательские данные должны кодироваться в соответствии с **контекстом вывода**.
 
-| Контекст | Метод | Пример |
-|----------|-------|--------|
-| HTML body | HTML entity encoding | `&lt;script&gt;` |
-| HTML attribute | Attribute encoding | `&quot;` |
-| JavaScript | JS string escape | `\x3Cscript\x3E` |
-| URL | URL encoding | `%3Cscript%3E` |
-| CSS | CSS escape | `\3C script\3E` |
+| Контекст | Что кодировать | Пример результата |
+|----------|---------------|-------------------|
+| HTML body | `< > & " '` | `&lt;script&gt;` |
+| HTML attribute | кавычки, пробелы | `&quot; onclick` |
+| JavaScript | экранирование строк | `\x3Cscript\x3E` |
+| CSS | CSS-escape | `\3C script\3E` |
+| URL | URL-encoding | `%3Cscript%3E` |
 
-2. **Content Security Policy (CSP)** — defense in depth:
-```
-Content-Security-Policy: default-src 'self'; script-src 'self'
-```
+> Использование **неправильного типа кодирования** может не устранить XSS. HTML-safe ≠ JavaScript-safe.
 
-3. **Template engines с auto-escaping**:
-```python
-# Jinja2 — autoescape ON by default
-{{ user_input }}  # безопасно
+Пример:
+```javascript
+// Вставка в HTML-атрибут:
+element.setAttribute("data-name", encodeURIComponent(userInput));
 
-# React — экранирует по умолчанию
-<div>{userInput}</div>  # безопасно
+// Вставка как текст:
+element.textContent = userInput;
 ```
 
-### Дополнительно:
-- HttpOnly + Secure + SameSite cookies
-- Trusted Types API (современные браузеры)
-- Input validation (allowlist там, где возможно)
-- DOMPurify для случаев, когда HTML необходим
+### 2. Использование безопасных DOM API
 
-## Как проверить исправление
+**Предпочитать:**
+- `textContent`
+- `innerText`
+- `createTextNode()`
+- `setAttribute()` (с кодированием)
 
-```bash
-# 1. Отправить payload
-curl -X POST https://target.com/comment \
-  -d "text=<script>alert(1)</script>"
+**Избегать:**
+- `innerHTML`
+- `outerHTML`
+- `document.write()`
+- `insertAdjacentHTML()`
 
-# 2. Проверить, что payload не выполняется
-curl -s https://target.com/comment/1 | grep "&lt;script&gt;"
+### 3. Санитизация HTML
 
-# 3. Проверить CSP заголовки
-curl -sI https://target.com | grep -i content-security-policy
+Использовать **только при необходимости отображения HTML**.
 
-# 4. Проверить HttpOnly cookie
-curl -sI https://target.com | grep -i set-cookie
+Рекомендуемый инструмент: **DOMPurify**
+
+```javascript
+import DOMPurify from 'dompurify';
+const safe = DOMPurify.sanitize(userInput, { ALLOWED_TAGS: ['b', 'i', 'em'] });
 ```
 
-## Типичные ошибки
+### 4. Content Security Policy (CSP)
 
-| Ошибка | Почему не работает |
-|--------|-------------------|
-| Только client-side validation | Атакующий шлёт напрямую POST |
-| Экранирование через `strip_tags()` | Не всё удаляет, обходится через `<<script>script>` |
-| CSP без nonces | `unsafe-inline` разрешает inline скрипты |
-| Blacklist фильтрация | Обходится через encoding, Unicode, entities |
-| Регулярные выражения | Не покрывают все варианты |
-| Sanitize в одном контексте для другого | HTML safe не значит JS safe |
+CSP ограничивает выполнение ресурсов браузером.
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self';
+```
+
+**CSP:**
+- снижает последствия успешной XSS (скрипты с других доменов не выполнятся);
+- **не устраняет саму уязвимость**;
+- является **дополнительным уровнем защиты** (defense in depth).
+
+**Не рекомендуется использовать:**
+- `unsafe-inline` — разрешает inline-скрипты;
+- `unsafe-eval` — разрешает `eval()`.
+
+**Лучшая практика:** использовать CSP с nonces или хешами:
+
+```
+Content-Security-Policy: script-src 'nonce-abc123' 'strict-dynamic'
+```
+
+### 5. HttpOnly Cookie
+
+HttpOnly предотвращает чтение cookie через JavaScript (`document.cookie`).
+
+Однако:
+- не предотвращает XSS;
+- не мешает злоумышленнику выполнять действия от имени пользователя (API-запросы выполняются с cookie автоматически).
+
+### 6. Trusted Types API (современные браузеры)
+
+Позволяет запретить использование опасных sink без проверки:
+
+```javascript
+// Включение Trusted Types
+Content-Security-Policy: require-trusted-types-for 'script';
+
+// Использование
+element.innerHTML = trustedHTML;  // только через Trusted Type policy
+```
+
+## Анализ результатов SAST
+
+При анализе найденной XSS необходимо проверить:
+
+1. **Источник пользовательских данных (Source)**
+   - Откуда приходят данные? (URL, БД, cookie, postMessage)
+   - Контролирует ли атакующий этот источник?
+
+2. **Путь распространения данных (Taint Flow)**
+   - Проходят ли данные через какие-либо преобразования?
+   - Есть ли проверки или фильтрация на пути?
+
+3. **Используется ли безопасный Sanitizer**
+   - DOMPurify? htmlspecialchars? Template engine с autoescape?
+
+4. **Какой именно Sink используется**
+   - `innerHTML`? `document.write`? `eval`?
+
+5. **Действительно ли пользовательский ввод достигает Sink**
+   - Возможно, данные проверяются перед выводом
+
+6. **Является ли срабатывание истинным (True Positive) или ложноположительным (False Positive)**
 
 ## Defense in Depth
 
+Защита от XSS должна строиться в несколько уровней:
+
 ```
-Layer 1: Input validation (allowlist)
-Layer 2: Context-aware encoding (основной)
-Layer 3: CSP заголовки
-Layer 4: HttpOnly cookies
-Layer 5: Trusted Types API
-Layer 6: XSS Auditor (legacy, но может помочь)
-Layer 7: Регулярный SAST + DAST
+Layer 1: Безопасная разработка (autoescaping, textContent)
+Layer 2: Output Encoding (контекстное кодирование)
+Layer 3: Безопасные DOM API (textContent вместо innerHTML)
+Layer 4: Санитизация (DOMPurify — при необходимости HTML)
+Layer 5: Content Security Policy (CSP)
+Layer 6: HttpOnly + Secure + SameSite Cookie
+Layer 7: Trusted Types API
+Layer 8: Регулярный SAST
+Layer 9: Регулярный DAST
 ```
+
+> Ни один механизм по отдельности не гарантирует полную защиту.
 
 ## Связанные стандарты
 
-- **CWE-79**: Cross-site Scripting
+- **CWE-79**: Cross-Site Scripting
 - **OWASP Top 10 (2021)**: A03: Injection
 - **OWASP ASVS**: V.5 Validation, Sanitization and Encoding
 - **PCI DSS**: 6.5.7 Cross-site scripting (XSS)
 - **NIST SSDF**: PW.9 — Secure Coding Practices
-
-## Ключевые тезисы
-
-- XSS возникает из-за вывода пользовательского ввода без экранирования
-- **Context-aware encoding — основной метод защиты**
-- CSP — defense in depth, а не замена encoding
-- Sanitize ≠ Encode. Sanitize удаляет, Encode делает безопасным
-- React/Vue/Svelte безопасны по умолчанию, но `dangerouslySetInnerHTML` — red flag
-- Один слой защиты будет обойдён. Всегда используй defense in depth
 
 ## Полезные ссылки
 
@@ -208,15 +363,54 @@ Layer 7: Регулярный SAST + DAST
 - [PortSwigger XSS Labs](https://portswigger.net/web-security/cross-site-scripting)
 - [CSP Evaluator](https://csp-evaluator.withgoogle.com/)
 - [DOMPurify](https://github.com/cure53/DOMPurify)
+- [PayloadsAllTheThings — XSS](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection)
+
+## AppSec Notes
+
+> 💡 Практические наблюдения, которые редко встречаются в учебниках, но часто помогают в работе.
+
+1. **`innerHTML` не всегда означает XSS** — важно проверить, действительно ли пользовательский ввод достигает этого sink'a. Если данные проходят через санитизатор или берутся не из пользовательского источника — это может быть False Positive.
+
+2. **Если HTML не нужен, `textContent` почти всегда лучше, чем санитизация** — санитизация может быть ошибочной, а `textContent` гарантированно безопасен.
+
+3. **При анализе отчёта SAST сначала изучай taint flow, а уже потом решай, является ли находка True Positive или False Positive.** Не блокируйся на sink'e — смотри весь путь данных.
+
+4. **Наличие CSP не является основанием закрыть XSS как ложноположительное срабатывание.** CSP снижает последствия эксплуатации, но не устраняет саму уязвимость.
+
+5. **Всегда учитывай контекст вывода:** HTML, атрибут, JavaScript, CSS и URL требуют разных способов экранирования. Кодирование для HTML-контекста не защитит в JavaScript-контексте.
 
 ## Практика
 
 **Из опыта**: самая частая причина XSS — разработчик уверен, что данные безопасны. "Это же просто имя пользователя" — а в имени `</div><script>...</script>`.
 
-**Лучшая защита**: autoescaping (React/Vue/Svelte) + CSP с nonces + регулярный DAST сканинг. Не полагаться на один слой.
+**Где чаще всего нахожу XSS в 2025:**
+- Комментарии и отзывы (Stored XSS)
+- Поисковые формы (Reflected XSS)
+- SPA с динамическим рендерингом (DOM XSS)
+- JSON-ответы, которые вставляются в `innerHTML` без экранирования
+- Application cache/service workers
+
+**Лучшая защита**: autoescaping (React/Vue/Svelte) + CSP с nonces + регулярный DAST. Не полагаться на один слой.
 
 **Что спрашивать разработчиков на Code Review:**
 - "Как ты экранируешь этот вывод?"
 - "Почему здесь `dangerouslySetInnerHTML`?"
 - "Какие данные могут попасть в этот `innerHTML`?"
 - "CSP настроен или в процессе?"
+- "Ты проверял, что будет, если ввести `<img src=x onerror=alert(1)>`?"
+- "Какой контекст вывода? HTML, атрибут или JavaScript?"
+
+## Ключевые тезисы
+
+- XSS — выполнение произвольного JavaScript в браузере пользователя
+- Основная причина — вывод недоверенных данных без корректной обработки
+- Основные типы: Reflected, Stored, DOM
+- `innerHTML` — опасный Sink
+- `textContent` — безопасная альтернатива для отображения текста
+- SAST выявляет XSS с помощью Taint Analysis
+- DAST обнаруживает XSS, отправляя специальные payload и анализируя выполнение JavaScript
+- Output Encoding — основная защита
+- Sanitization применяется, когда необходимо отображать HTML
+- CSP снижает последствия успешной XSS, но не устраняет уязвимость
+- HttpOnly защищает cookie от чтения JavaScript, но не предотвращает выполнение XSS
+- Защита должна строиться по принципу Defense in Depth

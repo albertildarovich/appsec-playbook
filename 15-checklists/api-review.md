@@ -17,6 +17,9 @@
 - [ ] **Dynamic SQL**: нет конкатенации, нет `createNativeQuery`
 - [ ] **ORDER BY / GROUP BY**: allowlist допустимых колонок
 - [ ] **NoSQL Injection**: нет `$where`, `$regex` с пользовательским вводом
+- [ ] **XSS (Reflected/Stored)**: вывод пользовательских данных экранируется
+- [ ] **XSS (DOM)**: нет пользовательского ввода в `innerHTML`, `document.write`, `eval`
+- [ ] **CSP**: Content-Security-Policy настроен, без `unsafe-inline`
 - [ ] **Mass assignment**: DTO / whitelist для изменяемых полей
 - [ ] **Schema validation**: JSON Schema / Pydantic для всех request body
 - [ ] **Размер запроса**: ограничен

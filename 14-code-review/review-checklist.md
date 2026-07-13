@@ -37,7 +37,19 @@
 - [ ] **ORM**: нет конкатенации в HQL/JPQL
 - [ ] **Stored Procedures**: внутри нет динамической сборки SQL
 - [ ] **NoSQLi**: нет `$where`, `$regex` с пользовательским вводом
-- [ ] **XSS**: context-aware encoding, нет `innerHTML` с вводом
+
+### Cross-Site Scripting (XSS)
+- [ ] **Context-aware encoding**: вывод экранируется по контексту (HTML, атрибут, JS, CSS, URL)
+- [ ] **innerHTML / outerHTML**: нет пользовательского ввода в этих sink
+- [ ] **dangerouslySetInnerHTML**: не используется (React)
+- [ ] **document.write()**: не вызывается с пользовательским вводом
+- [ ] **eval()**: не вызывается с пользовательским вводом
+- [ ] **Template engines**: autoescaping включён (Jinja2, Handlebars, и т.д.)
+- [ ] **DOMPurify**: если HTML необходим, используется санитизация
+- [ ] **CSP**: настроен, без `unsafe-inline` / `unsafe-eval`
+- [ ] **HttpOnly + Secure + SameSite**: cookie защищены
+
+### Server-Side Template Injection (SSTI)
 - [ ] **SSTI**: нет `render_template_string` с пользовательским вводом
 - [ ] **SSRF**: allow list для external URLs, запрещены internal IP
 - [ ] **XXE**: XML парсер без external entities
