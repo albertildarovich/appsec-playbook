@@ -168,12 +168,12 @@ add_header Access-Control-Allow-Origin "https://app.example.com";
 try:
     check_permission(user, resource)
 except Exception:
-    pass  # ❌ ошибка → доступ есть
 ```
 
 ### Как исправить
 ```python
-# ✅ БЕЗОПАСНО: при ошибке доступ запрещён
+
+# БЕЗОПАСНО: при ошибке доступ запрещён
 if not check_permission(user, resource):
     abort(403)
 ```

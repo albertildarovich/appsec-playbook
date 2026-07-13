@@ -12,7 +12,7 @@ XSS (Cross-Site Scripting) — тип инъекции, при котором з
 
 Основная причина — вывод пользовательского ввода в HTML/JS контексте без корректного экранирования (encoding).
 
-❌ Уязвимый пример:
+Уязвимый пример (ОПАСНО):
 ```python
 # Python / Flask
 return f"<div>Привет, {user_input}</div>"
@@ -27,7 +27,7 @@ return f"<div>Привет, {user_input}</div>"
 <?php echo "Search: " . $_GET['q']; ?>
 ```
 
-✅ Безопасная реализация:
+Безопасная реализация:
 ```python
 from flask import escape
 return f"<div>Привет, {escape(user_input)}</div>"
@@ -50,9 +50,9 @@ return f"<div>Привет, {escape(user_input)}</div>"
 
 ```
 Source (GET/POST/input)
-  ↓
+  |
 Поток данных (конкатенация, манипуляции)
-  ↓
+  |
 Sink (echo, innerHTML, dangerouslySetInnerHTML, render_template_string)
 ```
 
@@ -132,10 +132,10 @@ Content-Security-Policy: default-src 'self'; script-src 'self'
 3. **Template engines с auto-escaping**:
 ```python
 # Jinja2 — autoescape ON by default
-{{ user_input }}  # ✅ безопасно
+{{ user_input }}  # безопасно
 
 # React — экранирует по умолчанию
-<div>{userInput}</div>  # ✅ безопасно
+<div>{userInput}</div>  # безопасно
 ```
 
 ### Дополнительно:

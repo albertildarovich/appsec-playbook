@@ -14,21 +14,22 @@
 - [ ] Отмечены Data Flows
 - [ ] Trust boundaries выделены
 
-## STRIDE — для каждого элемента DFD
 
-| Элемент | S | T | R | I | D | E |
-|---------|---|---|---|---|---|---|
-| External Entities | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Processes | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Data Stores | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Data Flows | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ |
 
-- [ ] Spoofing: кто может выдать себя за другого?
-- [ ] Tampering: где данные могут быть изменены?
-- [ ] Repudiation: кто может отрицать действие?
-- [ ] Information Disclosure: где данные могут утечь?
+| Data Stores | Нет | Да | Нет | Да | Нет | Нет |
+| Data Flows | Да | Да | Нет | Да | Да | Нет |
+
+
+
+
+
 - [ ] Denial of Service: что может сделать систему недоступной?
 - [ ] Elevation of Privilege: где можно получить больше прав?
+
+
+
+
+
 
 ## Documentation
 - [ ] Каждая угроза задокументирована
@@ -37,3 +38,4 @@
 - [ ] Status: Mitigated / Accepted / In progress
 - [ ] Ответственный назначен
 - [ ] Трекер (Jira, GitHub Issues) заведён
+

@@ -47,23 +47,23 @@ grep -rn "GROUP BY.*+" src/         # Динамический GROUP BY
 ## Безопасные паттерны
 
 ```java
-// ✅ Java
+// Java
 PreparedStatement ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
 ps.setInt(1, id);
 ```
 
 ```python
-# ✅ Python
+# Python
 cursor.execute("SELECT * FROM users WHERE id = %s", (id,))
 ```
 
 ```javascript
-// ✅ Node.js (pg)
+// Node.js (pg)
 await client.query('SELECT * FROM users WHERE id = $1', [id]);
 ```
 
 ```php
-// ✅ PHP
+// PHP
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$id]);
 ```
@@ -71,10 +71,10 @@ $stmt->execute([$id]);
 ## Динамический ORDER BY (allowlist)
 
 ```python
-# ❌ Уязвимо
+# Уязвимо
 query = f"SELECT * FROM users ORDER BY {user_input}"
 
-# ✅ Безопасно — allowlist
+# Безопасно — allowlist
 ALLOWED_COLUMNS = ['name', 'email', 'created_at']
 if user_input not in ALLOWED_COLUMNS:
     raise ValueError("Invalid sort column")
@@ -97,3 +97,4 @@ curl "https://target.com/users?id=1'"
 - **CWE-89**: SQL Injection
 - **CWE-564**: Hibernate Injection
 - **CWE-943**: NoSQL Injection
+вавава

@@ -11,7 +11,7 @@ AppSec: "JWT — это аутентификация. Авторизация —
 | | Аутентификация | Авторизация |
 |---|---|---|
 | Вопрос | "Кто ты?" | "Что тебе можно?" |
-| JWT | ✅ Да, JWT подтверждает identity | ❌ Нет, JWT не определяет права |
+| JWT | Да, JWT подтверждает identity | Нет, JWT не определяет права |
 | Ответ | `sub: "user123"` | `GET /api/orders/123` — имеешь ли ты право? |
 
 ## Ошибки, которые я видел
@@ -20,22 +20,22 @@ AppSec: "JWT — это аутентификация. Авторизация —
 ```json
 {
   "sub": "user123",
-  "role": "admin",  // ❌ роль в JWT — не гарантия
-  "can_do_anything": true  // ❌
+  "role": "admin",  // роль в JWT — не гарантия
+  "can_do_anything": true  // ОПАСНО
 }
 ```
 Проблема: JWT подписан, но кто сказал, что роль admin актуальна? Права могли отозвать.
 
 ### 2. Проверка роли только на UI
 ```tsx
-// ❌ ОПАСНО: скрыли кнопку, но API не защищён
+// ОПАСНО: скрыли кнопку, но API не защищён
 {user.role === 'admin' && <DeleteButton />}
 ```
 API endpoint должен сам проверять права.
 
 ### 3. Отсутствие проверки ownership
 ```python
-# ❌ УЯЗВИМО: JWT показал, что это user123,
+# УЯЗВИМО: JWT показал, что это user123,
 # но endpoint не проверил, что order_id принадлежит user123
 @app.get('/api/orders/{order_id}')
 def get_order(order_id):
@@ -58,15 +58,15 @@ def get_order(order_id):
 @app.get('/api/orders/{order_id}')
 def get_order(order_id):
     current_user = get_current_user()  # из JWT
-    
+
     # Проверка прав
     order = db.query(Order).get(order_id)
     if not order:
         abort(404)
-    
+
     if order.owner_id != current_user.id and not current_user.is_admin:
         abort(403)
-    
+
     return order
 ```
 

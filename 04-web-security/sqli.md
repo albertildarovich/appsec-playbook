@@ -12,7 +12,7 @@ SQL Injection (SQLi) — уязвимость, при которой польз�
 
 Основная причина — **конкатенация пользовательского ввода со строкой SQL-запроса**.
 
-❌ Уязвимый пример:
+Уязвимый пример (ОПАСНО):
 ```java
 // Java / JDBC
 String sql = "SELECT * FROM users WHERE login = '" + login + "'";
@@ -34,7 +34,7 @@ $sql = "SELECT * FROM users WHERE login = '" . $_GET['login'] . "'";
 Пользовательский ввод становится частью SQL-кода.
 Ввод: `' OR 1=1 --` → запрос: `SELECT * FROM users WHERE login = '' OR 1=1 --'`
 
-✅ Безопасная реализация:
+Безопасная реализация:
 ```java
 PreparedStatement ps = connection.prepareStatement(
     "SELECT * FROM users WHERE login = ?"
@@ -77,9 +77,9 @@ $stmt->execute([$login]);
 
 ```
 Source (GET/POST/input)
-  ↓
+  |
 Конкатенация строки SQL
-  ↓
+  |
 Sink (executeQuery, exec, raw SQL)
 ```
 
@@ -172,16 +172,16 @@ grep -rn "'.*+.*'" src/    # Конкатенация
 ### Потенциально опасные ситуации:
 ```python
 # Hibernate — HQL конкатенация
-String hql = "FROM User WHERE login='" + login + "'";  // ❌
+String hql = "FROM User WHERE login='" + login + "'";  // ОПАСНО
 
 # JPA — нативный запрос
-entityManager.createNativeQuery(sql);  // ❌ если sql собран вручную
+entityManager.createNativeQuery(sql);  // ОПАСНО, если sql собран вручную
 
 # Django — raw query
-User.objects.raw("SELECT * FROM users WHERE login = '%s'" % login)  // ❌
+User.objects.raw("SELECT * FROM users WHERE login = '%s'" % login)  // ОПАСНО
 ```
 
-✅ Безопасно с ORM:
+Безопасно с ORM:
 ```python
 # SQLAlchemy
 User.query.filter_by(login=login).first()
