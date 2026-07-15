@@ -24,6 +24,7 @@
 |     | ├─ Vertical Privilege Esc.     | P0 | ✅ Done | `07-authorization/privilege-escalation.md` |
 |     | └─ Horizontal Privilege Esc.   | P0 | ✅ Done | `07-authorization/privilege-escalation.md` |
 | 11 | **Интерпретаторы** (fundamental) | P0 | ✅ Done | `01-fundamentals/interpreters.md` |
+| 12 | Security Misconfiguration | P0 | ✅ Done | `04-web-security/security-misconfiguration.md` |
 
 ## Tier 2: Advanced
 

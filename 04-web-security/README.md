@@ -14,6 +14,8 @@
 | `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | ✅ 100% |
 | `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | ✅ 100% |
 | `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
+| `insecure-deserialization.md` | Insecure Deserialization — языковое покрытие, gadget chains, защита | ✅ 100% |
+| `security-misconfiguration.md` | Security Misconfiguration — debug, .git, .env, Secure by Default | ✅ 100% |
 ---
 
 ## SQL Injection
@@ -95,6 +97,20 @@
 
 ---
 
+## Security Misconfiguration
+
+Ключевые тезисы:
+
+- **Security Misconfiguration** — небезопасные настройки, а не код
+- **Главный вопрос AppSec:** «Почему это вообще доступно?»
+- **Примеры:** DEBUG Mode, открытый Swagger, доступный `.git`, доступный `.env`, stack trace пользователю, Server Header, стандартные пароли
+- **Secure by Default** — система должна быть безопасной «из коробки»
+- **Reduce Attack Surface** — не публикуй то, что не нужно
+
+👉 [Читать конспект →](security-misconfiguration.md)
+
+---
+
 ## План
 
 - [x] SQL Injection
@@ -104,6 +120,6 @@
 - [x] XXE
 - [x] Command Injection
 - [x] Insecure Deserialization
-- [ ] Security Misconfiguration
+- [x] Security Misconfiguration
 - [ ] Vulnerable Components
 

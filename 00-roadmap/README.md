@@ -17,6 +17,7 @@ IDOR                   ░░░░░░░░░░░░░░░░░░░
 SSTI                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 Command Injection      ████████████████████ 100% ✅
 Insecure Deserialization ████████████████████ 100% ✅
+Security Misconfig.   ████████████████████ 100% ✅
 
 Threat Modeling        ████████████████░░░░  80% 📝
 BSIMM                  ░░░░░░░░░░░░░░░░░░░░   0% ❌
@@ -51,6 +52,9 @@ API Security           ██████████░░░░░░░░░
 - [x] CSRF
 - [x] SSRF
 - [x] XXE
+- [x] Command Injection
+- [x] Insecure Deserialization
+- [x] Security Misconfiguration
 - [ ] IDOR
 - [ ] Authentication & Session Management
 - [ ] Authorization (RBAC, ABAC)

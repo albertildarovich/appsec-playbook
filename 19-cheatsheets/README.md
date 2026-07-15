@@ -16,6 +16,7 @@
 | `xxe.md` | XXE — payload, безопасные конфигурации, blind XXE, DoS | ✅ |
 | `command-injection.md` | Command Injection — payload, безопасные паттерны, валидация | ✅ |
 | `insecure-deserialization.md` | Insecure Deserialization — поиск, gadget chains, безопасные паттерны | ✅ |
+| `security-misconfiguration.md` | Security Misconfiguration — endpoint'ы, заголовки, code review, защита | ✅ |
 | — | Command Injection | ⏳ |
 
 ---
@@ -29,6 +30,7 @@
 - [x] XXE
 - [x] Insecure Deserialization
 - [x] Command Injection
+- [x] Security Misconfiguration
 - [ ] JWT
 - [ ] Docker
 - [ ] Kubernetes
