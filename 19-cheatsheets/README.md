@@ -13,7 +13,7 @@
 | `authorization.md` | BAC / IDOR / BOLA / PrivEsc — code review, безопасные паттерны, классификация | ✅ |
 | `csrf.md` | CSRF — SameSite, CSRF-токен, Double Submit Cookie, SPA схема | ✅ |
 | `ssrf.md` | SSRF — payload, allowlist, DNS resolve, redirects, egress policy | ✅ |
-| — | XXE | ⏳ |
+| `xxe.md` | XXE — payload, безопасные конфигурации, blind XXE, DoS | ✅ |
 | — | Insecure Deserialization | ⏳ |
 | — | Command Injection | ⏳ |
 
@@ -25,7 +25,7 @@
 - [x] Authorization (BAC / IDOR / BOLA / PrivEsc)
 - [x] CSRF
 - [x] SSRF
-- [ ] XXE
+- [x] XXE
 - [ ] Insecure Deserialization
 - [ ] Command Injection
 - [ ] JWT

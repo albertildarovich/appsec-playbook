@@ -11,7 +11,7 @@ SQL Injection          ███████████████████
 XSS                    ████████████████████ 100% ✅
 CSRF                   ████████████████████ 100% ✅
 SSRF                   ████████████████████ 100% ✅
-XXE                    ░░░░░░░░░░░░░░░░░░░░   0% ❌
+XXE                    ████████████████████ 100% ✅
 IDOR                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 SSTI                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 
@@ -46,7 +46,7 @@ API Security           ██████████░░░░░░░░░
 - [x] XSS
 - [x] CSRF
 - [x] SSRF
-- [ ] XXE
+- [x] XXE
 - [ ] IDOR
 - [ ] Authentication & Session Management
 - [ ] Authorization (RBAC, ABAC)

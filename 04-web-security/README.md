@@ -12,7 +12,7 @@
 | `xss.md` | Cross-Site Scripting — Reflected, Stored, DOM-based | ✅ 100% |
 | `csrf.md` | CSRF — механизм атаки, CORS vs SOP vs CSRF, хранение токенов | ✅ 100% |
 | `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | ✅ 100% |
-| — | XXE | ⏳ План |
+| `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | ✅ 100% |
 | — | Command Injection | ⏳ План |
 | — | Insecure Deserialization | ⏳ План |
 
@@ -56,13 +56,27 @@
 
 ---
 
+## XXE (XML External Entity)
+
+Ключевые тезисы:
+
+- **XXE** — XML-парсер обрабатывает внешние сущности, что ведёт к чтению файлов, SSRF или DoS
+- **Лучшая защита** — отключить DOCTYPE, External Entities и DTD
+- **Defense in Depth**: безопасный парсер + минимальные привилегии + сегментация сети
+- XXE — классический пример, почему сервис должен иметь доступ только к необходимым ресурсам
+
+👉 [Читать конспект →](xxe.md)
+
+---
+
 ## План
 
 - [x] SQL Injection
 - [x] XSS
 - [x] CSRF
 - [x] SSRF
-- [ ] XXE
+- [x] XXE
 - [ ] Command Injection
 - [ ] Insecure Deserialization
+
 

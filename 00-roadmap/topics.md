@@ -14,7 +14,7 @@
 | 4 | XSS | P0 | ✅ Done | `04-web-security` |
 | 5 | CSRF | P0 | ✅ Done | `04-web-security/csrf.md` |
 | 6 | SSRF | P0 | ✅ Done | `04-web-security/ssrf.md` |
-| 7 | XXE | P0 | ❌ TODO | `04-web-security` |
+| 7 | XXE | P0 | ✅ Done | `04-web-security/xxe.md` |
 | 8 | IDOR | P0 | 📝 WIP | `07-authorization/idor.md` |
 | 9 | Authentication | P0 | 📝 WIP | `06-authentication` |
 | 10 | Authorization (RBAC, ABAC, BAC) | P0 | 📝 WIP | `07-authorization` |
