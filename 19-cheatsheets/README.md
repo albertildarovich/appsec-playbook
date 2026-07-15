@@ -14,7 +14,7 @@
 | `csrf.md` | CSRF — SameSite, CSRF-токен, Double Submit Cookie, SPA схема | ✅ |
 | `ssrf.md` | SSRF — payload, allowlist, DNS resolve, redirects, egress policy | ✅ |
 | `xxe.md` | XXE — payload, безопасные конфигурации, blind XXE, DoS | ✅ |
-| — | Insecure Deserialization | ⏳ |
+| `command-injection.md` | Command Injection — payload, безопасные паттерны, валидация | ✅ |
 | — | Command Injection | ⏳ |
 
 ---
@@ -27,7 +27,7 @@
 - [x] SSRF
 - [x] XXE
 - [ ] Insecure Deserialization
-- [ ] Command Injection
+- [x] Command Injection
 - [ ] JWT
 - [ ] Docker
 - [ ] Kubernetes

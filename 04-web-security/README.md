@@ -13,9 +13,8 @@
 | `csrf.md` | CSRF — механизм атаки, CORS vs SOP vs CSRF, хранение токенов | ✅ 100% |
 | `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | ✅ 100% |
 | `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | ✅ 100% |
-| — | Command Injection | ⏳ План |
+| `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
 | — | Insecure Deserialization | ⏳ План |
-
 ---
 
 ## SQL Injection
@@ -69,6 +68,19 @@
 
 ---
 
+## Command Injection
+
+Ключевые тезисы:
+
+- **Command Injection** — пользовательский ввод управляет командами ОС
+- **Лучшая защита** — не вызывать shell (использовать библиотеки)
+- **ProcessBuilder** / `subprocess.run([...])` / `spawn(...)` с раздельными аргументами
+- **ProcessBuilder не защищает от SSRF** — проверяй аргументы
+
+👉 [Читать конспект →](command-injection.md)
+
+---
+
 ## План
 
 - [x] SQL Injection
@@ -76,7 +88,6 @@
 - [x] CSRF
 - [x] SSRF
 - [x] XXE
-- [ ] Command Injection
+- [x] Command Injection
 - [ ] Insecure Deserialization
-
 
