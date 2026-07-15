@@ -15,6 +15,7 @@
 | `ssrf.md` | SSRF — payload, allowlist, DNS resolve, redirects, egress policy | ✅ |
 | `xxe.md` | XXE — payload, безопасные конфигурации, blind XXE, DoS | ✅ |
 | `command-injection.md` | Command Injection — payload, безопасные паттерны, валидация | ✅ |
+| `insecure-deserialization.md` | Insecure Deserialization — поиск, gadget chains, безопасные паттерны | ✅ |
 | — | Command Injection | ⏳ |
 
 ---
@@ -26,7 +27,7 @@
 - [x] CSRF
 - [x] SSRF
 - [x] XXE
-- [ ] Insecure Deserialization
+- [x] Insecure Deserialization
 - [x] Command Injection
 - [ ] JWT
 - [ ] Docker

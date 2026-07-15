@@ -14,7 +14,6 @@
 | `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | ✅ 100% |
 | `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | ✅ 100% |
 | `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
-| — | Insecure Deserialization | ⏳ План |
 ---
 
 ## SQL Injection
@@ -81,6 +80,21 @@
 
 ---
 
+## Insecure Deserialization
+
+Ключевые тезисы:
+
+- **Insecure Deserialization** — злоумышленник управляет процессом создания объектов
+- **Это не только Java.** Python (`pickle`), PHP (`unserialize`), .NET (`BinaryFormatter`), Ruby (`Marshal.load`) — все могут быть уязвимы
+- **Gadget Chain** — используются существующие классы, не свои
+- **JSON безопаснее** — тип известен, строки не выполняются как код
+- **JSON опасен** — если включена полиморфная десериализация (`@class`, `enableDefaultTyping`)
+- **Ключевое правило:** уязвимость возникает в любой технологии, где недоверенные данные управляют процессом восстановления объектов
+
+👉 [Читать конспект →](insecure-deserialization.md)
+
+---
+
 ## План
 
 - [x] SQL Injection
@@ -89,5 +103,7 @@
 - [x] SSRF
 - [x] XXE
 - [x] Command Injection
-- [ ] Insecure Deserialization
+- [x] Insecure Deserialization
+- [ ] Security Misconfiguration
+- [ ] Vulnerable Components
 

@@ -12,9 +12,11 @@ XSS                    ███████████████████
 CSRF                   ████████████████████ 100% ✅
 SSRF                   ████████████████████ 100% ✅
 XXE                    ████████████████████ 100% ✅
+Interpreters           ████████████████████ 100% ✅
 IDOR                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 SSTI                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 Command Injection      ████████████████████ 100% ✅
+Insecure Deserialization ████████████████████ 100% ✅
 
 Threat Modeling        ████████████████░░░░  80% 📝
 BSIMM                  ░░░░░░░░░░░░░░░░░░░░   0% ❌
@@ -43,6 +45,7 @@ API Security           ██████████░░░░░░░░░
 ### Must-Know (Фундамент)
 - [x] OWASP Top 10 (2021)
 - [x] Security Principles (CIA, Defense in Depth, Least Privilege)
+- [x] **Interpreters — объединяющая концепция**
 - [x] SQL Injection
 - [x] XSS
 - [x] CSRF
