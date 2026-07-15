@@ -10,14 +10,9 @@
 | [secure-api](secure-api/) | То же API, но с защитой |
 | [jwt-demo](jwt-demo/) | Атаки на JWT + защита |
 | [oauth-demo](oauth-demo/) | OAuth 2.0 + PKCE реализация |
+| [chrome-security-auditor](chrome-security-auditor/) | 🛡️ Chrome Extension для аудита безопасности веб-страниц |
+| [vscode-security-auditor](vscode-security-auditor/) | 🛡️ VSCode Extension — линтер безопасности кода |
 
 ## Структура проекта
 
-```
-project/
-├── README.md       # Цель, как запустить
-├── vulnerable/     # Уязвимая версия
-├── secure/         # Исправленная версия
-├── exploit/        # PoC
-└── tests/          # Security tests
-```
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Auditor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🛡️ Security Auditor</h1>
+      <span class="url-badge" id="currentUrl">...</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="checklist">📋 Чек-лист</button>
+      <button class="tab" data-tab="scanner">🔍 Сканер</button>
+      <button class="tab" data-tab="report">📊 Отчёт</button>
+    </div>
+
+    <!-- Tab: Checklist -->
+    <div class="tab-content active" id="checklist">
+      <div class="checklist-info">
+        <p>Проверьте уязвимости на текущей странице:</p>
+      </div>
+      <div class="checklist-items" id="checklistItems">
+        <!-- Items will be injected by JS -->
+      </div>
+      <div class="checklist-actions">
+        <button id="runAllChecks" class="btn-primary">▶ Запустить все проверки</button>
+        <button id="resetChecklist" class="btn-secondary">↺ Сбросить</button>
+      </div>
+    </div>
+
+    <!-- Tab: Scanner -->
+    <div class="tab-content" id="scanner">
+      <div class="scanner-controls">
+        <button id="scanPage" class="btn-primary">🔍 Сканировать страницу</button>
+        <span class="scan-status" id="scanStatus">Готов к сканированию</span>
+      </div>
+      <div class="scan-results" id="scanResults">
+        <div class="placeholder">Нажмите "Сканировать страницу" для начала</div>
+      </div>
+    </div>
+
+    <!-- Tab: Report -->
+    <div class="tab-content" id="report">
+      <div class="report-summary">
+        <div class="stat">
+          <span class="stat-value" id="totalChecks">0</span>
+          <span class="stat-label">Всего проверок</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="passedChecks">0</span>
+          <span class="stat-label">Пройдено</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="failedChecks">0</span>
+          <span class="stat-label">Провалено</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="warningChecks">0</span>
+          <span class="stat-label">Предупреждений</span>
+        </div>
+      </div>
+      <div class="report-details" id="reportDetails">
+        <div class="placeholder">Запустите проверки для получения отчёта</div>
+      </div>
+      <div class="report-actions">
+        <button id="exportReport" class="btn-secondary">📥 Экспорт (JSON)</button>
+        <button id="exportHTML" class="btn-secondary">📥 Экспорт (HTML)</button>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

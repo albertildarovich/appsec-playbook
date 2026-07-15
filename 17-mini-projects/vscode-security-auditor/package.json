@@ -1,0 +1,121 @@
+{
+  "name": "vscode-security-auditor",
+  "displayName": "Security Auditor",
+  "description": "Линтер безопасности кода. Проверяет код, конфиги и инфраструктуру на уязвимости (OWASP-based).",
+  "version": "1.0.0",
+  "publisher": "security-auditor",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "security",
+    "audit",
+    "vulnerability",
+    "owasp",
+    "linter",
+    "code-review"
+  ],
+  "icon": "icons/icon128.png",
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:python",
+    "onLanguage:dockerfile",
+    "onLanguage:yaml",
+    "onLanguage:json",
+    "onLanguage:html",
+    "onLanguage:shellscript",
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "security-auditor",
+          "title": "Security Auditor",
+          "icon": "icons/icon16.png"
+        }
+      ]
+    },
+    "views": {
+      "security-auditor": [
+        {
+          "type": "tree",
+          "id": "securityAuditorView",
+          "name": "Уязвимости"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "security-auditor.scanFile",
+        "title": "Security Audit: Сканировать текущий файл"
+      },
+      {
+        "command": "security-auditor.scanWorkspace",
+        "title": "Security Audit: Сканировать весь проект"
+      },
+      {
+        "command": "security-auditor.showResults",
+        "title": "Security Audit: Показать результаты"
+      },
+      {
+        "command": "security-auditor.exportReport",
+        "title": "Security Audit: Экспорт отчёта (JSON)"
+      },
+      {
+        "command": "security-auditor.clearResults",
+        "title": "Security Audit: Очистить результаты"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "security-auditor.scanFile",
+          "group": "7_security@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "security-auditor.scanFile",
+          "group": "7_security@1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "security-auditor.scanFile",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s"
+      }
+    ],
+    "configuration": {
+      "title": "Security Auditor",
+      "properties": {
+        "securityAuditor.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Включить/отключить Security Auditor"
+        },
+        "securityAuditor.severityThreshold": {
+          "type": "string",
+          "enum": ["info", "low", "medium", "high"],
+          "default": "medium",
+          "description": "Минимальный уровень серьёзности для отображения"
+        },
+        "securityAuditor.scanOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Сканировать файл при сохранении"
+        }
+      }
+    }
+  }
+}
