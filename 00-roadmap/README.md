@@ -18,6 +18,8 @@ SSTI                   ░░░░░░░░░░░░░░░░░░░
 Command Injection      ████████████████████ 100% ✅
 Insecure Deserialization ████████████████████ 100% ✅
 Security Misconfig.   ████████████████████ 100% ✅
+Identification & Auth ████████████████████ 100% ✅
+Vulnerable Components ████████████████████ 100% ✅
 
 Threat Modeling        ████████████████░░░░  80% 📝
 BSIMM                  ░░░░░░░░░░░░░░░░░░░░   0% ❌
@@ -55,6 +57,8 @@ API Security           ██████████░░░░░░░░░
 - [x] Command Injection
 - [x] Insecure Deserialization
 - [x] Security Misconfiguration
+- [x] Identification & Authentication Failures
+- [x] Vulnerable Components (A06)
 - [ ] IDOR
 - [ ] Authentication & Session Management
 - [ ] Authorization (RBAC, ABAC)

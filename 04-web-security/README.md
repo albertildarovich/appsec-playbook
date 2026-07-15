@@ -16,6 +16,7 @@
 | `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
 | `insecure-deserialization.md` | Insecure Deserialization — языковое покрытие, gadget chains, защита | ✅ 100% |
 | `security-misconfiguration.md` | Security Misconfiguration — debug, .git, .env, Secure by Default | ✅ 100% |
+| `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | ✅ 100% |
 ---
 
 ## SQL Injection
@@ -111,6 +112,21 @@
 
 ---
 
+## Vulnerable Components (A06)
+
+Ключевые тезисы:
+
+- **CVE ≠ Risk** — оценивай контекст, а не только CVSS
+- **Reachability** — главный вопрос AppSec: используется ли уязвимый код?
+- **Triage** — всегда убирай FP, проверяй reachability и KEV
+- **Compensating Controls** — если нельзя обновить, изолируй (WAF, сегментация, sandbox)
+- **SBOM** — что входит в приложение; **Trivy** — что уязвимо
+- **Continuous Scanning** — безопасность проверяется постоянно, а не разово
+
+👉 [Читать конспект →](vulnerable-components.md)
+
+---
+
 ## План
 
 - [x] SQL Injection
@@ -121,5 +137,7 @@
 - [x] Command Injection
 - [x] Insecure Deserialization
 - [x] Security Misconfiguration
-- [ ] Vulnerable Components
+- [x] Vulnerable Components (A06)
+- [ ] Software & Data Integrity Failures
+- [ ] Logging & Monitoring Failures
 

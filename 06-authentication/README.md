@@ -1,9 +1,33 @@
 # Authentication
 
-Раздел в разработке.
+## Содержание раздела
+
+| Файл | Описание | Статус |
+|------|----------|--------|
+| `identification-authentication-failures.md` | OWASP A07 — Username Enumeration, Timing, Brute Force, Session Fixation, JWT trade-offs, Risk-Based Auth | ✅ 100% |
+
+---
+
+## Identification & Authentication Failures
+
+Ключевые тезисы:
+
+- **Username Enumeration** — одинаковые ответы + одинаковое время
+- **Timing Attack** — даже время ответа может быть информацией
+- **Brute Force** — блокировка аккаунта = DoS, нужен баланс (backoff, rate limit, CAPTCHA)
+- **MFA** — наличие ≠ безопасность, SMS — не лучший вариант (SIM Swap, SS7)
+- **Session Fixation** — регенерировать Session ID после логина
+- **JWT** — stateless, но сложный logout и отзыв доступа
+- **Refresh Token** — инвалидировать при logout / disable user
+- **Risk-Based Authentication** — оценивать контекст входа (device, geo, IP)
+
+👉 [Читать конспект →](identification-authentication-failures.md)
+
+---
 
 ## План
 
+- [x] Identification & Authentication Failures (OWASP A07)
 - [ ] JWT
 - [ ] OAuth 2.0
 - [ ] OIDC

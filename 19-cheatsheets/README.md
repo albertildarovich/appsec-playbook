@@ -17,6 +17,8 @@
 | `command-injection.md` | Command Injection — payload, безопасные паттерны, валидация | ✅ |
 | `insecure-deserialization.md` | Insecure Deserialization — поиск, gadget chains, безопасные паттерны | ✅ |
 | `security-misconfiguration.md` | Security Misconfiguration — endpoint'ы, заголовки, code review, защита | ✅ |
+| `identification-authentication.md` | Identification & Authentication — username enum, timing, session fixation, JWT | ✅ |
+| `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | ✅ |
 | — | Command Injection | ⏳ |
 
 ---
@@ -31,6 +33,8 @@
 - [x] Insecure Deserialization
 - [x] Command Injection
 - [x] Security Misconfiguration
+- [x] Identification & Authentication Failures
+- [x] Vulnerable Components
 - [ ] JWT
 - [ ] Docker
 - [ ] Kubernetes

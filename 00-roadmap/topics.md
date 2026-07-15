@@ -16,7 +16,7 @@
 | 6 | SSRF | P0 | ✅ Done | `04-web-security/ssrf.md` |
 | 7 | XXE | P0 | ✅ Done | `04-web-security/xxe.md` |
 | 8 | IDOR | P0 | 📝 WIP | `07-authorization/idor.md` |
-| 9 | Authentication | P0 | 📝 WIP | `06-authentication` |
+| 9 | Authentication (A07, Session Mgmt, MFA) | P0 | ✅ Done | `06-authentication` |
 | 10 | Authorization (RBAC, ABAC, BAC) | P0 | 📝 WIP | `07-authorization` |
 |     | ├─ Broken Access Control        | P0 | ✅ Done | `07-authorization/broken-access-control.md` |
 |     | ├─ IDOR                        | P0 | ✅ Done | `07-authorization/idor.md` |
@@ -25,6 +25,8 @@
 |     | └─ Horizontal Privilege Esc.   | P0 | ✅ Done | `07-authorization/privilege-escalation.md` |
 | 11 | **Интерпретаторы** (fundamental) | P0 | ✅ Done | `01-fundamentals/interpreters.md` |
 | 12 | Security Misconfiguration | P0 | ✅ Done | `04-web-security/security-misconfiguration.md` |
+| 13 | Identification & Authentication Failures | P0 | ✅ Done | `06-authentication/identification-authentication-failures.md` |
+| 14 | Vulnerable and Outdated Components (A06) | P0 | ✅ Done | `04-web-security/vulnerable-components.md` |
 
 ## Tier 2: Advanced
 
