@@ -9,8 +9,8 @@
 ```
 SQL Injection          ████████████████████ 100% ✅
 XSS                    ████████████████████ 100% ✅
-CSRF                   ████████████░░░░░░░░  60% 📝
-SSRF                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
+CSRF                   ████████████████████ 100% ✅
+SSRF                   ████████████████████ 100% ✅
 XXE                    ░░░░░░░░░░░░░░░░░░░░   0% ❌
 IDOR                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
 SSTI                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
@@ -23,7 +23,7 @@ Secure SDLC            ░░░░░░░░░░░░░░░░░░░
 Security Champions     ░░░░░░░░░░░░░░░░░░░░   0% ❌
 
 Authentication         ██████████████░░░░░░  70% 📝
-Authorization          ██████████░░░░░░░░░░  50% 📝
+Authorization          ██████████████████░░  90% 📝
 Cryptography           ██████░░░░░░░░░░░░░░  30% 📝
 
 DevSecOps              ██████████░░░░░░░░░░  50% 📝
@@ -44,8 +44,8 @@ API Security           ██████████░░░░░░░░░
 - [x] Security Principles (CIA, Defense in Depth, Least Privilege)
 - [x] SQL Injection
 - [x] XSS
-- [ ] CSRF
-- [ ] SSRF
+- [x] CSRF
+- [x] SSRF
 - [ ] XXE
 - [ ] IDOR
 - [ ] Authentication & Session Management

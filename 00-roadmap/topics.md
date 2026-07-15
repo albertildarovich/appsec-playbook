@@ -12,12 +12,17 @@
 | 2 | Security Principles | P0 | ✅ Done | `01-fundamentals` |
 | 3 | SQL Injection | P0 | ✅ Done | `04-web-security` |
 | 4 | XSS | P0 | ✅ Done | `04-web-security` |
-| 5 | CSRF | P0 | 📝 WIP | `04-web-security` |
-| 6 | SSRF | P0 | ❌ TODO | `04-web-security` |
+| 5 | CSRF | P0 | ✅ Done | `04-web-security/csrf.md` |
+| 6 | SSRF | P0 | ✅ Done | `04-web-security/ssrf.md` |
 | 7 | XXE | P0 | ❌ TODO | `04-web-security` |
-| 8 | IDOR | P0 | ❌ TODO | `04-web-security` |
+| 8 | IDOR | P0 | 📝 WIP | `07-authorization/idor.md` |
 | 9 | Authentication | P0 | 📝 WIP | `06-authentication` |
-| 10 | Authorization | P0 | 📝 WIP | `07-authorization` |
+| 10 | Authorization (RBAC, ABAC, BAC) | P0 | 📝 WIP | `07-authorization` |
+|     | ├─ Broken Access Control        | P0 | ✅ Done | `07-authorization/broken-access-control.md` |
+|     | ├─ IDOR                        | P0 | ✅ Done | `07-authorization/idor.md` |
+|     | ├─ BOLA                        | P0 | ✅ Done | `07-authorization/bola.md` |
+|     | ├─ Vertical Privilege Esc.     | P0 | ✅ Done | `07-authorization/privilege-escalation.md` |
+|     | └─ Horizontal Privilege Esc.   | P0 | ✅ Done | `07-authorization/privilege-escalation.md` |
 
 ## Tier 2: Advanced
 
@@ -50,3 +55,4 @@
 | 3 | Security Metrics | P2 | ❌ TODO | `02-secure-sdlc` |
 | 4 | AppSec Maturity | P2 | ❌ TODO | `02-secure-sdlc` |
 | 5 | Communication | P2 | ❌ TODO | `22-security-thinking` |
+
