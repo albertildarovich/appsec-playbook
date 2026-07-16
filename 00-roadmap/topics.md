@@ -42,20 +42,15 @@
 | 8 | Security Misconfiguration (A05) | P0 | ✅ Done | `04-web-security/security-misconfiguration.md` |
 | 9 | Vulnerable & Outdated Components (A06) | P0 | ✅ Done | `04-web-security/vulnerable-components.md` |
 | 10 | Identification & Authentication Failures (A07) | P0 | ✅ Done | `06-authentication/identification-authentication-failures.md` |
+| 11 | Broken Access Control (A01) | P0 | ✅ Done | `07-authorization/broken-access-control.md` |
 
 ### OWASP Top 10 — осталось пройти
 
 | # | Тема | Приоритет | Статус | Раздел в playbook |
 |---|------|-----------|--------|-------------------|
-| 1 | Broken Access Control (A01) | P0 | ❌ TODO | `07-authorization` |
-|     | ├─ Broken Access Control        | P0 | ❌ TODO | — |
-|     | ├─ IDOR                        | P0 | ❌ TODO | — |
-|     | ├─ BOLA                        | P0 | ❌ TODO | — |
-|     | ├─ Vertical Privilege Esc.     | P0 | ❌ TODO | — |
-|     | └─ Horizontal Privilege Esc.   | P0 | ❌ TODO | — |
-| 2 | Cryptographic Failures (A02) | P0 | ❌ TODO | `08-cryptography` |
-| 3 | Software & Data Integrity Failures (A08) | P0 | ❌ TODO | — |
-| 4 | Logging & Monitoring Failures (A09) | P0 | ❌ TODO | — |
+| 1 | Cryptographic Failures (A02) | P0 | ❌ TODO | `08-cryptography` |
+| 2 | Software & Data Integrity Failures (A08) | P0 | ❌ TODO | — |
+| 3 | Logging & Monitoring Failures (A09) | P0 | ❌ TODO | — |
 
 ## Tier 2: API Security
 

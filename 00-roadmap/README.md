@@ -26,7 +26,7 @@ Vulnerable Components ███████████████████�
 Identification & Auth ████████████████████ 100% ✅
 
 === OWASP Top 10 (TODO) ===
-Broken Access Control ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Broken Access Control ████████████████████ 100% ✅
 Cryptographic Failures ░░░░░░░░░░░░░░░░░░░░   0% ❌
 Software Integrity    ░░░░░░░░░░░░░░░░░░░░   0% ❌
 Logging & Monitoring  ░░░░░░░░░░░░░░░░░░░░   0% ❌
@@ -91,7 +91,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 - [x] Security Misconfiguration (A05)
 - [x] Vulnerable Components (A06)
 - [x] Identification & Authentication Failures (A07)
-- [ ] Broken Access Control (A01)
+- [x] Broken Access Control (A01)
 - [ ] Cryptographic Failures (A02)
 - [ ] Software & Data Integrity Failures (A08)
 - [ ] Logging & Monitoring Failures (A09)

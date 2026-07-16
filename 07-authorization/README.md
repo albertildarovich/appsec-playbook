@@ -1,14 +1,17 @@
 # Authorization
 
+> Broken Access Control — одна из самых распространённых уязвимостей. Включает IDOR, BOLA, Privilege Escalation, Mass Assignment, Tenant Isolation.
+
+---
+
 ## Содержание раздела
 
 | Файл | Описание | Статус |
 |------|----------|--------|
-| `broken-access-control.md` | Broken Access Control — теория, root cause, типичный поток проверки, code review вопросы | ✅ Done (~70%) |
-| `idor.md` | IDOR — что такое, root cause, уязвимый/безопасный код, SAST vs IDOR | ✅ Done (~80%) |
-| `privilege-escalation.md` | Horizontal vs Vertical Privilege Escalation — схемы, примеры, классификация | ✅ Done (~90%) |
-| `bola.md` | BOLA — Broken Object Level Authorization в контексте API, JWT vs Object Auth | ✅ Done (~90%) |
-| — | RBAC vs ABAC | ⏳ План |
+| `broken-access-control.md` | BAC — главный конспект: IDOR, BOLA, PE, Tenant Isolation, RBAC vs ABAC, централизованная авторизация, Mass Assignment | ✅ 100% |
+| `idor.md` | IDOR — root cause, примеры, SAST vs IDOR, защита | ✅ 100% |
+| `privilege-escalation.md` | Horizontal vs Vertical PE — схемы, примеры, классификация | ✅ 100% |
+| `bola.md` | BOLA — Broken Object Level Authorization, API-контекст | ✅ 100% |
 
 ---
 
@@ -16,10 +19,13 @@
 
 Ключевые тезисы:
 
-- **Authentication ≠ Authorization ≠ Object Authorization**
-- Проверка роли — не проверка доступа к объекту
-- Все проверки — только на backend
-- Главная причина BAC: сервер доверяет ID от клиента
+- **Authentication ≠ Authorization** — наличие JWT/сессии не даёт права на любое действие
+- **IDOR / BOLA** — проверяй не только существование объекта, но и право доступа к нему
+- **Horizontal PE** — доступ к данным того же уровня; **Vertical PE** — доступ к функциям высшей роли
+- **Tenant Isolation** — в SaaS критична изоляция данных между компаниями
+- **RBAC** — просто, но Role Explosion; **ABAC** — гибко, но сложнее
+- **Централизованная авторизация** — AuthorizationService, OPA, Cedar, Zanzibar
+- **Mass Assignment** — DTO с только разрешёнными полями; критичные поля только от сервера
 
 👉 [Читать конспект →](broken-access-control.md)
 
@@ -66,10 +72,6 @@
 
 ## План
 
-- [x] Broken Access Control — теория, root cause, flow проверки
-- [x] IDOR — что такое, root cause, примеры кода, SAST vs IDOR
-- [x] Horizontal vs Vertical Privilege Escalation
-- [x] BOLA — Broken Object Level Authorization (API)
-- [ ] RBAC vs ABAC
+- [x] Broken Access Control (IDOR, BOLA, Horizontal/Vertical PE, Mass Assignment, Tenant Isolation, RBAC vs ABAC, централизованная авторизация)
 - [ ] Практика Code Review — реальные примеры
 - [ ] Практический кейс — уязвимость → фикс

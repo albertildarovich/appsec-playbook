@@ -1,244 +1,403 @@
-# Broken Access Control (BAC)
+# Broken Access Control
 
-> Класс уязвимостей, при котором приложение не выполняет или некорректно выполняет проверку прав доступа пользователя к ресурсу или действию.
+> Уязвимость, возникающая, когда приложение не проверяет, имеет ли пользователь право на выполнение запрашиваемого действия.
 >
-> **OWASP Top 10 2021: #A01 — Broken Access Control**
-
----
-
-## Что такое Access Control
-
-Access Control — механизм, определяющий, кто может выполнять какие действия над какими ресурсами.
-
-Любая проверка доступа отвечает на три вопроса:
-
-| Вопрос | Компонент |
-|--------|-----------|
-| **Кто пользователь?** | Authentication |
-| **Что ему разрешено делать?** | Authorization (Role / Permission) |
-| **Может ли он выполнять действие именно над этим объектом?** | Object Authorization (Ownership Check) |
-
----
-
-## Последствия BAC
-
-- Доступ к чужим данным
-- Изменение чужих данных
-- Удаление чужих объектов
-- Повышение привилегий
-- Обход ограничений бизнес-логики
-
----
-
-## Типичный пример
-
-```http
-GET /api/orders/123
-```
-
-Пользователь изменяет идентификатор:
-
-```http
-GET /api/orders/124
-```
-
-Если сервер возвращает чужой заказ **без проверки владельца** — это Broken Access Control.
-
----
-
-## Root Cause
-
-**Главная причина:** сервер доверяет запросу клиента вместо того, чтобы самостоятельно проверить права доступа.
-
-### Никогда нельзя доверять:
-
-- URL-параметрам
-- ID объектов
-- Данным из формы
-- Скрытым полям (hidden fields)
-- JavaScript-коду
-- Проверкам на frontend
+> **Главная идея:** Authentication отвечает на вопрос «Кто ты?», Authorization — «Что тебе разрешено?»
 
 ---
 
 ## Authentication ≠ Authorization
 
-| Authentication | Authorization |
-|---------------|---------------|
-| Отвечает: **«Кто пользователь?»** | Отвечает: **«Что пользователю разрешено?»** |
-| Проверка подлинности | Проверка прав |
+Наличие валидного JWT, сессии или OAuth-токена **не означает**, что пользователь имеет право выполнять любое действие.
 
-**Этого недостаточно.** Необходимо выполнить ещё одну проверку.
+```java
+// ❌ Проверена только аутентификация
+@GetMapping("/orders/{id}")
+public Order getOrder(@PathVariable Long id) {
+    // Кто ты? — проверили (JWT валиден)
+    // Что тебе разрешено? — НЕ проверили
+    return orderRepo.findById(id);
+}
+```
+
+**Правило:** после аутентификации всегда следует авторизация.
 
 ---
 
-## Object Authorization (Ownership Check)
+## IDOR (Insecure Direct Object Reference)
 
-Даже если пользователь имеет роль `USER`, необходимо проверить, что ресурс действительно принадлежит ему.
+### Суть
+
+Пользователь изменяет идентификатор объекта и получает доступ к чужим данным.
+
+```
+GET /orders/154   →  200 OK   (мой заказ)
+GET /orders/155   →  200 OK   (чужой заказ — IDOR!)
+```
+
+### Причина
+
+Приложение проверило:
+
+- ✅ Пользователь вошёл в систему
+
+Но не проверило:
+
+- ❌ Имеет ли он право читать **именно этот объект**
+
+### Правильная проверка
+
+Проверять нужно **право доступа к объекту**, а не только существование объекта.
+
+```java
+// ❌ ОПАСНО — проверяем только существование
+Order order = orderRepo.findById(id);
+if (order != null) {
+    return order;
+}
+
+// ✅ БЕЗОПАСНО — проверяем право доступа
+Order order = orderRepo.findByIdAndOwnerId(id, currentUserId);
+if (order != null) {
+    return order;
+}
+
+// ✅ ЕЩЁ ЛУЧШЕ — через сервис авторизации
+authorizationService.authorize(currentUser, order, Action.READ);
+```
+
+### На уровне БД
+
+```sql
+-- ❌ ОПАСНО — любой может запросить любой id
+SELECT * FROM orders WHERE id = :id;
+
+-- ✅ БЕЗОПАСНО — фильтр по владельцу
+SELECT * FROM orders WHERE id = :id AND owner_id = :currentUserId;
+```
+
+---
+
+## Horizontal Privilege Escalation
+
+Пользователь получает доступ к данным **другого пользователя того же уровня**.
+
+```
+ROLE_USER
+    ↓
+читает чужой заказ
+    ↓
+Роль не изменилась (всё ещё ROLE_USER)
+```
+
+Это IDOR, где изменяется владелец объекта, но не уровень доступа.
+
+---
+
+## Vertical Privilege Escalation
+
+Пользователь получает функции **более высокой роли**.
+
+```
+ROLE_USER
+    ↓
+ROLE_ADMIN
+    ↓
+получает доступ к админ-панели
+```
+
+### Пример
+
+```http
+# Пользователь с ролью USER отправляет:
+POST /admin/delete-user
+Authorization: Bearer <token>
+{"userId": 42}
+
+# Сервер проверяет токен (✅), но не проверяет роль (❌)
+```
+
+### Защита
+
+Проверять роль или атрибуты пользователя для каждого действия, требующего повышенных привилегий:
+
+```java
+@PreAuthorize("hasRole('ADMIN')")
+@PostMapping("/admin/delete-user")
+public void deleteUser(@RequestBody DeleteUserRequest request) {
+    userService.delete(request.getUserId());
+}
+```
+
+---
+
+## BOLA (Broken Object Level Authorization)
+
+**BOLA** — современное название IDOR в REST API.
+
+Часто используется в **OWASP API Security Top 10** (AP1: Broken Object Level Authorization).
+
+Фактически это тот же IDOR, но:
+- Ориентирован на REST API
+- Подчёркивает, что объекты часто идентифицируются через URL-параметры (`/api/v1/users/{id}`)
+- Является **самой распространённой** уязвимостью в API
+
+```http
+# BOLA — злоумышленник перебирает ID
+GET /api/v1/users/1001
+GET /api/v1/users/1002
+GET /api/v1/users/1003
+```
+
+---
+
+## Tenant Isolation
+
+Для **SaaS-приложений** необходимо изолировать данные разных компаний (tenant'ов).
+
+Одна и та же ошибка может одновременно быть:
+
+- **IDOR** — пользователь читает чужие данные
+- **BOLA** — через API
+- **Horizontal Privilege Escalation** — тот же уровень, другой пользователь
+- **Нарушением Tenant Isolation** — пользователь компании A читает данные компании B
+
+```sql
+-- ❌ ОПАСНО — данные не изолированы по tenant
+SELECT * FROM invoices WHERE id = :id;
+
+-- ✅ БЕЗОПАСНО — фильтр по tenant
+SELECT * FROM invoices WHERE id = :id AND tenant_id = :currentTenantId;
+```
+
+---
+
+## RBAC (Role Based Access Control)
+
+Доступ определяется **ролями**.
+
+```
+ROLE_USER     →  может читать свои заказы
+ROLE_ADMIN    →  может читать все заказы, управлять пользователями
+ROLE_SUPPORT  →  может читать заказы, но не управлять пользователями
+```
+
+### Преимущества
+
+- Простая модель
+- Легко внедрить
+- Понятна бизнесу
+
+### Проблема: Role Explosion
+
+При росте системы количество ролей разрастается:
+
+```
+ROLE_USER
+ROLE_USER_PREMIUM
+ROLE_USER_PREMIUM_MANAGER
+ROLE_USER_PREMIUM_MANAGER_EUROPE
+ROLE_USER_PREMIUM_MANAGER_EUROPE_CAN_REFUND
+```
+
+Каждая комбинация прав требует новой роли. Это не масштабируется.
+
+---
+
+## ABAC (Attribute Based Access Control)
+
+Доступ определяется **атрибутами**, а не только ролью.
 
 ```python
-# ❌ Опасный код: только проверка аутентификации
-def get_order(order_id):
-    order = order_repo.find_by_id(order_id)
-    return order
-
-# ✅ Безопасный код: проверка владельца
-def get_order(order_id, current_user):
-    order = order_repo.find_by_id(order_id)
-    if order.owner_id != current_user.id:
-        raise AccessDenied()
-    return order
+# Пример: политика ABAC
+if (
+    user.role == "Manager"
+    and user.department == "Finance"
+    and resource.type == "Report"
+    and resource.region == user.region
+    and device.is_corporate == True
+    and network == "Office"
+):
+    grant_access()
 ```
 
-Именно **отсутствие этой проверки** приводит к большинству BAC.
+### Что может быть атрибутами
+
+| Категория | Примеры |
+|-----------|---------|
+| **Пользователь** | role, department, region, clearance level |
+| **Ресурс** | type, classification, owner, tenant_id |
+| **Окружение** | time, location, device, network, IP |
+| **Действие** | read, write, delete, approve |
+
+### ABAC vs RBAC
+
+| Характеристика | RBAC | ABAC |
+|---------------|------|------|
+| Простота | ✅ Высокая | ❌ Низкая |
+| Масштабируемость | ❌ Role explosion | ✅ Гибкие политики |
+| Детализация | ✅ Роль | ✅ Атрибуты + контекст |
+| Внедрение | ✅ Простое | ❌ Сложное |
+| Поддержка | ❌ Сложно при росте | ✅ Легче при правильной архитектуре |
 
 ---
 
-## Проверка роли ≠ Проверка доступа к объекту
+## Централизованная авторизация
 
-Недостаточно:
+**Проблема:** если проверки размазаны по всем контроллерам, их трудно сопровождать и легко ошибиться.
 
-```python
-if not has_role("USER"):
-    raise AccessDenied()
+```java
+// ❌ Проверки в каждом контроллере — дублирование и риск
+@GetMapping("/orders/{id}")
+public Order getOrder(...) {
+    // проверка
+    // проверка
+    // проверка
+}
+
+@PostMapping("/orders")
+public Order createOrder(...) {
+    // те же проверки
+    // те же проверки
+}
 ```
 
-Необходимо также проверить:
+**Решение:** централизованная авторизация.
 
-```python
-if order.owner_id != current_user.id:
-    raise AccessDenied()
+| Инструмент | Описание |
+|-----------|----------|
+| **AuthorizationService** | Собственный сервис в приложении |
+| **OPA (Open Policy Agent)** | Декларативные политики на Rego |
+| **Cedar** | Политики от AWS (используется в AWS Verified Permissions) |
+| **Keycloak Authorization** | Встроенная авторизация Keycloak |
+| **Zanzibar** | Система авторизации Google (SpiceDB — open source) |
+
+### Преимущества централизации
+
+- ✅ Единая логика
+- ✅ Меньше ошибок (не забыли проверку)
+- ✅ Проще сопровождать
+- ✅ Defense in Depth
+- ✅ Аудит (можно логировать все решения)
+
+---
+
+## Mass Assignment
+
+### Проблема
+
+Ошибка возникает, когда пользователь может массово заполнить поля внутренней сущности.
+
+```java
+// ❌ ОПАСНО — пользователь управляет всеми полями
+@PostMapping("/users")
+public User createUser(@RequestBody User user) {
+    return userRepo.save(user);
+}
 ```
 
-Или предоставить доступ только администраторам (если это админский endpoint).
+Хакер может отправить:
 
----
-
-## Frontend vs Backend
-
-### Frontend
-
-Используется **исключительно для UX**:
-- скрыть кнопку
-- скрыть меню
-- отключить функциональность
-
-**Frontend нельзя считать доверенной средой.** Пользователь может:
-- изменить JavaScript
-- использовать DevTools
-- отправить запрос через Burp Suite
-- использовать Postman
-- вызвать API напрямую
-
-### Backend
-
-**Все проверки безопасности выполняются только на backend.**
-
-Backend **обязан** проверять:
-- валидность токена
-- аутентификацию
-- роль пользователя
-- разрешения (permissions)
-- принадлежность объекта текущему пользователю
-
----
-
-## RBAC недостаточно
-
-| RBAC отвечает | RBAC **не** отвечает |
-|---------------|----------------------|
-| Может ли пользователь выполнять данный тип операций? | Может ли пользователь работать именно с этим объектом? |
-
-Поэтому после проверки роли **практически всегда** требуется дополнительная проверка владения ресурсом.
-
----
-
-## Типичный поток проверки
-
-```
-Пользователь
-     │
-     ▼
-Authentication (кто ты?)
-     │
-     ▼
-Authorization — Role / Permission (что тебе разрешено?)
-     │
-     ▼
-Object Authorization — Ownership (можешь ли работать с этим объектом?)
-     │
-     ▼
-Business Logic
-     │
-     ▼
-Response
+```json
+{
+    "name": "hacker",
+    "email": "hacker@evil.com",
+    "role": "ADMIN",
+    "balance": 1000000,
+    "status": "APPROVED"
+}
 ```
 
----
+### Защита через DTO
 
-## Что искать во время Code Review
+```java
+// ✅ БЕЗОПАСНО — DTO содержит только разрешённые поля
+public record CreateUserDTO(
+    String name,
+    String email,
+    String password
+) {}
 
-Если видишь код вида:
-
-```python
-repository.find_by_id(id)
+@PostMapping("/users")
+public User createUser(@RequestBody @Valid CreateUserDTO dto) {
+    User user = new User(dto.name(), dto.email(), dto.password());
+    user.setRole("USER");           // задаётся сервером
+    user.setBalance(0);             // задаётся сервером
+    user.setStatus("PENDING");      // задаётся сервером
+    return userRepo.save(user);
+}
 ```
 
-**Первый вопрос:** где проверяется, что текущий пользователь имеет право получить именно этот объект?
+### Важно: DTO — не панацея
 
-### Дополнительные вопросы:
+DTO защищает только если он **содержит только разрешённые поля**. Если DTO повторяет структуру Entity — это не защита.
 
-- Где происходит аутентификация?
-- Где проверяются роли?
-- Где проверяются permissions?
-- Где проверяется владелец объекта?
-- Можно ли изменить ID в URL?
-- Что произойдет, если запросить чужой объект?
+```java
+// ❌ Бесполезный DTO — повторяет Entity
+public record CreateUserDTO(
+    String name,
+    String email,
+    String password,
+    String role,     // ❌ не должно быть от клиента
+    BigDecimal balance,  // ❌ не должно быть от клиента
+    String status   // ❌ не должно быть от клиента
+) {}
+```
+
+Критичные поля должны задаваться **только сервером**:
+
+- `role`
+- `balance`
+- `status`
+- `createdAt`
+- `tenantId`
+- `isVerified`
 
 ---
 
-## Практические правила
+## Что любят спрашивать на интервью
 
-| ✅ Делать | ❌ Не делать |
-|-----------|-------------|
-| Проверять ownership на сервере | Доверять ID из URL/запроса |
-| Использовать ID из JWT/session | Брать ID из параметров запроса |
-| Проверять доступ на каждом endpoint | Полагаться только на frontend |
-| Default deny: без явного разрешения — запрет | Надеяться, что «никто не догадается» |
+| Вопрос | Ответ |
+|--------|-------|
+| **Чем отличается Authentication от Authorization?** | Authentication — «Кто ты?», Authorization — «Что тебе разрешено?» |
+| **Почему JWT не защищает от IDOR?** | JWT подтверждает личность, но не проверяет право доступа к конкретному объекту |
+| **Что такое Horizontal Privilege Escalation?** | Доступ к данным другого пользователя того же уровня |
+| **Что такое Vertical Privilege Escalation?** | Доступ к функциям более высокой роли |
+| **Что такое BOLA?** | IDOR для REST API (OWASP API Security Top 10) |
+| **Почему проверки в контроллерах недостаточны?** | Дублирование, риск забыть, сложно сопровождать |
+| **Зачем нужен Authorization Service?** | Единая логика, меньше ошибок, Defense in Depth, аудит |
+| **Чем RBAC отличается от ABAC?** | RBAC — только роль; ABAC — роль + атрибуты + контекст |
+| **Что такое Mass Assignment?** | Пользователь заполняет поля, которые не должен контролировать |
+| **Почему DTO — не панацея?** | Если DTO повторяет Entity — это не защита |
 
 ---
 
-## Ключевые мысли
+## Что запомнить (коротко)
 
-1. **Authentication** отвечает на вопрос «Кто ты?»
-2. **Authorization** отвечает на вопрос «Что тебе разрешено?»
-3. **Object Authorization** отвечает на вопрос «Можешь ли ты работать именно с этим объектом?»
-4. **Проверка роли — это не проверка доступа к объекту**
-5. Все проверки безопасности должны выполняться в **доверенной среде**. Для веб-приложений такой средой является **backend**
+1. **Authentication ≠ Authorization** — наличие JWT/сессии не даёт права на любое действие
+2. **IDOR / BOLA** — проверяй не только существование объекта, но и право доступа к нему
+3. **Horizontal PE** — доступ к данным того же уровня; **Vertical PE** — доступ к функциям высшей роли
+4. **Tenant Isolation** — в SaaS критична изоляция данных между компаниями
+5. **RBAC** — просто, но Role Explosion; **ABAC** — гибко, но сложнее
+6. **Централизованная авторизация** — AuthorizationService, OPA, Cedar, Zanzibar
+7. **Mass Assignment** — DTO с только разрешёнными полями; критичные поля только от сервера
 
 ---
 
 ## Связанные темы
 
-| Тема | Описание |
-|------|----------|
-| **IDOR** (Insecure Direct Object Reference) | Классический пример Broken Access Control |
-| **BOLA** (Broken Object Level Authorization) | Аналогичная проблема в API (OWASP API Security Top 10) |
-| **Vertical Privilege Escalation** | Пользователь получает доступ к действиям более привилегированной роли |
-| **Horizontal Privilege Escalation** | Пользователь получает доступ к данным другого пользователя с той же ролью |
-| **RBAC / ABAC** | Модели авторизации |
-| **OWASP Top 10: A01** | Broken Access Control |
-| **OWASP API Security Top 10: API1** | Broken Object Level Authorization |
+| Тема | Связь |
+|------|-------|
+| **Authentication** | JWT / сессия — необходимы, но недостаточны |
+| **API Security** | BOLA — основная уязвимость REST API |
+| **SaaS Security** | Tenant Isolation |
+| **Policy Engines** | OPA, Cedar, Zanzibar |
+| **OWASP Top 10 (A01)** | Broken Access Control |
 
 ---
 
 ## Что дальше
 
-После этого конспекта стоит разобрать:
-
-- [ ] **IDOR** — как выглядит на практике, примеры кода
-- [ ] **BOLA** — та же проблема в контексте REST API
-- [ ] **Vertical / Horizontal Privilege Escalation** — сценарии эксплуатации
-- [ ] **RBAC vs ABAC** — сравнительный анализ моделей
-- [ ] **Практика Code Review** — разбор реальных примеров
-- [ ] **Практический кейс** — сквозной пример с уязвимостью и фиксом
+- [ ] **Cryptographic Failures (A02)** — следующая тема OWASP Top 10
+- [ ] **Software & Data Integrity Failures (A08)**
+- [ ] **Logging & Monitoring Failures (A09)**
