@@ -1,6 +1,8 @@
 # Web Security
 
 > Уязвимости веб-приложений из OWASP Top 10 и не только.
+>
+> **📌 OWASP Top 10 хаб:** [`24-owasp-top10/`](../24-owasp-top10/README.md) — краткие обзоры всех категорий
 
 ---
 
@@ -16,6 +18,7 @@
 | `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
 | `insecure-deserialization.md` | Insecure Deserialization — языковое покрытие, gadget chains, защита | ✅ 100% |
 | `security-misconfiguration.md` | Security Misconfiguration — debug, .git, .env, Secure by Default | ✅ 100% |
+| `insecure-design.md` | Insecure Design (A04) — архитектурное мышление, Abuse Cases, Never Trust the Client | ✅ 100% |
 | `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | ✅ 100% |
 ---
 
@@ -138,6 +141,7 @@
 - [x] Insecure Deserialization
 - [x] Security Misconfiguration
 - [x] Vulnerable Components (A06)
+- [x] Insecure Design (A04)
 - [ ] Software & Data Integrity Failures
 - [ ] Logging & Monitoring Failures
 

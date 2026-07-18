@@ -19,6 +19,9 @@
 | `security-misconfiguration.md` | Security Misconfiguration — endpoint'ы, заголовки, code review, защита | ✅ |
 | `identification-authentication.md` | Identification & Authentication — username enum, timing, session fixation, JWT | ✅ |
 | `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | ✅ |
+| `cryptographic-failures.md` | Cryptographic Failures — выбор алгоритма, Argon2, TLS, PFS, Salt/Pepper | ✅ |
+| `insecure-design.md` | Insecure Design — чек-лист, Never Trust the Client, Abuse Cases | ✅ |
+| `stride.md` | STRIDE — 6 категорий угроз, DFD mapping, OWASP mapping, формат записи | ✅ |
 | — | Command Injection | ⏳ |
 
 ---

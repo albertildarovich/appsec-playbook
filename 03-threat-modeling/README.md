@@ -77,7 +77,45 @@ Threat Modeling не исправляет — он **предотвращает*
 
 ## Практика
 
-**Из опыта**: Threat Modeling проводили для архитектурных изменений.
+# Threat Modeling
+
+> 🟢 **Статус:** STRIDE — готово
+
+## Содержание
+
+| Тема | Статус | Файл |
+|------|--------|------|
+| **STRIDE** | ✅ Готово | [`stride.md`](stride.md) |
+| DFD (Data Flow Diagrams) | ❌ TODO | — |
+| Trust Boundaries | ❌ TODO | — |
+| Attack Trees | ❌ TODO | — |
+| Threat Modeling Tools | ❌ TODO | — |
+
+## Ключевые тезисы
+
+1. **STRIDE** — методология Microsoft для систематического поиска угроз на этапе проектирования.
+2. **S** — Spoofing (подмена личности), **T** — Tampering (изменение данных), **R** — Repudiation (отказ от действий).
+3. **I** — Information Disclosure (утечка), **D** — Denial of Service (отказ в обслуживании), **E** — Elevation of Privilege (повышение привилегий).
+4. STRIDE применяется к элементам DFD: External Entity (S), Process (все), Data Store (T, I), Data Flow (S, T, I, D).
+5. Категории STRIDE маппятся на OWASP Top 10: S→A07, T→A04, R→A09, I→A02, D→A04, E→A01.
+6. **Главное:** STRIDE — это модель мышления, не список уязвимостей.
+
+## Теория
+
+Threat Modeling — это систематический процесс выявления, документирования и смягчения угроз безопасности на этапе проектирования.
+
+> "Threat Modeling is the process of thinking about what could go wrong and deciding what to do about it." — Adam Shostack
+
+## Как разработчик может ошибиться
+
+- Не проводить Threat Modeling вообще ("у нас agile, нет времени")
+- Проводить формально — "чтобы было", без реального анализа
+- Думать, что SAFT/DAST заменяют Threat Modeling
+- Документировать угрозы, но никогда не возвращаться к ним
+
+## Как AppSec проводит Threat Modeling
+
+### Мой процесс
 Формат: 1-2 сессии с архитектором и lead developer.
 Основная сложность — не уйти в "паралич анализа".
 

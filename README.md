@@ -29,7 +29,7 @@
 | # | Раздел | Описание |
 |---|--------|----------|
 | 00 | [Roadmap](00-roadmap) | Прогресс, трекер, learning roadmap, цели |
-| 01 | [Fundamentals](01-fundamentals) | OWASP Top 10, ASVS, Security Principles |
+| 01 | [Fundamentals](01-fundamentals) | ASVS, Security Principles, Interpreters |
 | 02 | [Secure SDLC & Governance](02-secure-sdlc) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates, Metrics |
 | 03 | [Threat Modeling](03-threat-modeling) | STRIDE, DFD, Attack Trees, примеры |
 | 04 | [Web Security](04-web-security) | XSS, CSRF, SQLi, SSRF, XXE, IDOR |
@@ -46,6 +46,7 @@
 | 15 | [Checklists](15-checklists) | Security Review, Docker, K8s, Release |
 | 16 | [Writeups](16-writeups) | Разбор лабораторных и CVE |
 | 17 | [Mini Projects](17-mini-projects) | vulnerable-api, jwt-demo, oauth-demo |
+| | **[OWASP Top 10](24-owasp-top10)** | **Единый хаб по всем категориям A01–A10** |
 | 18 | [Case Studies](18-case-studies) | CVE Analysis, Bug Bounty, Postmortems |
 | 19 | [Cheatsheets](19-cheatsheets) | JWT, Docker, kubectl, OpenSSL, XSS, SQLi |
 | 20 | [Experience](20-experience) | Мой опыт в коммерческих проектах |

@@ -18,6 +18,7 @@
 | 4 | Compensating Controls (WAF, сегментация, sandbox) | P0 | 📝 Started | `04-web-security/vulnerable-components.md` |
 | 5 | Architecture Thinking (почему это вообще доступно?, trade-offs) | P0 | 📝 Started | `04-web-security/security-misconfiguration.md` |
 | 6 | **Интерпретаторы** — объединяющая концепция | P0 | ✅ Done | `01-fundamentals/interpreters.md` |
+| 7 | **Insecure Design (A04)** — архитектурное мышление, Abuse Cases, Never Trust the Client | P0 | ✅ Done | `04-web-security/insecure-design.md` |
 
 ## Tier 1: Core AppSec (Must Know)
 
@@ -26,7 +27,7 @@
 | # | Тема | Приоритет | Статус | Раздел в playbook |
 |---|------|-----------|--------|-------------------|
 | 1 | Security Principles (CIA, Defense in Depth, Least Privilege) | P0 | ✅ Done | `01-fundamentals` |
-| 2 | OWASP Top 10 (общий обзор) | P0 | ✅ Done | `01-fundamentals` |
+| 2 | OWASP Top 10 (общий обзор) | P0 | ✅ Done | `24-owasp-top10` |
 
 ### OWASP Top 10 — пройденные темы
 
@@ -43,14 +44,15 @@
 | 9 | Vulnerable & Outdated Components (A06) | P0 | ✅ Done | `04-web-security/vulnerable-components.md` |
 | 10 | Identification & Authentication Failures (A07) | P0 | ✅ Done | `06-authentication/identification-authentication-failures.md` |
 | 11 | Broken Access Control (A01) | P0 | ✅ Done | `07-authorization/broken-access-control.md` |
+| 12 | Cryptographic Failures (A02) | P0 | ✅ Done | `08-cryptography/cryptographic-failures.md` |
+| 13 | **Insecure Design (A04)** | P0 | ✅ Done | `04-web-security/insecure-design.md` |
 
 ### OWASP Top 10 — осталось пройти
 
 | # | Тема | Приоритет | Статус | Раздел в playbook |
 |---|------|-----------|--------|-------------------|
-| 1 | Cryptographic Failures (A02) | P0 | ❌ TODO | `08-cryptography` |
-| 2 | Software & Data Integrity Failures (A08) | P0 | ❌ TODO | — |
-| 3 | Logging & Monitoring Failures (A09) | P0 | ❌ TODO | — |
+| 1 | Software & Data Integrity Failures (A08) | P0 | ❌ TODO | — |
+| 2 | Logging & Monitoring Failures (A09) | P0 | ❌ TODO | — |
 
 ## Tier 2: API Security
 
@@ -86,7 +88,7 @@
 
 | # | Тема | Приоритет | Статус | Раздел в playbook |
 |---|------|-----------|--------|-------------------|
-| 1 | STRIDE | P0 | ❌ TODO | `03-threat-modeling` |
+| 1 | **STRIDE** | P0 | ✅ Done | `03-threat-modeling/stride.md` |
 | 2 | DFD (Data Flow Diagrams) | P0 | ❌ TODO | `03-threat-modeling` |
 | 3 | Attack Trees | P0 | ❌ TODO | `03-threat-modeling` |
 | 4 | Threat Modeling Tools (OWASP Threat Dragon, MS TMT) | P1 | ❌ TODO | `03-threat-modeling` |

@@ -397,7 +397,6 @@ public record CreateUserDTO(
 ---
 
 ## Что дальше
-
-- [ ] **Cryptographic Failures (A02)** — следующая тема OWASP Top 10
+- [x] **Cryptographic Failures (A02)** — ✅ пройдено
 - [ ] **Software & Data Integrity Failures (A08)**
 - [ ] **Logging & Monitoring Failures (A09)**

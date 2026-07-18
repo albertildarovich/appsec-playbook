@@ -9,6 +9,7 @@
 ```
 === Security Thinking (Tier 0) ===
 Interpreters           ████████████████████ 100% ✅
+Insecure Design (A04) ████████████████████ 100% ✅
 Risk Assessment        ████████░░░░░░░░░░░░  40% 📝
 Triage                 ████████░░░░░░░░░░░░  40% 📝
 Architecture Thinking  ████████░░░░░░░░░░░░  40% 📝
@@ -27,7 +28,7 @@ Identification & Auth ███████████████████�
 
 === OWASP Top 10 (TODO) ===
 Broken Access Control ████████████████████ 100% ✅
-Cryptographic Failures ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Cryptographic Failures ████████████████████ 100% ✅
 Software Integrity    ░░░░░░░░░░░░░░░░░░░░   0% ❌
 Logging & Monitoring  ░░░░░░░░░░░░░░░░░░░░   0% ❌
 
@@ -43,7 +44,9 @@ Java / Python / Go    ░░░░░░░░░░░░░░░░░░░�
 SAST (Semgrep/CodeQL) ░░░░░░░░░░░░░░░░░░░░   0% ❌
 
 === Threat Modeling ===
-STRIDE / DFD / Trees  ░░░░░░░░░░░░░░░░░░░░   0% ❌
+STRIDE                 ████████████████████ 100% ✅
+DFD                    ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Attack Trees           ░░░░░░░░░░░░░░░░░░░░   0% ❌
 
 === Secure SDLC & DevSecOps ===
 Secure SDLC           ██████░░░░░░░░░░░░░░  30% 📝
@@ -74,6 +77,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ### Tier 0: Security Thinking (мышление)
 - [x] **Интерпретаторы** — объединяющая концепция
+- [x] **Insecure Design (A04)** — архитектурное мышление, Abuse Cases, Never Trust the Client
 - [ ] Risk Assessment (CVE vs Risk, контекст)
 - [ ] Triage (приоритизация, FP, reachability)
 - [ ] Architecture Thinking (trade-offs, surface reduction)
@@ -92,7 +96,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 - [x] Vulnerable Components (A06)
 - [x] Identification & Authentication Failures (A07)
 - [x] Broken Access Control (A01)
-- [ ] Cryptographic Failures (A02)
+- [x] Cryptographic Failures (A02)
 - [ ] Software & Data Integrity Failures (A08)
 - [ ] Logging & Monitoring Failures (A09)
 
@@ -114,7 +118,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 - [ ] SAST (Semgrep, CodeQL)
 
 ### Tier 4: Threat Modeling
-- [ ] STRIDE
+- [x] **STRIDE** — методология поиска угроз (Spoofing, Tampering, Repudiation, Info Disclosure, DoS, EoP)
 - [ ] DFD (Data Flow Diagrams)
 - [ ] Attack Trees
 - [ ] Практика: нарисовать TM для реального сервиса
