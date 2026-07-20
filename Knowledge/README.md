@@ -41,12 +41,13 @@
 | [Defense in Depth](./secure-design/defense-in-depth.md) | ✅ |
 | [Reduce Attack Surface](./secure-design/reduce-attack-surface.md) | ✅ |
 | [Complete Mediation](./secure-design/complete-mediation.md) | ✅ |
-| Economy of Mechanism | ❌ |
-| Separation of Privilege | ❌ |
+| [Economy of Mechanism](./secure-design/economy-of-mechanism.md) | ✅ |
+| [Separation of Privilege](./secure-design/separation-of-privilege.md) | ✅ |
 | Open Design | ❌ |
-| Never Trust the Client | 📝 |
+| [Least Common Mechanism](./secure-design/least-common-mechanism.md) | ✅ |
+| [Never Trust the Client](./secure-design/never-trust-client.md) | ✅ |
 | Psychological Acceptability | ❌ |
-| Least Common Mechanism | ❌ |
+| Open Design | ❌ |
 
 [Карта всех принципов →](../Security%20Thinking/architecture-thinking/secure-design-principles.md)
 

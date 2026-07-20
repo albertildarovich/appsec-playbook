@@ -16,12 +16,12 @@
 | [Defense in Depth](../../Knowledge/secure-design/defense-in-depth.md) | Несколько слоёв защиты | ✅ |
 | [Reduce Attack Surface](../../Knowledge/secure-design/reduce-attack-surface.md) | Меньше кода — меньше уязвимостей | ✅ |
 | [Complete Mediation](../../Knowledge/secure-design/complete-mediation.md) | Всегда проверяй права | ✅ |
-| Economy of Mechanism | Простота — залог безопасности | ❌ |
-| Separation of Privilege | Разделение условий для доступа | ❌ |
-| Open Design | Безопасность не должна быть секретом | ❌ |
-| Never Trust the Client | Клиент всегда под подозрением | 📝 |
+| [Economy of Mechanism](../../Knowledge/secure-design/economy-of-mechanism.md) | Простота — залог безопасности | ✅ |
+| [Separation of Privilege](../../Knowledge/secure-design/separation-of-privilege.md) | Разделение условий для доступа | ✅ |
+| [Least Common Mechanism](../../Knowledge/secure-design/least-common-mechanism.md) | Минимизация разделяемых механизмов | ✅ |
+| [Never Trust the Client](../../Knowledge/secure-design/never-trust-client.md) | Клиент всегда под подозрением | ✅ |
 | Psychological Acceptability | Безопасность не должна мешать | ❌ |
-| Least Common Mechanism | Избегать разделяемых механизмов | ❌ |
+| Open Design | Безопасность не должна быть секретом | ❌ |
 
 ---
 
