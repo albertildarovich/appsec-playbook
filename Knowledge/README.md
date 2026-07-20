@@ -10,6 +10,7 @@
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
+| [Secure Design](./secure-design/) | Secure Design Principles — 6 готовых конспектов в interview-ready формате | ✅ |
 | [Fundamentals](01-fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | ✅ |
 | [Secure SDLC & Governance](02-secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates | 📝 |
 | [Threat Modeling](03-threat-modeling/) | STRIDE, DFD, Attack Trees, методология | ✅ |
@@ -28,6 +29,29 @@
 
 ---
 
+## Secure Design Principles
+
+Закрыты 6 из 12 принципов в едином формате:
+
+| Принцип | Статус |
+|---------|--------|
+| [Least Privilege](./secure-design/least-privilege.md) | ✅ |
+| [Fail Secure (Fail Closed)](./secure-design/fail-secure.md) | ✅ |
+| [Secure Defaults (Secure by Default)](./secure-design/secure-defaults.md) | ✅ |
+| [Defense in Depth](./secure-design/defense-in-depth.md) | ✅ |
+| [Reduce Attack Surface](./secure-design/reduce-attack-surface.md) | ✅ |
+| [Complete Mediation](./secure-design/complete-mediation.md) | ✅ |
+| Economy of Mechanism | ❌ |
+| Separation of Privilege | ❌ |
+| Open Design | ❌ |
+| Never Trust the Client | 📝 |
+| Psychological Acceptability | ❌ |
+| Least Common Mechanism | ❌ |
+
+[Карта всех принципов →](../Security%20Thinking/architecture-thinking/secure-design-principles.md)
+
+---
+
 ## Как читать этот раздел
 
 Начинай с **Fundamentals** — там закладывается мышление.
@@ -40,16 +64,3 @@
 
 Каждый конспект строится по шаблону:
 
-```
-1. Теория — что это, как работает
-2. Как разработчик может ошибиться — типичные anti-patterns
-3. Как AppSec обнаружит — SAST, DAST, Code Review, Threat Modeling
-4. Как исправить — безопасные паттерны
-5. Как предотвратить — preventive controls
-6. Практика — примеры, упражнения
-7. Lessons Learned — что пошло не так в реальных проектах
-```
-
----
-
-> ⚡ **Принцип:** знание без практики — просто информация. Используй этот слой как справочник, но применяй знания в `Engineering/` и `Experience/`.
