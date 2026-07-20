@@ -1,6 +1,10 @@
 # Security Code Review
 
+> **Этот раздел расширен → [`../Engineering/code-reviews/`](../Engineering/code-reviews/) и [`../Engineering/playbooks/code-review-session.md`](../Engineering/playbooks/code-review-session.md)**
+
 Здесь собраны чек-листы, сценарии и паттерны для проведения Security Code Review.
+
+Новая структура добавляет к чек-листам полноценные разборы (code-reviews/) с реальными примерами из проектов.
 
 ## Почему это важно
 
