@@ -10,7 +10,7 @@
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Secure Design](./secure-design/) | Secure Design Principles — 6 готовых конспектов в interview-ready формате | ✅ |
+| [Secure Design](./secure-design/) | Secure Design Principles — все 12 в interview-ready формате | ✅ |
 | [Fundamentals](01-fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | ✅ |
 | [Secure SDLC & Governance](02-secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates | 📝 |
 | [Threat Modeling](03-threat-modeling/) | STRIDE, DFD, Attack Trees, методология | ✅ |
@@ -31,7 +31,7 @@
 
 ## Secure Design Principles
 
-Закрыты 6 из 12 принципов в едином формате:
+**12 из 12** принципов готовы в едином interview-ready формате.
 
 | Принцип | Статус |
 |---------|--------|
@@ -43,11 +43,10 @@
 | [Complete Mediation](./secure-design/complete-mediation.md) | ✅ |
 | [Economy of Mechanism](./secure-design/economy-of-mechanism.md) | ✅ |
 | [Separation of Privilege](./secure-design/separation-of-privilege.md) | ✅ |
-| Open Design | ❌ |
 | [Least Common Mechanism](./secure-design/least-common-mechanism.md) | ✅ |
 | [Never Trust the Client](./secure-design/never-trust-client.md) | ✅ |
-| Psychological Acceptability | ❌ |
-| Open Design | ❌ |
+| [Open Design](./secure-design/open-design.md) | ✅ |
+| [Psychological Acceptability](./secure-design/psychological-acceptability.md) | ✅ |
 
 [Карта всех принципов →](../Security%20Thinking/architecture-thinking/secure-design-principles.md)
 
@@ -64,4 +63,19 @@
 ## Формат каждой темы
 
 Каждый конспект строится по шаблону:
+
+```
+1. Теория — что это, как работает
+2. Как разработчик может ошибиться — типичные anti-patterns
+3. Как AppSec обнаружит — SAST, DAST, Code Review, Threat Modeling
+4. Как исправить — безопасные паттерны
+5. Как предотвратить — preventive controls
+6. Практика — примеры, упражнения
+7. Lessons Learned — что пошло не так в реальных проектах
+```
+
+---
+
+> ⚡ **Принцип:** знание без практики — просто информация. Используй этот слой как справочник, но применяй знания в `Engineering/` и `Experience/`.
+
 
