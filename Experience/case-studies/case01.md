@@ -4,7 +4,7 @@
 Code Review был обязательной частью процесса перед merge.
 Без approve ревьювера — никакой PR не попадал в main.
 
-**Связь с Playbook**: [Code Review](../14-code-review/README.md)
+**Связь с Playbook**: [Code Review](../../Engineering/code-review/README.md)
 
 **Что понял**:
 - Разработчики лучше воспринимают feedback, если показываешь fix, а не просто указываешь на проблему
@@ -17,7 +17,7 @@ Code Review был обязательной частью процесса пер
 - SSO для нескольких приложений
 - Интеграция с LDAP
 
-**Связь с Playbook**: [Authorization](../07-authorization/README.md)
+**Связь с Playbook**: [Authorization](???)
 
 **Что понял**:
 - Role explosion — реальная проблема. Ролей становится слишком много
@@ -30,7 +30,7 @@ Code Review был обязательной частью процесса пер
 - Docker compose + networking
 - SSL/TLS (acme.sh, certbot)
 
-**Связь с Playbook**: [Linux](../11-linux/README.md)
+**Связь с Playbook**: [Linux](???)
 
 ### 4. Docker Security
 - Non-root контейнеры

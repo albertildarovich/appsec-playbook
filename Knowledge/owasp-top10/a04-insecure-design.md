@@ -32,4 +32,4 @@
 
 ## 🔗 Полная версия
 
-👉 [`04-web-security/insecure-design.md`](../04-web-security/insecure-design.md) — Abuse Cases, Human Error, Compensating Controls, примеры на Java/Python, interview questions
+👉 [`04-web-security/insecure-design.md`](./web-security/insecure-design.md) — Abuse Cases, Human Error, Compensating Controls, примеры на Java/Python, interview questions

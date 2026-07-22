@@ -56,4 +56,4 @@ SCA → CVE → Triage → Risk Assessment → Remediation / Acceptance
 
 ## 🔗 Полная версия
 
-👉 [`04-web-security/vulnerable-components.md`](../04-web-security/vulnerable-components.md) — подробно о reachability, triage, SBOM, Trivy, CI/CD, стратегии управления рисками
+👉 [`04-web-security/vulnerable-components.md`](./web-security/vulnerable-components.md) — подробно о reachability, triage, SBOM, Trivy, CI/CD, стратегии управления рисками

@@ -32,7 +32,7 @@
 
 | Тема | Конспект |
 |------|----------|
-| SQL Injection | [`04-web-security/sqli.md`](../04-web-security/sqli.md) |
-| Command Injection | [`04-web-security/command-injection.md`](../04-web-security/command-injection.md) |
-| XXE | [`04-web-security/xxe.md`](../04-web-security/xxe.md) |
-| Интерпретаторы (объединяющая концепция) | [`01-fundamentals/interpreters.md`](../01-fundamentals/interpreters.md) |
+| SQL Injection | [`web-security/sqli.md`](./web-security/sqli.md) |
+| Command Injection | [`web-security/command-injection.md`](./web-security/command-injection.md) |
+| XXE | [`web-security/xxe.md`](./web-security/xxe.md) |
+| Интерпретаторы (объединяющая концепция) | [`fundamentals/interpreters.md`](./fundamentals/interpreters.md) |
