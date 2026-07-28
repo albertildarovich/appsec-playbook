@@ -5,6 +5,6 @@
 ## План
 
 - [ ] PortSwigger Web Security Academy
-- [ ] OWASP Juice Shop
+- [x] OWASP Juice Shop
 - [ ] DVWA
 - [ ] Hack The Box

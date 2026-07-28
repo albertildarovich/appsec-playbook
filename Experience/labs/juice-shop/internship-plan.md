@@ -8,13 +8,13 @@
 ## Прогресс
 
 ```
-Фаза 1: Recon & Architecture    [████░░░░░░]  40%  — Модули 1-2 частично
-Фаза 2: Threat Modeling          [██████░░░░]  60%  — Модуль 4 частично
+Фаза 1: Recon & Architecture    [██████████] 100%  — Модули 1-3 готовы
+Фаза 2: Threat Modeling          [██████████] 100%  — Модуль 4 готов
 Фаза 3: Security Testing         [░░░░░░░░░░]   0%
 Фаза 4: DevSecOps & Automation   [░░░░░░░░░░]   0%
 Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%
 ─────────────────────────────────────────────
-Total:                            [██░░░░░░░░]  15%
+Total:                            [██░░░░░░░░]  18%
 ```
 
 ---
@@ -33,12 +33,15 @@ Total:                            [██░░░░░░░░]  15%
 - ✅ Нашли админ-панель: `/administration`
 - ✅ Нашли Swagger: `/api-docs`
 - ✅ Базовая карта эндпоинтов
+- ✅ Прошлись по всем страницам в браузере (UI)
+- ✅ Составили mindmap приложения (все страницы и связи)
+- ✅ Заполнили таблицу эндпоинтов в `module-01-recon/report.md`
 
-- [ ] ⏳ Пройтись по всем страницам в браузере (UI)
-- [ ] ⏳ Составить mindmap приложения (все страницы и связи)
-- [ ] ⏳ Заполнить таблицу эндпоинтов в `module-01-recon/report.md`
+- [x] Пройтись по всем страницам в браузере (UI)
+- [x] Составить mindmap приложения (все страницы и связи)
+- [x] Заполнить таблицу эндпоинтов в `module-01-recon/report.md`
 
-**Результат:** `module-01-recon/report.md` — карта приложения
+**Результат:** ✅ `module-01-recon/report.md` — карта приложения
 
 ## Модуль 2 — Assets
 
@@ -48,26 +51,33 @@ Total:                            [██░░░░░░░░]  15%
 - ✅ Составили список активов: User data, JWT, Basket/Orders, Products, Admin panel
 - ✅ Оценили критичность: High / Medium / Low
 - ✅ Нашли через практику: утечка всех пользователей через `/api/Users`, JWT `alg:none`
+- ✅ Заполнили CIA для каждого актива (Confidentiality, Integrity, Availability)
+- ✅ Оформили таблицу в `module-02-assets/report.md`
 
-- [ ] ⏳ Для каждого актива дозаполнить CIA (Confidentiality, Integrity, Availability)
-- [ ] ⏳ Оформить таблицу в `module-02-assets/report.md`
+- [x] Для каждого актива дозаполнить CIA (Confidentiality, Integrity, Availability)
+- [x] Оформить таблицу в `module-02-assets/report.md`
 
-**Результат:** `module-02-assets/report.md` — таблица активов с CIA
+**Результат:** ✅ `module-02-assets/report.md` — таблица активов с CIA (самостоятельно)
 
 ## Модуль 3 — Trust Boundaries
 
 **Цель:** Найти границы доверия и построить DFD
 
-- [ ] ⏳ Нарисовать Data Flow Diagram (DFD)
-- [ ] ⏳ Отметить External Entities
-- [ ] ⏳ Отметить Processes
-- [ ] ⏳ Отметить Data Stores
-- [ ] ⏳ Выделить Trust Boundaries
-- [ ] ⏳ Описать, где меняется уровень доверия
+**Что уже сделано:**
+- ✅ Определили External Entities (Пользователь, Админ, Платёжка, LLM)
+- ✅ Определили Processes (11 процессов Juice Shop)
+- ✅ Определили Data Stores (SQLite, File System)
+- ✅ Нарисовали DFD с 3 Trust Boundaries
+- ✅ Описали, где и почему меняется уровень доверия
 
-**Результат:** `module-03-boundaries/report.md` — DFD + Trust Boundaries
+- [x] Нарисовать Data Flow Diagram (DFD)
+- [x] Отметить External Entities
+- [x] Отметить Processes
+- [x] Отметить Data Stores
+- [x] Выделить Trust Boundaries
+- [x] Описать, где меняется уровень доверия
 
----
+**Результат:** ✅ `module-03-boundaries/report.md` — DFD + Trust Boundaries
 
 # Фаза 2: Threat Modeling
 
@@ -81,14 +91,13 @@ Total:                            [██░░░░░░░░]  15%
 - ✅ **Tampering:** SQL Injection — проверили ✅
 - ✅ **Information Disclosure:** /ftp/ открыт, утечка пользователей через `/api/Users` ✅
 - ✅ **Elevation of Privilege:** Mass Assignment → admin, админка без RBAC ✅
+- ✅ **Repudiation:** проверили failed login — логов нет ✅
+- ✅ **Denial of Service:** проверили rate limiting — отсутствует ✅
 - ✅ DFD + Trust Boundaries нарисованы
-- ✅ 23 угрозы идентифицированы (12 High, 10 Medium, 3 Low)
+- ✅ 11 угроз идентифицированы (7 Critical, 2 High, 2 Medium)
+- ✅ Оформили отчёт в `module-04-threat-model/report.md`
 
-- [ ] ⏳ **Repudiation:** проверить аудит-логи (нет ли logging?)
-- [ ] ⏳ **Denial of Service:** проверить rate limiting
-- [ ] ⏳ Оформить всё как отдельный отчёт в `module-04-threat-model/report.md`
-
-**Результат:** `module-04-threat-model/report.md` — полный STRIDE-анализ
+**Результат:** ✅ `module-04-threat-model/report.md` — полный STRIDE-анализ (7 Critical, 2 High, 2 Medium)
 
 ---
 
