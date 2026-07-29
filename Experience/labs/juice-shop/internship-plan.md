@@ -226,6 +226,25 @@ Total:                            [███████░░░]  65%
 
 **Результат:** ✅ `module-12-burp/report.md`
 
+## Модуль 13 — Nuclei (DAST)
+
+**Цель:** Научиться запускать DAST-сканирование через Nuclei, писать custom templates
+
+**Что уже сделано:**
+- ✅ Установлен Nuclei (3.4.9)
+- ✅ Запущен cloud-шаблон (nuclei -t cloud) — 15 находок
+- ✅ Prometheus /metrics (Medium), Swagger /api-docs (Medium), Full Path Disclosure (Medium)
+- ✅ Написан свой шаблон для /ftp/ (ftp-exposure.yaml)
+- ✅ Сравнение с Burp и ZAP
+
+- [x] Установить Nuclei
+- [x] Запустить стандартные cloud-шаблоны
+- [x] Проанализировать результаты
+- [x] Написать свой шаблон (/ftp/ exposure)
+- [x] Сравнить с Burp Suite
+
+**Результат:** ✅ `module-13-nuclei/report.md`
+
 ## Модуль 14 — ZAP (Zed Attack Proxy)
 
 **Цель:** Сравнить ZAP (DAST) с Nuclei, понять разницу в подходах
