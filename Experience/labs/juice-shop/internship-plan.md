@@ -317,11 +317,20 @@ Total:                            [███████░░░]  74%
   - **L2 (SAST):** Нашёл SQLi (3 файла: loginAdminChallenge, loginJimChallenge, dbSchema) ✅
   - **L3 (SCA):** Проверил зависимости — jsonwebtoken OK ✅
   - **L4 (DAST):** Проверен план DAST-сканирования ✅
+- ✅ Практика с `gitlab-ci-local@4.35.0` — запущен GitLab CI pipeline локально:
+  - **L1 (pre-commit):** Нашёл RSA private key — блокирован ✅
+  - **L2 (SAST):** Нашёл `eval()` в `/routes/captcha.ts` и `/routes/userProfile.ts` — блокирован ✅
+  - **L3-L5 (SCA/DAST/Sign-off):** Заблокированы из-за L2 ✅
+- ✅ Сравнение GitHub Actions vs GitLab CI (синтаксис, скорость, плюсы/минусы)
+- ✅ `.gitlab-ci.yml` сохранён в module-17-ssdlc/
 
 - [x] Описать pipeline безопасности для Juice Shop
 - [x] Какие проверки добавить в PR?
 - [x] Какие gates поставить перед деплоем?
 - [x] Написать Security Requirements
+- [x] Запустить pipeline через act (GitHub Actions)
+- [x] Запустить pipeline через gitlab-ci-local (GitLab CI)
+- [x] Сравнить оба инструмента
 
 **Результат:** ✅ `module-17-ssdlc/report.md`
 

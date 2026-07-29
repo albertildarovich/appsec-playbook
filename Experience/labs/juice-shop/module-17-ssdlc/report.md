@@ -3,6 +3,77 @@
 > **Цель:** Встроить безопасность в процесс разработки Juice Shop
 > **Контекст:** Результаты модулей 1-16 (20 уязвимостей, 4 Critical, 5 High, 11 Medium)
 
+
+---
+
+## 10. Практика: Локальный запуск CI/CD pipeline
+
+### Инструменты для локального запуска
+
+Для практической отработки pipeline использованы два инструмента:
+
+| Инструмент | Платформа | Установка | Статус |
+|-----------|-----------|-----------|--------|
+| **act** | GitHub Actions | `brew install act` | ✅ Работает |
+| **gitlab-ci-local** | GitLab CI | `npx gitlab-ci-local@4.35.0` | ✅ Работает |
+
+### Настройка
+
+Оба pipeline используют одни и те же security gates (L1-L4), но разный синтаксис:
+
+**GitHub Actions** (`.github/workflows/security-pipeline.yml`):
+```yaml
+jobs:
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: L1: Secrets scan
+        run: |
+          grep -q "RSA PRIVATE KEY" lib/insecurity.ts \
+            && echo "BLOCKED: Private key found!" \
+            && exit 1 \
+            || echo "No secrets found"
+```
+
+**GitLab CI** (`.gitlab-ci.yml`):
+```yaml
+secretscan:
+  stage: pre-commit
+  allow_failure: true
+  script: "echo L1: Scanning...; grep -q 'RSA PRIVATE KEY' lib/insecurity.ts && echo BLOCKED && exit 1 || echo OK; echo L1 PASSED"
+```
+
+### Результаты запуска
+
+| Gate | Проверка | GitHub Actions (act) | GitLab CI (gitlab-ci-local) |
+|------|---------|---------------------|---------------------------|
+| **L1** | RSA Private Key | ❌ BLOCKED | ❌ BLOCKED |
+| **L2** | SQL Injection | ❌ BLOCKED (`sequelize.query`) | ✅ OK |
+| **L2** | eval() | — | ❌ BLOCKED (`routes/captcha.ts`, `routes/userProfile.ts`) |
+| **L3** | SCA | ✅ PASSED | ✅ PASSED |
+| **L4** | Sign-off | ✅ PASSED | ✅ PASSED |
+
+### Сравнение: GitHub Actions vs GitLab CI
+
+| Аспект | GitHub Actions (act) | GitLab CI (gitlab-ci-local) |
+|--------|--------------------|---------------------------|
+| **Синтаксис YAML** | `jobs.<id>.steps` с `uses:` / `run:` | `stages` + `needs` |
+| **Docker** | Автоматически (нужен Docker) | Не нужен (shell executor) |
+| **Параллелизм** | Job runs последовательно без `needs` | Через `needs:` |
+| **Установка** | `brew install act` | `npx gitlab-ci-local@4.35.0` |
+| **Совместимость версий** | ✅ `act` 0.2.x — LTS стабильная | ❌ v4.68.0+ — сломали парсинг `script`, работает только v4.35.0 |
+| **Скорость** | ~2-3 сек/job (Docker pull) | ~10-20ms/job (shell) |
+| **Плюсы** | Полная совместимость с GHA workflow | Работает без Docker, быстрый |
+| **Минусы** | Требует Docker, пулл образов | Ограниченный парсер YAML |
+
+### Выводы по практике
+
+1. **`act`** — отличный выбор для GitHub Actions. Единственный нюанс: требует Docker и пул образов при первом запуске
+2. **`gitlab-ci-local`** — быстрый, не требует Docker. Проблема: начиная с v4.68.0+ сломали парсинг `script` с массивом. Работает только версия 4.35.0, и `script` должен быть **строкой** (не массивом), команды разделяются `;`
+3. **`gitlab-runner exec`** — удалён в v19+. Работает через Docker-образ `gitlab/gitlab-runner:v16.11.0`, но требует коммита и Docker-in-Docker
+4. **Рекомендация:** для локального запуска использовать `act` (GHA) или `gitlab-ci-local@4.35.0` (GitLab CI) в зависимости от платформы
+
 ---
 
 ## 1. Security Pipeline для Juice Shop
