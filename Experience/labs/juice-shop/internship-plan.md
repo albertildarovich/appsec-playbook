@@ -10,11 +10,11 @@
 ```
 Фаза 1: Recon & Architecture    [██████████] 100%  — Модули 1-3 готовы
 Фаза 2: Threat Modeling          [██████████] 100%  — Модуль 4 готов
-Фаза 3: Security Testing         [██████████] 100%  — Модули 5-15 готовы
+Фаза 3: Security Testing         [██████████] 100%  — Модули 5-16 готовы
 Фаза 4: DevSecOps & Automation   [███░░░░░░░]  12%  — Модуль 15 готов
 Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%
 ─────────────────────────────────────────────
-Total:                            [███████░░░]  65%
+Total:                            [███████░░░]  70%
 ```
 
 ---
@@ -286,13 +286,22 @@ Total:                            [███████░░░]  65%
 
 **Цель:** Провести ручной обзор кода
 
-- [ ] ⏳ Открыть исходники Juice Shop (GitHub)
-- [ ] ⏳ Прочитать файл аутентификации
-- [ ] ⏳ Прочитать файл корзины/заказов
-- [ ] ⏳ Найти плохие практики
-- [ ] ⏳ Задокументировать findings
+**Что уже сделано:**
+- ✅ Прочитаны файлы аутентификации (routes/login.ts, lib/insecurity.ts, models/user.ts)
+- ✅ Прочитаны файлы корзины/заказов (routes/basket.ts, routes/order.ts)
+- ✅ Прочитаны файлы search.ts, redirect.ts, currentUser.ts
+- ✅ Найдено 20 уязвимостей (4 Critical, 5 High, 11 Medium)
+- ✅ Сравнение SAST vs DAST vs Manual Review
+- ✅ Ключевые находки: SQLi (2), hardcoded RSA key, eval(), MD5 passwords, coupon forgery, negative order
+- ✅ Приоритизация исправлений (P0-P3)
 
-**Результат:** `module-16-security-review/report.md`
+- [x] Открыть исходники Juice Shop (GitHub)
+- [x] Прочитать файл аутентификации
+- [x] Прочитать файл корзины/заказов
+- [x] Найти плохие практики
+- [x] Задокументировать findings (20 finding, 4 Critical, 5 High, 11 Medium)
+
+**Результат:** ✅ `module-16-security-review/report.md`
 
 ## Модуль 17 — SSDLC
 
