@@ -84,9 +84,9 @@ OWASP Top 10:          ███████████████████
 Web Security:          ████████████████████ 80%
 Authentication:        ██████████████░░░░░░ 70%
 Authorization:         ██████████░░░░░░░░░░ 50%
-Secure SDLC:           ████████░░░░░░░░░░░░ 40%
+Secure SDLC:           ████████████░░░░░░░░░ 60%
 Cryptography:          ████████░░░░░░░░░░░░ 40%
-DevSecOps:             ██████░░░░░░░░░░░░░░ 30%
+DevSecOps:             ██████████░░░░░░░░░░ 50%
 Architecture Reviews:  ░░░░░░░░░░░░░░░░░░░░  0%
 Security Thinking:     ████████░░░░░░░░░░░░ 40%
 ```
