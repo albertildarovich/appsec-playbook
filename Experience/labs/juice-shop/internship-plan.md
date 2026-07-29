@@ -10,11 +10,11 @@
 ```
 Фаза 1: Recon & Architecture    [██████████] 100%  — Модули 1-3 готовы
 Фаза 2: Threat Modeling          [██████████] 100%  — Модуль 4 готов
-Фаза 3: Security Testing         [░░░░░░░░░░]   0%
+Фаза 3: Security Testing         [███░░░░░░░]  33%  — Модули 5-7 готовы
 Фаза 4: DevSecOps & Automation   [░░░░░░░░░░]   0%
 Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%
 ─────────────────────────────────────────────
-Total:                            [██░░░░░░░░]  18%
+Total:                            [████░░░░░░]  32%
 ```
 
 ---
@@ -107,14 +107,22 @@ Total:                            [██░░░░░░░░]  18%
 
 **Цель:** Проверить механизмы аутентификации
 
-- [ ] ⏳ Регистрация — можно ли создать пользователя с особыми правами?
-- [ ] ⏳ Логин — есть ли bruteforce защита?
-- [ ] ⏳ Logout — действительно ли завершает сессию?
-- [ ] ⏳ Смена пароля — требуется ли старый пароль?
-- [ ] ⏳ Reset password — насколько безопасен механизм?
-- [ ] ⏳ MFA — есть ли, можно ли обойти?
+**Что уже сделано:**
+- ✅ Регистрация — Mass Assignment (role→admin), ❌ нет верификации email, ❌ нет капчи
+- ✅ Логин — ❌ нет rate limiting, ❌ нет блокировки аккаунта
+- ✅ Logout — ❌ JWT не инвалидируется (токен живёт вечно)
+- ✅ Смена пароля — нет UI для смены
+- ✅ Reset password — UI есть, но не работает (нет email-провайдера)
+- ✅ MFA — отсутствует (totpSecret есть в JWT, но не используется)
 
-**Результат:** `module-05-auth/report.md`
+- [x] Регистрация — можно ли создать пользователя с особыми правами?
+- [x] Логин — есть ли bruteforce защита?
+- [x] Logout — действительно ли завершает сессию?
+- [x] Смена пароля — требуется ли старый пароль?
+- [x] Reset password — насколько безопасен механизм?
+- [x] MFA — есть ли, можно ли обойти?
+
+**Результат:** ✅ `module-05-auth/report.md`
 
 ## Модуль 6 — Authorization
 
@@ -124,12 +132,12 @@ Total:                            [██░░░░░░░░]  18%
 - ✅ Mass Assignment: role (создали админа)
 - ✅ Mass Assignment: deluxeToken (подделали премиум)
 
-- [ ] ⏳ RBAC — проверка ролей на каждом endpoint
-- [ ] ⏳ BOLA — Broken Object Level Authorization
-- [ ] ⏳ BFLA — Broken Function Level Authorization
-- [ ] ⏳ IDOR — подмена ID в запросах (начали — получили чужую корзину через alg:none)
+- [x] RBAC — проверка ролей на каждом endpoint
+- [x] BOLA — Broken Object Level Authorization
+- [x] BFLA — Broken Function Level Authorization
+- [x] IDOR — подмена ID в запросах (чужая корзина по ID)
 
-**Результат:** `module-06-authorization/report.md`
+**Результат:** ✅ `module-06-authorization/report.md`
 
 ## Модуль 7 — JWT
 
@@ -140,11 +148,11 @@ Total:                            [██░░░░░░░░]  18%
 - ✅ Проверили alg:none — **подтвердили уязвимость** ✅
 - ✅ Увидели, что JWT хранится в `authentication.token` (localStorage)
 
-- [ ] ⏳ Проверить TTL / Exp
-- [ ] ⏳ Проверить Refresh механизм
-- [ ] ⏳ Проверить Aud, Iss, Scope
+- [x] Проверить TTL / Exp
+- [x] Проверить Refresh механизм
+- [x] Проверить Aud, Iss, Scope
 
-**Результат:** `module-07-jwt/report.md`
+**Результат:** ✅ `module-07-jwt/report.md`
 
 ## Модуль 9 — OWASP Top 10
 
