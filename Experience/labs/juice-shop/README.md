@@ -48,10 +48,10 @@ docker run -d --name juice-shop -p 3000:3000 bkimminich/juice-shop
 
 ```
 Фаза 1: Recon & Architecture    [██░░░░░░░░]  15%  (модули 1-3)
-Фаза 2: Threat Modeling          [██░░░░░░░░]  10%  (модуль 4)
-Фаза 3: Security Testing         [░░░░░░░░░░]   0%  (модули 5-13)
-Фаза 4: DevSecOps & Automation   [░░░░░░░░░░]   0%  (модули 14-19)
-Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%  (модули 20-22)
+Фаза 2: Threat Modeling          [██████████] 100%  (модуль 4)
+Фаза 3: Security Testing         [██████████] 100%  (модули 5-14)
+Фаза 4: DevSecOps & Automation   [░░░░░░░░░░]   0%  (модули 15-20)
+Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%  (модули 21-23)
 ```
 
 ### Пройденные модули

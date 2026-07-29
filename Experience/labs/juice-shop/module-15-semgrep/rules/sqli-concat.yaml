@@ -1,0 +1,13 @@
+rules:
+  - id: sql-query-concatenation
+    patterns:
+      - pattern-either:
+          - pattern: sequelize.query("..." + $VAR + "...")
+          - pattern: sequelize.query(`...${$VAR}...`)
+          - pattern: |
+              sequelize.query("..." + $VAR + "...", ...)
+    message: >
+      SQL injection: user input concatenated into raw SQL query.
+      Use parameterized queries instead.
+    languages: [typescript, javascript]
+    severity: ERROR

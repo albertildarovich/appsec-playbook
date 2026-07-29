@@ -1,0 +1,17 @@
+rules:
+  - id: mass-assignment-user-role
+    patterns:
+      - pattern-inside: |
+          router.$METHOD($PATH, function($REQ, $RES, $NEXT) {
+            ...
+          })
+      - pattern: $MODEL.create($REQ.body)
+      - metavariable-regex:
+          metavariable: $METHOD
+          regex: (post|put|patch)
+    message: >
+      Potential Mass Assignment: user-controllable data ($REQ.body) passed directly to
+      $MODEL.create() without explicit field allowlisting. An attacker can set
+      arbitrary properties like 'role' or 'isAdmin'.
+    languages: [typescript]
+    severity: ERROR

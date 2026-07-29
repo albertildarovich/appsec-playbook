@@ -10,11 +10,11 @@
 ```
 Фаза 1: Recon & Architecture    [██████████] 100%  — Модули 1-3 готовы
 Фаза 2: Threat Modeling          [██████████] 100%  — Модуль 4 готов
-Фаза 3: Security Testing         [███░░░░░░░]  33%  — Модули 5-7 готовы
-Фаза 4: DevSecOps & Automation   [░░░░░░░░░░]   0%
+Фаза 3: Security Testing         [██████████] 100%  — Модули 5-15 готовы
+Фаза 4: DevSecOps & Automation   [███░░░░░░░]  12%  — Модуль 15 готов
 Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%
 ─────────────────────────────────────────────
-Total:                            [████░░░░░░]  32%
+Total:                            [███████░░░]  65%
 ```
 
 ---
@@ -163,97 +163,107 @@ Total:                            [████░░░░░░]  32%
 - ✅ A03: Injection (SQL Injection — подтвердили)
 - ✅ A05: Security Misconfiguration (/ftp/ открыт, JWT alg:none)
 
-- [ ] ⏳ A02: Cryptographic Failures
-- [ ] ⏳ A04: Insecure Design
-- [ ] ⏳ A06: Vulnerable Components
-- [ ] ⏳ A07: Identification & Auth Failures
-- [ ] ⏳ A08: Software & Data Integrity
-- [ ] ⏳ A09: Security Logging & Monitoring
-- [ ] ⏳ A10: SSRF
+- [x] A02: Cryptographic Failures
+- [x] A04: Insecure Design
+- [x] A06: Vulnerable Components
+- [x] A07: Identification & Auth Failures
+- [x] A08: Software & Data Integrity
+- [x] A09: Security Logging & Monitoring
+- [x] A10: SSRF
 
-**Результат:** `module-09-owasp-top10/report.md`
+**Результат:** ✅ `module-09-owasp-top10/report.md` — 6 Critical, 2 High, 2 Medium
 
 ## Модуль 8 — OWASP API Top 10
 
 **Цель:** Проверить каждую категорию API Top 10
 
-- [ ] ⏳ API1: Broken Object Level Authorization
-- [ ] ⏳ API2: Broken Authentication
-- [ ] ⏳ API3: Broken Object Property Level Authorization (Mass Assignment)
-- [ ] ⏳ API4: Unrestricted Resource Consumption
-- [ ] ⏳ API5: Broken Function Level Authorization
-- [ ] ⏳ API6: Unrestricted Access to Sensitive Business Flows
-- [ ] ⏳ API7: Server Side Request Forgery
-- [ ] ⏳ API8: Security Misconfiguration
-- [ ] ⏳ API9: Improper Inventory Management
-- [ ] ⏳ API10: Unsafe Consumption of APIs
+- [x] API1: Broken Object Level Authorization
+- [x] API2: Broken Authentication
+- [x] API3: Broken Object Property Level Authorization (Mass Assignment)
+- [x] API4: Unrestricted Resource Consumption
+- [x] API5: Broken Function Level Authorization
+- [x] API6: Unrestricted Access to Sensitive Business Flows
+- [x] API7: SSRF (частично)
+- [x] API8: Security Misconfiguration
+- [x] API9: Improper Inventory Management
+- [x] API10: Unsafe Consumption of APIs
 
-**Результат:** `module-08-api-top10/report.md`
+**Результат:** ✅ `module-08-api-top10/report.md` — 5 Critical, 3 High, 2 Medium
 
 ## Модуль 10 — Business Logic
 
 **Цель:** Найти уязвимости бизнес-логики
 
-- [ ] ⏳ Можно ли купить товар бесплатно?
-- [ ] ⏳ Можно ли изменить цену в корзине?
-- [ ] ⏳ Можно ли использовать купон дважды?
-- [ ] ⏳ Можно ли оформить миллион заказов?
-- [ ] ⏳ Можно ли создать миллион аккаунтов?
-- [ ] ⏳ Можно ли получить скидку без прав?
+- [x] Можно ли купить товар бесплатно? — ⚠️ Цена защищена
+- [x] Можно ли изменить цену в корзине? — ⚠️ Цена защищена
+- [x] Можно ли использовать купон дважды? — 🟡 API недоступен
+- [x] Можно ли оформить миллион заказов? — 🟡 Ограничение 5 шт/товар
+- [x] Можно ли создать миллион аккаунтов? — ❌ Нет капчи/rate limiting
+- [x] Можно ли получить скидку без прав? — ❌ deluxeToken проверяется сервером
 
-**Результат:** `module-10-business-logic/report.md`
+**Результат:** ✅ `module-10-business-logic/report.md`
 
 ## Модуль 11 — Anti-Fraud
 
 **Цель:** Подумать как защитник, а не как атакующий
 
-- [ ] ⏳ Какие фрод-сценарии возможны в Juice Shop?
-- [ ] ⏳ Какие проверки нужно добавить?
-- [ ] ⏳ Написать рекомендации по anti-fraud
+- [x] Какие фрод-сценарии возможны в Juice Shop?
+- [x] Какие проверки нужно добавить?
+- [x] Написать рекомендации по anti-fraud
 
-**Результат:** `module-11-anti-fraud/report.md`
+**Результат:** ✅ `module-11-anti-fraud/report.md`
 
 ## Модуль 12 — Burp Suite
 
 **Цель:** Освоить базовые и продвинутые функции Burp
 
-- [ ] ⏳ Proxy — перехват и модификация запросов
-- [ ] ⏳ Repeater — повторная отправка запросов
-- [ ] ⏳ Intruder — автоматизированный перебор
-- [ ] ⏳ Decoder — кодирование/декодирование
-- [ ] ⏳ Comparer — сравнение ответов
-- [ ] ⏳ Logger — анализ всех запросов
+- [x] Proxy — перехват и модификация запросов
+- [x] Repeater — повторная отправка запросов
+- [x] Intruder — автоматизированный перебор
+- [x] Decoder — кодирование/декодирование
+- [x] Comparer — сравнение ответов
+- [x] Logger — анализ всех запросов
 
-**Результат:** `module-12-burp/report.md`
+**Результат:** ✅ `module-12-burp/report.md`
 
-## Модуль 13 — Nuclei
+## Модуль 14 — ZAP (Zed Attack Proxy)
 
-**Цель:** Научиться использовать Nuclei для автоматизированного сканирования
+**Цель:** Сравнить ZAP (DAST) с Nuclei, понять разницу в подходах
 
-- [ ] ⏳ Установить Nuclei
-- [ ] ⏳ Запустить базовое сканирование Juice Shop
-- [ ] ⏳ Проанализировать результаты
-- [ ] ⏳ Написать/найти свой шаблон
+- [x] ✅ Установить ZAP (native Mac, через brew cask)
+- [x] ✅ Установить Java 17 (требуется для ZAP)
+- [x] ✅ Запустить ZAP в daemon-режиме
+- [x] ✅ Запустить spider + active scan на Juice Shop
+- [x] ✅ Проанализировать результаты (63 алерта)
+- [x] ✅ Сравнить с Nuclei
 
-**Результат:** `module-13-nuclei/report.md`
+**Результат:** ✅ `module-14-zap/report.md`
 
 ---
 
 # Фаза 4: DevSecOps & Automation
 
-## Модуль 14 — Semgrep
+## Модуль 15 — Semgrep
 
 **Цель:** Научиться писать свои SAST-правила
 
-- [ ] ⏳ Установить Semgrep
-- [ ] ⏳ Запустить стандартные правила
-- [ ] ⏳ Проанализировать результаты
-- [ ] ⏳ Написать своё правило для поиска Mass Assignment
-- [ ] ⏳ Написать своё правило для поиска SQLi
+**Что уже сделано:**
+- ✅ Semgrep установлен (1.168.0)
+- ✅ Запущены стандартные правила (p/default) — 71 finding
+- ✅ Найдены: SQLi (6), hardcoded JWT secret, eval(), open redirect
+- ✅ Сравнение SAST vs DAST (Semgrep vs ZAP/Nuclei)
+- ✅ Написано своё правило для Mass Assignment (`rules/mass-assignment.yaml`)
+- ✅ Написано своё правило для SQLi (`rules/sqli-concat.yaml`)
 
-**Результат:** `module-14-semgrep/report.md`
+- [x] Установить Semgrep
+- [x] Запустить стандартные правила
+- [x] Проанализировать результаты
+- [x] Написать своё правило для поиска Mass Assignment
+- [x] Написать своё правило для поиска SQLi
 
-## Модуль 15 — Security Review
+**Результат:** ✅ `module-15-semgrep/report.md`
+
+## Модуль 16 — Security Review
 
 **Цель:** Провести ручной обзор кода
 
@@ -263,9 +273,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Найти плохие практики
 - [ ] ⏳ Задокументировать findings
 
-**Результат:** `module-15-security-review/report.md`
+**Результат:** `module-16-security-review/report.md`
 
-## Модуль 16 — SSDLC
+## Модуль 17 — SSDLC
 
 **Цель:** Встроить безопасность в процесс разработки
 
@@ -274,9 +284,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Какие gates поставить перед деплоем?
 - [ ] ⏳ Написать Security Requirements
 
-**Результат:** `module-16-ssdlc/report.md`
+**Результат:** `module-17-ssdlc/report.md`
 
-## Модуль 17 — Docker
+## Модуль 18 — Docker
 
 **Цель:** Проанализировать безопасность Docker-контейнера
 
@@ -285,9 +295,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Проверить секреты в образе
 - [ ] ⏳ Написать рекомендации по hardening
 
-**Результат:** `module-17-docker/report.md`
+**Результат:** `module-18-docker/report.md`
 
-## Модуль 18 — Kubernetes
+## Модуль 19 — Kubernetes
 
 **Цель:** Представить Juice Shop в K8s и найти проблемы
 
@@ -296,9 +306,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Pod Security
 - [ ] ⏳ Secrets Management
 
-**Результат:** `module-18-kubernetes/report.md`
+**Результат:** `module-19-kubernetes/report.md`
 
-## Модуль 19 — Monitoring
+## Модуль 20 — Monitoring
 
 **Цель:** Определить, какие события нужно логировать
 
@@ -310,13 +320,13 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ coupon abuse
 - [ ] ⏳ mass assignment attempts
 
-**Результат:** `module-19-monitoring/report.md`
+**Результат:** `module-20-monitoring/report.md`
 
 ---
 
 # Фаза 5: Reporting & Architecture
 
-## Модуль 20 — Отчёт
+## Модуль 21 — Отчёт
 
 **Цель:** Оформить настоящий Pentest Report
 
@@ -326,9 +336,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Risk Matrix
 - [ ] ⏳ Приоритеты исправления
 
-**Результат:** `module-20-report/pentest-report.md`
+**Результат:** `module-21-report/pentest-report.md`
 
-## Модуль 21 — Архитектурные улучшения
+## Модуль 22 — Архитектурные улучшения
 
 **Цель:** Предложить архитектурные изменения для предотвращения уязвимостей
 
@@ -337,9 +347,9 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Рекомендации по изоляции компонентов
 - [ ] ⏳ Threat model v2 (после исправлений)
 
-**Результат:** `module-21-architecture/report.md`
+**Результат:** `module-22-architecture/report.md`
 
-## Модуль 22 — Финальный экзамен
+## Модуль 23 — Финальный экзамен
 
 **Цель:** Провести аудит нового приложения без подсказок
 
@@ -348,7 +358,7 @@ Total:                            [████░░░░░░]  32%
 - [ ] ⏳ Оформить отчёт
 - [ ] ⏳ Защитить результаты
 
-**Результат:** `module-22-exam/report.md`
+**Результат:** `module-23-exam/report.md`
 
 ---
 

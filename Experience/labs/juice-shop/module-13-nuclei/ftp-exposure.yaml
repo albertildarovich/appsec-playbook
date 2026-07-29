@@ -1,0 +1,30 @@
+id: juice-shop-ftp-exposure
+
+info:
+  name: Juice Shop - FTP Directory Exposure
+  author: albert
+  severity: medium
+  description: OWASP Juice Shop exposes /ftp/ directory listing without authentication, leaking sensitive files.
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+    cvss-score: 5.3
+    cwe-id: CWE-200
+  metadata:
+    max-request: 1
+  tags: juice-shop,ftp,exposure,misconfiguration
+
+http:
+  - method: GET
+    path:
+      - '{{BaseURL}}/ftp/'
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "index"
+
+      - type: status
+        status:
+          - 200
