@@ -11,10 +11,10 @@
 Фаза 1: Recon & Architecture    [██████████] 100%  — Модули 1-3 готовы
 Фаза 2: Threat Modeling          [██████████] 100%  — Модуль 4 готов
 Фаза 3: Security Testing         [██████████] 100%  — Модули 5-16 готовы
-Фаза 4: DevSecOps & Automation   [███░░░░░░░]  12%  — Модуль 15 готов
+Фаза 4: DevSecOps & Automation   [████░░░░░░]  17%  — Модули 15-17 готовы
 Фаза 5: Reporting & Architecture [░░░░░░░░░░]   0%
 ─────────────────────────────────────────────
-Total:                            [███████░░░]  70%
+Total:                            [███████░░░]  74%
 ```
 
 ---
@@ -307,12 +307,23 @@ Total:                            [███████░░░]  70%
 
 **Цель:** Встроить безопасность в процесс разработки
 
-- [ ] ⏳ Описать pipeline безопасности для Juice Shop
-- [ ] ⏳ Какие проверки добавить в PR?
-- [ ] ⏳ Какие gates поставить перед деплоем?
-- [ ] ⏳ Написать Security Requirements
+**Что уже сделано:**
+- ✅ Описан pipeline безопасности (SAST → SCA → DAST → Sign-off)
+- ✅ Определены проверки в PR (4 gates: secrets, SAST, SCA, tests)
+- ✅ Определены gates перед деплоем (L1-L4)
+- ✅ Написаны Security Requirements (25 требований)
+- ✅ Практика с `act` — запущен GitHub Actions pipeline локально:
+  - **L1 (pre-commit):** Нашёл RSA private key в `lib/insecurity.ts` ✅
+  - **L2 (SAST):** Нашёл SQLi (3 файла: loginAdminChallenge, loginJimChallenge, dbSchema) ✅
+  - **L3 (SCA):** Проверил зависимости — jsonwebtoken OK ✅
+  - **L4 (DAST):** Проверен план DAST-сканирования ✅
 
-**Результат:** `module-17-ssdlc/report.md`
+- [x] Описать pipeline безопасности для Juice Shop
+- [x] Какие проверки добавить в PR?
+- [x] Какие gates поставить перед деплоем?
+- [x] Написать Security Requirements
+
+**Результат:** ✅ `module-17-ssdlc/report.md`
 
 ## Модуль 18 — Docker
 
