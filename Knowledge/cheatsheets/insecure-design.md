@@ -12,11 +12,11 @@
 ## Never Trust the Client — что нельзя принимать от клиента
 
 ```
-❌ price / amount / total
-❌ role / isAdmin / permissions
-❌ paid / status / isVerified
-❌ discount / coupon (непроверенный)
-❌任何 identifiers, которые могут повлиять на логику
+[NO] price / amount / total
+[NO] role / isAdmin / permissions
+[NO] paid / status / isVerified
+[NO] discount / coupon (непроверенный)
+[NO]任何 identifiers, которые могут повлиять на логику
 ```
 
 ## Password Reset — чек-лист

@@ -19,12 +19,12 @@
 
 | Алгоритм | Статус | Memory Hard | Рекомендация |
 |----------|--------|-------------|--------------|
-| **Argon2id** | ✅ Современный | ✅ Да | ⭐⭐⭐⭐⭐ |
-| **bcrypt** | ✅ Проверенный | ❌ Нет | ⭐⭐⭐⭐ |
-| **scrypt** | ✅ Проверенный | ✅ Да | ⭐⭐⭐⭐ |
-| **PBKDF2** | ⚠️ Устаревает | ❌ Нет | ⭐⭐⭐ |
-| SHA-256 | ❌ Не для паролей | ❌ Нет | ❌ |
-| MD5 | ❌ Устарел | ❌ Нет | ❌ |
+| **Argon2id** | [OK] Современный | [OK] Да | ***** |
+| **bcrypt** | [OK] Проверенный | [NO] Нет | **** |
+| **scrypt** | [OK] Проверенный | [OK] Да | **** |
+| **PBKDF2** | [WARN] Устаревает | [NO] Нет | *** |
+| SHA-256 | [NO] Не для паролей | [NO] Нет | [NO] |
+| MD5 | [NO] Устарел | [NO] Нет | [NO] |
 
 ## Argon2id — рекомендуемые параметры
 
@@ -38,28 +38,28 @@
 
 | | Salt | Pepper |
 |---|------|--------|
-| Для каждого пользователя | ✅ Да | ❌ Нет (общий) |
-| Секрет | ❌ Нет | ✅ Да |
+| Для каждого пользователя | [OK] Да | [NO] Нет (общий) |
+| Секрет | [NO] Нет | [OK] Да |
 | Хранится | В базе | Vault / Secret Manager |
 
 ## Secrets Management — иерархия
 
 ```
-❌ Hardcoded в коде      → String apiKey = "..."
-❌ В Git                 → git add secrets.properties
-😐 Environment Variables → System.getenv("DB_PASSWORD")
-✅ Vault / Secrets Mgr   → AWS Secrets Manager, HashiCorp Vault
-⭐ Dynamic Secrets       → Vault с TTL и auto-rotation
+[NO] Hardcoded в коде      → String apiKey = "..."
+[NO] В Git                 → git add secrets.properties
+ Environment Variables → System.getenv("DB_PASSWORD")
+[OK] Vault / Secrets Mgr   → AWS Secrets Manager, HashiCorp Vault
+* Dynamic Secrets       → Vault с TTL и auto-rotation
 ```
 
 ## TLS — что использовать
 
 | Версия | Статус | Cipher Suites |
 |--------|--------|---------------|
-| TLS 1.0 | ❌ Запрещён | BEAST, POODLE |
-| TLS 1.1 | ❌ Запрещён | Слабые |
-| **TLS 1.2** | ✅ Рекомендуется | ECDHE + AES-GCM |
-| **TLS 1.3** | ✅ Рекомендуется | Быстрее, безопаснее |
+| TLS 1.0 | [NO] Запрещён | BEAST, POODLE |
+| TLS 1.1 | [NO] Запрещён | Слабые |
+| **TLS 1.2** | [OK] Рекомендуется | ECDHE + AES-GCM |
+| **TLS 1.3** | [OK] Рекомендуется | Быстрее, безопаснее |
 
 ## SAST patterns (Semgrep)
 
@@ -100,13 +100,13 @@ rules:
 
 ## Interview Quick Cards
 
-- **SHA-256 для паролей?** ❌ Слишком быстрый (миллиарды/сек на GPU)
-- **AES для паролей?** ❌ Не нужно восстанавливать + ключ компрометирует все
+- **SHA-256 для паролей?** [NO] Слишком быстрый (миллиарды/сек на GPU)
+- **AES для паролей?** [NO] Не нужно восстанавливать + ключ компрометирует все
 - **Hash vs Encryption?** Если не нужно восстанавливать → Hash, если нужно → Encryption
 - **Salt?** Случайный, для каждого пользователя, не секрет, в БД
 - **Pepper?** Общий секрет, отдельно от БД (Vault)
-- **trustAllCertificates?** ❌ MITM, HTTPS без проверки = шифрование для атакующего
-- **TLS 1.0?** ❌ BEAST, POODLE
+- **trustAllCertificates?** [NO] MITM, HTTPS без проверки = шифрование для атакующего
+- **TLS 1.0?** [NO] BEAST, POODLE
 - **PFS?** Каждая сессия — временный ключ, старый трафик защищён
 - **Argon2 vs bcrypt?** Argon2 Memory Hard → усложняет GPU
 

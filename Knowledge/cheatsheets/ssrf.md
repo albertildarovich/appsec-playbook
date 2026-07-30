@@ -76,7 +76,7 @@ http://7f000001.1u.ms          # resolves to 127.0.0.1
 ### 1. Allowlist доменов (рекомендуется)
 
 ```python
-# ✅ БЕЗОПАСНО — разрешить только доверенные домены
+# [OK] БЕЗОПАСНО — разрешить только доверенные домены
 ALLOWED_DOMAINS = [
     "images.example.com",
     "storage.example.com",

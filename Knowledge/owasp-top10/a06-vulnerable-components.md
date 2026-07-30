@@ -50,10 +50,10 @@ SCA → CVE → Triage → Risk Assessment → Remediation / Acceptance
 |---|------|-------------------|
 | **Отвечает на вопрос** | «Что входит в приложение?» | «Что уязвимо?» |
 | **Форматы** | SPDX, CycloneDX, SWID | — |
-| **Показывает CVE** | ❌ Нет | ✅ Да |
+| **Показывает CVE** | [NO] Нет | [OK] Да |
 
 ---
 
-## 🔗 Полная версия
+##  Полная версия
 
-👉 [`04-web-security/vulnerable-components.md`](./web-security/vulnerable-components.md) — подробно о reachability, triage, SBOM, Trivy, CI/CD, стратегии управления рисками
+ [`04-web-security/vulnerable-components.md`](./web-security/vulnerable-components.md) — подробно о reachability, triage, SBOM, Trivy, CI/CD, стратегии управления рисками

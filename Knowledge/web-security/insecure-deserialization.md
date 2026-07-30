@@ -37,7 +37,7 @@
 Ситуация, когда приложение **без проверки** десериализует данные, полностью контролируемые пользователем.
 
 ```java
-// ❌ ОПАСНО — Java
+// [NO] ОПАСНО — Java
 ObjectInputStream in = new ObjectInputStream(request.getInputStream());
 User user = (User) in.readObject();
 ```
@@ -53,7 +53,7 @@ User user = (User) in.readObject();
 ### Java
 
 ```java
-// ❌ Классическая проблема: ObjectInputStream.readObject()
+// [NO] Классическая проблема: ObjectInputStream.readObject()
 ObjectInputStream in = new ObjectInputStream(request.getInputStream());
 Object obj = in.readObject();  // может восстановить ЛЮБОЙ объект
 ```
@@ -63,7 +63,7 @@ Object obj = in.readObject();  // может восстановить ЛЮБОЙ
 ### Python — pickle
 
 ```python
-# ❌ ОПАСНО — аналог Java Serialization
+# [NO] ОПАСНО — аналог Java Serialization
 import pickle
 data = pickle.loads(request.body)  # может выполнить произвольный код
 ```
@@ -74,7 +74,7 @@ data = pickle.loads(request.body)  # может выполнить произв�
 ### PHP — unserialize()
 
 ```php
-// ❌ ОПАСНО — одна из самых известных функций в мире AppSec
+// [NO] ОПАСНО — одна из самых известных функций в мире AppSec
 $user = unserialize($_POST['data']);
 ```
 
@@ -83,7 +83,7 @@ $user = unserialize($_POST['data']);
 ### .NET (C#) — BinaryFormatter
 
 ```csharp
-// ❌ ОПАСНО — Microsoft официально не рекомендует
+// [NO] ОПАСНО — Microsoft официально не рекомендует
 BinaryFormatter formatter = new BinaryFormatter();
 object obj = formatter.Deserialize(stream);
 ```
@@ -91,7 +91,7 @@ object obj = formatter.Deserialize(stream);
 ### Ruby — Marshal / YAML
 
 ```ruby
-# ❌ ОПАСНО
+# [NO] ОПАСНО
 data = Marshal.load(user_input)
 data = YAML.load(user_input)  # тоже опасно
 ```
@@ -99,7 +99,7 @@ data = YAML.load(user_input)  # тоже опасно
 ### Go — JSON.Unmarshal (безопасно)
 
 ```go
-// ✅ БЕЗОПАСНО — просто заполняет поля структуры, без выполнения кода
+// [OK] БЕЗОПАСНО — просто заполняет поля структуры, без выполнения кода
 var user User
 err := json.Unmarshal(jsonData, &user)
 ```
@@ -109,7 +109,7 @@ Go в этом плане намного безопаснее.
 ### Rust — serde_json (безопасно)
 
 ```rust
-// ✅ БЕЗОПАСНО — просто создаёт структуру, никакой магии
+// [OK] БЕЗОПАСНО — просто создаёт структуру, никакой магии
 let user: User = serde_json::from_str(json_data)?;
 ```
 
@@ -135,7 +135,7 @@ let user: User = serde_json::from_str(json_data)?;
 
 **Gadget Chain** — цепочка уже существующих классов приложения или библиотек, которая при десериализации приводит к выполнению опасных действий.
 
-> ⚠️ Важно: злоумышленник **не загружает свой класс**. Он использует классы, которые **уже присутствуют** в приложении или его зависимостях.
+> [WARN] Важно: злоумышленник **не загружает свой класс**. Он использует классы, которые **уже присутствуют** в приложении или его зависимостях.
 
 ### Возможные последствия
 
@@ -165,7 +165,7 @@ let user: User = serde_json::from_str(json_data)?;
 Jackson обычно работает так:
 
 ```java
-// ✅ Приложение само определяет тип
+// [OK] Приложение само определяет тип
 User user = mapper.readValue(json, User.class);
 ```
 
@@ -176,7 +176,7 @@ User user = mapper.readValue(json, User.class);
 Если разработчик говорит Jackson: *«Пользователь сам укажет, какой класс создавать»* — и включает полиморфную десериализацию:
 
 ```java
-// ❌ ОПАСНО — enableDefaultTyping
+// [NO] ОПАСНО — enableDefaultTyping
 ObjectMapper mapper = new ObjectMapper();
 mapper.enableDefaultTyping();  // разрешает @class
 ```
@@ -191,9 +191,9 @@ mapper.enableDefaultTyping();  // разрешает @class
 
 ## Ключевое правило
 
-> ❌ **Неверно:** «Insecure Deserialization — проблема Java»
+> [NO] **Неверно:** «Insecure Deserialization — проблема Java»
 >
-> ✅ **Верно:** Insecure Deserialization возникает в любой технологии, где приложение позволяет **недоверенным данным управлять процессом восстановления объектов**.
+> [OK] **Верно:** Insecure Deserialization возникает в любой технологии, где приложение позволяет **недоверенным данным управлять процессом восстановления объектов**.
 
 ---
 
@@ -236,10 +236,10 @@ mapper.enableDefaultTyping();  // разрешает @class
 ### 3. Десериализовать только в заранее известные типы
 
 ```java
-// ✅ БЕЗОПАСНО — известный тип
+// [OK] БЕЗОПАСНО — известный тип
 mapper.readValue(json, User.class);
 
-// ❌ ОПАСНО — пользователь выбирает тип
+// [NO] ОПАСНО — пользователь выбирает тип
 mapper.readValue(json, Class.forName(userInput));
 ```
 

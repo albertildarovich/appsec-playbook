@@ -103,7 +103,7 @@ CVSS: 7.5  → High
 Не существует команды:
 
 ```
-Fix All CVE ✅   ← не работает
+Fix All CVE [OK]   ← не работает
 ```
 
 Всегда производится **приоритизация**.
@@ -112,8 +112,8 @@ Fix All CVE ✅   ← не работает
 
 | CVE | CVSS | Internet Facing | Reachability | KEV | Приоритет |
 |-----|------|----------------|-------------|-----|-----------|
-| CVE-2024-XXX | 7.2 | ✅ | ✅ | ✅ | **CRITICAL** → немедленно |
-| CVE-2024-YYY | 9.8 | ❌ Internal | ❌ Not reachable | ❌ | **LOW** → в бэклог |
+| CVE-2024-XXX | 7.2 | [OK] | [OK] | [OK] | **CRITICAL** → немедленно |
+| CVE-2024-YYY | 9.8 | [NO] Internal | [NO] Not reachable | [NO] | **LOW** → в бэклог |
 
 > **Лучше исправить:** CVSS 7.2, Internet, KEV, Reachable
 >

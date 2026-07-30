@@ -102,7 +102,7 @@ grep -rn "@Consumes.*xml\|@Produces.*xml" src/ --include="*.java"
 ### Java
 
 ```java
-// ✅ БЕЗОПАСНО — отключаем DOCTYPE, External Entities
+// [OK] БЕЗОПАСНО — отключаем DOCTYPE, External Entities
 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
@@ -112,14 +112,14 @@ factory.setExpandEntityReferences(false);
 ```
 
 ```java
-// ✅ БЕЗОПАСНО — SAXParser
+// [OK] БЕЗОПАСНО — SAXParser
 SAXParserFactory factory = SAXParserFactory.newInstance();
 factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
 factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
 ```
 
 ```java
-// ✅ БЕЗОПАСНО — XMLInputFactory (StAX)
+// [OK] БЕЗОПАСНО — XMLInputFactory (StAX)
 XMLInputFactory factory = XMLInputFactory.newInstance();
 factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
 factory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
@@ -128,7 +128,7 @@ factory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
 ### Python
 
 ```python
-# ✅ БЕЗОПАСНО — lxml
+# [OK] БЕЗОПАСНО — lxml
 from lxml import etree
 parser = etree.XMLParser(
     resolve_entities=False,
@@ -139,7 +139,7 @@ parser = etree.XMLParser(
 ```
 
 ```python
-# ✅ БЕЗОПАСНО — defusedxml (рекомендуется)
+# [OK] БЕЗОПАСНО — defusedxml (рекомендуется)
 from defusedxml import etree
 parser = etree.DefusedXMLParser()
 ```
@@ -147,7 +147,7 @@ parser = etree.DefusedXMLParser()
 ### Node.js
 
 ```javascript
-// ✅ БЕЗОПАСНО — libxmljs
+// [OK] БЕЗОПАСНО — libxmljs
 const libxml = require('libxmljs');
 const options = {
     noent: false,
@@ -160,7 +160,7 @@ const options = {
 ### Go
 
 ```go
-// ✅ БЕЗОПАСНО — encoding/xml (безопасен по умолчанию)
+// [OK] БЕЗОПАСНО — encoding/xml (безопасен по умолчанию)
 // Go-парсер не обрабатывает DOCTYPE и external entities
 import "encoding/xml"
 ```
@@ -168,7 +168,7 @@ import "encoding/xml"
 ### PHP
 
 ```php
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 libxml_disable_entity_loader(true);
 $xml = simplexml_load_string($input, 'SimpleXMLElement', LIBXML_NOENT);
 ```

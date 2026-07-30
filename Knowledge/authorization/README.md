@@ -8,10 +8,10 @@
 
 | Файл | Описание | Статус |
 |------|----------|--------|
-| `broken-access-control.md` | BAC — главный конспект: IDOR, BOLA, PE, Tenant Isolation, RBAC vs ABAC, централизованная авторизация, Mass Assignment | ✅ 100% |
-| `idor.md` | IDOR — root cause, примеры, SAST vs IDOR, защита | ✅ 100% |
-| `privilege-escalation.md` | Horizontal vs Vertical PE — схемы, примеры, классификация | ✅ 100% |
-| `bola.md` | BOLA — Broken Object Level Authorization, API-контекст | ✅ 100% |
+| `broken-access-control.md` | BAC — главный конспект: IDOR, BOLA, PE, Tenant Isolation, RBAC vs ABAC, централизованная авторизация, Mass Assignment | [OK] 100% |
+| `idor.md` | IDOR — root cause, примеры, SAST vs IDOR, защита | [OK] 100% |
+| `privilege-escalation.md` | Horizontal vs Vertical PE — схемы, примеры, классификация | [OK] 100% |
+| `bola.md` | BOLA — Broken Object Level Authorization, API-контекст | [OK] 100% |
 
 ---
 
@@ -27,7 +27,7 @@
 - **Централизованная авторизация** — AuthorizationService, OPA, Cedar, Zanzibar
 - **Mass Assignment** — DTO с только разрешёнными полями; критичные поля только от сервера
 
-👉 [Читать конспект →](broken-access-control.md)
+ [Читать конспект →](broken-access-control.md)
 
 ---
 
@@ -40,7 +40,7 @@
 - **SAST vs IDOR**: SAST может заподозрить, но не доказать — нужна ручная проверка
 - **Лучшая защита**: `findByIdAndOwnerId(id, currentUser.id)` вместо `findById(id)`
 
-👉 [Читать конспект →](idor.md)
+ [Читать конспект →](idor.md)
 
 ---
 
@@ -53,7 +53,7 @@
 - **IDOR → Horizontal PE** (но не каждая Horizontal PE — IDOR)
 - **Как классифицировать**: BAC → IDOR? → Horizontal? → Vertical?
 
-👉 [Читать конспект →](privilege-escalation.md)
+ [Читать конспект →](privilege-escalation.md)
 
 ---
 
@@ -66,7 +66,7 @@
 - Object ID может быть где угодно (URL, body, headers, cookie) — важно только наличие проверки на backend
 - **Лучшая защита**: `findByIdAndOwnerId(id, currentUser.id)`
 
-👉 [Читать конспект →](bola.md)
+ [Читать конспект →](bola.md)
 
 ---
 

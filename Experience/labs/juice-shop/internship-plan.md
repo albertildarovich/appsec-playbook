@@ -1,4 +1,4 @@
-# 🎓 Juice Shop
+#  Juice Shop
 
 > **Формат:** 22 модуля, 5 фаз
 > **Цель:** Аудит веб-приложений
@@ -28,47 +28,47 @@ Total:                            [███████░░░]  74%
 **Цель:** Исследовать все страницы, построить карту приложения
 
 **Что уже сделано:**
-- ✅ Нашли через curl: `/api/Users`, `/rest/products/search`, `/ftp/`, `/api-docs`, `/rest/user/login`
-- ✅ Определили роли: Anonymous, Customer, Admin, Deluxe Customer (из JWT)
-- ✅ Нашли админ-панель: `/administration`
-- ✅ Нашли Swagger: `/api-docs`
-- ✅ Базовая карта эндпоинтов
-- ✅ Прошлись по всем страницам в браузере (UI)
-- ✅ Составили mindmap приложения (все страницы и связи)
-- ✅ Заполнили таблицу эндпоинтов в `module-01-recon/report.md`
+- [OK] Нашли через curl: `/api/Users`, `/rest/products/search`, `/ftp/`, `/api-docs`, `/rest/user/login`
+- [OK] Определили роли: Anonymous, Customer, Admin, Deluxe Customer (из JWT)
+- [OK] Нашли админ-панель: `/administration`
+- [OK] Нашли Swagger: `/api-docs`
+- [OK] Базовая карта эндпоинтов
+- [OK] Прошлись по всем страницам в браузере (UI)
+- [OK] Составили mindmap приложения (все страницы и связи)
+- [OK] Заполнили таблицу эндпоинтов в `module-01-recon/report.md`
 
 - [x] Пройтись по всем страницам в браузере (UI)
 - [x] Составить mindmap приложения (все страницы и связи)
 - [x] Заполнить таблицу эндпоинтов в `module-01-recon/report.md`
 
-**Результат:** ✅ `module-01-recon/report.md` — карта приложения
+**Результат:** [OK] `module-01-recon/report.md` — карта приложения
 
 ## Модуль 2 — Assets
 
 **Цель:** Определить все активы и их критичность
 
 **Что уже сделано:**
-- ✅ Составили список активов: User data, JWT, Basket/Orders, Products, Admin panel
-- ✅ Оценили критичность: High / Medium / Low
-- ✅ Нашли через практику: утечка всех пользователей через `/api/Users`, JWT `alg:none`
-- ✅ Заполнили CIA для каждого актива (Confidentiality, Integrity, Availability)
-- ✅ Оформили таблицу в `module-02-assets/report.md`
+- [OK] Составили список активов: User data, JWT, Basket/Orders, Products, Admin panel
+- [OK] Оценили критичность: High / Medium / Low
+- [OK] Нашли через практику: утечка всех пользователей через `/api/Users`, JWT `alg:none`
+- [OK] Заполнили CIA для каждого актива (Confidentiality, Integrity, Availability)
+- [OK] Оформили таблицу в `module-02-assets/report.md`
 
 - [x] Для каждого актива дозаполнить CIA (Confidentiality, Integrity, Availability)
 - [x] Оформить таблицу в `module-02-assets/report.md`
 
-**Результат:** ✅ `module-02-assets/report.md` — таблица активов с CIA (самостоятельно)
+**Результат:** [OK] `module-02-assets/report.md` — таблица активов с CIA (самостоятельно)
 
 ## Модуль 3 — Trust Boundaries
 
 **Цель:** Найти границы доверия и построить DFD
 
 **Что уже сделано:**
-- ✅ Определили External Entities (Пользователь, Админ, Платёжка, LLM)
-- ✅ Определили Processes (11 процессов Juice Shop)
-- ✅ Определили Data Stores (SQLite, File System)
-- ✅ Нарисовали DFD с 3 Trust Boundaries
-- ✅ Описали, где и почему меняется уровень доверия
+- [OK] Определили External Entities (Пользователь, Админ, Платёжка, LLM)
+- [OK] Определили Processes (11 процессов Juice Shop)
+- [OK] Определили Data Stores (SQLite, File System)
+- [OK] Нарисовали DFD с 3 Trust Boundaries
+- [OK] Описали, где и почему меняется уровень доверия
 
 - [x] Нарисовать Data Flow Diagram (DFD)
 - [x] Отметить External Entities
@@ -77,7 +77,7 @@ Total:                            [███████░░░]  74%
 - [x] Выделить Trust Boundaries
 - [x] Описать, где меняется уровень доверия
 
-**Результат:** ✅ `module-03-boundaries/report.md` — DFD + Trust Boundaries
+**Результат:** [OK] `module-03-boundaries/report.md` — DFD + Trust Boundaries
 
 # Фаза 2: Threat Modeling
 
@@ -86,18 +86,18 @@ Total:                            [███████░░░]  74%
 **Цель:** Провести полноценный Threat Modeling
 
 **Что уже сделано:**
-- ✅ **Spoofing:** JWT `alg:none` — проверили на практике ✅
-- ✅ **Tampering:** Mass Assignment (role + deluxeToken) — проверили ✅
-- ✅ **Tampering:** SQL Injection — проверили ✅
-- ✅ **Information Disclosure:** /ftp/ открыт, утечка пользователей через `/api/Users` ✅
-- ✅ **Elevation of Privilege:** Mass Assignment → admin, админка без RBAC ✅
-- ✅ **Repudiation:** проверили failed login — логов нет ✅
-- ✅ **Denial of Service:** проверили rate limiting — отсутствует ✅
-- ✅ DFD + Trust Boundaries нарисованы
-- ✅ 11 угроз идентифицированы (7 Critical, 2 High, 2 Medium)
-- ✅ Оформили отчёт в `module-04-threat-model/report.md`
+- [OK] **Spoofing:** JWT `alg:none` — проверили на практике [OK]
+- [OK] **Tampering:** Mass Assignment (role + deluxeToken) — проверили [OK]
+- [OK] **Tampering:** SQL Injection — проверили [OK]
+- [OK] **Information Disclosure:** /ftp/ открыт, утечка пользователей через `/api/Users` [OK]
+- [OK] **Elevation of Privilege:** Mass Assignment → admin, админка без RBAC [OK]
+- [OK] **Repudiation:** проверили failed login — логов нет [OK]
+- [OK] **Denial of Service:** проверили rate limiting — отсутствует [OK]
+- [OK] DFD + Trust Boundaries нарисованы
+- [OK] 11 угроз идентифицированы (7 Critical, 2 High, 2 Medium)
+- [OK] Оформили отчёт в `module-04-threat-model/report.md`
 
-**Результат:** ✅ `module-04-threat-model/report.md` — полный STRIDE-анализ (7 Critical, 2 High, 2 Medium)
+**Результат:** [OK] `module-04-threat-model/report.md` — полный STRIDE-анализ (7 Critical, 2 High, 2 Medium)
 
 ---
 
@@ -108,12 +108,12 @@ Total:                            [███████░░░]  74%
 **Цель:** Проверить механизмы аутентификации
 
 **Что уже сделано:**
-- ✅ Регистрация — Mass Assignment (role→admin), ❌ нет верификации email, ❌ нет капчи
-- ✅ Логин — ❌ нет rate limiting, ❌ нет блокировки аккаунта
-- ✅ Logout — ❌ JWT не инвалидируется (токен живёт вечно)
-- ✅ Смена пароля — нет UI для смены
-- ✅ Reset password — UI есть, но не работает (нет email-провайдера)
-- ✅ MFA — отсутствует (totpSecret есть в JWT, но не используется)
+- [OK] Регистрация — Mass Assignment (role→admin), [NO] нет верификации email, [NO] нет капчи
+- [OK] Логин — [NO] нет rate limiting, [NO] нет блокировки аккаунта
+- [OK] Logout — [NO] JWT не инвалидируется (токен живёт вечно)
+- [OK] Смена пароля — нет UI для смены
+- [OK] Reset password — UI есть, но не работает (нет email-провайдера)
+- [OK] MFA — отсутствует (totpSecret есть в JWT, но не используется)
 
 - [x] Регистрация — можно ли создать пользователя с особыми правами?
 - [x] Логин — есть ли bruteforce защита?
@@ -122,46 +122,46 @@ Total:                            [███████░░░]  74%
 - [x] Reset password — насколько безопасен механизм?
 - [x] MFA — есть ли, можно ли обойти?
 
-**Результат:** ✅ `module-05-auth/report.md`
+**Результат:** [OK] `module-05-auth/report.md`
 
 ## Модуль 6 — Authorization
 
 **Цель:** Проверить все механизмы авторизации
 
 **Что уже сделано:**
-- ✅ Mass Assignment: role (создали админа)
-- ✅ Mass Assignment: deluxeToken (подделали премиум)
+- [OK] Mass Assignment: role (создали админа)
+- [OK] Mass Assignment: deluxeToken (подделали премиум)
 
 - [x] RBAC — проверка ролей на каждом endpoint
 - [x] BOLA — Broken Object Level Authorization
 - [x] BFLA — Broken Function Level Authorization
 - [x] IDOR — подмена ID в запросах (чужая корзина по ID)
 
-**Результат:** ✅ `module-06-authorization/report.md`
+**Результат:** [OK] `module-06-authorization/report.md`
 
 ## Модуль 7 — JWT
 
 **Цель:** Полностью разобрать и протестировать JWT
 
 **Что уже сделано:**
-- ✅ Декодировали JWT, изучили payload (role, deluxeToken, bid, iat)
-- ✅ Проверили alg:none — **подтвердили уязвимость** ✅
-- ✅ Увидели, что JWT хранится в `authentication.token` (localStorage)
+- [OK] Декодировали JWT, изучили payload (role, deluxeToken, bid, iat)
+- [OK] Проверили alg:none — **подтвердили уязвимость** [OK]
+- [OK] Увидели, что JWT хранится в `authentication.token` (localStorage)
 
 - [x] Проверить TTL / Exp
 - [x] Проверить Refresh механизм
 - [x] Проверить Aud, Iss, Scope
 
-**Результат:** ✅ `module-07-jwt/report.md`
+**Результат:** [OK] `module-07-jwt/report.md`
 
 ## Модуль 9 — OWASP Top 10
 
 **Цель:** Проверить каждую категорию OWASP Top 10
 
 **Что уже сделано:**
-- ✅ A01: Broken Access Control (Mass Assignment, админка без RBAC)
-- ✅ A03: Injection (SQL Injection — подтвердили)
-- ✅ A05: Security Misconfiguration (/ftp/ открыт, JWT alg:none)
+- [OK] A01: Broken Access Control (Mass Assignment, админка без RBAC)
+- [OK] A03: Injection (SQL Injection — подтвердили)
+- [OK] A05: Security Misconfiguration (/ftp/ открыт, JWT alg:none)
 
 - [x] A02: Cryptographic Failures
 - [x] A04: Insecure Design
@@ -171,7 +171,7 @@ Total:                            [███████░░░]  74%
 - [x] A09: Security Logging & Monitoring
 - [x] A10: SSRF
 
-**Результат:** ✅ `module-09-owasp-top10/report.md` — 6 Critical, 2 High, 2 Medium
+**Результат:** [OK] `module-09-owasp-top10/report.md` — 6 Critical, 2 High, 2 Medium
 
 ## Модуль 8 — OWASP API Top 10
 
@@ -188,20 +188,20 @@ Total:                            [███████░░░]  74%
 - [x] API9: Improper Inventory Management
 - [x] API10: Unsafe Consumption of APIs
 
-**Результат:** ✅ `module-08-api-top10/report.md` — 5 Critical, 3 High, 2 Medium
+**Результат:** [OK] `module-08-api-top10/report.md` — 5 Critical, 3 High, 2 Medium
 
 ## Модуль 10 — Business Logic
 
 **Цель:** Найти уязвимости бизнес-логики
 
-- [x] Можно ли купить товар бесплатно? — ⚠️ Цена защищена
-- [x] Можно ли изменить цену в корзине? — ⚠️ Цена защищена
-- [x] Можно ли использовать купон дважды? — 🟡 API недоступен
-- [x] Можно ли оформить миллион заказов? — 🟡 Ограничение 5 шт/товар
-- [x] Можно ли создать миллион аккаунтов? — ❌ Нет капчи/rate limiting
-- [x] Можно ли получить скидку без прав? — ❌ deluxeToken проверяется сервером
+- [x] Можно ли купить товар бесплатно? — [WARN] Цена защищена
+- [x] Можно ли изменить цену в корзине? — [WARN] Цена защищена
+- [x] Можно ли использовать купон дважды? — [MED] API недоступен
+- [x] Можно ли оформить миллион заказов? — [MED] Ограничение 5 шт/товар
+- [x] Можно ли создать миллион аккаунтов? — [NO] Нет капчи/rate limiting
+- [x] Можно ли получить скидку без прав? — [NO] deluxeToken проверяется сервером
 
-**Результат:** ✅ `module-10-business-logic/report.md`
+**Результат:** [OK] `module-10-business-logic/report.md`
 
 ## Модуль 11 — Anti-Fraud
 
@@ -211,7 +211,7 @@ Total:                            [███████░░░]  74%
 - [x] Какие проверки нужно добавить?
 - [x] Написать рекомендации по anti-fraud
 
-**Результат:** ✅ `module-11-anti-fraud/report.md`
+**Результат:** [OK] `module-11-anti-fraud/report.md`
 
 ## Модуль 12 — Burp Suite
 
@@ -224,18 +224,18 @@ Total:                            [███████░░░]  74%
 - [x] Comparer — сравнение ответов
 - [x] Logger — анализ всех запросов
 
-**Результат:** ✅ `module-12-burp/report.md`
+**Результат:** [OK] `module-12-burp/report.md`
 
 ## Модуль 13 — Nuclei (DAST)
 
 **Цель:** Научиться запускать DAST-сканирование через Nuclei, писать custom templates
 
 **Что уже сделано:**
-- ✅ Установлен Nuclei (3.4.9)
-- ✅ Запущен cloud-шаблон (nuclei -t cloud) — 15 находок
-- ✅ Prometheus /metrics (Medium), Swagger /api-docs (Medium), Full Path Disclosure (Medium)
-- ✅ Написан свой шаблон для /ftp/ (ftp-exposure.yaml)
-- ✅ Сравнение с Burp и ZAP
+- [OK] Установлен Nuclei (3.4.9)
+- [OK] Запущен cloud-шаблон (nuclei -t cloud) — 15 находок
+- [OK] Prometheus /metrics (Medium), Swagger /api-docs (Medium), Full Path Disclosure (Medium)
+- [OK] Написан свой шаблон для /ftp/ (ftp-exposure.yaml)
+- [OK] Сравнение с Burp и ZAP
 
 - [x] Установить Nuclei
 - [x] Запустить стандартные cloud-шаблоны
@@ -243,20 +243,20 @@ Total:                            [███████░░░]  74%
 - [x] Написать свой шаблон (/ftp/ exposure)
 - [x] Сравнить с Burp Suite
 
-**Результат:** ✅ `module-13-nuclei/report.md`
+**Результат:** [OK] `module-13-nuclei/report.md`
 
 ## Модуль 14 — ZAP (Zed Attack Proxy)
 
 **Цель:** Сравнить ZAP (DAST) с Nuclei, понять разницу в подходах
 
-- [x] ✅ Установить ZAP (native Mac, через brew cask)
-- [x] ✅ Установить Java 17 (требуется для ZAP)
-- [x] ✅ Запустить ZAP в daemon-режиме
-- [x] ✅ Запустить spider + active scan на Juice Shop
-- [x] ✅ Проанализировать результаты (63 алерта)
-- [x] ✅ Сравнить с Nuclei
+- [x] [OK] Установить ZAP (native Mac, через brew cask)
+- [x] [OK] Установить Java 17 (требуется для ZAP)
+- [x] [OK] Запустить ZAP в daemon-режиме
+- [x] [OK] Запустить spider + active scan на Juice Shop
+- [x] [OK] Проанализировать результаты (63 алерта)
+- [x] [OK] Сравнить с Nuclei
 
-**Результат:** ✅ `module-14-zap/report.md`
+**Результат:** [OK] `module-14-zap/report.md`
 
 ---
 
@@ -267,12 +267,12 @@ Total:                            [███████░░░]  74%
 **Цель:** Научиться писать свои SAST-правила
 
 **Что уже сделано:**
-- ✅ Semgrep установлен (1.168.0)
-- ✅ Запущены стандартные правила (p/default) — 71 finding
-- ✅ Найдены: SQLi (6), hardcoded JWT secret, eval(), open redirect
-- ✅ Сравнение SAST vs DAST (Semgrep vs ZAP/Nuclei)
-- ✅ Написано своё правило для Mass Assignment (`rules/mass-assignment.yaml`)
-- ✅ Написано своё правило для SQLi (`rules/sqli-concat.yaml`)
+- [OK] Semgrep установлен (1.168.0)
+- [OK] Запущены стандартные правила (p/default) — 71 finding
+- [OK] Найдены: SQLi (6), hardcoded JWT secret, eval(), open redirect
+- [OK] Сравнение SAST vs DAST (Semgrep vs ZAP/Nuclei)
+- [OK] Написано своё правило для Mass Assignment (`rules/mass-assignment.yaml`)
+- [OK] Написано своё правило для SQLi (`rules/sqli-concat.yaml`)
 
 - [x] Установить Semgrep
 - [x] Запустить стандартные правила
@@ -280,20 +280,20 @@ Total:                            [███████░░░]  74%
 - [x] Написать своё правило для поиска Mass Assignment
 - [x] Написать своё правило для поиска SQLi
 
-**Результат:** ✅ `module-15-semgrep/report.md`
+**Результат:** [OK] `module-15-semgrep/report.md`
 
 ## Модуль 16 — Security Review
 
 **Цель:** Провести ручной обзор кода
 
 **Что уже сделано:**
-- ✅ Прочитаны файлы аутентификации (routes/login.ts, lib/insecurity.ts, models/user.ts)
-- ✅ Прочитаны файлы корзины/заказов (routes/basket.ts, routes/order.ts)
-- ✅ Прочитаны файлы search.ts, redirect.ts, currentUser.ts
-- ✅ Найдено 20 уязвимостей (4 Critical, 5 High, 11 Medium)
-- ✅ Сравнение SAST vs DAST vs Manual Review
-- ✅ Ключевые находки: SQLi (2), hardcoded RSA key, eval(), MD5 passwords, coupon forgery, negative order
-- ✅ Приоритизация исправлений (P0-P3)
+- [OK] Прочитаны файлы аутентификации (routes/login.ts, lib/insecurity.ts, models/user.ts)
+- [OK] Прочитаны файлы корзины/заказов (routes/basket.ts, routes/order.ts)
+- [OK] Прочитаны файлы search.ts, redirect.ts, currentUser.ts
+- [OK] Найдено 20 уязвимостей (4 Critical, 5 High, 11 Medium)
+- [OK] Сравнение SAST vs DAST vs Manual Review
+- [OK] Ключевые находки: SQLi (2), hardcoded RSA key, eval(), MD5 passwords, coupon forgery, negative order
+- [OK] Приоритизация исправлений (P0-P3)
 
 - [x] Открыть исходники Juice Shop (GitHub)
 - [x] Прочитать файл аутентификации
@@ -301,28 +301,28 @@ Total:                            [███████░░░]  74%
 - [x] Найти плохие практики
 - [x] Задокументировать findings (20 finding, 4 Critical, 5 High, 11 Medium)
 
-**Результат:** ✅ `module-16-security-review/report.md`
+**Результат:** [OK] `module-16-security-review/report.md`
 
 ## Модуль 17 — SSDLC
 
 **Цель:** Встроить безопасность в процесс разработки
 
 **Что уже сделано:**
-- ✅ Описан pipeline безопасности (SAST → SCA → DAST → Sign-off)
-- ✅ Определены проверки в PR (4 gates: secrets, SAST, SCA, tests)
-- ✅ Определены gates перед деплоем (L1-L4)
-- ✅ Написаны Security Requirements (25 требований)
-- ✅ Практика с `act` — запущен GitHub Actions pipeline локально:
-  - **L1 (pre-commit):** Нашёл RSA private key в `lib/insecurity.ts` ✅
-  - **L2 (SAST):** Нашёл SQLi (3 файла: loginAdminChallenge, loginJimChallenge, dbSchema) ✅
-  - **L3 (SCA):** Проверил зависимости — jsonwebtoken OK ✅
-  - **L4 (DAST):** Проверен план DAST-сканирования ✅
-- ✅ Практика с `gitlab-ci-local@4.35.0` — запущен GitLab CI pipeline локально:
-  - **L1 (pre-commit):** Нашёл RSA private key — блокирован ✅
-  - **L2 (SAST):** Нашёл `eval()` в `/routes/captcha.ts` и `/routes/userProfile.ts` — блокирован ✅
-  - **L3-L5 (SCA/DAST/Sign-off):** Заблокированы из-за L2 ✅
-- ✅ Сравнение GitHub Actions vs GitLab CI (синтаксис, скорость, плюсы/минусы)
-- ✅ `.gitlab-ci.yml` сохранён в module-17-ssdlc/
+- [OK] Описан pipeline безопасности (SAST → SCA → DAST → Sign-off)
+- [OK] Определены проверки в PR (4 gates: secrets, SAST, SCA, tests)
+- [OK] Определены gates перед деплоем (L1-L4)
+- [OK] Написаны Security Requirements (25 требований)
+- [OK] Практика с `act` — запущен GitHub Actions pipeline локально:
+  - **L1 (pre-commit):** Нашёл RSA private key в `lib/insecurity.ts` [OK]
+  - **L2 (SAST):** Нашёл SQLi (3 файла: loginAdminChallenge, loginJimChallenge, dbSchema) [OK]
+  - **L3 (SCA):** Проверил зависимости — jsonwebtoken OK [OK]
+  - **L4 (DAST):** Проверен план DAST-сканирования [OK]
+- [OK] Практика с `gitlab-ci-local@4.35.0` — запущен GitLab CI pipeline локально:
+  - **L1 (pre-commit):** Нашёл RSA private key — блокирован [OK]
+  - **L2 (SAST):** Нашёл `eval()` в `/routes/captcha.ts` и `/routes/userProfile.ts` — блокирован [OK]
+  - **L3-L5 (SCA/DAST/Sign-off):** Заблокированы из-за L2 [OK]
+- [OK] Сравнение GitHub Actions vs GitLab CI (синтаксис, скорость, плюсы/минусы)
+- [OK] `.gitlab-ci.yml` сохранён в module-17-ssdlc/
 
 - [x] Описать pipeline безопасности для Juice Shop
 - [x] Какие проверки добавить в PR?
@@ -332,7 +332,7 @@ Total:                            [███████░░░]  74%
 - [x] Запустить pipeline через gitlab-ci-local (GitLab CI)
 - [x] Сравнить оба инструмента
 
-**Результат:** ✅ `module-17-ssdlc/report.md`
+**Результат:** [OK] `module-17-ssdlc/report.md`
 
 ## Модуль 18 — Docker
 
@@ -410,18 +410,18 @@ Total:                            [███████░░░]  74%
 
 ---
 
-## ✅ Легенда статусов
+## [OK] Легенда статусов
 
 | Статус | Значение |
 |--------|----------|
 | ⏳ | Не начато |
 | 🔄 | В работе |
-| 👀 | На ревью у Senior |
-| ✅ | Зачтено |
+|  | На ревью у Senior |
+| [OK] | Зачтено |
 
 ---
 
-## 🔗 Структура папок
+##  Структура папок
 
 ```
 Experience/labs/juice-shop/

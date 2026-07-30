@@ -1,6 +1,6 @@
 # Secure Design Principle — Never Trust the Client
 
-> **⚠️ Важно:** Это не классический принцип Saltzer & Schroeder, а современный принцип Secure Design, Secure Coding и Zero Trust, который используется практически во всех современных AppSec-практиках.
+> **[WARN] Важно:** Это не классический принцип Saltzer & Schroeder, а современный принцип Secure Design, Secure Coding и Zero Trust, который используется практически во всех современных AppSec-практиках.
 
 > **Формат:** Interview-ready. Открыл за 5 минут до собеседования — восстановил тему.
 
@@ -103,7 +103,7 @@
 ```javascript
 // Клиент отправляет свой баланс
 app.post('/api/game/add-coins', (req, res) => {
-    // ❌ пользователь может отправить { "coins": 1000000 }
+    // [NO] пользователь может отправить { "coins": 1000000 }
     user.coins += req.body.coins;
     user.save();
 });
@@ -126,7 +126,7 @@ app.post('/api/game/complete-level', (req, res) => {
 ```tsx
 // UI скрывает кнопку, но API не защищён
 function DeleteButton({ user, orderId }) {
-    if (user.role !== 'admin') return null;  // ❌ только UX
+    if (user.role !== 'admin') return null;  // [NO] только UX
 
     return <button onClick={() => deleteOrder(orderId)}>Delete</button>;
 }
@@ -153,7 +153,7 @@ def delete_order(order_id):
 ```javascript
 // Frontend validation
 function validateEmail(email) {
-    return email.includes('@');  // ❌ легко обойти
+    return email.includes('@');  // [NO] легко обойти
 }
 ```
 
@@ -162,9 +162,9 @@ function validateEmail(email) {
 @app.post('/api/users')
 def create_user():
     data = request.json
-    if not validate_email(data['email']):  # ✅ серверная валидация
+    if not validate_email(data['email']):  # [OK] серверная валидация
         return 400
-    if not validate_sql(data['name']):     # ✅ защита от injection
+    if not validate_sql(data['name']):     # [OK] защита от injection
         return 400
     user = create_user(data)
     return user
@@ -177,7 +177,7 @@ def create_user():
 // POST /api/checkout
 {
     "product_id": 42,
-    "price": 0.01,    // ❌ пользователь сам указал цену
+    "price": 0.01,    // [NO] пользователь сам указал цену
     "quantity": 100
 }
 ```
@@ -189,7 +189,7 @@ def checkout():
     data = request.json
     product = Product.find(data['product_id'])
     # Сервер берёт актуальную цену из БД
-    total = product.price * data['quantity']  # ✅
+    total = product.price * data['quantity']  # [OK]
     process_payment(total)
 ```
 
@@ -199,7 +199,7 @@ def checkout():
 ```javascript
 // Сервер доверяет роли, переданной клиентом
 app.post('/api/admin/delete-user', (req, res) => {
-    if (req.body.role === 'admin') {  // ❌ кто угодно может передать role: admin
+    if (req.body.role === 'admin') {  // [NO] кто угодно может передать role: admin
         deleteUser(req.body.userId);
     }
 });
@@ -210,7 +210,7 @@ app.post('/api/admin/delete-user', (req, res) => {
 app.post('/api/admin/delete-user', (req, res) => {
     // Сервер сам определяет роль из аутентификации
     const user = getCurrentUser(req);  // из JWT/session
-    if (user.role === 'admin') {       // ✅ серверный источник правды
+    if (user.role === 'admin') {       // [OK] серверный источник правды
         deleteUser(req.body.userId);
     }
 });
@@ -327,7 +327,7 @@ Never Trust the Client — фундаментальный принцип Zero Tr
 
 ## Common Interview Mistakes
 
-### ❌ Категоричный ответ
+### [NO] Категоричный ответ
 > «Никогда, ни при каких обстоятельствах нельзя доверять клиенту. Все client-side проверки бесполезны.»
 
 **Почему это проблема:** Клиентские проверки полезны для UX: мгновенная валидация формы, подсказки, авто-форматирование. Проблема не в том, что они есть, а в том, что **только** они.
@@ -335,7 +335,7 @@ Never Trust the Client — фундаментальный принцип Zero Tr
 **Зрелая формулировка:**
 > «Клиентские проверки — это UX. Они улучшают пользовательский опыт, но не защищают от злоумышленника. Серверные проверки — это Security. Они должны быть всегда, независимо от того, есть ли проверки на клиенте или нет. Клиентские проверки — приятное дополнение, но не замена.»
 
-### ❌ Категоричный ответ
+### [NO] Категоричный ответ
 > «Если мы используем HTTPS, то данные от клиента защищены — им можно доверять.»
 
 **Почему это проблема:** HTTPS защищает данные в пути (от перехвата), но не защищает от клиента. Пользователь сам отправляет данные — он может отправить что угодно через свой браузер, curl, Postman или Burp Suite.
@@ -343,7 +343,7 @@ Never Trust the Client — фундаментальный принцип Zero Tr
 **Зрелая формулировка:**
 > «HTTPS защищает от man-in-the-middle, но не от клиента. Клиент — это небезопасная среда, которой управляет пользователь. HTTPS — про confidentiality в transit, Never Trust the Client — про integrity и authorization на сервере. Это разные вещи.»
 
-### ❌ Категоричный ответ
+### [NO] Категоричный ответ
 > «Obfuscation JavaScript кода решит проблему — злоумышленник не сможет понять, как формируется запрос.»
 
 **Почему это проблема:** Obfuscation — это security through obscurity. Определить, как формируется запрос, можно через DevTools, network tab, перехват трафика. Obfuscation замедляет, но не阻止ляет.
@@ -395,4 +395,4 @@ Never Trust the Client — фундаментальный принцип Zero Tr
 - Assume Breach — следующий шаг после Never Trust the Client
 - Если защита есть только на клиенте — **её нет**
 
-> 🎯 **Самая важная мысль:** Любая информация, пришедшая от клиента, должна рассматриваться как недостоверная до тех пор, пока сервер её не проверит или не вычислит самостоятельно.
+>  **Самая важная мысль:** Любая информация, пришедшая от клиента, должна рассматриваться как недостоверная до тех пор, пока сервер её не проверит или не вычислит самостоятельно.

@@ -14,8 +14,8 @@
 
 | Инструмент | Платформа | Установка | Статус |
 |-----------|-----------|-----------|--------|
-| **act** | GitHub Actions | `brew install act` | ✅ Работает |
-| **gitlab-ci-local** | GitLab CI | `npx gitlab-ci-local@4.35.0` | ✅ Работает |
+| **act** | GitHub Actions | `brew install act` | [OK] Работает |
+| **gitlab-ci-local** | GitLab CI | `npx gitlab-ci-local@4.35.0` | [OK] Работает |
 
 ### Настройка
 
@@ -48,11 +48,11 @@ secretscan:
 
 | Gate | Проверка | GitHub Actions (act) | GitLab CI (gitlab-ci-local) |
 |------|---------|---------------------|---------------------------|
-| **L1** | RSA Private Key | ❌ BLOCKED | ❌ BLOCKED |
-| **L2** | SQL Injection | ❌ BLOCKED (`sequelize.query`) | ✅ OK |
-| **L2** | eval() | — | ❌ BLOCKED (`routes/captcha.ts`, `routes/userProfile.ts`) |
-| **L3** | SCA | ✅ PASSED | ✅ PASSED |
-| **L4** | Sign-off | ✅ PASSED | ✅ PASSED |
+| **L1** | RSA Private Key | [NO] BLOCKED | [NO] BLOCKED |
+| **L2** | SQL Injection | [NO] BLOCKED (`sequelize.query`) | [OK] OK |
+| **L2** | eval() | — | [NO] BLOCKED (`routes/captcha.ts`, `routes/userProfile.ts`) |
+| **L3** | SCA | [OK] PASSED | [OK] PASSED |
+| **L4** | Sign-off | [OK] PASSED | [OK] PASSED |
 
 ### Сравнение: GitHub Actions vs GitLab CI
 
@@ -62,7 +62,7 @@ secretscan:
 | **Docker** | Автоматически (нужен Docker) | Не нужен (shell executor) |
 | **Параллелизм** | Job runs последовательно без `needs` | Через `needs:` |
 | **Установка** | `brew install act` | `npx gitlab-ci-local@4.35.0` |
-| **Совместимость версий** | ✅ `act` 0.2.x — LTS стабильная | ❌ v4.68.0+ — сломали парсинг `script`, работает только v4.35.0 |
+| **Совместимость версий** | [OK] `act` 0.2.x — LTS стабильная | [NO] v4.68.0+ — сломали парсинг `script`, работает только v4.35.0 |
 | **Скорость** | ~2-3 сек/job (Docker pull) | ~10-20ms/job (shell) |
 | **Плюсы** | Полная совместимость с GHA workflow | Работает без Docker, быстрый |
 | **Минусы** | Требует Docker, пулл образов | Ограниченный парсер YAML |
@@ -157,24 +157,24 @@ jobs:
 
 | Severity | Action | Пример |
 |----------|--------|--------|
-| 🔴 **CRITICAL** | ❌ Block PR | SQL injection, hardcoded secret |
-| 🟠 **HIGH** | ⚠️ Require review | XSS, weak crypto |
-| 🟡 **MEDIUM** | 📝 Log + warn | Missing rate limiting |
-| 🟢 **LOW** | ℹ️ Info | Missing security header |
+| [CRIT] **CRITICAL** | [NO] Block PR | SQL injection, hardcoded secret |
+| [HIGH] **HIGH** | [WARN] Require review | XSS, weak crypto |
+| [MED] **MEDIUM** |  Log + warn | Missing rate limiting |
+| [LOW] **LOW** |  Info | Missing security header |
 
 ### Что проверяем конкретно для Juice Shop
 
 Исходя из найденных уязвимостей (модуль 16), в PR должны быть заблокированы:
 
 ```
-❌ BLOCK (CRITICAL):
+[NO] BLOCK (CRITICAL):
    - Конкатенация строк в SQL запросах (sequelize.query с ${})
    - Использование eval() с пользовательским вводом
    - Mass Assignment на модели User (role, deluxeToken)
    - Хардкоженные секреты/ключи в коде
    - Отсутствие Prepared Statements
 
-⚠️ WARN + REQUIRED REVIEW (HIGH):
+[WARN] WARN + REQUIRED REVIEW (HIGH):
    - Использование MD5/SHA1 для паролей
    - Отсутствие rate limiting на login
    - New endpoint без ownership check
@@ -195,7 +195,7 @@ jobs:
 │ ✔ gitleaks — secrets detection   │
 │ ✔ eslint-plugin-security         │
 │ ✔ prettier (форматирование)       │
-│ ❌ BLOCK: только secrets          │
+│ [NO] BLOCK: только secrets          │
 └──────────────────────────────────┘
 ```
 
@@ -211,8 +211,8 @@ jobs:
 │ ✔ SAST (Semgrep) — custom rules     │
 │ ✔ SCA (Trivy + npm audit)           │
 │ ✔ Unit tests + integration tests    │
-│ ❌ BLOCK: CRITICAL severity          │
-│ ⚠️ HIGH → AppSec review required     │
+│ [NO] BLOCK: CRITICAL severity          │
+│ [WARN] HIGH → AppSec review required     │
 └─────────────────────────────────────┘
 ```
 
@@ -250,8 +250,8 @@ gates:
 │ ✔ Nuclei — custom templates         │
 │ ✔ API Security Scan                  │
 │ ✔ Rate limit test (k6/bombardier)    │
-│ ❌ BLOCK: XSS, SQLi, Auth Bypass     │
-│ ⚠️ MEDIUM → manual review            │
+│ [NO] BLOCK: XSS, SQLi, Auth Bypass     │
+│ [WARN] MEDIUM → manual review            │
 └─────────────────────────────────────┘
 ```
 
@@ -294,7 +294,7 @@ Commit ──▶ L1 (Pre-commit) ──▶ PR ──▶ L2 (CI) ──▶ Stagin
 Secrets     Быстро        SAST + SCA    ZAP + API     Security        Релиз
 detect      (1-2 сек)     (2-5 мин)     (5-10 мин)    Checklist       готов
                                                          
-Блок:       ❌ Secrets    ❌ CRITICAL   ❌ XSS/SQLi   ❌ Любой
+Блок:       [NO] Secrets    [NO] CRITICAL   [NO] XSS/SQLi   [NO] Любой
 только                                         пункт не
 секреты                                         выполнен
 ```
@@ -495,10 +495,10 @@ jobs:
       - name: Security Sign-off
         run: |
           echo "=== SECURITY SIGN-OFF CHECKLIST ==="
-          echo "✅ SAST: Clean"
-          echo "✅ SCA: Clean" 
-          echo "✅ DAST: Clean"
-          echo "✅ Secrets: Clean"
+          echo "[OK] SAST: Clean"
+          echo "[OK] SCA: Clean" 
+          echo "[OK] DAST: Clean"
+          echo "[OK] Secrets: Clean"
           echo "=== APPROVED FOR DEPLOYMENT ==="
 
       - name: Deploy to production

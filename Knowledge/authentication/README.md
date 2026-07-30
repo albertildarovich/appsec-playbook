@@ -4,7 +4,7 @@
 
 | Файл | Описание | Статус |
 |------|----------|--------|
-| `identification-authentication-failures.md` | OWASP A07 — Username Enumeration, Timing, Brute Force, Session Fixation, JWT trade-offs, Risk-Based Auth | ✅ 100% |
+| `identification-authentication-failures.md` | OWASP A07 — Username Enumeration, Timing, Brute Force, Session Fixation, JWT trade-offs, Risk-Based Auth | [OK] 100% |
 
 ---
 
@@ -21,7 +21,7 @@
 - **Refresh Token** — инвалидировать при logout / disable user
 - **Risk-Based Authentication** — оценивать контекст входа (device, geo, IP)
 
-👉 [Читать конспект →](identification-authentication-failures.md)
+ [Читать конспект →](identification-authentication-failures.md)
 
 ---
 

@@ -1,17 +1,17 @@
 # Cryptography (OWASP A02)
 
-> 🟢 **Статус:** Cryptographic Failures — готово
+> [LOW] **Статус:** Cryptographic Failures — готово
 
 ## Содержание
 
 | Тема | Статус | Файл |
 |------|--------|------|
-| **Cryptographic Failures (A02)** | ✅ Готово | [`cryptographic-failures.md`](cryptographic-failures.md) |
-| Symmetric Encryption (AES) | 📝 В работе | — |
-| Asymmetric Encryption (RSA, ECC) | 📝 В работе | — |
-| Hashing (SHA, HMAC) | 📝 В работе | — |
-| TLS | 📝 В работе | — |
-| Key Management | 📝 В работе | — |
+| **Cryptographic Failures (A02)** | [OK] Готово | [`cryptographic-failures.md`](cryptographic-failures.md) |
+| Symmetric Encryption (AES) |  В работе | — |
+| Asymmetric Encryption (RSA, ECC) |  В работе | — |
+| Hashing (SHA, HMAC) |  В работе | — |
+| TLS |  В работе | — |
+| Key Management |  В работе | — |
 
 ## Ключевые тезисы
 

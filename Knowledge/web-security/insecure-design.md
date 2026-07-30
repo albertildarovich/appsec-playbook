@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Содержание
+##  Содержание
 
 1. [Что такое Insecure Design?](#1-что-такое-insecure-design)
 2. [Insecure Design vs Secure Coding](#2-insecure-design-vs-secure-coding)
@@ -92,10 +92,10 @@ Content-Type: application/json
 ### Что здесь не так?
 
 Код может быть **идеальным**:
-- ✅ JWT проверяется
-- ✅ SQL Injection отсутствует
-- ✅ XSS нет
-- ✅ CSRF-токен есть
+- [OK] JWT проверяется
+- [OK] SQL Injection отсутствует
+- [OK] XSS нет
+- [OK] CSRF-токен есть
 
 Но проектировщики **вообще не подумали**:
 - что аккаунт могут украсть;
@@ -117,7 +117,7 @@ Content-Type: application/json
 
 ## 4. Пример №2 — Never Trust the Client
 
-### ❌ Плохой API
+### [NO] Плохой API
 
 ```json
 // Запрос от клиента
@@ -139,7 +139,7 @@ Content-Type: application/json
 
 Если сервер **доверяет** этим данным, можно бесплатно получать товары.
 
-### ✅ Правильная архитектура
+### [OK] Правильная архитектура
 
 Клиент должен отправлять **только**:
 
@@ -161,24 +161,24 @@ Content-Type: application/json
 > **Never Trust the Client**
 
 Никогда не доверять данным от клиента:
-- ❌ цена;
-- ❌ роль /权限;
-- ❌ сумма;
-- ❌ статус оплаты;
-- ❌ признаки администратора (`isAdmin: true`);
-- ❌ любые критически важные данные.
+- [NO] цена;
+- [NO] роль /权限;
+- [NO] сумма;
+- [NO] статус оплаты;
+- [NO] признаки администратора (`isAdmin: true`);
+- [NO] любые критически важные данные.
 
 ### Демонстрация на Java (Spring Boot)
 
 ```java
-// ❌ ПЛОХО: доверяем данным от клиента
+// [NO] ПЛОХО: доверяем данным от клиента
 @PostMapping("/order")
 public Order createOrder(@RequestBody OrderRequest request) {
     // request.getPrice() — клиент прислал цену!
     return orderService.create(request);
 }
 
-// ✅ ХОРОШО: сервер сам определяет цену
+// [OK] ХОРОШО: сервер сам определяет цену
 @PostMapping("/order")
 public Order createOrder(@RequestBody OrderRequest request) {
     Product product = productRepository.findById(request.getProductId());
@@ -193,13 +193,13 @@ public Order createOrder(@RequestBody OrderRequest request) {
 ```python
 from pydantic import BaseModel
 
-# ❌ ПЛОХО: клиент указывает цену
+# [NO] ПЛОХО: клиент указывает цену
 class OrderRequest(BaseModel):
     product_id: int
-    price: float  # ❌ доверяем клиенту
+    price: float  # [NO] доверяем клиенту
     quantity: int
 
-# ✅ ХОРОШО: только ID товара
+# [OK] ХОРОШО: только ID товара
 class OrderRequest(BaseModel):
     product_id: int
     quantity: int
@@ -208,7 +208,7 @@ class OrderRequest(BaseModel):
 @app.post("/order")
 async def create_order(request: OrderRequest):
     product = get_product(request.product_id)
-    total = product.price * request.quantity  # ✅ цена от сервера
+    total = product.price * request.quantity  # [OK] цена от сервера
     return create_payment(request, total)
 ```
 
@@ -317,7 +317,7 @@ RATE_LIMITS = {
 
 ## 7. Пример №5 — Удаление аккаунта
 
-### ❌ Плохая архитектура
+### [NO] Плохая архитектура
 
 ```
 Нажал кнопку → Аккаунт удалён навсегда
@@ -330,7 +330,7 @@ RATE_LIMITS = {
 - инсайдер;
 - ошибка пользователя.
 
-### ✅ Как проектируют зрелые системы
+### [OK] Как проектируют зрелые системы
 
 ```
 Удалить аккаунт
@@ -368,7 +368,7 @@ RATE_LIMITS = {
 ### Как проектировать с учётом Human Error
 
 ```python
-# ✅ Подтверждение критических операций
+# [OK] Подтверждение критических операций
 def transfer_money(from_account, to_account, amount):
     if amount > DAILY_LIMIT:
         raise RequiresMFA("Transfer exceeds daily limit")
@@ -488,7 +488,7 @@ def transfer_money(from_account, to_account, amount):
 
 ---
 
-## 🔗 Связанные темы
+##  Связанные темы
 
 - [Интерпретаторы](../01-fundamentals/interpreters.md) — объединяющая концепция для injection
 - [STRIDE / Threat Modeling](../03-threat-modeling/stride.md) — систематический поиск угроз на этапе проектирования

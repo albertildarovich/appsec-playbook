@@ -75,7 +75,7 @@ grep -rn "decode.*jwt\|base64.*decode.*jwt" src/ --include="*.py"  # без veri
 ### Login — защита от enumeration и timing
 
 ```java
-// ❌ ОПАСНО — username enumeration
+// [NO] ОПАСНО — username enumeration
 public User login(String username, String password) {
     User user = userRepo.findByUsername(username);
     if (user == null) {
@@ -87,7 +87,7 @@ public User login(String username, String password) {
     return user;
 }
 
-// ✅ БЕЗОПАСНО — одинаковый ответ и одинаковое время
+// [OK] БЕЗОПАСНО — одинаковый ответ и одинаковое время
 public User login(String username, String password) {
     User user = userRepo.findByUsername(username);
     if (user == null) {
@@ -105,20 +105,20 @@ public User login(String username, String password) {
 ### Session Fixation
 
 ```java
-// ✅ После успешной аутентификации — регенерировать Session ID
+// [OK] После успешной аутентификации — регенерировать Session ID
 request.changeSessionId();  // Servlet 3.1+
 // или
 request.getSession().invalidate();
 request.getSession();  // создаётся новая
 
-// ❌ ОПАСНО — не регенерировать
+// [NO] ОПАСНО — не регенерировать
 // Session ID остаётся тем же
 ```
 
 ### Password Recovery
 
 ```php
-// ❌ ОПАСНО — username enumeration
+// [NO] ОПАСНО — username enumeration
 if (userExists($email)) {
     sendResetLink($email);
     return "Email sent";
@@ -126,7 +126,7 @@ if (userExists($email)) {
     return "User not found";
 }
 
-// ✅ БЕЗОПАСНО — одинаковый ответ
+// [OK] БЕЗОПАСНО — одинаковый ответ
 sendResetLinkIfExists($email);
 return "If the account exists, instructions have been sent.";
 ```

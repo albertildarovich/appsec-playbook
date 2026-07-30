@@ -19,11 +19,11 @@
 ## Username Enumeration
 
 ```http
-# ❌ Плохо — раскрывает существование пользователя
+# [NO] Плохо — раскрывает существование пользователя
 POST /login → "User not found"
 POST /login → "Wrong password"
 
-# ✅ Хорошо — одинаковый ответ
+# [OK] Хорошо — одинаковый ответ
 POST /login → "Invalid credentials"
 ```
 
@@ -76,6 +76,6 @@ else:
 
 ---
 
-## 🔗 Полная версия
+##  Полная версия
 
-👉 [`authentication/identification-authentication-failures.md`](./authentication/identification-authentication-failures.md) — Brute Force, блокировка аккаунта vs DoS, JWT trade-offs, Refresh Token, Risk-Based Auth, interview questions
+ [`authentication/identification-authentication-failures.md`](./authentication/identification-authentication-failures.md) — Brute Force, блокировка аккаунта vs DoS, JWT trade-offs, Refresh Token, Risk-Based Auth, interview questions

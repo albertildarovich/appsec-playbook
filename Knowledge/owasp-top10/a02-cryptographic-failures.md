@@ -33,6 +33,6 @@
 
 ---
 
-## 🔗 Полная версия
+##  Полная версия
 
-👉 [`cryptography/cryptographic-failures.md`](./cryptography/cryptographic-failures.md) — Argon2, Salt vs Pepper, Secrets Management, TLS, PFS, практические сценарии, interview questions
+ [`cryptography/cryptographic-failures.md`](./cryptography/cryptographic-failures.md) — Argon2, Salt vs Pepper, Secrets Management, TLS, PFS, практические сценарии, interview questions

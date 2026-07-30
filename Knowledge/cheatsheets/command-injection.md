@@ -71,29 +71,29 @@ $(whoami)
 ### Java
 
 ```java
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 Runtime.getRuntime().exec("ping " + ip);
 Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "ping " + ip});
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 ProcessBuilder pb = new ProcessBuilder("ping", ip);
 Process process = pb.start();
 
-// ✅ ЕЩЁ ЛУЧШЕ — не вызывать shell вообще
+// [OK] ЕЩЁ ЛУЧШЕ — не вызывать shell вообще
 InetAddress.getByName(ip).isReachable(timeout);
 ```
 
 ### Python
 
 ```python
-# ❌ ОПАСНО
+# [NO] ОПАСНО
 os.system("ping " + ip)
 os.popen("ping " + ip)
 
-# ✅ БЕЗОПАСНО
+# [OK] БЕЗОПАСНО
 subprocess.run(["ping", ip], shell=False)
 
-# ✅ ЕЩЁ ЛУЧШЕ
+# [OK] ЕЩЁ ЛУЧШЕ
 import ipaddress
 ipaddress.ip_address(ip)  # валидация IP
 ```
@@ -101,11 +101,11 @@ ipaddress.ip_address(ip)  # валидация IP
 ### Node.js
 
 ```javascript
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 const { exec } = require('child_process');
 exec(`ping ${ip}`, (err, stdout) => {});
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 const { spawn } = require('child_process');
 spawn('ping', [ip]);
 ```
@@ -113,10 +113,10 @@ spawn('ping', [ip]);
 ### PHP
 
 ```php
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 shell_exec("ping " . $ip);
 
-// ✅ БЕЗОПАСНО — если shell необходим
+// [OK] БЕЗОПАСНО — если shell необходим
 escapeshellarg($ip);
 // Но лучше вообще не вызывать shell
 ```
@@ -124,10 +124,10 @@ escapeshellarg($ip);
 ### Go
 
 ```go
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 cmd := exec.Command("/bin/sh", "-c", "ping " + ip)
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 cmd := exec.Command("ping", ip)
 ```
 

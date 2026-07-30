@@ -1,8 +1,8 @@
-# 🛡️ Security Auditor — VSCode Extension
+# 🛡 Security Auditor — VSCode Extension
 
 > Линтер безопасности кода для Visual Studio Code.
 
-## 📋 Возможности
+##  Возможности
 
 - **50+ проверок** для JavaScript, TypeScript, Python, HTML, Dockerfile, YAML/K8s
 - **Автоматическое сканирование** при сохранении (опционально)
@@ -16,54 +16,54 @@
 ### JavaScript / TypeScript
 | Проверка | Серьёзность |
 |---------|------------|
-| `eval()` использование | 🔴 high |
-| `innerHTML` / опасная вставка | 🔴 high |
-| `document.write()` | 🟡 medium |
-| Секреты в localStorage | 🔴 high |
-| Хардкоженные пароли/токены | 🔴 high |
-| AWS ключи | 🔴 high |
-| SQL-инъекции (конкатенация) | 🔴 high |
-| Слабые алгоритмы (MD5, SHA1) | 🟡 medium |
+| `eval()` использование | [CRIT] high |
+| `innerHTML` / опасная вставка | [CRIT] high |
+| `document.write()` | [MED] medium |
+| Секреты в localStorage | [CRIT] high |
+| Хардкоженные пароли/токены | [CRIT] high |
+| AWS ключи | [CRIT] high |
+| SQL-инъекции (конкатенация) | [CRIT] high |
+| Слабые алгоритмы (MD5, SHA1) | [MED] medium |
 | Отладочный код | 🔵 low |
-| ReDoS уязвимости | 🟡 medium |
-| Path Traversal | 🔴 high |
+| ReDoS уязвимости | [MED] medium |
+| Path Traversal | [CRIT] high |
 
 ### Python
 | Проверка | Серьёзность |
 |---------|------------|
-| `eval()` / `exec()` | 🔴 high |
-| `pickle.loads()` | 🔴 high |
-| SQL-инъекции (f-strings) | 🔴 high |
-| `shell=True` в subprocess | 🔴 high |
-| `os.system()` / `os.popen()` | 🔴 high |
-| HTTP requests без timeout | 🟡 medium |
-| Хардкоженные секреты | 🔴 high |
+| `eval()` / `exec()` | [CRIT] high |
+| `pickle.loads()` | [CRIT] high |
+| SQL-инъекции (f-strings) | [CRIT] high |
+| `shell=True` в subprocess | [CRIT] high |
+| `os.system()` / `os.popen()` | [CRIT] high |
+| HTTP requests без timeout | [MED] medium |
+| Хардкоженные секреты | [CRIT] high |
 
 ### Dockerfile
 | Проверка | Серьёзность |
 |---------|------------|
-| Запуск от root | 🟡 medium |
+| Запуск от root | [MED] medium |
 | `:latest` тег | 🔵 low |
 | `ADD` вместо `COPY` | 🔵 low |
-| Секреты в ENV | 🔴 high |
+| Секреты в ENV | [CRIT] high |
 | `apt-get` без `--no-install-recommends` | ⚪ info |
 
 ### Kubernetes / YAML
 | Проверка | Серьёзность |
 |---------|------------|
-| `privileged: true` | 🔴 high |
-| `runAsNonRoot` не задан | 🟡 medium |
-| `hostNetwork: true` | 🔴 high |
-| `readOnlyRootFilesystem` не задан | 🟡 medium |
+| `privileged: true` | [CRIT] high |
+| `runAsNonRoot` не задан | [MED] medium |
+| `hostNetwork: true` | [CRIT] high |
+| `readOnlyRootFilesystem` не задан | [MED] medium |
 
 ### HTML
 | Проверка | Серьёзность |
 |---------|------------|
-| Отсутствие CSP | 🔴 high |
-| Инлайн-скрипты без nonce | 🟡 medium |
-| Автозаполнение на password полях | 🟡 medium |
+| Отсутствие CSP | [CRIT] high |
+| Инлайн-скрипты без nonce | [MED] medium |
+| Автозаполнение на password полях | [MED] medium |
 
-## 🚀 Установка
+##  Установка
 
 ### Из VSIX (разработка)
 ```bash
@@ -83,7 +83,7 @@ code --install-extension vscode-security-auditor-*.vsix
 2. `...` → Install from VSIX...
 3. Выберите `.vsix` файл
 
-## ⌨️ Команды
+## ⌨ Команды
 
 | Команда | Горячие клавиши | Описание |
 |---------|----------------|----------|
@@ -93,7 +93,7 @@ code --install-extension vscode-security-auditor-*.vsix
 | `Security Audit: Экспорт отчёта` | — | Сохранить отчёт в JSON |
 | `Security Audit: Очистить результаты` | — | Сбросить все предупреждения |
 
-## ⚙️ Настройки
+## ⚙ Настройки
 
 | Параметр | По умолчанию | Описание |
 |---------|-------------|----------|
@@ -101,26 +101,26 @@ code --install-extension vscode-security-auditor-*.vsix
 | `securityAuditor.severityThreshold` | `"medium"` | Минимальный уровень (`info`, `low`, `medium`, `high`) |
 | `securityAuditor.scanOnSave` | `false` | Сканировать при сохранении файла |
 
-## 🖥️ Использование
+## 🖥 Использование
 
 1. Откройте файл в VSCode
 2. Нажмите `Cmd+Shift+S` (Mac) / `Ctrl+Shift+S` (Win)
 3. Проблемы появятся в **Problems** панели (Ctrl+Shift+M)
 4. Нажмите на проблему — перейдёте к уязвимому месту
 
-## 📊 Пример отчёта
+##  Пример отчёта
 
 ```
 =====================================================
-  🛡️  SECURITY AUDITOR - РЕЗУЛЬТЫ СКАНИРОВАНИЯ
+  🛡  SECURITY AUDITOR - РЕЗУЛЬТЫ СКАНИРОВАНИЯ
 =====================================================
   Всего найдено: 5 проблем
-  🔴 Высоких: 2
-  🟡 Средних: 2
+  [CRIT] Высоких: 2
+  [MED] Средних: 2
   🔵 Низких: 1
 -----------------------------------------------------
 
-  🔴 ВЫСОКИЙ ПРИОРИТЕТ:
+  [CRIT] ВЫСОКИЙ ПРИОРИТЕТ:
     1. src/config.py:15
        Потенциальный секрет в коде
     2. Dockerfile:8
@@ -128,7 +128,7 @@ code --install-extension vscode-security-auditor-*.vsix
   ...
 ```
 
-## 🗺️ План развития
+## 🗺 План развития
 
 - [x] **Этап 1:** Базовые проверки для JS/TS, Python, Docker, K8s
 - [ ] **Этап 2:** Проверка package.json/dependencies (Snyk-like)
@@ -138,4 +138,4 @@ code --install-extension vscode-security-auditor-*.vsix
 
 ---
 
-**⚠️ Предупреждение:** Инструмент предназначен для помощи в code review и не заменяет полноценный security audit.
+**[WARN] Предупреждение:** Инструмент предназначен для помощи в code review и не заменяет полноценный security audit.

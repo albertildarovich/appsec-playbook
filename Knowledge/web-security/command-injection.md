@@ -24,7 +24,7 @@ cmd / powershell
 ## Пример
 
 ```java
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 Runtime.getRuntime().exec("ping " + ip);
 ```
 
@@ -95,10 +95,10 @@ grep -rn "exec\.Command\|os/exec" src/ --include="*.go"
 Если задачу можно решить библиотекой или встроенным API — использовать их.
 
 ```java
-// ❌ ОПАСНО — вызов внешней команды
+// [NO] ОПАСНО — вызов внешней команды
 Runtime.getRuntime().exec("ping " + ip);
 
-// ✅ БЕЗОПАСНО — использовать библиотеку (Java InetAddress)
+// [OK] БЕЗОПАСНО — использовать библиотеку (Java InetAddress)
 InetAddress.getByName(ip).isReachable(timeout);
 ```
 
@@ -107,26 +107,26 @@ InetAddress.getByName(ip).isReachable(timeout);
 Использовать безопасный API, где команда и аргументы передаются **отдельно**.
 
 ```java
-// ❌ ОПАСНО — конкатенация в shell
+// [NO] ОПАСНО — конкатенация в shell
 Runtime.getRuntime().exec("ping " + ip);
 
-// ✅ БЕЗОПАСНО — аргументы отдельно от команды
+// [OK] БЕЗОПАСНО — аргументы отдельно от команды
 ProcessBuilder pb = new ProcessBuilder("ping", ip);
 ```
 
 ```python
-# ❌ ОПАСНО
+# [NO] ОПАСНО
 os.system("ping " + ip)
 
-# ✅ БЕЗОПАСНО
+# [OK] БЕЗОПАСНО
 subprocess.run(["ping", ip], shell=False)
 ```
 
 ```javascript
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 exec(`ping ${ip}`, (err, stdout) => {});
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 spawn('ping', [ip]);
 ```
 

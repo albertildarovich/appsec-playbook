@@ -20,12 +20,12 @@
 
 | Функция | Статус | Результат |
 |---------|--------|-----------|
-| Proxy/Intercept | ✅ | Перехватили запрос, модифицировали body, добавили `role:admin` |
-| Repeater | ✅ | Использовался для повторной отправки запросов |
-| Intruder | ✅ | Подобрали пароль `admin123` для admin@juice-sh.op (bruteforce) |
-| Decoder | ✅ | Декодировали JWT payload (password MD5, role, bid, нет exp) |
-| Comparer | ✅ | Сравнили ответы `/api/Users` и `/rest/products/search?q=` для разных ролей — ответы **идентичны** (подтверждение отсутствия RBAC) |
-| Logger | ✅ | Просмотрена история всех запросов через Proxy: методы, URL, статусы, время |
+| Proxy/Intercept | [OK] | Перехватили запрос, модифицировали body, добавили `role:admin` |
+| Repeater | [OK] | Использовался для повторной отправки запросов |
+| Intruder | [OK] | Подобрали пароль `admin123` для admin@juice-sh.op (bruteforce) |
+| Decoder | [OK] | Декодировали JWT payload (password MD5, role, bid, нет exp) |
+| Comparer | [OK] | Сравнили ответы `/api/Users` и `/rest/products/search?q=` для разных ролей — ответы **идентичны** (подтверждение отсутствия RBAC) |
+| Logger | [OK] | Просмотрена история всех запросов через Proxy: методы, URL, статусы, время |
 
 ## Вывод
 

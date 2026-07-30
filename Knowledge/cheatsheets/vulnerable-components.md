@@ -110,14 +110,14 @@ grep -rn "trivy\|snyk\|dependabot\|owasp.*dependency\|dependency-check\|npm audi
 ### Java (Maven)
 
 ```xml
-<!-- ❌ Уязвимая версия -->
+<!-- [NO] Уязвимая версия -->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>
     <version>2.14.1</version>  <!-- log4shell -->
 </dependency>
 
-<!-- ✅ Исправленная версия -->
+<!-- [OK] Исправленная версия -->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>
@@ -128,37 +128,37 @@ grep -rn "trivy\|snyk\|dependabot\|owasp.*dependency\|dependency-check\|npm audi
 ### Python (pip)
 
 ```bash
-# ❌ Устаревшая версия
+# [NO] Устаревшая версия
 pip install requests==2.25.0
 
-# ✅ Проверить уязвимости
+# [OK] Проверить уязвимости
 pip-audit
 
-# ✅ Обновить
+# [OK] Обновить
 pip install requests==2.31.0
 ```
 
 ### Node.js
 
 ```bash
-# ❌ Устаревшая версия (package.json)
+# [NO] Устаревшая версия (package.json)
 "express": "^4.17.1"
 
-# ✅ Проверить уязвимости
+# [OK] Проверить уязвимости
 npm audit
 npm audit fix
 
-# ✅ Обновить
+# [OK] Обновить
 "express": "^4.19.2"
 ```
 
 ### Docker
 
 ```dockerfile
-# ❌ Устаревший базовый образ
+# [NO] Устаревший базовый образ
 FROM node:14-alpine
 
-# ✅ Актуальный базовый образ
+# [OK] Актуальный базовый образ
 FROM node:20-alpine
 ```
 

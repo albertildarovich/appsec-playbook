@@ -479,7 +479,7 @@ async function scanFile(document) {
 // --- Scan Workspace ---
 async function scanWorkspace() {
   if (!vscode.workspace.workspaceFolders) {
-    vscode.window.showInformationMessage('❌ Откройте проект для сканирования');
+    vscode.window.showInformationMessage('[NO] Откройте проект для сканирования');
     return;
   }
 
@@ -537,7 +537,7 @@ async function scanWorkspace() {
     });
   } else {
     vscode.window.showInformationMessage(
-      `✅ Сканирование завершено: ${scannedFiles} файлов, проблем не найдено`
+      `[OK] Сканирование завершено: ${scannedFiles} файлов, проблем не найдено`
     );
   }
 }
@@ -568,17 +568,17 @@ function showResults() {
   }
 
   if (total === 0) {
-    panel.appendLine('✅ Проблем не найдено. Отличная работа!');
+    panel.appendLine('[OK] Проблем не найдено. Отличная работа!');
     panel.show();
     return;
   }
 
   panel.appendLine('='.repeat(70));
-  panel.appendLine('  🛡️  SECURITY AUDITOR - РЕЗУЛЬТЫ СКАНИРОВАНИЯ');
+  panel.appendLine('  🛡  SECURITY AUDITOR - РЕЗУЛЬТЫ СКАНИРОВАНИЯ');
   panel.appendLine('='.repeat(70));
   panel.appendLine(`  Всего найдено: ${total} проблем`);
-  panel.appendLine(`  🔴 Высоких: ${bySeverity.high.length}`);
-  panel.appendLine(`  🟡 Средних: ${bySeverity.medium.length}`);
+  panel.appendLine(`  [CRIT] Высоких: ${bySeverity.high.length}`);
+  panel.appendLine(`  [MED] Средних: ${bySeverity.medium.length}`);
   panel.appendLine(`  🔵 Низких: ${bySeverity.low.length}`);
   panel.appendLine(`  ⚪ Инфо: ${bySeverity.info.length}`);
   panel.appendLine('-'.repeat(70));
@@ -588,8 +588,8 @@ function showResults() {
     if (bySeverity[severity].length === 0) return;
 
     const labels = {
-      high: '🔴 ВЫСОКИЙ ПРИОРИТЕТ',
-      medium: '🟡 СРЕДНИЙ ПРИОРИТЕТ',
+      high: '[CRIT] ВЫСОКИЙ ПРИОРИТЕТ',
+      medium: '[MED] СРЕДНИЙ ПРИОРИТЕТ',
       low: '🔵 НИЗКИЙ ПРИОРИТЕТ',
       info: '⚪ ИНФО'
     };
@@ -646,7 +646,7 @@ async function exportReport() {
 
   if (fileUri) {
     fs.writeFileSync(fileUri.fsPath, JSON.stringify(report, null, 2));
-    vscode.window.showInformationMessage(`✅ Отчёт сохранён: ${fileUri.fsPath}`);
+    vscode.window.showInformationMessage(`[OK] Отчёт сохранён: ${fileUri.fsPath}`);
   }
 }
 
@@ -680,14 +680,14 @@ function updateStatusBar() {
   }
 
   if (totalIssues > 0) {
-    statusBarItem.text = `🛡️ $(warning) ${totalIssues} issue${totalIssues > 1 ? 's' : ''}` +
+    statusBarItem.text = `🛡 $(warning) ${totalIssues} issue${totalIssues > 1 ? 's' : ''}` +
       (highIssues > 0 ? ` (${highIssues} high)` : '');
     statusBarItem.tooltip = 'Security Auditor: нажмите для просмотра результатов';
     statusBarItem.command = 'security-auditor.showResults';
     statusBarItem.backgroundColor = highIssues > 0 ? new vscode.ThemeColor('statusBarItem.errorBackground') : undefined;
     statusBarItem.show();
   } else {
-    statusBarItem.text = '🛡️ $(check)';
+    statusBarItem.text = '🛡 $(check)';
     statusBarItem.tooltip = 'Security Auditor: проблем не найдено';
     statusBarItem.command = 'security-auditor.showResults';
     statusBarItem.backgroundColor = undefined;
@@ -733,7 +733,7 @@ class SecurityTreeDataProvider {
       if (diags.length === 0) continue;
       const filePath = vscode.workspace.asRelativePath(uri);
       const fileItem = new vscode.TreeItem(
-        `📄 ${filePath}`,
+        ` ${filePath}`,
         vscode.TreeItemCollapsibleState.Collapsed
       );
       fileItem.id = uri.toString();
@@ -746,8 +746,8 @@ class SecurityTreeDataProvider {
       fileItem.tooltip = `${diags.length} проблем`;
 
       const children = diags.map(d => {
-        const icon = d.severity === vscode.DiagnosticSeverity.Error ? '🔴' :
-                     d.severity === vscode.DiagnosticSeverity.Warning ? '🟡' :
+        const icon = d.severity === vscode.DiagnosticSeverity.Error ? '[CRIT]' :
+                     d.severity === vscode.DiagnosticSeverity.Warning ? '[MED]' :
                      d.severity === vscode.DiagnosticSeverity.Information ? '🔵' : '⚪';
         
         const issueItem = new vscode.TreeItem(
@@ -770,7 +770,7 @@ class SecurityTreeDataProvider {
 
     if (tree.length === 0) {
       const emptyItem = new vscode.TreeItem(
-        '✅ Проблем не найдено',
+        '[OK] Проблем не найдено',
         vscode.TreeItemCollapsibleState.None
       );
       emptyItem.tooltip = 'Запустите сканирование (Cmd+Shift+S)';
@@ -788,7 +788,7 @@ class SecurityTreeDataProvider {
     }
 
     const summaryItem = new vscode.TreeItem(
-      `🔍 ${high+medium+low} проблем: 🔴${high} 🟡${medium} 🔵${low}`,
+      `🔍 ${high+medium+low} проблем: [CRIT]${high} [MED]${medium} 🔵${low}`,
       vscode.TreeItemCollapsibleState.None
     );
     summaryItem.tooltip = 'Нажмите для просмотра детального отчёта';
@@ -807,7 +807,7 @@ let treeView;
 // ==============================
 
 function activate(context) {
-  console.log('🛡️ Security Auditor активирован');
+  console.log('🛡 Security Auditor активирован');
 
   // Register TreeView
   treeProvider = new SecurityTreeDataProvider();

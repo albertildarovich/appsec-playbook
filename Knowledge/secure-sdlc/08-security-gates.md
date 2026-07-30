@@ -53,9 +53,9 @@ security-sast:
 ```
 
 **Gate policy:**
-- ❌ CRITICAL vulnerabilities → блокировать PR
-- ⚠️ HIGH → уведомить, но не блокировать
-- ✅ LOW/MEDIUM → логировать
+- [NO] CRITICAL vulnerabilities → блокировать PR
+- [WARN] HIGH → уведомить, но не блокировать
+- [OK] LOW/MEDIUM → логировать
 
 ### L3: Staging
 ```yaml
@@ -68,8 +68,8 @@ security-dast:
 ```
 
 **Gate policy:**
-- ❌ Найдена XSS/SQLi → блокировать деплой в prod
-- ⚠️ Medium findings → требуется manual review
+- [NO] Найдена XSS/SQLi → блокировать деплой в prod
+- [WARN] Medium findings → требуется manual review
 
 ### L4: Release
 ```yaml

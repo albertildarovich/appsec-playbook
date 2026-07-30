@@ -10,18 +10,18 @@
 
 | Принцип | Суть | Готово |
 |---------|------|--------|
-| [Least Privilege](../../Knowledge/secure-design/least-privilege.md) | Минимум прав для работы | ✅ |
-| [Fail Secure (Fail Closed)](../../Knowledge/secure-design/fail-secure.md) | При ошибке — безопасное состояние | ✅ |
-| [Secure Defaults (Secure by Default)](../../Knowledge/secure-design/secure-defaults.md) | Безопасно из коробки | ✅ |
-| [Defense in Depth](../../Knowledge/secure-design/defense-in-depth.md) | Несколько слоёв защиты | ✅ |
-| [Reduce Attack Surface](../../Knowledge/secure-design/reduce-attack-surface.md) | Меньше кода — меньше уязвимостей | ✅ |
-| [Complete Mediation](../../Knowledge/secure-design/complete-mediation.md) | Всегда проверяй права | ✅ |
-| [Economy of Mechanism](../../Knowledge/secure-design/economy-of-mechanism.md) | Простота — залог безопасности | ✅ |
-| [Separation of Privilege](../../Knowledge/secure-design/separation-of-privilege.md) | Разделение условий для доступа | ✅ |
-| [Least Common Mechanism](../../Knowledge/secure-design/least-common-mechanism.md) | Минимизация разделяемых механизмов | ✅ |
-| [Never Trust the Client](../../Knowledge/secure-design/never-trust-client.md) | Клиент всегда под подозрением | ✅ |
-| [Psychological Acceptability](../../Knowledge/secure-design/psychological-acceptability.md) | Безопасность не должна мешать | ✅ |
-| [Open Design](../../Knowledge/secure-design/open-design.md) | Безопасность не должна быть секретом | ✅ |
+| [Least Privilege](../../Knowledge/secure-design/least-privilege.md) | Минимум прав для работы | [OK] |
+| [Fail Secure (Fail Closed)](../../Knowledge/secure-design/fail-secure.md) | При ошибке — безопасное состояние | [OK] |
+| [Secure Defaults (Secure by Default)](../../Knowledge/secure-design/secure-defaults.md) | Безопасно из коробки | [OK] |
+| [Defense in Depth](../../Knowledge/secure-design/defense-in-depth.md) | Несколько слоёв защиты | [OK] |
+| [Reduce Attack Surface](../../Knowledge/secure-design/reduce-attack-surface.md) | Меньше кода — меньше уязвимостей | [OK] |
+| [Complete Mediation](../../Knowledge/secure-design/complete-mediation.md) | Всегда проверяй права | [OK] |
+| [Economy of Mechanism](../../Knowledge/secure-design/economy-of-mechanism.md) | Простота — залог безопасности | [OK] |
+| [Separation of Privilege](../../Knowledge/secure-design/separation-of-privilege.md) | Разделение условий для доступа | [OK] |
+| [Least Common Mechanism](../../Knowledge/secure-design/least-common-mechanism.md) | Минимизация разделяемых механизмов | [OK] |
+| [Never Trust the Client](../../Knowledge/secure-design/never-trust-client.md) | Клиент всегда под подозрением | [OK] |
+| [Psychological Acceptability](../../Knowledge/secure-design/psychological-acceptability.md) | Безопасность не должна мешать | [OK] |
+| [Open Design](../../Knowledge/secure-design/open-design.md) | Безопасность не должна быть секретом | [OK] |
 
 ---
 

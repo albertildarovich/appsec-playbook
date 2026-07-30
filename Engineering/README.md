@@ -15,16 +15,16 @@ Knowledge → Engineering → Experience
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Architecture Reviews](./architecture-reviews/) | Шаблоны security review для типовых компонентов | ❌ |
-| [Architecture Patterns](./architecture-patterns/) | Паттерны безопасности: Authentication, Authorization, Secrets, Logging | ❌ |
-| [Threat Models](./threat-models/) | Готовые Threat Models для типовых систем | ❌ |
-| [Code Reviews](./code-reviews/) | Разборы Code Review: что искать, как аргументировать | ❌ |
-| [Security Reviews](./security-reviews/) | Полные security review: методология, шаблоны, примеры | ❌ |
-| [ADR](./adr/) | Архитектурные решения и компромиссы (Architecture Decision Records) | 📝 |
-| [Operational Playbooks](./playbooks/) | Пошаговые сценарии: Security Release, Incident Response, Container Review | 📝 |
-| [Security Decisions](./security-decisions/) | Библиотека инженерных решений: Trade-offs, сравнения, почему X а не Y | ❌ |
-| [Patterns](./patterns/) | Повторяемые решения: безопасные паттерны для типовых задач | ❌ |
-| [Checklists](./checklists/) | Быстрые чек-листы для Code Review, Security Review, Release | 📝 |
+| [Architecture Reviews](./architecture-reviews/) | Шаблоны security review для типовых компонентов | [NO] |
+| [Architecture Patterns](./architecture-patterns/) | Паттерны безопасности: Authentication, Authorization, Secrets, Logging | [NO] |
+| [Threat Models](./threat-models/) | Готовые Threat Models для типовых систем | [NO] |
+| [Code Reviews](./code-reviews/) | Разборы Code Review: что искать, как аргументировать | [NO] |
+| [Security Reviews](./security-reviews/) | Полные security review: методология, шаблоны, примеры | [NO] |
+| [ADR](./adr/) | Архитектурные решения и компромиссы (Architecture Decision Records) |  |
+| [Operational Playbooks](./playbooks/) | Пошаговые сценарии: Security Release, Incident Response, Container Review |  |
+| [Security Decisions](./security-decisions/) | Библиотека инженерных решений: Trade-offs, сравнения, почему X а не Y | [NO] |
+| [Patterns](./patterns/) | Повторяемые решения: безопасные паттерны для типовых задач | [NO] |
+| [Checklists](./checklists/) | Быстрые чек-листы для Code Review, Security Review, Release |  |
 
 ---
 

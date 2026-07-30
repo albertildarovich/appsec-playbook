@@ -79,17 +79,17 @@ Threat Modeling не исправляет — он **предотвращает*
 
 # Threat Modeling
 
-> 🟢 **Статус:** STRIDE — готово
+> [LOW] **Статус:** STRIDE — готово
 
 ## Содержание
 
 | Тема | Статус | Файл |
 |------|--------|------|
-| **STRIDE** | ✅ Готово | [`stride.md`](stride.md) |
-| DFD (Data Flow Diagrams) | ❌ TODO | — |
-| Trust Boundaries | ❌ TODO | — |
-| Attack Trees | ❌ TODO | — |
-| Threat Modeling Tools | ❌ TODO | — |
+| **STRIDE** | [OK] Готово | [`stride.md`](stride.md) |
+| DFD (Data Flow Diagrams) | [NO] TODO | — |
+| Trust Boundaries | [NO] TODO | — |
+| Attack Trees | [NO] TODO | — |
+| Threat Modeling Tools | [NO] TODO | — |
 
 ## Ключевые тезисы
 

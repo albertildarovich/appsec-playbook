@@ -1,79 +1,79 @@
-# 🗺️ AppSec Roadmap
+# 🗺 AppSec Roadmap
 
 > Личный трекер подготовки и прогресса. Позволяет в любой момент увидеть, какие темы закрыты, а какие ещё в работе.
 
 ---
 
-## 📊 Прогресс по темам
+##  Прогресс по темам
 
 ```
 === Security Thinking (Tier 0) ===
-Interpreters           ████████████████████ 100% ✅
-Insecure Design (A04) ████████████████████ 100% ✅
-Risk Assessment        ████████░░░░░░░░░░░░  40% 📝
-Triage                 ████████░░░░░░░░░░░░  40% 📝
-Architecture Thinking  ████████░░░░░░░░░░░░  40% 📝
+Interpreters           ████████████████████ 100% [OK]
+Insecure Design (A04) ████████████████████ 100% [OK]
+Risk Assessment        ████████░░░░░░░░░░░░  40% 
+Triage                 ████████░░░░░░░░░░░░  40% 
+Architecture Thinking  ████████░░░░░░░░░░░░  40% 
 
 === OWASP Top 10 (Done) ===
-SQL Injection          ████████████████████ 100% ✅
-XSS                    ████████████████████ 100% ✅
-CSRF                   ████████████████████ 100% ✅
-SSRF                   ████████████████████ 100% ✅
-XXE                    ████████████████████ 100% ✅
-Command Injection      ████████████████████ 100% ✅
-Insecure Deserialization ████████████████████ 100% ✅
-Security Misconfig.   ████████████████████ 100% ✅
-Vulnerable Components ████████████████████ 100% ✅
-Identification & Auth ████████████████████ 100% ✅
+SQL Injection          ████████████████████ 100% [OK]
+XSS                    ████████████████████ 100% [OK]
+CSRF                   ████████████████████ 100% [OK]
+SSRF                   ████████████████████ 100% [OK]
+XXE                    ████████████████████ 100% [OK]
+Command Injection      ████████████████████ 100% [OK]
+Insecure Deserialization ████████████████████ 100% [OK]
+Security Misconfig.   ████████████████████ 100% [OK]
+Vulnerable Components ████████████████████ 100% [OK]
+Identification & Auth ████████████████████ 100% [OK]
 
 === OWASP Top 10 (TODO) ===
-Broken Access Control ████████████████████ 100% ✅
-Cryptographic Failures ████████████████████ 100% ✅
-Software Integrity    ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Logging & Monitoring  ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Broken Access Control ████████████████████ 100% [OK]
+Cryptographic Failures ████████████████████ 100% [OK]
+Software Integrity    ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Logging & Monitoring  ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === API Security ===
-REST / GraphQL        ░░░░░░░░░░░░░░░░░░░░   0% ❌
-BOLA / Mass Assign.   ░░░░░░░░░░░░░░░░░░░░   0% ❌
-JWT / OAuth           ░░░░░░░░░░░░░░░░░░░░   0% ❌
-API Security Top 10   ░░░░░░░░░░░░░░░░░░░░   0% ❌
+REST / GraphQL        ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+BOLA / Mass Assign.   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+JWT / OAuth           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+API Security Top 10   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Secure Code Review ===
-Methodology           ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Java / Python / Go    ░░░░░░░░░░░░░░░░░░░░   0% ❌
-SAST (Semgrep/CodeQL) ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Methodology           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Java / Python / Go    ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+SAST (Semgrep/CodeQL) ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Threat Modeling ===
-STRIDE                 ████████████████████ 100% ✅
-DFD                    ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Attack Trees           ░░░░░░░░░░░░░░░░░░░░   0% ❌
+STRIDE                 ████████████████████ 100% [OK]
+DFD                    ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Attack Trees           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Secure SDLC & DevSecOps ===
-Secure SDLC           ██████░░░░░░░░░░░░░░  30% 📝
-CI/CD Security        ██████░░░░░░░░░░░░░░  30% 📝
-BSIMM / SAMM / SSDF   ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Secure SDLC           ██████░░░░░░░░░░░░░░  30% 
+CI/CD Security        ██████░░░░░░░░░░░░░░  30% 
+BSIMM / SAMM / SSDF   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Supply Chain ===
-SBOM / SCA            ████████████████████ 100% ✅
-Cosign / Sigstore     ░░░░░░░░░░░░░░░░░░░░   0% ❌
-CI/CD Pipeline Sec.   ░░░░░░░░░░░░░░░░░░░░   0% ❌
+SBOM / SCA            ████████████████████ 100% [OK]
+Cosign / Sigstore     ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+CI/CD Pipeline Sec.   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Infrastructure & Cloud ===
-Kubernetes            ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Linux                 ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Cloud (AWS)           ░░░░░░░░░░░░░░░░░░░░   0% ❌
-IaC                   ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Kubernetes            ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Linux                 ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Cloud (AWS)           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+IaC                   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Soft Skills & Process ===
-Communication         ░░░░░░░░░░░░░░░░░░░░   0% ❌
-Interview Prep        ░░░░░░░░░░░░░░░░░░░░   0% ❌
+Communication         ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Interview Prep        ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 ```
 
-**Легенда:** ✅ Готово — 📝 В работе — ❌ Не начато
+**Легенда:** [OK] Готово —  В работе — [NO] Не начато
 
 ---
 
-## 📚 Learning Roadmap
+##  Learning Roadmap
 
 ### Tier 0: Security Thinking (мышление)
 - [x] **Интерпретаторы** — объединяющая концепция
@@ -147,7 +147,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-## 🎯 Interview Progress
+##  Interview Progress
 
 | Компания | Статус | Дата | Заметки |
 |----------|--------|------|---------|
@@ -155,7 +155,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-## 📖 Books
+##  Books
 
 - [ ] The Web Application Hacker's Handbook
 - [ ] Threat Modeling: Designing for Security — Adam Shostack
@@ -165,7 +165,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-## 🎓 Courses
+##  Courses
 
 - [ ] SANS SEC542: Web App Penetration Testing
 - [ ] SANS SEC566: Implementing and Auditing
@@ -174,7 +174,7 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-## 🏆 Certificates
+##  Certificates
 
 - [ ] OSWE (Offensive Security Web Expert)
 - [ ] Certified AppSec Practitioner (CAP)
@@ -182,4 +182,4 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-> ⚡ **Принцип:** прогресс обновляется по мере написания конспектов. 100% = в playbook есть полноценный раздел с теорией, примерами, практикой и чек-листами.
+>  **Принцип:** прогресс обновляется по мере написания конспектов. 100% = в playbook есть полноценный раздел с теорией, примерами, практикой и чек-листами.

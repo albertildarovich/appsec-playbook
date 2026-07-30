@@ -8,9 +8,9 @@
 
 | Категория | Статус | Где |
 |-----------|--------|-----|
-| A01: Broken Access Control | ✅ Critical | Mass Assignment, админка без RBAC (Модуль 4, 6) |
-| A03: Injection | ✅ Critical | SQL Injection (Модуль 4) |
-| A05: Security Misconfiguration | ✅ Critical | /ftp/, JWT alg:none (Модуль 4) |
+| A01: Broken Access Control | [OK] Critical | Mass Assignment, админка без RBAC (Модуль 4, 6) |
+| A03: Injection | [OK] Critical | SQL Injection (Модуль 4) |
+| A05: Security Misconfiguration | [OK] Critical | /ftp/, JWT alg:none (Модуль 4) |
 
 ## A02: Cryptographic Failures
 
@@ -34,11 +34,11 @@
 ## A07: Identification & Auth Failures
 
 **Что нашли (из Модуля 5):**
-1. Регистрация: ❌ нет верификации email, ❌ нет капчи, ❌ Mass Assignment
-2. Логин: ❌ нет rate limiting, ❌ нет блокировки аккаунта
-3. Logout: ❌ JWT не инвалидируется на сервере
+1. Регистрация: [NO] нет верификации email, [NO] нет капчи, [NO] Mass Assignment
+2. Логин: [NO] нет rate limiting, [NO] нет блокировки аккаунта
+3. Logout: [NO] JWT не инвалидируется на сервере
 4. Reset password: UI есть, но сломан (Security Misconfiguration)
-5. MFA: ❌ отсутствует
+5. MFA: [NO] отсутствует
 
 **Риск:** Critical
 
@@ -63,10 +63,10 @@
 ## A09: Security Logging & Monitoring
 
 **Что нашли (из Модуля 4 — Repudiation):**
-1. ❌ Нет аудит-логов failed login
-2. ❌ Нет X-Request-Id для трассировки
-3. ❌ Невозможно расследовать инциденты
-4. ❌ Админ может злоупотреблять правами без доказательств
+1. [NO] Нет аудит-логов failed login
+2. [NO] Нет X-Request-Id для трассировки
+3. [NO] Невозможно расследовать инциденты
+4. [NO] Админ может злоупотреблять правами без доказательств
 
 **Риск:** High
 
@@ -83,13 +83,13 @@
 
 | Категория | Риск |
 |-----------|------|
-| A01: Broken Access Control | 🔴 Critical |
-| A02: Cryptographic Failures | 🔴 Critical |
-| A03: Injection | 🔴 Critical |
-| A04: Insecure Design | 🔴 Critical |
-| A05: Security Misconfiguration | 🔴 Critical |
-| A06: Vulnerable Components | 🟡 High |
-| A07: Identification & Auth Failures | 🔴 Critical |
-| A08: Software & Data Integrity | 🟢 Medium |
-| A09: Security Logging & Monitoring | 🟡 High |
-| A10: SSRF | 🟢 Medium |
+| A01: Broken Access Control | [CRIT] Critical |
+| A02: Cryptographic Failures | [CRIT] Critical |
+| A03: Injection | [CRIT] Critical |
+| A04: Insecure Design | [CRIT] Critical |
+| A05: Security Misconfiguration | [CRIT] Critical |
+| A06: Vulnerable Components | [MED] High |
+| A07: Identification & Auth Failures | [CRIT] Critical |
+| A08: Software & Data Integrity | [LOW] Medium |
+| A09: Security Logging & Monitoring | [MED] High |
+| A10: SSRF | [LOW] Medium |

@@ -15,13 +15,13 @@ Knowledge → Engineering → Experience
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Labs](./labs/) | Лабораторные: PortSwigger, Juice Shop, DVWA, HTB | ❌ |
-| [Writeups](./writeups/) | Разбор лабораторных и CVE | ❌ |
-| [Real Incidents](./incidents/) | Реальные инциденты и postmortems | ❌ |
-| [Mini Projects](./mini-projects/) | Практические проекты: расширения, инструменты, демо | ✅ |
-| [Case Studies](./case-studies/) | CVE Analysis, Bug Bounty, Postmortems | ❌ |
-| [Lessons Learned](./lessons-learned/) | Выводы из реальных проектов | ❌ |
-| [Bug Bounty](./bug-bounty/) | Находки, методология, подходы | ❌ |
+| [Labs](./labs/) | Лабораторные: PortSwigger, Juice Shop, DVWA, HTB | [NO] |
+| [Writeups](./writeups/) | Разбор лабораторных и CVE | [NO] |
+| [Real Incidents](./incidents/) | Реальные инциденты и postmortems | [NO] |
+| [Mini Projects](./mini-projects/) | Практические проекты: расширения, инструменты, демо | [OK] |
+| [Case Studies](./case-studies/) | CVE Analysis, Bug Bounty, Postmortems | [NO] |
+| [Lessons Learned](./lessons-learned/) | Выводы из реальных проектов | [NO] |
+| [Bug Bounty](./bug-bounty/) | Находки, методология, подходы | [NO] |
 
 ---
 
@@ -99,12 +99,12 @@ Format (без sensitive data):
 
 | Проект | Описание | Статус |
 |--------|----------|--------|
-| [Chrome Security Auditor](./mini-projects/chrome-security-auditor/) | Расширение для аудита безопасности страниц | ✅ |
-| [VSCode Security Auditor](./mini-projects/vscode-security-auditor/) | Линтер безопасности кода | ✅ |
-| vulnerable-api | Умышленно уязвимое API | ❌ |
-| secure-api | Защищённая версия API | ❌ |
-| jwt-demo | Атаки на JWT + защита | ❌ |
-| oauth-demo | OAuth 2.0 + PKCE реализация | ❌ |
+| [Chrome Security Auditor](./mini-projects/chrome-security-auditor/) | Расширение для аудита безопасности страниц | [OK] |
+| [VSCode Security Auditor](./mini-projects/vscode-security-auditor/) | Линтер безопасности кода | [OK] |
+| vulnerable-api | Умышленно уязвимое API | [NO] |
+| secure-api | Защищённая версия API | [NO] |
+| jwt-demo | Атаки на JWT + защита | [NO] |
+| oauth-demo | OAuth 2.0 + PKCE реализация | [NO] |
 
 ---
 
@@ -135,4 +135,4 @@ Format (без sensitive data):
 
 ---
 
-> ⚡ **Принцип:** опыт без записи — теряется. Каждый lab, каждый инцидент, каждый проект должен оставить след в этом разделе. Даже 3 строки lessons learned лучше, чем ничего.
+>  **Принцип:** опыт без записи — теряется. Каждый lab, каждый инцидент, каждый проект должен оставить след в этом разделе. Даже 3 строки lessons learned лучше, чем ничего.

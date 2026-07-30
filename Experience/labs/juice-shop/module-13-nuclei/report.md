@@ -79,13 +79,13 @@ nuclei -u http://localhost:3000 -severity critical,high,medium,low,info -o scan-
 
 | Уязвимость | Nuclei | Ручной аудит |
 |------------|--------|--------------|
-| Mass Assignment (role→admin) | ❌ Не нашёл | ✅ Нашли |
-| JWT `alg:none` | ❌ Не нашёл | ✅ Нашли |
-| SQLi в `/rest/products/search` | ❌ Не нашёл | ✅ Нашли |
-| BOLA на `/api/BasketItems/1` | ❌ Не нашёл | ✅ Нашли |
-| `/ftp/` открыт | ❌ Не нашёл (нет такого шаблона) | ✅ Нашли |
-| Prometheus `/metrics` | ✅ Нашёл | — |
-| Missing Security Headers (8 шт) | ✅ Нашёл (info) | — |
+| Mass Assignment (role→admin) | [NO] Не нашёл | [OK] Нашли |
+| JWT `alg:none` | [NO] Не нашёл | [OK] Нашли |
+| SQLi в `/rest/products/search` | [NO] Не нашёл | [OK] Нашли |
+| BOLA на `/api/BasketItems/1` | [NO] Не нашёл | [OK] Нашли |
+| `/ftp/` открыт | [NO] Не нашёл (нет такого шаблона) | [OK] Нашли |
+| Prometheus `/metrics` | [OK] Нашёл | — |
+| Missing Security Headers (8 шт) | [OK] Нашёл (info) | — |
 
 **Вывод:** Nuclei — это стартовая точка, но не замена ручному анализу.
 
@@ -143,7 +143,7 @@ http:
 nuclei -u http://localhost:3000 -t ftp-exposure.yaml
 ```
 
-**Результат:** ✅ Шаблон сработал — обнаружен `/ftp/` со статусом 200 и словом "index".
+**Результат:** [OK] Шаблон сработал — обнаружен `/ftp/` со статусом 200 и словом "index".
 
 ---
 
@@ -156,4 +156,4 @@ nuclei -u http://localhost:3000 -t ftp-exposure.yaml
 
 ---
 
-## Статус: ✅ Завершено
+## Статус: [OK] Завершено

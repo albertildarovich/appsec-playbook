@@ -116,12 +116,12 @@ GROUP BY stage
 | LOW      | 15   | 30     | 45d  |
 
 ## Vulnerabilities by Stage
-- Found in dev: 70% (target: >60%) ✅
+- Found in dev: 70% (target: >60%) [OK]
 - Found in staging: 25%
-- Found in prod: 5% (target: <5%) ✅
+- Found in prod: 5% (target: <5%) [OK]
 
 ## Training
-- Completion: 98% (target: 95%) ✅
+- Completion: 98% (target: 95%) [OK]
 - New Champions: 2 (total: 8)
 
 ## Recommendations

@@ -96,13 +96,13 @@ if referer and not referer.startswith("https://bank.com"):
 ## JWT в localStorage vs Cookie
 
 ```javascript
-// ❌ Cookie без SameSite — уязвимо к CSRF
+// [NO] Cookie без SameSite — уязвимо к CSRF
 fetch('/api/transfer', {
     method: 'POST',  // Cookie отправится автоматически
     body: JSON.stringify({ amount: 100 })
 });
 
-// ✅ JWT в localStorage — CSRF не работает (HTML-форма не добавит Authorization)
+// [OK] JWT в localStorage — CSRF не работает (HTML-форма не добавит Authorization)
 const token = localStorage.getItem('jwt');
 fetch('/api/transfer', {
     method: 'POST',

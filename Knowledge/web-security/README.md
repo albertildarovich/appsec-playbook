@@ -2,7 +2,7 @@
 
 > Уязвимости веб-приложений из OWASP Top 10 и не только.
 >
-> **📌 OWASP Top 10 хаб:** [`24-owasp-top10/`](../24-owasp-top10/README.md) — краткие обзоры всех категорий
+> ** OWASP Top 10 хаб:** [`24-owasp-top10/`](../24-owasp-top10/README.md) — краткие обзоры всех категорий
 
 ---
 
@@ -10,27 +10,27 @@
 
 | Файл | Описание | Статус |
 |------|----------|--------|
-| `sqli.md` | SQL Injection — теория, виды, эксплуатация, защита | ✅ 100% |
-| `xss.md` | Cross-Site Scripting — Reflected, Stored, DOM-based | ✅ 100% |
-| `csrf.md` | CSRF — механизм атаки, CORS vs SOP vs CSRF, хранение токенов | ✅ 100% |
-| `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | ✅ 100% |
-| `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | ✅ 100% |
-| `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | ✅ 100% |
-| `insecure-deserialization.md` | Insecure Deserialization — языковое покрытие, gadget chains, защита | ✅ 100% |
-| `security-misconfiguration.md` | Security Misconfiguration — debug, .git, .env, Secure by Default | ✅ 100% |
-| `insecure-design.md` | Insecure Design (A04) — архитектурное мышление, Abuse Cases, Never Trust the Client | ✅ 100% |
-| `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | ✅ 100% |
+| `sqli.md` | SQL Injection — теория, виды, эксплуатация, защита | [OK] 100% |
+| `xss.md` | Cross-Site Scripting — Reflected, Stored, DOM-based | [OK] 100% |
+| `csrf.md` | CSRF — механизм атаки, CORS vs SOP vs CSRF, хранение токенов | [OK] 100% |
+| `ssrf.md` | SSRF — сервер как браузер, внутренняя сеть, metadata, защита | [OK] 100% |
+| `xxe.md` | XXE — External Entities, чтение файлов, SSRF через XML, DoS, защита | [OK] 100% |
+| `command-injection.md` | Command Injection — shell, Runtime.exec, ProcessBuilder, безопасные паттерны | [OK] 100% |
+| `insecure-deserialization.md` | Insecure Deserialization — языковое покрытие, gadget chains, защита | [OK] 100% |
+| `security-misconfiguration.md` | Security Misconfiguration — debug, .git, .env, Secure by Default | [OK] 100% |
+| `insecure-design.md` | Insecure Design (A04) — архитектурное мышление, Abuse Cases, Never Trust the Client | [OK] 100% |
+| `vulnerable-components.md` | Vulnerable Components — SCA, triage, reachability, SBOM, Trivy, CI/CD | [OK] 100% |
 ---
 
 ## SQL Injection
 
-✅ [Читать конспект →](sqli.md)
+[OK] [Читать конспект →](sqli.md)
 
 ---
 
 ## XSS (Cross-Site Scripting)
 
-✅ [Читать конспект →](xss.md)
+[OK] [Читать конспект →](xss.md)
 
 ---
 
@@ -43,7 +43,7 @@
 - **JWT в localStorage** устраняет классический CSRF (HTML-форма не добавит `Authorization`)
 - Современный подход: **Access Token в Memory + Refresh Token в HttpOnly Cookie**
 
-👉 [Читать конспект →](csrf.md)
+ [Читать конспект →](csrf.md)
 
 ---
 
@@ -56,7 +56,7 @@
 - **Первый вопрос AppSec**: зачем пользователю указывать произвольный URL?
 - **Allowlist > Blacklist**, проверка после DNS Resolve + каждого редиректа
 
-👉 [Читать конспект →](ssrf.md)
+ [Читать конспект →](ssrf.md)
 
 ---
 
@@ -69,7 +69,7 @@
 - **Defense in Depth**: безопасный парсер + минимальные привилегии + сегментация сети
 - XXE — классический пример, почему сервис должен иметь доступ только к необходимым ресурсам
 
-👉 [Читать конспект →](xxe.md)
+ [Читать конспект →](xxe.md)
 
 ---
 
@@ -82,7 +82,7 @@
 - **ProcessBuilder** / `subprocess.run([...])` / `spawn(...)` с раздельными аргументами
 - **ProcessBuilder не защищает от SSRF** — проверяй аргументы
 
-👉 [Читать конспект →](command-injection.md)
+ [Читать конспект →](command-injection.md)
 
 ---
 
@@ -97,7 +97,7 @@
 - **JSON опасен** — если включена полиморфная десериализация (`@class`, `enableDefaultTyping`)
 - **Ключевое правило:** уязвимость возникает в любой технологии, где недоверенные данные управляют процессом восстановления объектов
 
-👉 [Читать конспект →](insecure-deserialization.md)
+ [Читать конспект →](insecure-deserialization.md)
 
 ---
 
@@ -111,7 +111,7 @@
 - **Secure by Default** — система должна быть безопасной «из коробки»
 - **Reduce Attack Surface** — не публикуй то, что не нужно
 
-👉 [Читать конспект →](security-misconfiguration.md)
+ [Читать конспект →](security-misconfiguration.md)
 
 ---
 
@@ -126,7 +126,7 @@
 - **SBOM** — что входит в приложение; **Trivy** — что уязвимо
 - **Continuous Scanning** — безопасность проверяется постоянно, а не разово
 
-👉 [Читать конспект →](vulnerable-components.md)
+ [Читать конспект →](vulnerable-components.md)
 
 ---
 

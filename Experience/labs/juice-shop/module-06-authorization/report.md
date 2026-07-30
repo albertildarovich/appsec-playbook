@@ -16,8 +16,8 @@
 
 ## Что уже сделано
 
-- ✅ Mass Assignment: role (создали админа)
-- ✅ Mass Assignment: deluxeToken (подделали премиум)
+- [OK] Mass Assignment: role (создали админа)
+- [OK] Mass Assignment: deluxeToken (подделали премиум)
 
 ---
 
@@ -28,9 +28,9 @@
 
 | Endpoint | Admin | Customer | Результат |
 |----------|-------|----------|-----------|
-| `/api/Users` | ✅ 200 | ✅ 200 | ❌ RBAC не работает |
-| `/administration` | ✅ 200 | ✅ 200 | ❌ RBAC не работает |
-| `/api/Feedbacks` | ✅ 200 | ✅ 200 | ❌ RBAC не работает |
+| `/api/Users` | [OK] 200 | [OK] 200 | [NO] RBAC не работает |
+| `/administration` | [OK] 200 | [OK] 200 | [NO] RBAC не работает |
+| `/api/Feedbacks` | [OK] 200 | [OK] 200 | [NO] RBAC не работает |
 
 **Результат:**
 - Роль `customer` может видеть всех пользователей (включая хеши паролей)
@@ -49,8 +49,8 @@
 - `/api/BasketItems/1` вернул данные чужой корзины
 
 **Результат:**
-- ❌ Customer может читать чужие корзины
-- ❌ Нет проверки UserId vs basket ID
+- [NO] Customer может читать чужие корзины
+- [NO] Нет проверки UserId vs basket ID
 - Риск: Critical (IDOR)
 
 ---
@@ -62,8 +62,8 @@
 - Customer DELETE `/api/Users/1` → **HTTP 401** (защищено)
 
 **Результат:**
-- ❌ Customer может удалять фидбеки (BFLA)
-- ✅ Удаление пользователей защищено (но защита непоследовательна)
+- [NO] Customer может удалять фидбеки (BFLA)
+- [OK] Удаление пользователей защищено (но защита непоследовательна)
 - Риск: High (несанкционированное удаление данных)
 
 ---
@@ -72,7 +72,7 @@
 
 | Категория | Статус | Риск |
 |-----------|--------|------|
-| RBAC | ❌ Отсутствует | Critical |
-| BOLA/IDOR | ❌ Чужие корзины доступны по ID | Critical |
-| BFLA | ❌ Customer может удалять фидбеки | High |
-| Mass Assignment | ❌ role→admin, deluxeToken | Critical |
+| RBAC | [NO] Отсутствует | Critical |
+| BOLA/IDOR | [NO] Чужие корзины доступны по ID | Critical |
+| BFLA | [NO] Customer может удалять фидбеки | High |
+| Mass Assignment | [NO] role→admin, deluxeToken | Critical |

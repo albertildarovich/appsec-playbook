@@ -31,12 +31,12 @@ Secure Coding Guidelines — это набор правил и рекоменд�
 ### JavaScript / TypeScript
 
 ```javascript
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 element.innerHTML = userInput;
 eval(userInput);
 const sql = `SELECT * FROM users WHERE id = ${id}`;
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 element.textContent = userInput;
 JSON.parse(userInput);
 const sql = 'SELECT * FROM users WHERE id = $1';
@@ -44,21 +44,21 @@ const sql = 'SELECT * FROM users WHERE id = $1';
 
 **React специфика:**
 ```tsx
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 <div dangerouslySetInnerHTML={{ __html: userComment }} />
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 <div>{userComment}</div>
 ```
 
 ### Python
 
 ```python
-# ❌ ОПАСНО
+# [NO] ОПАСНО
 query = f"SELECT * FROM users WHERE id = {user_id}"
 return render_template_string("Hello " + user_input)
 
-# ✅ БЕЗОПАСНО
+# [OK] БЕЗОПАСНО
 cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
 return render_template("hello.html", name=escape(user_input))
 ```
@@ -66,11 +66,11 @@ return render_template("hello.html", name=escape(user_input))
 ### Java
 
 ```java
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 String sql = "SELECT * FROM users WHERE id = " + id;
 Statement stmt = conn.createStatement();
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 PreparedStatement ps = conn.prepareStatement(
     "SELECT * FROM users WHERE id = ?"
 );
@@ -80,11 +80,11 @@ ps.setInt(1, id);
 ### PHP
 
 ```php
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 echo "Hello, " . $_GET['name'];
 $sql = "SELECT * FROM users WHERE id = " . $id;
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 <?= htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') ?>
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$id]);
@@ -93,11 +93,11 @@ $stmt->execute([$id]);
 ### Go
 
 ```go
-// ❌ ОПАСНО
+// [NO] ОПАСНО
 query := fmt.Sprintf("SELECT * FROM users WHERE id = %s", id)
 tmpl := template.Must(template.New("").Parse(userInput))
 
-// ✅ БЕЗОПАСНО
+// [OK] БЕЗОПАСНО
 db.Query("SELECT * FROM users WHERE id = $1", id)
 tmpl, _ := template.New("").Parse("Hello {{.}}")
 ```
@@ -140,12 +140,12 @@ K8s: External Secrets Operator
 
 ### Правила:
 ```javascript
-// ❌ ОПАСНО — раскрытие деталей
+// [NO] ОПАСНО — раскрытие деталей
 catch(err) {
     res.send(`Error: ${err.message}`);
 }
 
-// ✅ БЕЗОПАСНО — generic message
+// [OK] БЕЗОПАСНО — generic message
 catch(err) {
     log.error(err);
     res.status(500).send("Internal Server Error");

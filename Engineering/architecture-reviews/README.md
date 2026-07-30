@@ -8,16 +8,16 @@
 
 | Компонент | Описание | Статус |
 |-----------|----------|--------|
-| [Password Reset Flow](./password-reset.md) | Сброс пароля: токены, timing, enumeration | ❌ |
-| [OAuth / Social Login](./oauth-login.md) | OAuth 2.0, OIDC, PKCE, redirect_uri validation | ❌ |
-| [Payments Integration](./payments.md) | Stripe/Adyen: idempotency, webhooks, refunds | ❌ |
-| [File Upload](./file-upload.md) | Validation, storage, malware scanning, CDN | ❌ |
-| [Webhook Handling](./webhooks.md) | Signature verification, retry, idempotency, replay | ❌ |
-| [Email / Notifications](./notifications.md) | Email injection, rate limiting, spam | ❌ |
-| [CI/CD Pipeline](./cicd-pipeline.md) | Pipeline security, secret scanning, artifact signing | ❌ |
-| [Internal API](./internal-api.md) | Service-to-service auth, mTLS, rate limiting | ❌ |
-| [Public API](./public-api.md) | Auth, rate limiting, input validation, CORS | ❌ |
-| [Admin Panel](./admin-panel.md) | MFA, IP restriction, audit log, session management | ❌ |
+| [Password Reset Flow](./password-reset.md) | Сброс пароля: токены, timing, enumeration | [NO] |
+| [OAuth / Social Login](./oauth-login.md) | OAuth 2.0, OIDC, PKCE, redirect_uri validation | [NO] |
+| [Payments Integration](./payments.md) | Stripe/Adyen: idempotency, webhooks, refunds | [NO] |
+| [File Upload](./file-upload.md) | Validation, storage, malware scanning, CDN | [NO] |
+| [Webhook Handling](./webhooks.md) | Signature verification, retry, idempotency, replay | [NO] |
+| [Email / Notifications](./notifications.md) | Email injection, rate limiting, spam | [NO] |
+| [CI/CD Pipeline](./cicd-pipeline.md) | Pipeline security, secret scanning, artifact signing | [NO] |
+| [Internal API](./internal-api.md) | Service-to-service auth, mTLS, rate limiting | [NO] |
+| [Public API](./public-api.md) | Auth, rate limiting, input validation, CORS | [NO] |
+| [Admin Panel](./admin-panel.md) | MFA, IP restriction, audit log, session management | [NO] |
 
 ---
 
@@ -59,4 +59,4 @@
 
 ---
 
-> ⚡ **Принцип:** каждый review — это готовый сценарий. Открыл, прочитал, пошёл задавать вопросы команде.
+>  **Принцип:** каждый review — это готовый сценарий. Открыл, прочитал, пошёл задавать вопросы команде.

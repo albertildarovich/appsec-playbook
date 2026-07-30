@@ -10,22 +10,22 @@
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Secure Design](./secure-design/) | Secure Design Principles — все 12 в interview-ready формате | ✅ |
-| [Fundamentals](01-fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | ✅ |
-| [Secure SDLC & Governance](02-secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates | 📝 |
-| [Threat Modeling](03-threat-modeling/) | STRIDE, DFD, Attack Trees, методология | ✅ |
-| [Web Security](04-web-security/) | SQLi, XSS, CSRF, SSRF, XXE, Command Injection, Deserialization | ✅ |
-| [API Security](05-api-security/) | REST, GraphQL, BOLA, Mass Assignment, API Security Top 10 | ❌ |
-| [Authentication](06-authentication/) | JWT, OAuth 2.0, OIDC, MFA, Session Management | 📝 |
-| [Authorization](07-authorization/) | RBAC, ABAC, IDOR, BOLA, Privilege Escalation | ✅ |
-| [Cryptography](08-cryptography/) | AES, RSA, ECC, Hashing, TLS, Key Management | 📝 |
-| [DevSecOps](09-devsecops/) | SAST, DAST, SCA, Secret Scanning, IaC | ❌ |
-| [Kubernetes](10-kubernetes/) | RBAC, Pod Security, Network Policies, Container Security | ❌ |
-| [Linux](11-linux/) | Commands, systemd, auditd, openssl | ❌ |
-| [Cloud](12-cloud/) | AWS Security, IAM, S3, Cloud Trail | ❌ |
-| [Cheatsheets](19-cheatsheets/) | Быстрые справки по всем уязвимостям | ✅ |
-| [OWASP Top 10](24-owasp-top10/) | Единый хаб по всем категориям A01–A10 | ✅ |
-| [Tools](12-tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | ❌ |
+| [Secure Design](./secure-design/) | Secure Design Principles — все 12 в interview-ready формате | [OK] |
+| [Fundamentals](01-fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | [OK] |
+| [Secure SDLC & Governance](02-secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates |  |
+| [Threat Modeling](03-threat-modeling/) | STRIDE, DFD, Attack Trees, методология | [OK] |
+| [Web Security](04-web-security/) | SQLi, XSS, CSRF, SSRF, XXE, Command Injection, Deserialization | [OK] |
+| [API Security](05-api-security/) | REST, GraphQL, BOLA, Mass Assignment, API Security Top 10 | [NO] |
+| [Authentication](06-authentication/) | JWT, OAuth 2.0, OIDC, MFA, Session Management |  |
+| [Authorization](07-authorization/) | RBAC, ABAC, IDOR, BOLA, Privilege Escalation | [OK] |
+| [Cryptography](08-cryptography/) | AES, RSA, ECC, Hashing, TLS, Key Management |  |
+| [DevSecOps](09-devsecops/) | SAST, DAST, SCA, Secret Scanning, IaC | [NO] |
+| [Kubernetes](10-kubernetes/) | RBAC, Pod Security, Network Policies, Container Security | [NO] |
+| [Linux](11-linux/) | Commands, systemd, auditd, openssl | [NO] |
+| [Cloud](12-cloud/) | AWS Security, IAM, S3, Cloud Trail | [NO] |
+| [Cheatsheets](19-cheatsheets/) | Быстрые справки по всем уязвимостям | [OK] |
+| [OWASP Top 10](24-owasp-top10/) | Единый хаб по всем категориям A01–A10 | [OK] |
+| [Tools](12-tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | [NO] |
 
 ---
 
@@ -35,18 +35,18 @@
 
 | Принцип | Статус |
 |---------|--------|
-| [Least Privilege](./secure-design/least-privilege.md) | ✅ |
-| [Fail Secure (Fail Closed)](./secure-design/fail-secure.md) | ✅ |
-| [Secure Defaults (Secure by Default)](./secure-design/secure-defaults.md) | ✅ |
-| [Defense in Depth](./secure-design/defense-in-depth.md) | ✅ |
-| [Reduce Attack Surface](./secure-design/reduce-attack-surface.md) | ✅ |
-| [Complete Mediation](./secure-design/complete-mediation.md) | ✅ |
-| [Economy of Mechanism](./secure-design/economy-of-mechanism.md) | ✅ |
-| [Separation of Privilege](./secure-design/separation-of-privilege.md) | ✅ |
-| [Least Common Mechanism](./secure-design/least-common-mechanism.md) | ✅ |
-| [Never Trust the Client](./secure-design/never-trust-client.md) | ✅ |
-| [Open Design](./secure-design/open-design.md) | ✅ |
-| [Psychological Acceptability](./secure-design/psychological-acceptability.md) | ✅ |
+| [Least Privilege](./secure-design/least-privilege.md) | [OK] |
+| [Fail Secure (Fail Closed)](./secure-design/fail-secure.md) | [OK] |
+| [Secure Defaults (Secure by Default)](./secure-design/secure-defaults.md) | [OK] |
+| [Defense in Depth](./secure-design/defense-in-depth.md) | [OK] |
+| [Reduce Attack Surface](./secure-design/reduce-attack-surface.md) | [OK] |
+| [Complete Mediation](./secure-design/complete-mediation.md) | [OK] |
+| [Economy of Mechanism](./secure-design/economy-of-mechanism.md) | [OK] |
+| [Separation of Privilege](./secure-design/separation-of-privilege.md) | [OK] |
+| [Least Common Mechanism](./secure-design/least-common-mechanism.md) | [OK] |
+| [Never Trust the Client](./secure-design/never-trust-client.md) | [OK] |
+| [Open Design](./secure-design/open-design.md) | [OK] |
+| [Psychological Acceptability](./secure-design/psychological-acceptability.md) | [OK] |
 
 [Карта всех принципов →](../Security%20Thinking/architecture-thinking/secure-design-principles.md)
 
@@ -76,6 +76,6 @@
 
 ---
 
-> ⚡ **Принцип:** знание без практики — просто информация. Используй этот слой как справочник, но применяй знания в `Engineering/` и `Experience/`.
+>  **Принцип:** знание без практики — просто информация. Используй этот слой как справочник, но применяй знания в `Engineering/` и `Experience/`.
 
 

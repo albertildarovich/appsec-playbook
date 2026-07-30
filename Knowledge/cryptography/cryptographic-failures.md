@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Содержание
+##  Содержание
 
 1. [Главная идея](#1-главная-идея)
 2. [Хеширование vs Шифрование](#2-хеширование-vs-шифрование)
@@ -110,10 +110,10 @@ SHA-256 — **отличный криптографический алгорит
 
 | Алгоритм | Рейтинг | Особенность |
 |----------|---------|-------------|
-| **Argon2id** | ⭐⭐⭐⭐⭐ | Современный стандарт, Memory Hard |
-| **bcrypt** | ⭐⭐⭐⭐ | Проверенный временем |
-| **scrypt** | ⭐⭐⭐⭐ | Memory Hard, сложнее настройка |
-| **PBKDF2** | ⭐⭐⭐ | Только CPU-intensive, без памяти |
+| **Argon2id** | ***** | Современный стандарт, Memory Hard |
+| **bcrypt** | **** | Проверенный временем |
+| **scrypt** | **** | Memory Hard, сложнее настройка |
+| **PBKDF2** | *** | Только CPU-intensive, без памяти |
 
 Потому что они специально:
 - **медленные**;
@@ -123,11 +123,11 @@ SHA-256 — **отличный криптографический алгорит
 ### Демонстрация на Java
 
 ```java
-// ❌ ПЛОХО: SHA-256 — слишком быстрый
+// [NO] ПЛОХО: SHA-256 — слишком быстрый
 MessageDigest md = MessageDigest.getInstance("SHA-256");
 byte[] hash = md.digest(password.getBytes());
 
-// ✅ ХОРОШО: Argon2id — Password Hashing Competition winner
+// [OK] ХОРОШО: Argon2id — Password Hashing Competition winner
 Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
 String hash = argon2.hash(
     2,      // Time Cost
@@ -142,10 +142,10 @@ String hash = argon2.hash(
 import hashlib
 from argon2 import PasswordHasher
 
-# ❌ ПЛОХО: SHA-256 — миллиарды в секунду на GPU
+# [NO] ПЛОХО: SHA-256 — миллиарды в секунду на GPU
 hash = hashlib.sha256(password.encode()).hexdigest()
 
-# ✅ ХОРОШО: Argon2id
+# [OK] ХОРОШО: Argon2id
 ph = PasswordHasher(
     time_cost=3,
     memory_cost=65536,  # 64 MB
@@ -159,10 +159,10 @@ hash = ph.hash(password)
 ```javascript
 const crypto = require('crypto');
 
-// ❌ ПЛОХО: SHA-256
+// [NO] ПЛОХО: SHA-256
 const hash = crypto.createHash('sha256').update(password).digest('hex');
 
-// ✅ ХОРОШО: bcrypt
+// [OK] ХОРОШО: bcrypt
 const bcrypt = require('bcrypt');
 const hash = await bcrypt.hash(password, 12);  // cost factor = 12
 ```
@@ -179,7 +179,7 @@ const hash = await bcrypt.hash(password, 12);  // cost factor = 12
 |---------|-----------|-------------------|
 | **Argon2d** | GPU/ASIC атаки | Только от side-channel не защищён |
 | **Argon2i** | Side-channel | Data-independent memory access |
-| **Argon2id** | GPU + Side-channel | ✅ **Лучший выбор по умолчанию** |
+| **Argon2id** | GPU + Side-channel | [OK] **Лучший выбор по умолчанию** |
 
 **Рекомендация:** Всегда используйте **Argon2id**.
 
@@ -272,13 +272,13 @@ Password123 + Salt2 → Hash2
 import java.security.SecureRandom;
 import java.util.Base64;
 
-// ✅ Генерация соли
+// [OK] Генерация соли
 SecureRandom random = new SecureRandom();
 byte[] salt = new byte[16];
 random.nextBytes(salt);
 String saltString = Base64.getEncoder().encodeToString(salt);
 
-// ✅ Хеширование с солью
+// [OK] Хеширование с солью
 Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
 String hash = argon2.hash(3, 65536, 1, password.toCharArray(), salt);
 ```
@@ -289,7 +289,7 @@ String hash = argon2.hash(3, 65536, 1, password.toCharArray(), salt);
 import secrets
 from argon2 import PasswordHasher
 
-# ✅ Генерация соли (Argon2 делает это автоматически)
+# [OK] Генерация соли (Argon2 делает это автоматически)
 ph = PasswordHasher()
 hash = ph.hash(password)
 # Salt встроен в hash — отдельно хранить не нужно
@@ -327,8 +327,8 @@ Password + Salt + Pepper → Argon2 → Hash
 ### Что защищает Pepper?
 
 Если злоумышленник украл:
-- ✅ базу;
-- ✅ Salt;
+- [OK] базу;
+- [OK] Salt;
 
 ему всё ещё нужен **Pepper**.
 
@@ -352,11 +352,11 @@ hash = ph.hash(pepper + password)  # Pepper + Password + Salt
 
 | Характеристика | Salt | Pepper |
 |---------------|------|--------|
-| Для каждого пользователя | ✅ Да | ❌ Нет (общий) |
-| Секрет | ❌ Нет | ✅ Да |
+| Для каждого пользователя | [OK] Да | [NO] Нет (общий) |
+| Секрет | [NO] Нет | [OK] Да |
 | Хранится | В базе | Vault / Secret Manager |
-| Защищает от Rainbow Tables | ✅ | ✅ |
-| Требует компрометации 2х хранилищ | ❌ | ✅ |
+| Защищает от Rainbow Tables | [OK] | [OK] |
+| Требует компрометации 2х хранилищ | [NO] | [OK] |
 
 ---
 
@@ -364,7 +364,7 @@ hash = ph.hash(pepper + password)  # Pepper + Password + Salt
 
 > Очень популярная тема на интервью.
 
-### ❌ ПЛОХО
+### [NO] ПЛОХО
 
 ```java
 // application.properties
@@ -382,7 +382,7 @@ git add application.properties
 git commit -m "add config"
 ```
 
-### 😐 ПРИЕМЛЕМО
+###  ПРИЕМЛЕМО
 
 ```bash
 # Environment Variables
@@ -393,7 +393,7 @@ export DB_PASSWORD=...
 System.getenv("DB_PASSWORD");
 ```
 
-### ✅ ЛУЧШИЙ ВАРИАНТ
+### [OK] ЛУЧШИЙ ВАРИАНТ
 
 ```
 Vault
@@ -506,7 +506,7 @@ AES нужен когда данные **нужно восстановить**:
 ```python
 from cryptography.fernet import Fernet
 
-# ✅ AES-256-GCM через Fernet (рекомендуемый high-level API)
+# [OK] AES-256-GCM через Fernet (рекомендуемый high-level API)
 key = Fernet.generate_key()
 f = Fernet(key)
 ciphertext = f.encrypt(b"Sensitive data")
@@ -527,7 +527,7 @@ HTTPS состоит из двух частей:
 ### Самая опасная ошибка
 
 ```java
-// ❌ ОПАСНО: доверяем любому сертификату
+// [NO] ОПАСНО: доверяем любому сертификату
 TrustManager[] trustAll = new TrustManager[] {
     new X509TrustManager() {
         public void checkClientTrusted(...) {}
@@ -542,14 +542,14 @@ HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 ```
 
 ```python
-# ❌ ОПАСНО: отключаем проверку
+# [NO] ОПАСНО: отключаем проверку
 import requests
 requests.packages.urllib3.disable_warnings()
 response = requests.get('https://example.com', verify=False)
 ```
 
 ```javascript
-// ❌ ОПАСНО: Node.js
+// [NO] ОПАСНО: Node.js
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 ```
 
@@ -614,7 +614,7 @@ Client                    Attacker                  Server
 ### Semgrep правило
 
 ```yaml
-# ❌ Запрет trustAllCertificates
+# [NO] Запрет trustAllCertificates
 rules:
   - id: trust-all-certificates
     patterns:
@@ -633,10 +633,10 @@ rules:
 
 | Версия | Статус | Проблемы |
 |--------|--------|----------|
-| **TLS 1.0** | ❌ Устарел | Слабые cipher suites, BEAST атака |
-| **TLS 1.1** | ❌ Устарел | Слабые cipher suites |
-| **TLS 1.2** | ✅ Рекомендуется | Надёжен, широко поддерживается |
-| **TLS 1.3** | ✅ Рекомендуется | Быстрее, безопаснее, меньше round trips |
+| **TLS 1.0** | [NO] Устарел | Слабые cipher suites, BEAST атака |
+| **TLS 1.1** | [NO] Устарел | Слабые cipher suites |
+| **TLS 1.2** | [OK] Рекомендуется | Надёжен, широко поддерживается |
+| **TLS 1.3** | [OK] Рекомендуется | Быстрее, безопаснее, меньше round trips |
 
 ### Почему TLS 1.0 и 1.1 нельзя использовать?
 
@@ -648,13 +648,13 @@ rules:
 ### Настройка сервера (Nginx)
 
 ```nginx
-# ❌ ПЛОХО: TLS 1.0 и 1.1 включены
+# [NO] ПЛОХО: TLS 1.0 и 1.1 включены
 ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
-# ✅ ХОРОШО: только современные версии
+# [OK] ХОРОШО: только современные версии
 ssl_protocols TLSv1.2 TLSv1.3;
 
-# ✅ Лучшие cipher suites
+# [OK] Лучшие cipher suites
 ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;
 ssl_prefer_server_ciphers on;
 ```
@@ -662,10 +662,10 @@ ssl_prefer_server_ciphers on;
 ### Настройка Java
 
 ```java
-// ❌ ПЛОХО
+// [NO] ПЛОХО
 System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 
-// ✅ ХОРОШО
+// [OK] ХОРОШО
 System.setProperty("https.protocols", "TLSv1.2,TLSv1.3");
 ```
 
@@ -720,11 +720,11 @@ response = requests.get('https://example.com')
 ### Сценарий 1: Хранение паролей пользователей
 
 ```python
-# ❌ НЕПРАВИЛЬНО
+# [NO] НЕПРАВИЛЬНО
 import hashlib
 hash = hashlib.sha256(password.encode()).hexdigest()
 
-# ✅ ПРАВИЛЬНО
+# [OK] ПРАВИЛЬНО
 from argon2 import PasswordHasher
 ph = PasswordHasher(memory_cost=65536, time_cost=3, parallelism=4)
 hash = ph.hash(password)
@@ -735,7 +735,7 @@ hash = ph.hash(password)
 ```python
 from cryptography.fernet import Fernet
 
-# ✅ ПРАВИЛЬНО: шифрование с AES-256-GCM
+# [OK] ПРАВИЛЬНО: шифрование с AES-256-GCM
 key = Fernet.generate_key()  # Хранить в Vault!
 f = Fernet(key)
 encrypted = f.encrypt(b"4111-1111-1111-1111")
@@ -747,10 +747,10 @@ print("4111-XXXX-XXXX-1111")
 ### Сценарий 3: API Keys в коде
 
 ```python
-# ❌ НЕПРАВИЛЬНО
+# [NO] НЕПРАВИЛЬНО
 API_KEY = "sk-1234567890abcdef"
 
-# ✅ ПРАВИЛЬНО
+# [OK] ПРАВИЛЬНО
 import os
 import boto3
 
@@ -763,7 +763,7 @@ API_KEY = client.get_secret_value(SecretId='prod/api-key')
 ```python
 import hashlib
 
-# ✅ ПРАВИЛЬНО: SHA-256 для контроля целостности (не для паролей!)
+# [OK] ПРАВИЛЬНО: SHA-256 для контроля целостности (не для паролей!)
 with open('deploy.tar.gz', 'rb') as f:
     checksum = hashlib.sha256(f.read()).hexdigest()
 ```
@@ -856,7 +856,7 @@ with open('deploy.tar.gz', 'rb') as f:
 
 ---
 
-## 🔗 Связанные темы
+##  Связанные темы
 
 - [Интерпретаторы](../01-fundamentals/interpreters.md) — пароли как inputs для password hashing interpreter
 - [Secrets Management](../07-authorization/broken-access-control.md) — пересечение с управлением доступом к секретам

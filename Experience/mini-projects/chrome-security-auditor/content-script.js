@@ -230,5 +230,5 @@ function highlightVulnerableElements(findings) {
 // Initial passive analysis (runs on page load)
 (function() {
   // We just initialize and wait for commands from popup
-  console.log('🛡️ Security Auditor loaded on:', window.location.href);
+  console.log('🛡 Security Auditor loaded on:', window.location.href);
 })();

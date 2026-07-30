@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Содержание
+##  Содержание
 
 1. [Что такое STRIDE?](#1-что-такое-stride)
 2. [S — Spoofing](#2-s--spoofing)
@@ -327,10 +327,10 @@ User → Admin
 
 | Элемент DFD | S | T | R | I | D | E |
 |-------------|---|---|---|---|---|---|
-| **External Entity** | ✅ Да | ❌ Нет | ❌ Нет | ❌ Нет | ❌ Нет | ❌ Нет |
-| **Process** | ✅ Да | ✅ Да | ✅ Да | ✅ Да | ✅ Да | ✅ Да |
-| **Data Store** | ❌ Нет | ✅ Да | ❌ Нет | ✅ Да | ❌ Нет | ❌ Нет |
-| **Data Flow** | ✅ Да | ✅ Да | ❌ Нет | ✅ Да | ✅ Да | ❌ Нет |
+| **External Entity** | [OK] Да | [NO] Нет | [NO] Нет | [NO] Нет | [NO] Нет | [NO] Нет |
+| **Process** | [OK] Да | [OK] Да | [OK] Да | [OK] Да | [OK] Да | [OK] Да |
+| **Data Store** | [NO] Нет | [OK] Да | [NO] Нет | [OK] Да | [NO] Нет | [NO] Нет |
+| **Data Flow** | [OK] Да | [OK] Да | [NO] Нет | [OK] Да | [OK] Да | [NO] Нет |
 
 ### Пример применения к банковскому переводу
 
@@ -428,7 +428,7 @@ Payment Service (Process)
 
 ---
 
-## 🔗 Связанные темы
+##  Связанные темы
 
 - [Insecure Design (A04)](../04-web-security/insecure-design.md) — Abuse Cases, Never Trust the Client
 - [Broken Access Control (A01)](../07-authorization/broken-access-control.md) — EoP, IDOR, BOLA

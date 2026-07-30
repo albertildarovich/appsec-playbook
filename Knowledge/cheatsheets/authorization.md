@@ -37,7 +37,7 @@ grep -rn "tenant_id\|tenantId\|organization_id\|company_id" src/ --include="*.ja
 ## Типичные уязвимые паттерны
 
 ```java
-// ❌ ОПАСНО — нет проверки владельца
+// [NO] ОПАСНО — нет проверки владельца
 @GetMapping("/orders/{id}")
 public Order getOrder(@PathVariable Long id) {
     return repository.findById(id);
@@ -45,14 +45,14 @@ public Order getOrder(@PathVariable Long id) {
 ```
 
 ```python
-# ❌ ОПАСНО — нет проверки владельца
+# [NO] ОПАСНО — нет проверки владельца
 @app.get("/users/{user_id}")
 def get_user(user_id: int):
     return db.query(User).filter(User.id == user_id).first()
 ```
 
 ```javascript
-// ❌ ОПАСНО — нет проверки владельца
+// [NO] ОПАСНО — нет проверки владельца
 app.get('/api/profile/:id', (req, res) => {
     const profile = db.profiles.findById(req.params.id);
     res.json(profile);
@@ -62,7 +62,7 @@ app.get('/api/profile/:id', (req, res) => {
 ### Mass Assignment
 
 ```java
-// ❌ ОПАСНО — Entity напрямую от клиента
+// [NO] ОПАСНО — Entity напрямую от клиента
 @PostMapping("/users")
 public User createUser(@RequestBody User user) {
     return userRepo.save(user);  // клиент может задать role=ADMIN
@@ -74,7 +74,7 @@ public User createUser(@RequestBody User user) {
 ## Безопасные паттерны
 
 ```java
-// ✅ БЕЗОПАСНО — проверка владельца
+// [OK] БЕЗОПАСНО — проверка владельца
 @GetMapping("/orders/{id}")
 public Order getOrder(@PathVariable Long id) {
     Order order = repository.findById(id);
@@ -84,17 +84,17 @@ public Order getOrder(@PathVariable Long id) {
     return order;
 }
 
-// ✅ ЕЩЁ ЛУЧШЕ — фильтрация в запросе
+// [OK] ЕЩЁ ЛУЧШЕ — фильтрация в запросе
 repository.findByIdAndOwnerId(id, currentUser.getId());
 
-// ✅ БЕЗОПАСНО — централизованная авторизация
+// [OK] БЕЗОПАСНО — централизованная авторизация
 @PreAuthorize("hasPermission(#id, 'Order', 'READ')")
 @GetMapping("/orders/{id}")
 public Order getOrder(@PathVariable Long id) {
     return repository.findById(id);
 }
 
-// ✅ Mass Assignment — DTO с только разрешёнными полями
+// [OK] Mass Assignment — DTO с только разрешёнными полями
 @PostMapping("/users")
 public User createUser(@RequestBody @Valid CreateUserDTO dto) {
     User user = new User(dto.name(), dto.email());
@@ -104,7 +104,7 @@ public User createUser(@RequestBody @Valid CreateUserDTO dto) {
 ```
 
 ```python
-# ✅ БЕЗОПАСНО — проверка владельца
+# [OK] БЕЗОПАСНО — проверка владельца
 @app.get("/users/{user_id}")
 def get_user(user_id: int, current_user: User = Depends(get_current_user)):
     user = db.query(User).filter(User.id == user_id).first()
@@ -112,13 +112,13 @@ def get_user(user_id: int, current_user: User = Depends(get_current_user)):
         raise HTTPException(status_code=403)
     return user
 
-# ✅ ЕЩЁ ЛУЧШЕ — фильтрация в запросе
+# [OK] ЕЩЁ ЛУЧШЕ — фильтрация в запросе
 user = db.query(User).filter(
     User.id == user_id,
     User.owner_id == current_user.id
 ).first()
 
-# ✅ Mass Assignment — Pydantic схема с только разрешёнными полями
+# [OK] Mass Assignment — Pydantic схема с только разрешёнными полями
 class CreateUserDTO(BaseModel):
     name: str
     email: str
@@ -130,7 +130,7 @@ def create_user(dto: CreateUserDTO):
 ```
 
 ```javascript
-// ✅ БЕЗОПАСНО — проверка владельца
+// [OK] БЕЗОПАСНО — проверка владельца
 app.get('/api/profile/:id', authenticate, (req, res) => {
     const profile = db.profiles.findById(req.params.id);
     if (profile.ownerId !== req.user.id) {
@@ -175,8 +175,8 @@ app.get('/api/profile/:id', authenticate, (req, res) => {
 | Характеристика | RBAC | ABAC |
 |---------------|------|------|
 | Модель | Роль пользователя | Атрибуты (пользователь, ресурс, окружение) |
-| Простота | ✅ Высокая | ❌ Низкая |
-| Масштабируемость | ❌ Role explosion | ✅ Гибкие политики |
+| Простота | [OK] Высокая | [NO] Низкая |
+| Масштабируемость | [NO] Role explosion | [OK] Гибкие политики |
 | Типичный пример | `hasRole('ADMIN')` | `role=Manager AND dept=Finance AND region=EU` |
 | Инструменты | Spring Security, Shiro | OPA, Cedar, AuthzForce |
 
@@ -185,13 +185,13 @@ app.get('/api/profile/:id', authenticate, (req, res) => {
 ## Централизованная авторизация
 
 ```java
-// ❌ Размазанные проверки — дублирование, риск забыть
+// [NO] Размазанные проверки — дублирование, риск забыть
 @GetMapping("/orders/{id}")    // проверка
 @PostMapping("/orders")         // проверка
 @PutMapping("/orders/{id}")     // проверка
 @DeleteMapping("/orders/{id}")  // проверка
 
-// ✅ Централизованная авторизация
+// [OK] Централизованная авторизация
 @Service
 public class AuthorizationService {
     public void authorize(User user, Object resource, Action action) {
@@ -208,18 +208,18 @@ public class AuthorizationService {
 ## Tenant Isolation
 
 ```sql
--- ❌ ОПАСНО — нет фильтра по tenant
+-- [NO] ОПАСНО — нет фильтра по tenant
 SELECT * FROM invoices WHERE id = :id;
 
--- ✅ БЕЗОПАСНО — фильтр по tenant
+-- [OK] БЕЗОПАСНО — фильтр по tenant
 SELECT * FROM invoices WHERE id = :id AND tenant_id = :tenantId;
 ```
 
 ```java
-// ❌ ОПАСНО — tenant_id от клиента
+// [NO] ОПАСНО — tenant_id от клиента
 Long tenantId = request.getParameter("tenant_id");
 
-// ✅ БЕЗОПАСНО — tenant_id из контекста аутентификации
+// [OK] БЕЗОПАСНО — tenant_id из контекста аутентификации
 Long tenantId = currentUser.getTenantId();
 ```
 

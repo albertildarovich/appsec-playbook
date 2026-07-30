@@ -296,7 +296,7 @@ function renderChecklist() {
     const statusLabels = {
       'pass': '<span class="item-status status-pass">✓ Пройдено</span>',
       'fail': '<span class="item-status status-fail">✗ Провалено</span>',
-      'warning': '<span class="item-status status-warning">⚠ Внимание</span>',
+      'warning': '<span class="item-status status-warning">[WARN] Внимание</span>',
       'pending': '<span class="item-status status-pending">○ Ожидание</span>'
     };
 
@@ -504,7 +504,7 @@ function updateScanResults() {
       return state?.status === 'pass';
     }).length;
     container.innerHTML = `<div class="scan-result-item severity-info">
-      <div class="result-title">✅ Проверки выполнены</div>
+      <div class="result-title">[OK] Проверки выполнены</div>
       <div class="result-description">Пройдено авто-проверок: ${passCount}. Проблем не обнаружено.</div>
     </div>`;
     return;
@@ -553,9 +553,9 @@ function updateReport() {
     const div = document.createElement('div');
     div.className = 'report-detail-item';
     const statusSymbols = {
-      'pass': '✅',
-      'fail': '❌',
-      'warning': '⚠️',
+      'pass': '[OK]',
+      'fail': '[NO]',
+      'warning': '[WARN]',
       'pending': '⏳'
     };
     div.innerHTML = `
@@ -607,9 +607,9 @@ function exportHTML() {
   CHECKLIST.forEach(item => {
     const state = checklistState[item.id] || { status: 'pending' };
     const statusLabels = {
-      'pass': '✅ Пройдено',
-      'fail': '❌ Провалено',
-      'warning': '⚠️ Внимание',
+      'pass': '[OK] Пройдено',
+      'fail': '[NO] Провалено',
+      'warning': '[WARN] Внимание',
       'pending': '⏳ Не проверено'
     };
     itemsHtml += `
@@ -640,7 +640,7 @@ function exportHTML() {
   </style>
 </head>
 <body>
-  <h1>🛡️ Security Audit Report</h1>
+  <h1>🛡 Security Audit Report</h1>
   <p class="meta">URL: ${url}<br>Дата: ${timestamp}</p>
   <div class="summary">
     <div class="stat"><span class="stat-value">${total}</span>Всего</div>
@@ -714,7 +714,7 @@ function setupEventListeners() {
     $('scanStatus').textContent = '⏳ Сканирование...';
     $('scanStatus').classList.add('scanning');
     await runAutoChecks();
-    $('scanStatus').textContent = '✅ Сканирование завершено';
+    $('scanStatus').textContent = '[OK] Сканирование завершено';
     $('scanStatus').classList.remove('scanning');
   });
 

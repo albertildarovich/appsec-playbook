@@ -112,5 +112,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 // Log installation
 chrome.runtime.onInstalled.addListener((details) => {
-  console.log('🛡️ Security Auditor installed:', details.reason);
+  console.log('🛡 Security Auditor installed:', details.reason);
 });

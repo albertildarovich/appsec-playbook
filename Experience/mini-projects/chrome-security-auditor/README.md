@@ -1,8 +1,8 @@
-# 🛡️ Security Auditor — Chrome Extension
+# 🛡 Security Auditor — Chrome Extension
 
 > Расширение для Chrome для аудита безопасности веб-страниц.
 
-## 📋 Возможности
+##  Возможности
 
 ### Этап 1: Чек-лист уязвимостей
 - **23+ проверки** на основе OWASP Top 10 и лучших практик
@@ -33,7 +33,7 @@ chrome-security-auditor/
     └── icon128.png
 ```
 
-## 🚀 Установка (Developer Mode)
+##  Установка (Developer Mode)
 
 1. Откройте Chrome и перейдите на `chrome://extensions/`
 2. Включите **Developer mode** (правый верхний угол)
@@ -46,7 +46,7 @@ chrome-security-auditor/
 ### Чек-лист
 1. Откройте любую страницу
 2. Нажмите на иконку расширения
-3. Вкладка **📋 Чек-лист** — список проверок
+3. Вкладка ** Чек-лист** — список проверок
 4. Отмечайте выполненные проверки вручную
 5. Нажмите **▶ Запустить все проверки** для автоматических
 
@@ -56,53 +56,53 @@ chrome-security-auditor/
 3. Расширение проанализирует заголовки, куки и HTML
 
 ### Отчёт
-1. Вкладка **📊 Отчёт** — сводка результатов
+1. Вкладка ** Отчёт** — сводка результатов
 2. Экспорт в **JSON** или **HTML**
 
-## 📋 Чек-лист (23 проверки)
+##  Чек-лист (23 проверки)
 
 ### Transport Security
-- ✅ HTTPS
-- ✅ HSTS
-- ✅ X-Frame-Options / CSP frame-ancestors
-- ✅ X-Content-Type-Options
+- [OK] HTTPS
+- [OK] HSTS
+- [OK] X-Frame-Options / CSP frame-ancestors
+- [OK] X-Content-Type-Options
 
 ### Content Security
-- ✅ Content-Security-Policy
-- ✅ X-XSS-Protection
-- ✅ Referrer-Policy
+- [OK] Content-Security-Policy
+- [OK] X-XSS-Protection
+- [OK] Referrer-Policy
 
 ### Cookie Security
-- ✅ Secure flag
-- ✅ HttpOnly flag
-- ✅ SameSite attribute
+- [OK] Secure flag
+- [OK] HttpOnly flag
+- [OK] SameSite attribute
 
 ### Information Disclosure
-- ✅ Server header
-- ✅ X-Powered-By
-- ✅ Directory Listing
+- [OK] Server header
+- [OK] X-Powered-By
+- [OK] Directory Listing
 
 ### Cross-Origin
-- ✅ CORS policy
-- ✅ Permissions-Policy
+- [OK] CORS policy
+- [OK] Permissions-Policy
 
 ### XSS & Injection
-- ✅ Inline scripts (nonce)
-- ✅ XSS test
-- ✅ SQL injection test
+- [OK] Inline scripts (nonce)
+- [OK] XSS test
+- [OK] SQL injection test
 
 ### Forms & Input
-- ✅ Autocomplete off
-- ✅ Password fields
-- ✅ Server validation
+- [OK] Autocomplete off
+- [OK] Password fields
+- [OK] Server validation
 
 ### Supply Chain
-- ✅ Subresource Integrity (SRI)
+- [OK] Subresource Integrity (SRI)
 
 ### Infrastructure
-- ✅ Open ports check
+- [OK] Open ports check
 
-## 🗺️ План развития
+## 🗺 План развития
 
 - [x] **Этап 1:** Чек-лист + базовые авто-проверки
 - [ ] **Этап 2:** Углублённый анализ DOM, подсветка элементов
@@ -110,7 +110,7 @@ chrome-security-auditor/
 - [ ] **Этап 4:** Интеграция с OWASP ZAP API, более сложные проверки
 - [ ] **Этап 5:** Экспорт в PDF, история проверок, сравнение
 
-## 🛡️ Для чего это?
+## 🛡 Для чего это?
 
 Расширение помогает:
 - **Разработчикам** — быстро проверить базовые настройки безопасности
@@ -118,10 +118,10 @@ chrome-security-auditor/
 - **QA-инженерам** — добавлять security-тесты в регрессионное тестирование
 - **CTF-игрокам** — не пропустить базовые уязвимости
 
-## 📝 Лицензия
+##  Лицензия
 
 Проект является частью учебного курса по Security. Используйте для обучения и тестирования.
 
 ---
 
-**⚠️ Предупреждение:** Используйте расширение только на тех сайтах, которые вы имеете право тестировать. Автор не несёт ответственности за неправомерное использование.
+**[WARN] Предупреждение:** Используйте расширение только на тех сайтах, которые вы имеете право тестировать. Автор не несёт ответственности за неправомерное использование.

@@ -1,0 +1,27 @@
+ ZAP baseline rule config (tab-separated)
+ Формат:  <rule-id>\t<action: WARN|FAIL|IGNORE>\t<comment>
+ Полный список ID: https://www.zaproxy.org/docs/alerts/
+
+ Стратегия: критичные для Juice Shop классы уязвимостей => FAIL (блокируют
+ pipeline на staging). Шумные информационные правила => IGNORE, чтобы не
+ создавать усталость от алертов. Всё остальное => WARN (в отчёт, но не блок).
+
+	FAIL	SQL Injection
+	FAIL	Cross Site Scripting (Reflected)
+	FAIL	Cross Site Scripting (Persistent)
+	FAIL	Cross Site Scripting (Persistent) - Prime
+	FAIL	Cross Site Scripting (Persistent) - Spider
+	FAIL	Server Side Code Injection
+	FAIL	Remote OS Command Injection
+	    FAIL	Path Traversal
+	FAIL	CRLF Injection
+
+	WARN	Absence of Anti-CSRF Tokens
+	WARN	Content Security Policy (CSP) Header Not Set
+	WARN	Strict-Transport-Security Header Not Set
+	WARN	X-Content-Type-Options Header Missing
+	WARN	Missing Anti-clickjacking Header
+
+	IGNORE	Timestamp Disclosure - noisy on static assets
+	IGNORE	Information Disclosure - Suspicious Comments
+	IGNORE	Modern Web Application

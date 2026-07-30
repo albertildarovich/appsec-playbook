@@ -149,13 +149,13 @@ const jwtSecret = 'e731dl;d;1l2j3oi1j4oi2j34io23j4i23j431j413;j4;j'
 | Аспект | SAST (Semgrep) | DAST (ZAP/Nuclei) |
 |--------|---------------|-------------------|
 | **Тип анализа** | Исходный код | Запущенное приложение |
-| **SQL Injection** | ✅ 6 находок | ❌ Не нашли (не было триггера) |
-| **Hardcoded Secrets** | ✅ JWT secret, HMAC key | ❌ Не применимо |
-| **Eval()** | ✅ 2 находки | ❌ Не применимо |
-| **CORS Misconfig** | ❌ Не ищет | ✅ 19 находок (ZAP) |
-| **CSP Headers** | ❌ Не искали | ✅ 3 находки (ZAP) |
-| **/metrics (Prometheus)** | ❌ Не искали | ✅ Nuclei |
-| **Open Redirect** | ✅ 3 находки | ❌ Не проверяли |
+| **SQL Injection** | [OK] 6 находок | [NO] Не нашли (не было триггера) |
+| **Hardcoded Secrets** | [OK] JWT secret, HMAC key | [NO] Не применимо |
+| **Eval()** | [OK] 2 находки | [NO] Не применимо |
+| **CORS Misconfig** | [NO] Не ищет | [OK] 19 находок (ZAP) |
+| **CSP Headers** | [NO] Не искали | [OK] 3 находки (ZAP) |
+| **/metrics (Prometheus)** | [NO] Не искали | [OK] Nuclei |
+| **Open Redirect** | [OK] 3 находки | [NO] Не проверяли |
 
 **Вывод:** SAST и DAST — комплементарны. SAST находит уязвимости в коде (hardcoded secrets, SQLi, eval). DAST находит misconfiguration в рантайме (CORS, CSP, открытые эндпоинты).
 

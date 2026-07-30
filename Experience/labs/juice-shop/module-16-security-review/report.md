@@ -21,26 +21,26 @@
 
 | ID | Уязвимость | Severity | CWE | ОWASP Top 10 | Файл |
 |----|-----------|----------|-----|-------------|------|
-| SR-01 | SQL Injection (логин, поиск) | 🔴 Critical | CWE-89 | A03:Injection | `routes/login.ts:34`, `routes/search.ts:23` |
-| SR-02 | Hardcoded Private RSA Key | 🔴 Critical | CWE-798 | A05:Security Misconfiguration | `lib/insecurity.ts:21` |
-| SR-03 | eval() Injection | 🔴 Critical | CWE-95 | A03:Injection | `routes/captcha.ts`, `routes/userProfile.ts` |
-| SR-04 | Shell Injection в CI/CD | 🔴 Critical | CWE-78 | A03:Injection | `.github/workflows/update-challenges-*.yml` |
-| SR-05 | Weak Password Hashing (MD5) | 🔴 High | CWE-327 | A02:Cryptographic Failures | `lib/insecurity.ts:41`, `models/user.ts:76` |
-| SR-06 | Hardcoded HMAC Secret | 🔴 High | CWE-798 | A05:Security Misconfiguration | `lib/insecurity.ts:42` |
-| SR-07 | Mass Assignment / Remote Property Injection | 🔴 High | CWE-915 | A01:Broken Access Control | `routes/currentUser.ts:22-33`, `routes/order.ts:146` |
-| SR-08 | Coupon Forgery (Z85 reversible encoding) | 🔴 High | CWE-327 | A02:Cryptographic Failures | `lib/insecurity.ts:97-100`, `routes/order.ts:196-207` |
-| SR-09 | Business Logic: Negative Order Total | 🔴 High | CWE-840 | A04:Insecure Design | `routes/order.ts:144` |
-| SR-10 | Open Redirect (bypass via `includes`) | 🟡 Medium | CWE-601 | A01:Broken Access Control | `routes/redirect.ts:15-18`, `lib/insecurity.ts:133-138` |
-| SR-11 | Sensitive Data Exposure in JWT | 🟡 Medium | CWE-200 | A01:Broken Access Control | `lib/insecurity.ts:54`, `routes/login.ts:26` |
-| SR-12 | No Rate Limiting (Login) | 🟡 Medium | CWE-307 | A07:Identification Auth | `routes/login.ts` |
-| SR-13 | CORS Misconfiguration | 🟡 Medium | CWE-942 | A05:Security Misconfiguration | `server.ts` |
-| SR-14 | Session Fixation | 🟡 Medium | CWE-384 | A07:Identification Auth | `lib/insecurity.ts:186-196` |
-| SR-15 | Null Byte Injection | 🟡 Medium | CWE-158 | A03:Injection | `lib/insecurity.ts:44-50`, `routes/fileServer.ts` |
-| SR-16 | No CSRF Protection | 🟡 Medium | CWE-352 | A01:Broken Access Control | Все state-changing endpoints |
-| SR-17 | Insecure Cookie Configuration | 🟡 Medium | CWE-614 | A05:Security Misconfiguration | `lib/insecurity.ts:186-196` |
-| SR-18 | curl | bash в CI | 🟡 Medium | CWE-347 | A06:Vulnerable Components | `.github/workflows/ci.yml:358` |
-| SR-19 | Mutable Action Tags в CI/CD | 🟡 Medium | CWE-829 | A06:Vulnerable Components | `.github/workflows/*.yml` |
-| SR-20 | Directory Listing / Path Traversal | 🟡 Medium | CWE-548 | A01:Broken Access Control | `routes/fileServer.ts`, `server.ts` |
+| SR-01 | SQL Injection (логин, поиск) | [CRIT] Critical | CWE-89 | A03:Injection | `routes/login.ts:34`, `routes/search.ts:23` |
+| SR-02 | Hardcoded Private RSA Key | [CRIT] Critical | CWE-798 | A05:Security Misconfiguration | `lib/insecurity.ts:21` |
+| SR-03 | eval() Injection | [CRIT] Critical | CWE-95 | A03:Injection | `routes/captcha.ts`, `routes/userProfile.ts` |
+| SR-04 | Shell Injection в CI/CD | [CRIT] Critical | CWE-78 | A03:Injection | `.github/workflows/update-challenges-*.yml` |
+| SR-05 | Weak Password Hashing (MD5) | [CRIT] High | CWE-327 | A02:Cryptographic Failures | `lib/insecurity.ts:41`, `models/user.ts:76` |
+| SR-06 | Hardcoded HMAC Secret | [CRIT] High | CWE-798 | A05:Security Misconfiguration | `lib/insecurity.ts:42` |
+| SR-07 | Mass Assignment / Remote Property Injection | [CRIT] High | CWE-915 | A01:Broken Access Control | `routes/currentUser.ts:22-33`, `routes/order.ts:146` |
+| SR-08 | Coupon Forgery (Z85 reversible encoding) | [CRIT] High | CWE-327 | A02:Cryptographic Failures | `lib/insecurity.ts:97-100`, `routes/order.ts:196-207` |
+| SR-09 | Business Logic: Negative Order Total | [CRIT] High | CWE-840 | A04:Insecure Design | `routes/order.ts:144` |
+| SR-10 | Open Redirect (bypass via `includes`) | [MED] Medium | CWE-601 | A01:Broken Access Control | `routes/redirect.ts:15-18`, `lib/insecurity.ts:133-138` |
+| SR-11 | Sensitive Data Exposure in JWT | [MED] Medium | CWE-200 | A01:Broken Access Control | `lib/insecurity.ts:54`, `routes/login.ts:26` |
+| SR-12 | No Rate Limiting (Login) | [MED] Medium | CWE-307 | A07:Identification Auth | `routes/login.ts` |
+| SR-13 | CORS Misconfiguration | [MED] Medium | CWE-942 | A05:Security Misconfiguration | `server.ts` |
+| SR-14 | Session Fixation | [MED] Medium | CWE-384 | A07:Identification Auth | `lib/insecurity.ts:186-196` |
+| SR-15 | Null Byte Injection | [MED] Medium | CWE-158 | A03:Injection | `lib/insecurity.ts:44-50`, `routes/fileServer.ts` |
+| SR-16 | No CSRF Protection | [MED] Medium | CWE-352 | A01:Broken Access Control | Все state-changing endpoints |
+| SR-17 | Insecure Cookie Configuration | [MED] Medium | CWE-614 | A05:Security Misconfiguration | `lib/insecurity.ts:186-196` |
+| SR-18 | curl | bash в CI | [MED] Medium | CWE-347 | A06:Vulnerable Components | `.github/workflows/ci.yml:358` |
+| SR-19 | Mutable Action Tags в CI/CD | [MED] Medium | CWE-829 | A06:Vulnerable Components | `.github/workflows/*.yml` |
+| SR-20 | Directory Listing / Path Traversal | [MED] Medium | CWE-548 | A01:Broken Access Control | `routes/fileServer.ts`, `server.ts` |
 
 ---
 
@@ -318,22 +318,22 @@ Cookies не имеют флагов:
 
 | Уязвимость | Semgrep (SAST) | ZAP (DAST) | Nuclei | Manual Review |
 |-----------|:---:|:---:|:---:|:---:|
-| SQL Injection (login) | ✅ | ❌ | ❌ | ✅ |
-| SQL Injection (search) | ✅ | ❌ | ❌ | ✅ |
-| Hardcoded RSA Key | ✅ | ❌* | ❌* | ✅ |
-| Hardcoded HMAC Secret | ✅ | ❌* | ❌* | ✅ |
-| eval() | ✅ | ❌ | ❌ | ✅ |
-| Shell Injection CI/CD | ✅ | ❌ | ❌ | ✅ |
-| Mass Assignment | ✅ | ❌ | ❌ | ✅ |
-| Open Redirect | ✅ | ❌ | ❌ | ✅ |
-| Weak Password Hashing | ❌ | ❌ | ❌ | ✅ |
-| Coupon Forgery | ❌ | ❌ | ❌ | ✅ |
-| Business Logic (negative order) | ❌ | ❌ | ❌ | ✅ |
-| No Rate Limiting | ❌ | ✅** | ❌ | ✅ |
-| CORS Misconfiguration | ❌ | ✅ | ❌ | ✅ |
-| Session Fixation | ✅ | ❌ | ❌ | ✅ |
-| No CSRF | ❌ | ❌ | ❌ | ✅ |
-| XSS | ❌ | ❌ | ❌ | ❌*** |
+| SQL Injection (login) | [OK] | [NO] | [NO] | [OK] |
+| SQL Injection (search) | [OK] | [NO] | [NO] | [OK] |
+| Hardcoded RSA Key | [OK] | [NO]* | [NO]* | [OK] |
+| Hardcoded HMAC Secret | [OK] | [NO]* | [NO]* | [OK] |
+| eval() | [OK] | [NO] | [NO] | [OK] |
+| Shell Injection CI/CD | [OK] | [NO] | [NO] | [OK] |
+| Mass Assignment | [OK] | [NO] | [NO] | [OK] |
+| Open Redirect | [OK] | [NO] | [NO] | [OK] |
+| Weak Password Hashing | [NO] | [NO] | [NO] | [OK] |
+| Coupon Forgery | [NO] | [NO] | [NO] | [OK] |
+| Business Logic (negative order) | [NO] | [NO] | [NO] | [OK] |
+| No Rate Limiting | [NO] | [OK]** | [NO] | [OK] |
+| CORS Misconfiguration | [NO] | [OK] | [NO] | [OK] |
+| Session Fixation | [OK] | [NO] | [NO] | [OK] |
+| No CSRF | [NO] | [NO] | [NO] | [OK] |
+| XSS | [NO] | [NO] | [NO] | [NO]*** |
 
 > \* — DAST-инструменты не проверяют исходный код  
 > \*\* — ZAP нашёл CORS в active scan; rate limiting можно проверить брутфорсом  
@@ -353,7 +353,7 @@ Cookies не имеют флагов:
 
 ---
 
-## 🧠 Как приоритизировать уязвимости?
+##  Как приоритизировать уязвимости?
 
 ### Шаг 1: Три вопроса к каждой находке
 
@@ -399,32 +399,32 @@ Likelihood (вероятность атаки):
 
 | Ось | Оценка | Почему? |
 |----|--------|---------|
-| **Impact** | 🔴 Critical | Читает всю БД (Users, Orders, Products), обходит аутентификацию |
-| **Likelihood** | 🔴 High | POST /rest/user/login — публичный эндпоинт, не требует токена. PoC = 1 curl-запрос |
+| **Impact** | [CRIT] Critical | Читает всю БД (Users, Orders, Products), обходит аутентификацию |
+| **Likelihood** | [CRIT] High | POST /rest/user/login — публичный эндпоинт, не требует токена. PoC = 1 curl-запрос |
 | **Итог** | **P0** | Impact × Likelihood = Critical × High |
 
 #### Пример P1: SR-07 (Mass Assignment в currentUser.ts)
 
 | Ось | Оценка | Почему? |
 |----|--------|---------|
-| **Impact** | 🔴 High | Можно прочитать password-хэш любого пользователя |
-| **Likelihood** | 🟡 Medium | Требуется валидный JWT-токен (нужно залогиниться). Но любой зарегистрированный пользователь может это сделать |
+| **Impact** | [CRIT] High | Можно прочитать password-хэш любого пользователя |
+| **Likelihood** | [MED] Medium | Требуется валидный JWT-токен (нужно залогиниться). Но любой зарегистрированный пользователь может это сделать |
 | **Итог** | **P1** | Impact × Likelihood = High × Medium |
 
 #### Пример P2: SR-16 (No CSRF Protection)
 
 | Ось | Оценка | Почему? |
 |----|--------|---------|
-| **Impact** | 🟡 Medium | Можно выполнить action от имени жертвы (но не прочитать данные) |
-| **Likelihood** | 🟡 Medium | Нужна жертва, которая перейдёт по ссылке на сайт злоумышленника |
+| **Impact** | [MED] Medium | Можно выполнить action от имени жертвы (но не прочитать данные) |
+| **Likelihood** | [MED] Medium | Нужна жертва, которая перейдёт по ссылке на сайт злоумышленника |
 | **Итог** | **P2** | Impact × Likelihood = Medium × Medium |
 
 #### Пример P3: SR-15 (Null Byte Injection)
 
 | Ось | Оценка | Почему? |
 |----|--------|---------|
-| **Impact** | 🟡 Medium | Path traversal в теории возможен, но null byte обрезается функцией |
-| **Likelihood** | 🟢 Low | Экранирование всё же есть, требуется специфическая комбинация |
+| **Impact** | [MED] Medium | Path traversal в теории возможен, но null byte обрезается функцией |
+| **Likelihood** | [LOW] Low | Экранирование всё же есть, требуется специфическая комбинация |
 | **Итог** | **P3** | Impact × Likelihood = Medium × Low |
 
 ### Шаг 4: Поправка на контекст проекта
@@ -484,7 +484,7 @@ Likelihood (вероятность атаки):
 CVSS (Common Vulnerability Scoring System) — формальная система с 8+ метриками (AV, AC, PR, UI, S, C, I, A...).  
 **На реальном проекте** ты будешь встречать CVSS в отчётах сканеров (Nessus, Qualys), но:
 
-| ✅ Плюсы CVSS | ❌ Минусы CVSS |
+| [OK] Плюсы CVSS | [NO] Минусы CVSS |
 |--------------|----------------|
 | Стандартизирован (все говорят на одном языке) | Сложный для быстрого triage (8+ метрик) |
 | Объективен (считается по формуле) | Игнорирует контекст бизнеса |
@@ -509,26 +509,26 @@ CVSS (Common Vulnerability Scoring System) — формальная систем
 
 ## Рекомендации по приоритетам
 
-### 🔴 P0 — Fix immediately
+### [CRIT] P0 — Fix immediately
 1. **SR-01** — Заменить прямой SQL на parameterized queries (sequelize поддерживает `:param`)
 2. **SR-02** — Убрать приватный ключ из кода, генерировать при деплое
 3. **SR-03** — Убрать `eval()`, использовать безопасные альтернативы
 4. **SR-04** — Использовать `env:` для передачи `github.ref_name` в shell
 
-### 🔴 P1 — Fix this sprint
+### [CRIT] P1 — Fix this sprint
 5. **SR-05** — Заменить MD5 на bcrypt/argon2 с солью
 6. **SR-06** — Вынести HMAC-ключ в environment variables
 7. **SR-07** — Внедрить allowlist для полей в `/rest/user/whoami`
 8. **SR-08** — Подписывать купоны HMAC вместо Z85 encoding
 9. **SR-09** — Блокировать заказы с `totalPrice < 0`
 
-### 🟡 P2 — Fix next sprint
+### [MED] P2 — Fix next sprint
 10. **SR-10** — Заменить `includes` на `startsWith` в `isRedirectAllowed`
 11. **SR-14** — Добавить механизм revokation для JWT (blacklist)
 12. **SR-16** — Добавить CSRF-токены (csurf или double-submit cookie)
 13. **SR-17** — Настроить `httpOnly`, `secure`, `sameSite` для cookies
 
-### 🟡 P3 — Fix when possible
+### [MED] P3 — Fix when possible
 14. **SR-11** — Убрать `bid` из JWT, хранить в server-side session
 15. **SR-12** — Добавить rate limiting (express-rate-limit)
 16. **SR-15** — Использовать безопасные функции для работы с файлами
@@ -545,4 +545,4 @@ Juice Shop — намеренно уязвимое приложение, и да
 3. **Business Logic** — самые интересные уязвимости (coupon forgery, negative order), которые не находят SAST/DAST.
 4. **DevSecOps** — CI/CD пайплайны уязвимы к shell injection и supply chain attacks.
 
-**Security Review завершён:** ✅ `module-16-security-review/report.md`
+**Security Review завершён:** [OK] `module-16-security-review/report.md`

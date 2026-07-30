@@ -10,16 +10,16 @@
 
 | ID | Решение | Статус |
 |----|---------|--------|
-| ADR-001 | [OAuth 2.0 вместо Session-based auth](./adr-001-oauth-vs-session.md) | 📝 |
-| ADR-002 | [Semgrep для SAST вместо SonarQube](./adr-002-semgrep.md) | ✅ |
-| ADR-003 | [WAF в режиме Fail Open](./adr-003-waf-fail-open.md) | ❌ |
-| ADR-004 | [Vault для secrets management](./adr-004-vault.md) | ❌ |
-| ADR-005 | [Centralized authorization (OPA/Cedar)](./adr-005-centralized-authz.md) | ❌ |
-| ADR-006 | [JWT + Refresh Token вместо Session](./adr-006-jwt-refresh.md) | ❌ |
-| ADR-007 | [Argon2id для паролей вместо bcrypt](./adr-007-argon2id.md) | ❌ |
-| ADR-008 | [mTLS для service-to-service auth](./adr-008-mtls.md) | ❌ |
-| ADR-009 | [OWASP ASVS как baseline требований](./adr-009-asvs-baseline.md) | ❌ |
-| ADR-010 | [Keycloak/Auth0 для SSO](./adr-010-keycloak.md) | ✅ |
+| ADR-001 | [OAuth 2.0 вместо Session-based auth](./adr-001-oauth-vs-session.md) |  |
+| ADR-002 | [Semgrep для SAST вместо SonarQube](./adr-002-semgrep.md) | [OK] |
+| ADR-003 | [WAF в режиме Fail Open](./adr-003-waf-fail-open.md) | [NO] |
+| ADR-004 | [Vault для secrets management](./adr-004-vault.md) | [NO] |
+| ADR-005 | [Centralized authorization (OPA/Cedar)](./adr-005-centralized-authz.md) | [NO] |
+| ADR-006 | [JWT + Refresh Token вместо Session](./adr-006-jwt-refresh.md) | [NO] |
+| ADR-007 | [Argon2id для паролей вместо bcrypt](./adr-007-argon2id.md) | [NO] |
+| ADR-008 | [mTLS для service-to-service auth](./adr-008-mtls.md) | [NO] |
+| ADR-009 | [OWASP ASVS как baseline требований](./adr-009-asvs-baseline.md) | [NO] |
+| ADR-010 | [Keycloak/Auth0 для SSO](./adr-010-keycloak.md) | [OK] |
 
 ---
 
@@ -79,4 +79,4 @@
 
 ---
 
-> ⚡ **Принцип:** ADR не про "правильные" ответы. Они про осознанные решения. Если через год ты оглянешься и скажешь "надо было по-другому" — это нормально. Главное — понять почему.
+>  **Принцип:** ADR не про "правильные" ответы. Они про осознанные решения. Если через год ты оглянешься и скажешь "надо было по-другому" — это нормально. Главное — понять почему.

@@ -44,10 +44,10 @@ GET /orders/124   # вместо /orders/123
 Отсутствует проверка **владельца объекта**:
 
 ```java
-// ❌ Опасно
+// [NO] Опасно
 repository.findById(id);
 
-// ✅ Нужна проверка
+// [OK] Нужна проверка
 if (currentUser.id != order.ownerId) {
     throw new ForbiddenException();
 }

@@ -15,10 +15,10 @@ E — Elevation of Privilege → "Можно ли получить больше 
 
 | Элемент | S | T | R | I | D | E |
 |---------|---|---|---|---|---|---|
-| External Entity | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Process | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Data Store | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Data Flow | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ |
+| External Entity | [OK] | [NO] | [NO] | [NO] | [NO] | [NO] |
+| Process | [OK] | [OK] | [OK] | [OK] | [OK] | [OK] |
+| Data Store | [NO] | [OK] | [NO] | [OK] | [NO] | [NO] |
+| Data Flow | [OK] | [OK] | [NO] | [OK] | [OK] | [NO] |
 
 ## S — Spoofing
 
@@ -60,14 +60,14 @@ Audit Log обязательные поля:
 ## I — Information Disclosure
 
 ```
-❌ Entity → API (danger!)
-❌ Stack trace в ответе
-❌ Password hash/null в JSON
-❌ Внутренние поля (salary, notes)
+[NO] Entity → API (danger!)
+[NO] Stack trace в ответе
+[NO] Password hash/null в JSON
+[NO] Внутренние поля (salary, notes)
 
-✅ DTO — только то, что нужно UI
-✅ Минимизация ответа
-✅ @JsonIgnore / @JsonProperty(access = WRITE_ONLY)
+[OK] DTO — только то, что нужно UI
+[OK] Минимизация ответа
+[OK] @JsonIgnore / @JsonProperty(access = WRITE_ONLY)
 ```
 
 ## D — Denial of Service

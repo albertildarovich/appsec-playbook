@@ -9,7 +9,7 @@
 В новой версии Security Thinking — это не просто раздел, а **центр плейбука**:
 
 ```
-🧠 Security Thinking/
+ Security Thinking/
 ├── mental-models/          — Фреймворки мышления (Interpreters, Attack Surface)
 ├── risk-assessment/        — CVE vs Risk, контекст, reachability
 ├── trade-offs/             — Инженерные компромиссы (JWT vs Session и т.д.)

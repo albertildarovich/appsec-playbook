@@ -71,17 +71,17 @@ SSDF состоит из **4 групп** и **19 практик**:
 | **Обязательность** | EO 14028 (US gov) | Voluntary | Voluntary |
 | **Scope** | Software only | Full security program | Full security program |
 | **Гибкость** | Высокая | Средняя | Низкая |
-| **SBOM** | ✅ Включён | ❌ | ❌ |
-| **CI/CD** | ✅ | SAMM v2 | Ограничен |
+| **SBOM** | [OK] Включён | [NO] | [NO] |
+| **CI/CD** | [OK] | SAMM v2 | Ограничен |
 
 ## Как внедрить SSDF
 
 ### Step 1: Gap Assessment
 ```
 Текущее состояние vs. SSDF Practices
-PO.1: ❌ Нет security requirements
-PW.1: ✅ Code review есть
-PW.2: ❌ Нет DAST
+PO.1: [NO] Нет security requirements
+PW.1: [OK] Code review есть
+PW.2: [NO] Нет DAST
 ...
 ```
 

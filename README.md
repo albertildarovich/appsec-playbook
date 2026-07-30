@@ -1,6 +1,6 @@
 # AppSec Playbook
 
-> 🧠 Живая база знаний AppSec инженера. Playbook + Second Brain + Wiki.
+>  Живая база знаний AppSec инженера. Playbook + Second Brain + Wiki.
 
 ---
 
@@ -26,7 +26,7 @@
 ## Структура по слоям
 
 ```
-📚 Knowledge/                   — "Как это работает?"
+ Knowledge/                   — "Как это работает?"
 ├── fundamentals/               — Security Principles, Interpreters, NIST CSF
 ├── secure-sdlc/                — SDLC, BSIMM, SAMM, SSDF, Security Champions
 ├── threat-modeling/            — STRIDE, DFD, Attack Trees
@@ -43,7 +43,7 @@
 ├── owasp-top10/                — Единый хаб по всем категориям A01–A10
 └── tools/                      — Burp, Semgrep, Trivy workflow
 
-🛠️ Engineering/                 — "Как я работаю?"
+ Engineering/                 — "Как я работаю?"
 ├── architecture-reviews/       — Шаблоны security review для типовых компонентов
 ├── architecture-patterns/      — Паттерны: Auth, Secrets, Encryption, API
 ├── threat-models/              — Готовые Threat Models для типовых систем
@@ -55,7 +55,7 @@
 ├── patterns/                   — Повторяемые безопасные решения
 └── checklists/                 — Быстрые чек-листы для ежедневной работы
 
-🎯 Experience/                  — "Что я сделал?"
+ Experience/                  — "Что я сделал?"
 ├── labs/                       — PortSwigger, Juice Shop, DVWA, HTB
 ├── writeups/                   — Разбор лабораторных и CVE
 ├── incidents/                  — Реальные инциденты и postmortems
@@ -64,7 +64,7 @@
 ├── lessons-learned/            — Выводы из каждого проекта и инцидента
 └── bug-bounty/                 — Находки, методология, подходы
 
-🧠 Security Thinking/           — "Как я думаю?"
+ Security Thinking/           — "Как я думаю?"
 ├── mental-models/              — Фреймворки мышления (Interpreters, Attack Surface)
 ├── risk-assessment/            — CVE vs Risk, контекст, reachability
 ├── trade-offs/                 — Инженерные компромиссы (JWT vs Session и т.д.)
@@ -77,7 +77,7 @@
 ```
 ---
 
-## 📈 Прогресс
+##  Прогресс
 
 ```
 OWASP Top 10:          ████████████████████ 85% (11/13)
@@ -99,10 +99,10 @@ Security Thinking:     ████████░░░░░░░░░░░
 
 | Слой | Назначение | Примеры |
 |------|-----------|---------|
-| 📚 Knowledge | Теория и справочная информация | "Как работает SQL Injection" |
-| 🛠️ Engineering | Практические сценарии и шаблоны | "Как провести Security Review" |
-| 🎯 Experience | Выполненные работы и опыт | "Как я взломал Juice Shop" |
-| 🚀 Career | Развитие и подготовка | "Ответы на вопросы интервью" |
-| 🧠 Security Thinking | Мышление и анализ | "Почему BAC сложнее XSS" |
+|  Knowledge | Теория и справочная информация | "Как работает SQL Injection" |
+|  Engineering | Практические сценарии и шаблоны | "Как провести Security Review" |
+|  Experience | Выполненные работы и опыт | "Как я взломал Juice Shop" |
+|  Career | Развитие и подготовка | "Ответы на вопросы интервью" |
+|  Security Thinking | Мышление и анализ | "Почему BAC сложнее XSS" |
 
 ---

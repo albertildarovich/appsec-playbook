@@ -114,10 +114,10 @@ Metrics:
 ### Пример результата
 
 ```
-Governance:   3/4 ✅
-Process:     2/4 📝
-Tools:       3/4 ✅
-Metrics:     1/4 ❌
+Governance:   3/4 [OK]
+Process:     2/4 
+Tools:       3/4 [OK]
+Metrics:     1/4 [NO]
 
 Overall: Level 2 — Defined
 Next step: Добавить метрики и dashboard

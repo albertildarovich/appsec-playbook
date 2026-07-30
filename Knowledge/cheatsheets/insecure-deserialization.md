@@ -88,15 +88,15 @@ grep -rn "@class\|@type\|_type\|typeref\|enableDefaultTyping" src/ --include="*.
 ### Java
 
 ```java
-// ❌ ОПАСНО — десериализация без проверки
+// [NO] ОПАСНО — десериализация без проверки
 ObjectInputStream in = new ObjectInputStream(request.getInputStream());
 Object obj = in.readObject();
 
-// ✅ БЕЗОПАСНО — JSON с известным типом
+// [OK] БЕЗОПАСНО — JSON с известным типом
 ObjectMapper mapper = new ObjectMapper();
 User user = mapper.readValue(json, User.class);
 
-// ✅ ДОПОЛНИТЕЛЬНАЯ ЗАЩИТА — LookAheadObjectInputStream
+// [OK] ДОПОЛНИТЕЛЬНАЯ ЗАЩИТА — LookAheadObjectInputStream
 public class SafeObjectInputStream extends ObjectInputStream {
     private final Set<String> ALLOWED_CLASSES = Set.of(
         "com.app.User", "com.app.Order"
@@ -115,28 +115,28 @@ public class SafeObjectInputStream extends ObjectInputStream {
 ### Python
 
 ```python
-# ❌ ОПАСНО — pickle с пользовательскими данными
+# [NO] ОПАСНО — pickle с пользовательскими данными
 import pickle
 data = pickle.loads(request.body)  # RCE
 
-# ✅ БЕЗОПАСНО — JSON
+# [OK] БЕЗОПАСНО — JSON
 import json
 data = json.loads(request.body)
 
-# ⚠️ ЕСЛИ PICKLE НЕОБХОДИМ — safe unpickle
+# [WARN] ЕСЛИ PICKLE НЕОБХОДИМ — safe unpickle
 # Но это сложно, лучше не использовать pickle с данными от пользователя
 ```
 
 ### PHP
 
 ```php
-// ❌ ОПАСНО — unserialize с пользовательскими данными
+// [NO] ОПАСНО — unserialize с пользовательскими данными
 $user = unserialize($_POST['data']);  // RCE через __wakeup / __destruct
 
-// ✅ БЕЗОПАСНО — JSON
+// [OK] БЕЗОПАСНО — JSON
 $user = json_decode($_POST['data']);
 
-// ✅ Чуть безопаснее — разрешённые классы (PHP 7+)
+// [OK] Чуть безопаснее — разрешённые классы (PHP 7+)
 $user = unserialize($data, ['allowed_classes' => ['User', 'Order']]);
 // Внимание: это НЕ гарантирует безопасность, если классы содержат опасные методы
 ```
@@ -144,49 +144,49 @@ $user = unserialize($data, ['allowed_classes' => ['User', 'Order']]);
 ### Node.js
 
 ```javascript
-// ❌ ОПАСНО — node-serialize
+// [NO] ОПАСНО — node-serialize
 const serialize = require('node-serialize');
 const obj = serialize.unserialize(req.body.data);  // RCE
 
-// ❌ ОПАСНО — unsafe JSON.parse с eval
+// [NO] ОПАСНО — unsafe JSON.parse с eval
 const obj = eval('(' + req.body.data + ')');  // RCE
 
-// ✅ БЕЗОПАСНО — JSON.parse
+// [OK] БЕЗОПАСНО — JSON.parse
 const obj = JSON.parse(req.body.data);
 ```
 
 ### Ruby
 
 ```ruby
-# ❌ ОПАСНО — Marshal.load
+# [NO] ОПАСНО — Marshal.load
 data = Marshal.load(params[:data])  # RCE
 
-# ❌ ОПАСНО — YAML.load (может создавать объекты)
+# [NO] ОПАСНО — YAML.load (может создавать объекты)
 data = YAML.load(params[:data])
 
-# ✅ БЕЗОПАСНО — JSON.parse
+# [OK] БЕЗОПАСНО — JSON.parse
 require 'json'
 data = JSON.parse(params[:data])
 
-# ⚠️ Чуть безопаснее — YAML.safe_load
+# [WARN] Чуть безопаснее — YAML.safe_load
 data = YAML.safe_load(params[:data])  # не создаёт произвольные объекты
 ```
 
 ### .NET (C#)
 
 ```csharp
-// ❌ ОПАСНО — BinaryFormatter (Microsoft не рекомендует)
+// [NO] ОПАСНО — BinaryFormatter (Microsoft не рекомендует)
 BinaryFormatter formatter = new BinaryFormatter();
 object obj = formatter.Deserialize(stream);
 
-// ❌ ОПАСНО — SoapFormatter / LosFormatter
+// [NO] ОПАСНО — SoapFormatter / LosFormatter
 SoapFormatter soap = new SoapFormatter();
 object obj = soap.Deserialize(stream);
 
-// ✅ БЕЗОПАСНО — JSON
+// [OK] БЕЗОПАСНО — JSON
 var user = JsonSerializer.Deserialize<User>(jsonString);
 
-// ✅ БЕЗОПАСНО — XML (без DTD)
+// [OK] БЕЗОПАСНО — XML (без DTD)
 var serializer = new XmlSerializer(typeof(User));
 var user = (User)serializer.Deserialize(reader);
 ```
@@ -194,14 +194,14 @@ var user = (User)serializer.Deserialize(reader);
 ### Go (безопасно)
 
 ```go
-// ✅ БЕЗОПАСНО — json.Unmarshal
+// [OK] БЕЗОПАСНО — json.Unmarshal
 var user User
 err := json.Unmarshal(jsonData, &user)
 
-// ✅ БЕЗОПАСНО — encoding/gob для внутренних протоколов
+// [OK] БЕЗОПАСНО — encoding/gob для внутренних протоколов
 // goob не предназначен для недоверенных данных, но не выполняет произвольный код
 
-// ❌ ОСТОРОЖНО — рефлексия с типом от пользователя
+// [NO] ОСТОРОЖНО — рефлексия с типом от пользователя
 var user = reflect.New(userType).Interface()
 json.Unmarshal(data, user)  // если userType от пользователя — риск
 ```
@@ -209,10 +209,10 @@ json.Unmarshal(data, user)  // если userType от пользователя �
 ### Rust (безопасно)
 
 ```rust
-// ✅ БЕЗОПАСНО — serde_json
+// [OK] БЕЗОПАСНО — serde_json
 let user: User = serde_json::from_str(json_data)?;
 
-// ✅ БЕЗОПАСНО — serde с Protobuf / MessagePack и т.д.
+// [OK] БЕЗОПАСНО — serde с Protobuf / MessagePack и т.д.
 // Все serde десериализаторы работают с известными типами
 ```
 
@@ -261,13 +261,13 @@ curl -X POST "https://target.com/api/data" \
 ## Когда JSON становится опасным
 
 ```java
-// ❌ ОПАСНО — enableDefaultTyping
+// [NO] ОПАСНО — enableDefaultTyping
 ObjectMapper mapper = new ObjectMapper();
 mapper.enableDefaultTyping();  // разрешает @class
 User user = mapper.readValue(json, User.class);
 // Злоумышленник может подставить любой класс через "@class": "..."
 
-// ✅ БЕЗОПАСНО — без default typing
+// [OK] БЕЗОПАСНО — без default typing
 ObjectMapper mapper = new ObjectMapper();
 User user = mapper.readValue(json, User.class);
 // @class игнорируется, создаётся только User

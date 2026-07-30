@@ -30,16 +30,16 @@
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Mental Models](./mental-models/) | Фреймворки мышления: Interpreters, Attack Surface, Trust Boundaries | 📝 |
-| [Risk Assessment](./risk-assessment/) | CVE vs Risk, контекст, compensating controls, reachability | 📝 |
-| [Trade-offs](./trade-offs/) | Инженерные компромиссы: когда что выбирать | ❌ |
-| [Decision Framework](./decision-framework/) | Как принимать решения: алгоритмы, checklists | ❌ |
-| [Architecture Thinking](./architecture-thinking/) | Архитектурное мышление: Abuse Cases, Never Trust the Client | ✅ |
-| [Security Smells](./security-smells/) | Паттерны, которые должны настораживать: smells в коде, архитектуре, процессе | ❌ |
-| [Lessons Learned](./lessons-learned/) | Что пошло не так и почему | 📝 |
-| [Interview Mistakes](./interview-mistakes/) | Ошибки на собеседованиях и как их избежать | ❌ |
-| [Anti-patterns](./anti-patterns/) | Что НЕ надо делать: типовые ошибки AppSec-инженеров | ❌ |
-| [Analysis](./analysis/) | Анализ и рефлексия по конкретным темам | 📝 |
+| [Mental Models](./mental-models/) | Фреймворки мышления: Interpreters, Attack Surface, Trust Boundaries |  |
+| [Risk Assessment](./risk-assessment/) | CVE vs Risk, контекст, compensating controls, reachability |  |
+| [Trade-offs](./trade-offs/) | Инженерные компромиссы: когда что выбирать | [NO] |
+| [Decision Framework](./decision-framework/) | Как принимать решения: алгоритмы, checklists | [NO] |
+| [Architecture Thinking](./architecture-thinking/) | Архитектурное мышление: Abuse Cases, Never Trust the Client | [OK] |
+| [Security Smells](./security-smells/) | Паттерны, которые должны настораживать: smells в коде, архитектуре, процессе | [NO] |
+| [Lessons Learned](./lessons-learned/) | Что пошло не так и почему |  |
+| [Interview Mistakes](./interview-mistakes/) | Ошибки на собеседованиях и как их избежать | [NO] |
+| [Anti-patterns](./anti-patterns/) | Что НЕ надо делать: типовые ошибки AppSec-инженеров | [NO] |
+| [Analysis](./analysis/) | Анализ и рефлексия по конкретным темам |  |
 
 ---
 
@@ -159,4 +159,4 @@
 
 ---
 
-> 🧠 **Главное:** этот раздел никогда не будет "завершён". Он растёт вместе с опытом. Каждый новый инцидент, каждое новое решение — это новая запись здесь.
+>  **Главное:** этот раздел никогда не будет "завершён". Он растёт вместе с опытом. Каждый новый инцидент, каждое новое решение — это новая запись здесь.
