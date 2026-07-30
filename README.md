@@ -1,4 +1,4 @@
-# AppSec Playbook
+# AppSec Playbook | Engineering Portfolio
 
 > Инженерный репозиторий AppSec / DevSecOps инженера: база знаний, практические
 > плейбуки, портфолио выполненных работ и аналитическое мышление.
