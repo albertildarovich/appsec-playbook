@@ -29,19 +29,19 @@ Identification & Auth ███████████████████�
 === OWASP Top 10 (TODO) ===
 Broken Access Control ████████████████████ 100% [OK]
 Cryptographic Failures ████████████████████ 100% [OK]
-Software Integrity    ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-Logging & Monitoring  ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Software Integrity    ████████████████████ 100% [OK]
+Logging & Monitoring  ████████████████████ 100% [OK]
 
 === API Security ===
-REST / GraphQL        ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-BOLA / Mass Assign.   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-JWT / OAuth           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-API Security Top 10   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+REST / GraphQL        ████████████░░░░░░░░░░  60% 
+BOLA / Mass Assign.   ██████████████░░░░░░░░  70% 
+JWT / OAuth           ████████████████████ 100% [OK]
+API Security Top 10   ████████████░░░░░░░░░░  60% 
 
 === Secure Code Review ===
-Methodology           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-Java / Python / Go    ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-SAST (Semgrep/CodeQL) ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Methodology           ████░░░░░░░░░░░░░░░░░░  20% 
+Java / Python / Go    ██████░░░░░░░░░░░░░░░░  30%  (Go: sql-injection, Python: 0, Java: 0)
+SAST (Semgrep/CodeQL) ████████████░░░░░░░░░░  60%  (Semgrep + taint rules)
 
 === Threat Modeling ===
 STRIDE                 ████████████████████ 100% [OK]
@@ -49,20 +49,21 @@ DFD                    ░░░░░░░░░░░░░░░░░░░
 Attack Trees           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 
 === Secure SDLC & DevSecOps ===
-Secure SDLC           ██████░░░░░░░░░░░░░░  30% 
-CI/CD Security        ██████░░░░░░░░░░░░░░  30% 
-BSIMM / SAMM / SSDF   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Secure SDLC           ████████████████████ 100% [OK]
+CI/CD Security        ████████████████░░░░░  80%  (module-17 pipeline + devsecops)
+BSIMM / SAMM / SSDF   ████████████████░░░░░  80%  (теория есть, практики нет)
 
 === Supply Chain ===
 SBOM / SCA            ████████████████████ 100% [OK]
 Cosign / Sigstore     ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-CI/CD Pipeline Sec.   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+CI/CD Pipeline Sec.   ██████░░░░░░░░░░░░░░░░  30%  (devsecops.md + module-17)
 
 === Infrastructure & Cloud ===
-Kubernetes            ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-Linux                 ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Kubernetes            ███████████████████░  95% [OK]
+Linux                 ████████████████░░░░░  80% 
 Cloud (AWS)           ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 IaC                   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
+Docker                ████████████████████ 100% [OK]
 
 === Soft Skills & Process ===
 Communication         ░░░░░░░░░░░░░░░░░░░░   0% [NO]
@@ -97,25 +98,25 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 - [x] Identification & Authentication Failures (A07)
 - [x] Broken Access Control (A01)
 - [x] Cryptographic Failures (A02)
-- [ ] Software & Data Integrity Failures (A08)
-- [ ] Logging & Monitoring Failures (A09)
+- [x] Software & Data Integrity Failures (A08)
+- [x] Logging & Monitoring Failures (A09)
 
 ### Tier 2: API Security
-- [ ] REST API Security
+- [x] REST API Security (api-security/README.md)
 - [ ] GraphQL Security
-- [ ] BOLA / Mass Assignment
-- [ ] JWT / OAuth
-- [ ] API Gateway
+- [x] BOLA / Mass Assignment (authorization/bola.md)
+- [x] JWT / OAuth (jwt.md, oauth2-oidc.md)
+- [x] API Gateway (Engineering/architecture-reviews/api.gateway.md)
 - [ ] Rate Limiting
-- [ ] OWASP API Security Top 10
+- [x] OWASP API Security Top 10 (api-security/README.md)
 
 ### Tier 3: Secure Code Review
 - [ ] Code Review Methodology
 - [ ] Java — patterns & anti-patterns
 - [ ] Python — patterns & anti-patterns
-- [ ] Go — patterns & anti-patterns
+- [x] Go — patterns & anti-patterns (go-security/sql-injection.md)
 - [ ] Node.js — patterns & anti-patterns
-- [ ] SAST (Semgrep, CodeQL)
+- [x] SAST (Semgrep, CodeQL) — module-15 + taint rules (sqli, cmdi, path-traversal, open-redirect)
 
 ### Tier 4: Threat Modeling
 - [x] **STRIDE** — методология поиска угроз (Spoofing, Tampering, Repudiation, Info Disclosure, DoS, EoP)
@@ -124,22 +125,23 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 - [ ] Практика: нарисовать TM для реального сервиса
 
 ### Tier 5: Secure SDLC & DevSecOps
-- [ ] Secure SDLC (фазы, security gates)
-- [ ] CI/CD Security (Pipeline, SAST/DAST/SCA)
-- [ ] BSIMM
-- [ ] OWASP SAMM
-- [ ] NIST SSDF
+- [x] Secure SDLC (фазы, security gates) — 10 файлов
+- [x] CI/CD Security (Pipeline, SAST/DAST/SCA) — devsecops.md + module-17
+- [x] BSIMM (конспект)
+- [x] OWASP SAMM (конспект)
+- [x] NIST SSDF (конспект)
 
 ### Tier 6: Supply Chain Security
 - [x] SBOM / SCA
 - [ ] Cosign / Sigstore
-- [ ] CI/CD Pipeline Security (Artifact Integrity)
+- [x] CI/CD Pipeline Security (Artifact Integrity) — devsecops.md + module-17
 
 ### Tier 7: Infrastructure & Cloud
-- [ ] Kubernetes Security
-- [ ] Linux Security
+- [x] Kubernetes Security (6 файлов: RBAC, Pod Security, Network Policies, CIS Benchmark, Runtime Security, Security Context)
+- [x] Linux Security (linux/README.md)
 - [ ] Cloud Security (AWS)
 - [ ] IaC Security (Terraform)
+- [x] Docker Security (docker-security/README.md, 462 строки)
 
 ### Tier 8: Soft Skills & Process
 - [ ] Communication (как говорить с разработчиками и бизнесом)
