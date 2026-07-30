@@ -1,150 +1,201 @@
-# AppSec Playbook | Engineering Portfolio
+# Application Security Playbook
 
-> Инженерный репозиторий AppSec / DevSecOps инженера: база знаний, практические
-> плейбуки, портфолио выполненных работ и аналитическое мышление.
-> 
-> **Цель репозитория** — показать, как я мыслю, работаю и принимаю решения в области
-> безопасности приложений, а не просто перечислить технологии в резюме.
+> **Engineering Portfolio of an Application Security / DevSecOps Engineer**
 
----
+Практическое инженерное портфолио, демонстрирующее мой подход к Application Security, DevSecOps и Secure SDLC.
 
-## Компетенции
+В репозитории собраны реальные инженерные артефакты: архитектурные обзоры, threat models, Security Code Review, DevSecOps pipeline, лабораторные проекты, ADR, практические плейбуки и разборы инцидентов.
 
-Ниже — карта компетенций с прямыми ссылками на соответствующие разделы репозитория.
-Каждая ссылка ведёт к документу, который можно открыть и оценить глубину проработки.
-
-| Компетенция | Где в репозитории |
-|-------------|-------------------|
-| **Secure SDLC** | [10 документов: фазы, gates, maturity, security champions, метрики](Knowledge/secure-sdlc/) |
-| **Threat Modeling (STRIDE)** | [Методология](Knowledge/threat-modeling/stride.md) + [практическая модель Juice Shop](Experience/labs/juice-shop/threat-model.md) |
-| **SAST/SCA/Secret Scanning** | [DevSecOps-стек](Knowledge/devsecops/devsecops.md) + [кастомные Semgrep-правила](Experience/labs/juice-shop/module-15-semgrep/rules/) |
-| **CI/CD Pipeline as Code** | [Production-grade GitLab CI: include + extends + gate policy](Experience/labs/juice-shop/module-17-ssdlc/report.md) |
-| **OWASP Top 10 + ASVS** | [Все 10 категорий](Knowledge/owasp-top10/) + [ASVS mapping (14 находок на 12 контролей)](Experience/labs/juice-shop/module-16-security-review/asvs-mapping.md) |
-| **Kubernetes Hardening** | [6 документов: RBAC, Pod Security, Network Policies, CIS Benchmark, Runtime Security, Security Context](Knowledge/kubernetes/) |
-| **Docker Hardening** | [CIS Benchmark + hardened Dockerfile + Trivy + Falco-правила](Knowledge/docker-security/README.md) |
-| **Code Review** | [Чек-лист](Engineering/code-review/review-checklist.md) + [React](Engineering/code-review/react.md) + [Go (SQL injection)](Knowledge/go-security/sql-injection.md) |
-| **API Security** | [Gateway security review (STRIDE + конфигурация)](Engineering/architecture-reviews/api-gateway.md) + [JWT](Knowledge/authentication/jwt.md) + [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md) |
-| **Security Review** | [Playbook: полный процесс](Engineering/playbooks/security-review.md) + [Payments-сервис](Engineering/architecture-reviews/payments.md) |
-| **Безопасный дизайн** | [12 принципов](Knowledge/secure-design/) + [архитектурное мышление](Security%20Thinking/architecture-thinking/secure-design-principles.md) |
-| **Инциденты и Case Studies** | [Auth0 JWT CVE](Experience/case-studies/case02-auth0-jwt.md) + [Capital One SSRF](Experience/case-studies/case03-capital-one-ssrf.md) |
+Главная цель репозитория — показать **не только знания технологий, но и инженерное мышление, процесс принятия решений и подход к построению безопасной разработки.**
 
 ---
 
-## Инструменты
+# Highlights
 
-| Категория | Инструменты |
-|-----------|-------------|
-| **SAST** | Semgrep (public + custom taint rules: SQLi, command injection, path traversal, open redirect) |
-| **SCA** | Trivy, npm audit |
-| **Secret Scanning** | Gitleaks |
-| **Container Scanning** | Trivy (образы + Dockerfile misconfig) |
-| **IaC Scanning** | Checkov, tfsec (запланировано) |
-| **DAST** | OWASP ZAP (baseline + full scan), Nuclei |
-| **Runtime Security** | Falco (eBPF, custom rules) |
-| **Kubernetes** | kube-bench, CIS Benchmark |
-| **Ручное тестирование** | Burp Suite Professional |
-| **Pipeline** | GitLab CI (include, extends, SARIF), GitHub Actions |
+- 100+ инженерных документов
+- 15 тематических разделов
+- 17 лабораторных модулей OWASP Juice Shop
+- Production-grade Secure SDLC Pipeline (GitLab CI)
+- Security Architecture Reviews
+- Threat Modeling (STRIDE)
+- Security Code Review
+- DevSecOps Playbooks
+- Case Studies реальных атак
+- Open Source
 
 ---
 
-## Избранные артефакты
+# Core Competencies
 
-Чтобы не копаться во всех 100+ файлах — вот 7 документов, которые лучше всего
-показывают инженерный уровень:
-
-| # | Документ | Что внутри |
-|---|----------|------------|
-| 1 | [SSDLC Pipeline для Juice Shop](Experience/labs/juice-shop/module-17-ssdlc/report.md) | 710 строк: production-grade GitLab CI (include + extends), gate policy, 25 security requirements в Gherkin, план внедрения на 4 недели |
-| 2 | [Security Review: API Gateway](Engineering/architecture-reviews/api-gateway.md) | 238 строк: полный STRIDE (24 угрозы), безопасный паттерн из 9 шагов, чек-лист на 50+ пунктов, 10 вопросов к команде |
-| 3 | [Docker Security](Knowledge/docker-security/README.md) | 462 строки: hardened Dockerfile, CIS Benchmark v1.6, Trivy-интеграция, Falco-правила, Docker BuildKit secrets |
-| 4 | [JWT Security](Knowledge/authentication/jwt.md) | Структура, алгоритмы, 5 уязвимостей (alg:none, RS/HS confusion, kid injection, jku/x5u, weak secret), чек-лист валидации |
-| 5 | [OAuth 2.0 + OIDC](Knowledge/authentication/oauth2-oidc.md) | Grant types, PKCE, redirect_uri validation, state-параметр, BFF-паттерн, ID Token validation |
-| 6 | [ASVS Mapping](Experience/labs/juice-shop/module-16-security-review/asvs-mapping.md) | 14 находок из Juice Shop распределены по 12 контролам ASVS v4.0 с обоснованием |
-| 7 | [Case Study: Capital One SSRF](Experience/case-studies/case03-capital-one-ssrf.md) | Разбор атаки: SSRF -> metadata -> IAM credentials -> S3 exfiltration. Архитектурные ошибки и выводы |
+| Competency | Evidence |
+|------------|----------|
+| Secure SDLC | [Security Gates, BSIMM, SAMM, SSDF, Champions, Metrics](Knowledge/secure-sdlc/) |
+| DevSecOps | [SAST, DAST, SCA, Secret Detection, CI/CD Security](Knowledge/devsecops/devsecops.md) |
+| Threat Modeling | [STRIDE](Knowledge/threat-modeling/stride.md), [Juice Shop Threat Model](Experience/labs/juice-shop/threat-model.md) |
+| Architecture Review | [API Gateway Review](Engineering/architecture-reviews/api-gateway.md), [Payments Review](Engineering/architecture-reviews/payments.md) |
+| Security Code Review | [Checklist](Engineering/code-review/review-checklist.md), React, Go |
+| OWASP Top 10 | [All Categories A01–A10](Knowledge/owasp-top10/) |
+| API Security | JWT, OAuth2/OIDC, API Gateway, OWASP API Security |
+| Kubernetes Security | RBAC, Pod Security, Network Policies, Runtime Security |
+| Docker Security | CIS Benchmark, Hardened Dockerfile, Trivy, Falco |
+| Authentication & Authorization | JWT, OAuth2/OIDC, RBAC, BOLA, IDOR |
+| Secure Design | Security Principles, Architecture Thinking |
+| Security Reviews | Architecture Reviews, Playbooks, ADR |
 
 ---
 
-## Структура репозитория
+# Featured Engineering Artifacts
+
+## Production-grade Secure SDLC Pipeline
+
+**Demonstrates**
+
+- GitLab CI
+- Security Gates
+- SAST
+- SCA
+- Secret Detection
+- DAST
+- Gherkin Security Requirements
+
+➡️ [Open document](Experience/labs/juice-shop/module-17-ssdlc/report.md)
+
+---
+
+## Security Architecture Review
+
+API Gateway security assessment using STRIDE.
+
+Includes
+
+- 24 identified threats
+- mitigation strategy
+- architecture recommendations
+- review checklist
+
+➡️ [Open document](Engineering/architecture-reviews/api-gateway.md)
+
+---
+
+## Docker Security Guide
+
+Practical Docker hardening.
+
+Includes
+
+- CIS Benchmark
+- Hardened Dockerfile
+- Trivy
+- Falco
+- BuildKit Secrets
+
+➡️ [Open document](Knowledge/docker-security/README.md)
+
+---
+
+## Authentication & Authorization
+
+Practical documentation covering
+
+- JWT
+- OAuth 2.0
+- OIDC
+- common vulnerabilities
+- validation checklist
+
+➡️ [JWT](Knowledge/authentication/jwt.md)
+
+➡️ [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md)
+
+---
+
+## Security Review Playbook
+
+Complete methodology for conducting security reviews.
+
+Includes
+
+- preparation
+- architecture analysis
+- threat modeling
+- reporting
+- recommendations
+
+➡️ [Open document](Engineering/playbooks/security-review.md)
+
+---
+
+## Case Studies
+
+Analysis of real-world incidents.
+
+- Capital One SSRF
+- Auth0 JWT vulnerability
+- Juice Shop Authentication Bypass
+
+---
+
+# Tooling
+
+| Category | Stack |
+|-----------|------|
+| SAST | Semgrep (public + custom rules) |
+| DAST | OWASP ZAP, Nuclei |
+| SCA | Trivy, npm audit |
+| Secret Detection | Gitleaks |
+| Container Security | Trivy |
+| Runtime Security | Falco |
+| IaC | Checkov, tfsec |
+| Kubernetes | kube-bench, CIS Benchmark |
+| Manual Testing | Burp Suite Professional |
+| CI/CD | GitLab CI, GitHub Actions |
+
+---
+
+# Repository Structure
 
 ```
-appsec-playbook/
-|
-+-- Knowledge/           "Как это работает" — теория и справочники
-|   +-- owasp-top10/         10/10 категорий (A01–A10)
-|   +-- web-security/        11 уязвимостей (SQLi, XSS, CSRF, SSRF, XXE, ...)
-|   +-- api-security/        REST, API Gateway, OWASP API Top 10
-|   +-- authentication/      JWT, OAuth 2.0, OIDC
-|   +-- authorization/       BOLA, IDOR, BAC, Privilege Escalation
-|   +-- secure-design/       12 принципов (Least Privilege, Defense in Depth, ...)
-|   +-- secure-sdlc/         10 документов (SDLC, BSIMM, SAMM, SSDF, Champions, Gates, ...)
-|   +-- threat-modeling/     STRIDE, Threat Modeling
-|   +-- devsecops/           SAST, DAST, SCA, Secret Scanning
-|   +-- cryptography/        Cryptographic Failures (A02)
-|   +-- kubernetes/          6 документов (RBAC, Pod Security, Network Policies, CIS, Runtime)
-|   +-- docker-security/     CIS Benchmark, hardened Dockerfile, Trivy
-|   +-- go-security/         SQL injection в Go, Semgrep-правила
-|   +-- linux/               AppSec-ориентированная шпаргалка (~150 строк)
-|   +-- fundamentals/        Security Principles, Interpreters, NIST CSF
-|   +-- cheatsheets/         14 быстрых справок
-|
-+-- Engineering/         "Как я работаю" — плейбуки и шаблоны
-|   +-- architecture-reviews/   API Gateway, Payments (STRIDE + чек-листы)
-|   +-- code-review/            Чек-лист, React, Go
-|   +-- playbooks/              Security Review (полный процесс)
-|   +-- adr/                    ADR-001 (Keycloak), ADR-002 (Semgrep)
-|   +-- checklists/             API Review, Threat Modeling
-|
-+-- Experience/          "Что я сделал" — портфолио
-|   +-- labs/juice-shop/       17 модулей (от recon до SSDLC pipeline)
-|   +-- case-studies/          Auth0 JWT CVE, Capital One SSRF, Juice Shop auth bypass
-|   +-- mini-projects/         Chrome Security Auditor, VSCode Security Auditor
-|
-+-- Security Thinking/    "Как я думаю" — анализ и trade-offs
-    +-- analysis/              Broken Access Control, JWT vs Sessions
-    +-- architecture-thinking/ Secure Design Principles (практическое применение)
-    +-- trade-offs/            JWT vs Session
+Knowledge/
+    How security works
 
-15 директорий   |   100+ файлов   |   10 000+ строк
+Engineering/
+    How I build security
+
+Experience/
+    What I implemented
+
+Security Thinking/
+    How I analyze security
 ```
 
 ---
 
-## Прогресс по ключевым направлениям
+# Engineering Principles
 
-Цифры отражают реальное состояние репозитория, а не планы. Подробный трекер
-с 50+ темами — в [roadmap](Knowledge/roadmap/README.md).
+This repository follows several principles:
 
-```
-OWASP Top 10         100% (10/10)   Все категории A01–A10 закрыты
-Web Security         100% (11/11)   SQLi, XSS, CSRF, SSRF, XXE, Command Injection,
-                                    Insecure Deserialization, Security Misconfiguration,
-                                    Vulnerable Components, Insecure Design, SSRF
-Secure SDLC          100% (10/10)   От SDLC-фаз до AppSec Maturity Model
-Kubernetes            95%           RBAC, Pod Security, Network Policies, CIS,
-                                    Runtime Security, Security Context
-Docker               100%           CIS Benchmark, Trivy, Falco, hardened Dockerfile
-Authentication        85%           JWT, OAuth2/OIDC, Auth Failures
-Authorization         70%           BOLA, IDOR, BAC, Privilege Escalation
-DevSecOps             70%           SAST/DAST/SCA + CI/CD pipeline
-Cryptography          25%           Cryptographic Failures (A02), нужно AES/RSA/ECC/TLS
-Architecture Reviews  25%           API Gateway (238 строк), Payments
-Code Review           30%           Чек-лист, React, Go (SQL injection)
-Security Thinking     40%           Trade-offs, Analysis, Architecture Thinking
-Cloud                  0%           Запланировано (AWS IAM, KMS, GuardDuty)
-Python Security        0%           Запланировано (Flask/Django/FastAPI)
-```
+- Security should support development, not slow it down.
+- Automation is preferred over manual processes.
+- Threats are analyzed before selecting tools.
+- Security controls should be reproducible.
+- Engineering decisions should be documented.
+- Every recommendation should have technical justification.
 
 ---
 
-## Контакты
+# Why this repository exists
 
-| Канал | Ссылка |
-|--------|--------|
-| GitHub | [github.com/albertildarovich](https://github.com/albertildarovich) |
+Most security repositories focus on explaining technologies.
+
+This repository focuses on demonstrating engineering practice.
+
+Instead of isolated notes, it contains complete engineering artifacts that can be used as references during architecture reviews, Secure SDLC implementation, DevSecOps adoption and Application Security assessments.
 
 ---
 
-## Лицензия
+# About
 
-MIT. Используйте, форкайте, адаптируйте. Буду рад, если этот репозиторий поможет
-ещё кому-то структурировать знания по Application Security.
+Repository maintained by an Application Security / DevSecOps Engineer.
+
+GitHub:
+https://github.com/albertildarovich
