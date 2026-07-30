@@ -1,24 +1,10 @@
-# WeBBankir AppSec Engineer -- Gap Analysis
+# Gap Analysis
 
-> Оценка репозитория `appsec-playbook` на соответствие требованиям вакансии WeBBankir.
-> Позиция: нанимающий менеджер / технический лид.
-
----
-
-## Резюме
-
-| Аспект | Оценка |
-|--------|--------|
-| Общее впечатление | Сильная концепция, хорошая структура, видна инженерная культура |
-| OWASP Top 10 + Web Security | Закрыто на 100% |
-| Kubernetes + Docker | Закрыто хорошо (12 файлов) |
-| DevSecOps / CI/CD | Закрыто (module-17, SSDLC pipeline) |
-| Критичные пробелы под вакансию | 6 позиций (Python, SOAP/XML-RPC, Cloud, Code Review, Crypto, Roadmap) |
-| Рекомендуемое время на закрытие | ~15-18 рабочих дней |
+> Оценка репозитория `appsec-playbook` на соответствие требованиям.
 
 ---
 
-## Критичные пробелы относительно требований вакансии
+## Критичные пробелы
 
 ### 1. Python -- отсутствует полностью
 
@@ -140,8 +126,6 @@ Knowledge/cryptography/
 └── random.md            -- /dev/urandom vs /dev/random, CSPRNG в Go/Python
 ```
 
-**Трудозатраты:** ~3 дня
-
 ---
 
 ### 6. Roadmap рассинхронизирован с реальностью
@@ -160,11 +144,6 @@ Knowledge/cryptography/
 | SAST (Semgrep/CodeQL) | 0% [NO] | module-15 + custom rules | Факт: 60% |
 | Secure SDLC | 30% | 10 файлов создано | Факт: 100% |
 | SBOM / SCA | 100% [OK] | Верно | -- |
-
-**Что нужно:**
-Обновить все прогресс-бары в `Knowledge/roadmap/README.md` до актуальных значений.
-
-**Трудозатраты:** ~0.5 дня
 
 ---
 
@@ -185,8 +164,6 @@ Knowledge/cryptography/
 | architecture-thinking/ | Создан (secure-design-principles) |
 | analysis/ | Создан (broken-access-control, jwt-vs-sessions) |
 
-**Трудозатраты:** ~3 дня
-
 ---
 
 ### 8. Architecture Reviews -- 20% (2 документа)
@@ -195,8 +172,6 @@ Knowledge/cryptography/
 - Кредитный конвейер / скоринг
 - Личный кабинет пользователя
 - Партнёрские интеграции
-
-**Трудозатраты:** ~2 дня (по 0.5 дня на документ)
 
 ---
 
@@ -211,8 +186,6 @@ Knowledge/cryptography/
 | Writeups | Пусто |
 | Incidents | Пусто |
 
-**Трудозатраты:** внешние достижения накапливаются со временем, не быстро
-
 ---
 
 ### 10. BSIMM/SAMM -- теория без практического применения
@@ -224,8 +197,6 @@ Knowledge/cryptography/
 Experience/mini-projects/samm-assessment/
 └── report.md    -- самооценка по OWASP SAMM v2, конкретные баллы, roadmap улучшения
 ```
-
-**Трудозатраты:** ~1 день
 
 ---
 
@@ -260,8 +231,6 @@ Experience/mini-projects/samm-assessment/
 | 8 | Architecture Reviews (кредитный конвейер, ЛК, партнёры) | P2 | 2 |
 | 9 | SAMM self-assessment | P3 | 1 |
 | 10 | External experience (PortSwigger, HTB, Bug Bounty) | P3 | ongoing |
-
-**Всего:** ~18 дней на P0-P2
 
 ---
 
