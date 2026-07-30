@@ -65,9 +65,6 @@ Cloud (AWS)           ░░░░░░░░░░░░░░░░░░░�
 IaC                   ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 Docker                ████████████████████ 100% [OK]
 
-=== Soft Skills & Process ===
-Communication         ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-Interview Prep        ░░░░░░░░░░░░░░░░░░░░   0% [NO]
 ```
 
 **Легенда:** [OK] Готово —  В работе — [NO] Не начато
@@ -149,16 +146,10 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-##  Interview Progress
-
-| Компания | Статус | Дата | Заметки |
-|----------|--------|------|---------|
-| — | — | — | — |
-
----
-
 ##  Books
 
+- [x] Alice and Bob Learn Secure Coding
+- [x] Secure By Design by Daniel Deogun, Dan Bergh Johnsson, Daniel Sawano (40%) 
 - [ ] The Web Application Hacker's Handbook
 - [ ] Threat Modeling: Designing for Security — Adam Shostack
 - [ ] The Tangled Web — Michal Zalewski
@@ -169,18 +160,8 @@ Interview Prep        ░░░░░░░░░░░░░░░░░░░�
 
 ##  Courses
 
-- [ ] SANS SEC542: Web App Penetration Testing
-- [ ] SANS SEC566: Implementing and Auditing
-- [ ] PortSwigger Web Security Academy (все лабораторные)
-- [ ] PentesterLab PRO
+- [x] PortSwigger Web Security Academy (все лабораторные)
 
----
-
-##  Certificates
-
-- [ ] OSWE (Offensive Security Web Expert)
-- [ ] Certified AppSec Practitioner (CAP)
-- [ ] GIAC Web Application Penetration Tester (GWAPT)
 
 ---
 
