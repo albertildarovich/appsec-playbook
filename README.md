@@ -31,16 +31,16 @@
 |------------|----------|
 | Secure SDLC | [Security Gates, BSIMM, SAMM, SSDF, Champions, Metrics](Knowledge/secure-sdlc/) |
 | DevSecOps | [SAST, DAST, SCA, Secret Detection, CI/CD Security](Knowledge/devsecops/devsecops.md) |
-| Threat Modeling | [STRIDE](Knowledge/threat-modeling/stride.md), [Juice Shop Threat Model](Experience/labs/juice-shop/threat-model.md) |
+| Threat Modeling | [STRIDE](Knowledge/threat-modeling/stride.md), [Juice Shop Threat Model](Experience/labs/juice-shop/threat-model.md), [Overview](Knowledge/threat-modeling/) |
 | Architecture Review | [API Gateway Review](Engineering/architecture-reviews/api-gateway.md), [Payments Review](Engineering/architecture-reviews/payments.md) |
-| Security Code Review | [Checklist](Engineering/code-review/review-checklist.md), React, Go |
+| Security Code Review | [Checklist](Engineering/code-review/review-checklist.md), [Overview](Engineering/code-review/) |
 | OWASP Top 10 | [All Categories A01–A10](Knowledge/owasp-top10/) |
-| API Security | JWT, OAuth2/OIDC, API Gateway, OWASP API Security |
-| Kubernetes Security | RBAC, Pod Security, Network Policies, Runtime Security |
-| Docker Security | CIS Benchmark, Hardened Dockerfile, Trivy, Falco |
-| Authentication & Authorization | JWT, OAuth2/OIDC, RBAC, BOLA, IDOR |
-| Secure Design | Security Principles, Architecture Thinking |
-| Security Reviews | Architecture Reviews, Playbooks, ADR |
+| API Security | [Overview](Knowledge/api-security/), JWT, OAuth2/OIDC, API Gateway, OWASP API Security |
+| Kubernetes Security | [Overview](Knowledge/kubernetes/), RBAC, Pod Security, Network Policies, Runtime Security |
+| Docker Security | [Guide](Knowledge/docker-security/README.md), CIS Benchmark, Hardened Dockerfile, Trivy, Falco |
+| Authentication & Authorization | [JWT](Knowledge/authentication/jwt.md), [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md), [Overview](Knowledge/authentication/), [Authorization](Knowledge/authorization/) |
+| Secure Design | [Security Principles](Knowledge/secure-design/), [Architecture Thinking](Security%20Thinking/architecture-thinking/secure-design-principles.md) |
+| Security Reviews | [Architecture Reviews](Engineering/architecture-reviews/), [Playbooks](Engineering/playbooks/), [ADR](Engineering/adr/) |
 
 ---
 
@@ -129,9 +129,22 @@ Includes
 
 Analysis of real-world incidents.
 
-- Capital One SSRF
-- Auth0 JWT vulnerability
-- Juice Shop Authentication Bypass
+- [Capital One SSRF](Experience/case-studies/case03-capital-one-ssrf.md)
+- [Auth0 JWT vulnerability](Experience/case-studies/case02-auth0-jwt.md)
+- [Juice Shop Authentication Bypass](Experience/case-studies/case01.md)
+
+➡️ [All case studies](Experience/case-studies/)
+
+---
+
+## Mini Projects
+
+Practical implementations.
+
+- [Chrome Security Auditor Extension](Experience/mini-projects/chrome-security-auditor/)
+- [VS Code Security Auditor Extension](Experience/mini-projects/vscode-security-auditor/)
+
+➡️ [All mini projects](Experience/mini-projects/)
 
 ---
 
@@ -155,17 +168,44 @@ Analysis of real-world incidents.
 # Repository Structure
 
 ```
-Knowledge/
-    How security works
+[Knowledge](Knowledge/)                          How security works
+  |-- [Fundamentals](Knowledge/fundamentals/)
+  |-- [Secure Design](Knowledge/secure-design/)
+  |-- [Authentication](Knowledge/authentication/)
+  |-- [Authorization](Knowledge/authorization/)
+  |-- [Threat Modeling](Knowledge/threat-modeling/)
+  |-- [OWASP Top 10](Knowledge/owasp-top10/)
+  |-- [API Security](Knowledge/api-security/)
+  |-- [Web Security](Knowledge/web-security/)
+  |-- [Cryptography](Knowledge/cryptography/)
+  |-- [Kubernetes Security](Knowledge/kubernetes/)
+  |-- [Docker Security](Knowledge/docker-security/)
+  |-- [DevSecOps](Knowledge/devsecops/)
+  |-- [Cheatsheets](Knowledge/cheatsheets/)
+  |-- [Roadmap](Knowledge/roadmap/)
+  |-- [Tools](Knowledge/tools/)
+  |-- [Go Security](Knowledge/go-security/)
+  |-- [Linux Security](Knowledge/linux/)
+  |-- [Secure SDLC](Knowledge/secure-sdlc/)
 
-Engineering/
-    How I build security
+[Engineering](Engineering/)                      How I build security
+  |-- [Architecture Reviews](Engineering/architecture-reviews/)
+  |-- [Code Review](Engineering/code-review/)
+  |-- [Checklists](Engineering/checklists/)
+  |-- [Playbooks](Engineering/playbooks/)
+  |-- [ADR (Architecture Decision Records)](Engineering/adr/)
+  |-- [Architecture Patterns](Engineering/architecture-patterns/)
+  |-- [Security Decisions](Engineering/security-decisions/)
 
-Experience/
-    What I implemented
+[Experience](Experience/)                        What I implemented
+  |-- [Case Studies](Experience/case-studies/)
+  |-- [Labs: OWASP Juice Shop](Experience/labs/juice-shop/)
+  |-- [Mini Projects](Experience/mini-projects/)
 
-Security Thinking/
-    How I analyze security
+[Security Thinking](Security%20Thinking/)        How I analyze security
+  |-- [Analysis](Security%20Thinking/analysis/)
+  |-- [Trade-offs](Security%20Thinking/trade-offs/)
+  |-- [Architecture Thinking](Security%20Thinking/architecture-thinking/)
 ```
 
 ---
