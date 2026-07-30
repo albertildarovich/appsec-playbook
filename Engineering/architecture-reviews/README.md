@@ -8,9 +8,10 @@
 
 | Компонент | Описание | Статус |
 |-----------|----------|--------|
+| [API Gateway](./api-gateway.md) | Аутентификация, rate limiting, BOLA, JWT-валидация | [YES] |
+| [Payments Integration](./payments.md) | Платёжный шлюз: идемпотентность, вебхуки, PCI DSS | [YES] |
 | [Password Reset Flow](./password-reset.md) | Сброс пароля: токены, timing, enumeration | [NO] |
 | [OAuth / Social Login](./oauth-login.md) | OAuth 2.0, OIDC, PKCE, redirect_uri validation | [NO] |
-| [Payments Integration](./payments.md) | Stripe/Adyen: idempotency, webhooks, refunds | [NO] |
 | [File Upload](./file-upload.md) | Validation, storage, malware scanning, CDN | [NO] |
 | [Webhook Handling](./webhooks.md) | Signature verification, retry, idempotency, replay | [NO] |
 | [Email / Notifications](./notifications.md) | Email injection, rate limiting, spam | [NO] |

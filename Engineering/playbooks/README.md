@@ -10,7 +10,7 @@
 
 | Playbook | Описание | Статус |
 |----------|----------|--------|
-| [Security Review](./security-review.md) | Полный security review сервиса/фичи | [NO] |
+| [Security Review](./security-review.md) | Полный security review сервиса/фичи | [YES] |
 | [Release Review](./release-review.md) | Security gates перед релизом | [NO] |
 | [Incident Response](./incident-response.md) | Обнаружение, анализ, remediation | [NO] |
 | [Container Security Review](./container-review.md) | Docker image, Dockerfile, scanning | [NO] |

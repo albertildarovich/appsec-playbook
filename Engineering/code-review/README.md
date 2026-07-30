@@ -1,6 +1,6 @@
 # Security Code Review
 
-> **Этот раздел расширен → [`../Engineering/code-reviews/`](../Engineering/code-reviews/) и [`../Engineering/playbooks/code-review-session.md`](../Engineering/playbooks/code-review-session.md)**
+> **Этот раздел расширен → [`../code-review/`](../code-review/) и [`../playbooks/code-review-session.md`](../playbooks/code-review-session.md)**
 
 Здесь собраны чек-листы, сценарии и паттерны для проведения Security Code Review.
 

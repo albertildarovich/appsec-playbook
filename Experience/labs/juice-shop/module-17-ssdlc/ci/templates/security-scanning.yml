@@ -1,38 +1,38 @@
- =============================================================================
- Reusable security-scanning templates for GitLab CI
- -----------------------------------------------------------------------------
- Подключается в .gitlab-ci.yml через `include: local:`.
- Каждый шаблон — это "hidden job" (начинается с точки), который подключается
- в конкретные джобы через `extends`. Это позволяет переиспользовать логику
- и держать корневой .gitlab-ci.yml тонким.
+# =============================================================================
+# Reusable security-scanning templates for GitLab CI
+# -----------------------------------------------------------------------------
+# Подключается в .gitlab-ci.yml через include: local:.
+# Каждый шаблон — это "hidden job" (начинается с точки), который подключается
+# в конкретные джобы через extends. Это позволяет переиспользовать логику
+# и держать корневой .gitlab-ci.yml тонким.
+#
+# Требования вакансии, которые закрывает этот файл:
+#   - "Умение писать пайплайны с нуля, работать с include и шаблонами"
+#   - "Настройка security-проверок в CI/CD, в том числе в GitLab Pipeline"
+#   - "SAST, DAST, SCA/OSA и их интеграция в процессы разработки"
+# =============================================================================
 
- Требования вакансии, которые закрывает этот файл:
-   - "Умение писать пайплайны с нуля, работать с include и шаблонами"
-   - "Настройка security-проверок в CI/CD, в том числе в GitLab Pipeline"
-   - "SAST, DAST, SCA/OSA и их интеграция в процессы разработки"
- =============================================================================
-
- --- Общие правила запуска ---------------------------------------------------
- MR pipelines + пуш в защищённые ветки. Избегаем дублирующихся пайплайнов
- (detached MR pipeline vs branch pipeline).
+# --- Общие правила запуска ---------------------------------------------------
+# MR pipelines + пуш в защищённые ветки. Избегаем дублирующихся пайплайнов
+# (detached MR pipeline vs branch pipeline).
 .security:rules:mr-and-default:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: '$CI_COMMIT_BRANCH == "develop"'
 
- Только для дефолтной ветки (например, деплой / sign-off).
+# Только для дефолтной ветки (например, деплой / sign-off).
 .security:rules:default-only:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
- -----------------------------------------------------------------------------
- L — Secret scanning (gitleaks)
- -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Secret scanning (gitleaks)
+# -----------------------------------------------------------------------------
 .secret-scan:
   stage: secret-scan
   image:
-    name: zricethezav/gitleaks:v..
+    name: zricethezav/gitleaks:v8.18.0
     entrypoint: [""]
   script:
     - gitleaks detect
@@ -40,46 +40,46 @@
         --report-format sarif
         --report-path gitleaks.sarif
         --redact
-        --exit-code 
+        --exit-code 1
         --verbose
   artifacts:
     when: always
     paths:
       - gitleaks.sarif
     reports:
-       GitLab отображает secret_detection отчёт в MR-виджете
+      # GitLab отображает secret_detection отчёт в MR-виджете
       secret_detection: gitleaks.sarif
-    expire_in:  week
+    expire_in: 1 week
 
- -----------------------------------------------------------------------------
- L — SAST (Semgrep) с кастомными правилами репозитория
- -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# SAST (Semgrep) с кастомными правилами репозитория
+# -----------------------------------------------------------------------------
 .sast-semgrep:
   stage: sast
-  image: semgrep/semgrep:..
+  image: semgrep/semgrep:1.66.0
   variables:
-     Блокируем pipeline только на ERROR-правилах (CRITICAL).
-     WARNING (HIGH) — не блокируют, но попадают в отчёт для ревью AppSec.
+    # Блокируем pipeline только на ERROR-правилах (CRITICAL).
+    # WARNING (HIGH) — не блокируют, но попадают в отчёт для ревью AppSec.
     SEMGREP_RULES: >-
       p/typescript
       p/owasp-top-ten
       p/javascript
   script:
     - semgrep --version
-     ) Полное сканирование с публичными и кастомными правилами -> SARIF для GitLab
+    # Полное сканирование с публичными и кастомными правилами -> SARIF для GitLab
     - semgrep ci
         --config "$SEMGREP_RULES"
-        --config ../../module--semgrep/rules/
+        --config ../../module-15-semgrep/rules/
         --sarif --output semgrep.sarif
         --error
         || SEMGREP_EXIT=$?
-     ) Дополнительный JSON для человекочитаемого отчёта в артефактах
+    # Дополнительный JSON для человекочитаемого отчёта в артефактах
     - semgrep scan
         --config "$SEMGREP_RULES"
-        --config ../../module--semgrep/rules/
+        --config ../../module-15-semgrep/rules/
         --json --output semgrep.json
         --severity ERROR --severity WARNING || true
-    - exit ${SEMGREP_EXIT:-}
+    - exit ${SEMGREP_EXIT:-0}
   artifacts:
     when: always
     paths:
@@ -87,15 +87,15 @@
       - semgrep.json
     reports:
       sast: semgrep.sarif
-    expire_in:  week
+    expire_in: 1 week
 
- -----------------------------------------------------------------------------
- L — SCA / OSA: зависимости (Trivy fs) + npm audit
- -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# SCA / OSA: зависимости (Trivy fs) + npm audit
+# -----------------------------------------------------------------------------
 .sca-trivy:
   stage: sca
   image:
-    name: aquasec/trivy:..
+    name: aquasec/trivy:0.50.1
     entrypoint: [""]
   variables:
     TRIVY_CACHE_DIR: ".trivycache/"
@@ -106,9 +106,9 @@
       - .trivycache/
   script:
     - trivy --version
-     Обновляем БД заранее, чтобы разделить сетевые сбои и реальные находки
+    # Обновляем БД заранее, чтобы разделить сетевые сбои и реальные находки
     - trivy fs --download-db-only
-     SARIF-отчёт для GitLab dependency scanning виджета
+    # SARIF-отчёт для GitLab dependency scanning виджета
     - trivy fs
         --scanners vuln,secret,misconfig
         --severity CRITICAL,HIGH
@@ -116,12 +116,12 @@
         --format sarif
         --output trivy-fs.sarif
         .
-     Отдельный прогон, который РЕАЛЬНО блокирует pipeline на CRITICAL
+    # Отдельный прогон, который РЕАЛЬНО блокирует pipeline на CRITICAL
     - trivy fs
         --scanners vuln
         --severity CRITICAL
         --ignore-unfixed
-        --exit-code 
+        --exit-code 1
         .
   artifacts:
     when: always
@@ -129,31 +129,31 @@
       - trivy-fs.sarif
     reports:
       dependency_scanning: trivy-fs.sarif
-    expire_in:  week
+    expire_in: 1 week
 
 .sca-npm-audit:
   stage: sca
-  image: node:-alpine
+  image: node:20-alpine
   script:
     - node --version && npm --version
-     Блокируем только на HIGH+ уязвимостях в прямых/транзитивных зависимостях
+    # Блокируем только на HIGH+ уязвимостях в прямых/транзитивных зависимостях
     - npm audit --audit-level=high --omit=dev || AUDIT_EXIT=$?
     - npm audit --json > npm-audit.json || true
-    - exit ${AUDIT_EXIT:-}
+    - exit ${AUDIT_EXIT:-0}
   allow_failure: false
   artifacts:
     when: always
     paths:
       - npm-audit.json
-    expire_in:  week
+    expire_in: 1 week
 
- -----------------------------------------------------------------------------
- Container image scanning (Trivy image) — supply chain
- -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Container image scanning (Trivy image) — supply chain
+# -----------------------------------------------------------------------------
 .container-scan:
   stage: container-scan
   image:
-    name: aquasec/trivy:..
+    name: aquasec/trivy:0.50.1
     entrypoint: [""]
   variables:
     IMAGE_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
@@ -172,7 +172,7 @@
     - trivy image
         --severity CRITICAL
         --ignore-unfixed
-        --exit-code 
+        --exit-code 1
         "$IMAGE_TAG"
   artifacts:
     when: always
@@ -180,34 +180,34 @@
       - trivy-image.sarif
     reports:
       container_scanning: trivy-image.sarif
-    expire_in:  week
+    expire_in: 1 week
 
- -----------------------------------------------------------------------------
- L — DAST (OWASP ZAP baseline) на задеплоенном staging
- -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# DAST (OWASP ZAP baseline) на задеплоенном staging
+# -----------------------------------------------------------------------------
 .dast-zap:
   stage: dast
   image:
     name: ghcr.io/zaproxy/zaproxy:stable
     entrypoint: [""]
   variables:
-    DAST_TARGET: "http://juice-shop.staging.svc:"
+    DAST_TARGET: "http://juice-shop.staging.svc:3000"
   script:
     - mkdir -p zap-out
-     baseline = пассивный скан + быстрые active-правила, безопасен для staging.
-     -I  = не падать на WARN; реальные FAIL описаны в zap-rules.tsv (allowlist).
+    # baseline = пассивный скан + быстрые active-правила, безопасен для staging.
+    # -I  = не падать на WARN; реальные FAIL описаны в zap-rules.tsv (allowlist).
     - zap-baseline.py
         -t "$DAST_TARGET"
-        -c zap-rules.tsv
+        -c ci/zap-rules.tsv
         -J zap-report.json
         -r zap-report.html
         -I
         || ZAP_EXIT=$?
-    - cp /zap/wrk/zap-report. zap-out/ >/dev/null || true
-    - exit ${ZAP_EXIT:-}
+    - cp /zap/wrk/zap-report.* zap-out/ 2>/dev/null || true
+    - exit ${ZAP_EXIT:-0}
   artifacts:
     when: always
     paths:
       - zap-report.html
       - zap-report.json
-    expire_in:  week
+    expire_in: 1 week

@@ -34,4 +34,4 @@
 
 ##  Полная версия
 
- [`04-web-security/security-misconfiguration.md`](./web-security/security-misconfiguration.md) — Secure by Default, Reduce Attack Surface, что искать на Code Review
+ [`04-web-security/security-misconfiguration.md`](../web-security/security-misconfiguration.md) — Secure by Default, Reduce Attack Surface, что искать на Code Review

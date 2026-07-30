@@ -858,9 +858,9 @@ with open('deploy.tar.gz', 'rb') as f:
 
 ##  Связанные темы
 
-- [Интерпретаторы](../01-fundamentals/interpreters.md) — пароли как inputs для password hashing interpreter
-- [Secrets Management](../07-authorization/broken-access-control.md) — пересечение с управлением доступом к секретам
-- [Security Misconfiguration](../04-web-security/security-misconfiguration.md) — TLS misconfiguration как частный случай
+- [Интерпретаторы](../fundamentals/interpreters.md) — пароли как inputs для password hashing interpreter
+- [Secrets Management](../authorization/broken-access-control.md) — пересечение с управлением доступом к секретам
+- [Security Misconfiguration](../web-security/security-misconfiguration.md) — TLS misconfiguration как частный случай
 
 ---
 

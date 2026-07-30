@@ -430,12 +430,12 @@ Payment Service (Process)
 
 ##  Связанные темы
 
-- [Insecure Design (A04)](../04-web-security/insecure-design.md) — Abuse Cases, Never Trust the Client
-- [Broken Access Control (A01)](../07-authorization/broken-access-control.md) — EoP, IDOR, BOLA
-- [Identification & Authentication Failures (A07)](../06-authentication/identification-authentication-failures.md) — Spoofing, session management
-- [Cryptographic Failures (A02)](../08-cryptography/cryptographic-failures.md) — Information Disclosure, Tampering
-- [Security Logging & Monitoring (A09)](../04-web-security/security-misconfiguration.md) — Repudiation
-- [Интерпретаторы](../01-fundamentals/interpreters.md) — фундаментальная концепция
+- [Insecure Design (A04)](../web-security/insecure-design.md) — Abuse Cases, Never Trust the Client
+- [Broken Access Control (A01)](../authorization/broken-access-control.md) — EoP, IDOR, BOLA
+- [Identification & Authentication Failures (A07)](../authentication/identification-authentication-failures.md) — Spoofing, session management
+- [Cryptographic Failures (A02)](../cryptography/cryptographic-failures.md) — Information Disclosure, Tampering
+- [Security Logging & Monitoring (A09)](../web-security/security-misconfiguration.md) — Repudiation
+- [Интерпретаторы](../fundamentals/interpreters.md) — фундаментальная концепция
 
 ---
 

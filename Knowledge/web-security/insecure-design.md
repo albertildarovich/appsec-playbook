@@ -490,11 +490,11 @@ def transfer_money(from_account, to_account, amount):
 
 ##  Связанные темы
 
-- [Интерпретаторы](../01-fundamentals/interpreters.md) — объединяющая концепция для injection
-- [STRIDE / Threat Modeling](../03-threat-modeling/stride.md) — систематический поиск угроз на этапе проектирования
+- [Интерпретаторы](../fundamentals/interpreters.md) — объединяющая концепция для injection
+- [STRIDE / Threat Modeling](../threat-modeling/stride.md) — систематический поиск угроз на этапе проектирования
 - [Security Misconfiguration](security-misconfiguration.md) — примеры небезопасного дефолтного поведения (Swagger, DEBUG)
-- [Identification & Authentication Failures](../06-authentication/identification-authentication-failures.md) — MFA, Session Management, Password Reset
-- [Broken Access Control](../07-authorization/broken-access-control.md) — доверие ролям от клиента
+- [Identification & Authentication Failures](../authentication/identification-authentication-failures.md) — MFA, Session Management, Password Reset
+- [Broken Access Control](../authorization/broken-access-control.md) — доверие ролям от клиента
 
 ---
 

@@ -43,4 +43,4 @@
 
 ##  Полная версия
 
- [`web-security/ssrf.md`](./web-security/ssrf.md) — Blind SSRF, защита на DNS уровне, metadata атаки, схемы атак
+ [`web-security/ssrf.md`](../web-security/ssrf.md) — Blind SSRF, защита на DNS уровне, metadata атаки, схемы атак

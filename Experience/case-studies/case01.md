@@ -17,7 +17,7 @@ Code Review был обязательной частью процесса пер
 - SSO для нескольких приложений
 - Интеграция с LDAP
 
-**Связь с Playbook**: [Authorization](???)
+**Связь с Playbook**: [Authorization](../../Knowledge/authorization/README.md), [ADF-001 Keycloak](../../Engineering/adr/adr-001-keycloak.md)
 
 **Что понял**:
 - Role explosion — реальная проблема. Ролей становится слишком много
@@ -30,7 +30,7 @@ Code Review был обязательной частью процесса пер
 - Docker compose + networking
 - SSL/TLS (acme.sh, certbot)
 
-**Связь с Playbook**: [Linux](???)
+**Связь с Playbook**: [Linux](../../Knowledge/linux/README.md)
 
 ### 4. Docker Security
 - Non-root контейнеры

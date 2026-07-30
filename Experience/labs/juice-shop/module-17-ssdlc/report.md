@@ -6,73 +6,144 @@
 
 ---
 
-## 10. Практика: Локальный запуск CI/CD pipeline
+## 10. Production-grade GitLab CI Pipeline (реализация)
 
-### Инструменты для локального запуска
+### Архитектура: include + extends
 
-Для практической отработки pipeline использованы два инструмента:
+Пайплайн построен по паттерну **«тонкий корневой файл + переиспользуемые шаблоны»** — стандартная практика в enterprise GitLab CI.
 
-| Инструмент | Платформа | Установка | Статус |
-|-----------|-----------|-----------|--------|
-| **act** | GitHub Actions | `brew install act` | [OK] Работает |
-| **gitlab-ci-local** | GitLab CI | `npx gitlab-ci-local@4.35.0` | [OK] Работает |
-
-### Настройка
-
-Оба pipeline используют одни и те же security gates (L1-L4), но разный синтаксис:
-
-**GitHub Actions** (`.github/workflows/security-pipeline.yml`):
-```yaml
-jobs:
-  secrets-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: L1: Secrets scan
-        run: |
-          grep -q "RSA PRIVATE KEY" lib/insecurity.ts \
-            && echo "BLOCKED: Private key found!" \
-            && exit 1 \
-            || echo "No secrets found"
+```
+.gitlab-ci.yml          (корневой: stages + конкретные джобы)
+  |
+  +-- include: local: ci/templates/security-scanning.yml  (hidden jobs)
+        |
+        +-- .secret-scan       (gitleaks)
+        +-- .sast-semgrep      (Semgrep + кастомные правила)
+        +-- .sca-trivy         (Trivy fs)
+        +-- .sca-npm-audit     (npm audit)
+        +-- .container-scan    (Trivy image)
+        +-- .dast-zap          (OWASP ZAP baseline)
 ```
 
-**GitLab CI** (`.gitlab-ci.yml`):
+**Почему так:**
+- Каждый шаблон можно переиспользовать в других проектах компании (подключить тот же `security-scanning.yml` через `include: project:` или `include: remote:`).
+- Корневой `.gitlab-ci.yml` остаётся читаемым — только stages и джобы с `extends`.
+- Обновление версий инструментов (gitleaks, Trivy, Semgrep) — правка в одном файле (шаблоне).
+
+### Файлы пайплайна
+
+| Файл | Назначение | Строк |
+|------|-----------|-------|
+| `.gitlab-ci.yml` | Корневой файл: stages, джобы с `extends`, правила запуска | 37 |
+| `ci/templates/security-scanning.yml` | Hidden jobs: все 6 сканеров, общие правила запуска | 200+ |
+| `ci/zap-rules.tsv` | ZAP allowlist: правила, которые не блокируют пайплайн | — |
+
+### Структура stages
+
 ```yaml
-secretscan:
-  stage: pre-commit
-  allow_failure: true
-  script: "echo L1: Scanning...; grep -q 'RSA PRIVATE KEY' lib/insecurity.ts && echo BLOCKED && exit 1 || echo OK; echo L1 PASSED"
+stages:
+  - secret-scan       # L1: gitleaks
+  - sast              # L2: Semgrep (блокирует на ERROR)
+  - sca               # L3: Trivy + npm audit (блокирует на CRITICAL)
+  - container-scan    # L4: Trivy image (блокирует на CRITICAL)
+  - dast              # L5: ZAP baseline
+  - sign-off          # L6: Security Sign-off (только на main)
 ```
 
-### Результаты запуска
+### Gate policy (встроена в пайплайн)
 
-| Gate | Проверка | GitHub Actions (act) | GitLab CI (gitlab-ci-local) |
-|------|---------|---------------------|---------------------------|
-| **L1** | RSA Private Key | [NO] BLOCKED | [NO] BLOCKED |
-| **L2** | SQL Injection | [NO] BLOCKED (`sequelize.query`) | [OK] OK |
-| **L2** | eval() | — | [NO] BLOCKED (`routes/captcha.ts`, `routes/userProfile.ts`) |
-| **L3** | SCA | [OK] PASSED | [OK] PASSED |
-| **L4** | Sign-off | [OK] PASSED | [OK] PASSED |
+| Severity | SAST (Semgrep) | SCA (Trivy) | Container Scan | DAST (ZAP) |
+|----------|---------------|-------------|----------------|------------|
+| **CRITICAL / ERROR** | Блокировка (`--error`) | Блокировка (`--exit-code 1`) | Блокировка (`--exit-code 1`) | Блокировка |
+| **HIGH / WARNING** | SARIF-отчёт, не блокирует | SARIF-отчёт | SARIF-отчёт | AppSec review |
+| **MEDIUM / LOW** | Информационно | Информационно | Информационно | Информационно |
 
-### Сравнение: GitHub Actions vs GitLab CI
+### Сканеры и их конфигурация
 
-| Аспект | GitHub Actions (act) | GitLab CI (gitlab-ci-local) |
-|--------|--------------------|---------------------------|
-| **Синтаксис YAML** | `jobs.<id>.steps` с `uses:` / `run:` | `stages` + `needs` |
-| **Docker** | Автоматически (нужен Docker) | Не нужен (shell executor) |
-| **Параллелизм** | Job runs последовательно без `needs` | Через `needs:` |
-| **Установка** | `brew install act` | `npx gitlab-ci-local@4.35.0` |
-| **Совместимость версий** | [OK] `act` 0.2.x — LTS стабильная | [NO] v4.68.0+ — сломали парсинг `script`, работает только v4.35.0 |
-| **Скорость** | ~2-3 сек/job (Docker pull) | ~10-20ms/job (shell) |
-| **Плюсы** | Полная совместимость с GHA workflow | Работает без Docker, быстрый |
-| **Минусы** | Требует Docker, пулл образов | Ограниченный парсер YAML |
+**L1 — Secret Scanning (gitleaks v8.18.0):**
+- Формат отчёта: SARIF (интеграция с GitLab Security Dashboard)
+- `--redact` — маскирует секреты в отчёте
+- `--exit-code 1` — блокирует пайплайн при находке
+- Артефакт: `gitleaks.sarif`
 
-### Выводы по практике
+**L2 — SAST (Semgrep 1.66.0):**
+- Публичные наборы: `p/typescript`, `p/owasp-top-ten`, `p/javascript`
+- Кастомные правила: `../../module-15-semgrep/rules/` (SQLi, eval, mass assignment)
+- Два прогона: `semgrep ci` (SARIF, блокирует на ERROR) + `semgrep scan` (JSON для человекочитаемого отчёта)
+- Артефакты: `semgrep.sarif` + `semgrep.json`
 
-1. **`act`** — отличный выбор для GitHub Actions. Единственный нюанс: требует Docker и пул образов при первом запуске
-2. **`gitlab-ci-local`** — быстрый, не требует Docker. Проблема: начиная с v4.68.0+ сломали парсинг `script` с массивом. Работает только версия 4.35.0, и `script` должен быть **строкой** (не массивом), команды разделяются `;`
-3. **`gitlab-runner exec`** — удалён в v19+. Работает через Docker-образ `gitlab/gitlab-runner:v16.11.0`, но требует коммита и Docker-in-Docker
-4. **Рекомендация:** для локального запуска использовать `act` (GHA) или `gitlab-ci-local@4.35.0` (GitLab CI) в зависимости от платформы
+**L3 — SCA (Trivy 0.50.1 + npm audit):**
+- Trivy: сканирует vuln, secret, misconfig в файловой системе
+- SARIF для GitLab Dependency Scanning виджета
+- Отдельный прогон с `--exit-code 1` только на CRITICAL
+- npm audit: блокирует на HIGH+ (`--audit-level=high`)
+- Кеширование Trivy DB через GitLab CI cache (ключ `trivy-db`)
+
+**L4 — Container Scanning (Trivy 0.50.1):**
+- Сканирует собранный образ `$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA`
+- Два прогона: SARIF для виджета + `--exit-code 1` на CRITICAL
+- Артефакт: `trivy-image.sarif`
+
+**L5 — DAST (OWASP ZAP baseline):**
+- Цель: `http://juice-shop.staging.svc:3000`
+- Режим baseline: пассивный скан + быстрые активные проверки
+- `-I` — не падать на WARN (только подтверждённые находки)
+- Кастомный allowlist: `ci/zap-rules.tsv`
+- Артефакты: `zap-report.html` + `zap-report.json`
+
+### Правила запуска (rules)
+
+```yaml
+.security:rules:mr-and-default:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'  # Каждый MR
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'        # Пуш в main
+    - if: '$CI_COMMIT_BRANCH == "develop"'                 # Пуш в develop
+```
+
+Избегает дублирующихся пайплайнов (detached MR pipeline vs branch pipeline).
+
+### Валидация YAML
+
+Оба файла проходят синтаксическую проверку:
+
+```
+[OK] .gitlab-ci.yml
+[OK] ci/templates/security-scanning.yml
+```
+
+Проверка: `python3 -c "import yaml; yaml.safe_load(open(f))"`
+
+---
+
+## 11. Как читать результаты пайплайна
+
+### Для разработчика (MR view)
+
+1. **Зелёный пайплайн** — все проверки пройдены, можно мёржить.
+2. **Красный пайплайн на L1 (secret-scan)** — найден секрет. Нужно:
+   - Удалить секрет из кода
+   - Перенести в CI/CD Variables / Vault
+   - Ротировать скомпрометированный ключ
+   - Залить исправление новым коммитом
+3. **Красный пайплайн на L2 (SAST)** — CRITICAL находка. Открыть вкладку Security в MR, посмотреть `semgrep.sarif`, исправить уязвимость.
+4. **Жёлтый в SAST/SCA** — HIGH находка. AppSec посмотрит на код-ревью. Блокировки нет, но AppSec может запросить правки.
+
+### Для AppSec (Security Dashboard)
+
+- **GitLab Security Dashboard** агрегирует все SARIF-отчёты (SAST, Secret Detection, Dependency Scanning, Container Scanning) в одном месте.
+- **ZAP-отчёт** (`zap-report.html`) — открывается в браузере, показывает все найденные алерты с деталями запроса/ответа.
+- **semgrep.json** — человекочитаемый JSON со всеми находками, можно анализировать через `jq`.
+
+### Типичные проблемы и их решение
+
+| Проблема | Причина | Решение |
+|----------|---------|---------|
+| Trivy DB не обновляется | Сетевые ограничения | `trivy fs --download-db-only` в начале джобы, кеш `trivy-db` |
+| Semgrep падает с OOM | Слишком большой проект | `--max-memory 2048`, разбить на stages |
+| ZAP не может достучаться до цели | Staging не задеплоен | Проверить `DAST_TARGET`, добавить `needs: [deploy-staging]` |
+| False positive в SAST | Правило слишком широкое | Добавить `pattern-not` в Semgrep-правило, `paths:` с исключениями |
+| gitleaks находит старые секреты | Секреты в истории git | `git filter-repo` + ротация ключей |
 
 ---
 

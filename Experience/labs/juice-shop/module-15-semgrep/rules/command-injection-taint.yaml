@@ -1,0 +1,157 @@
+# Semgrep Taint Rule: Command Injection / Path Traversal (TypeScript/JavaScript)
+# Отслеживает flow от пользовательского ввода до опасных функций (child_process, fs)
+# Версия: 1.0.0
+
+rules:
+  - id: command-injection-taint-exec
+    message: |
+      [TAINT] Пользовательский ввод ($VAR) достигает вызова child_process.exec().
+      Этот flow создаёт риск Command Injection.
+      Fix: Использовать child_process.execFile() с массивом аргументов вместо конкатенации строк.
+      Если exec() необходим — валидировать ввод по строгому allowlist + экранировать спецсимволы (;, |, &, $, `).
+    severity: ERROR
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern: req.body
+              - pattern: req.params
+              - pattern: req.query
+              - pattern: req.body.$FIELD
+              - pattern: req.params.$FIELD
+              - pattern: req.query.$FIELD
+              - pattern: $REQ.body.$FIELD
+              - pattern: $REQ.params.$FIELD
+              - pattern: $REQ.query.$FIELD
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: child_process.exec($CMD, ...)
+              - pattern: exec($CMD, ...)
+              - pattern: child_process.execSync($CMD, ...)
+              - pattern: execSync($CMD, ...)
+              - pattern: shelljs.exec($CMD, ...)
+              - pattern: $SHELL.exec($CMD, ...)
+          - pattern-not-inside: |
+              const $SAFE = [...];
+              child_process.exec($SAFE.join(' '), ...)
+          - pattern-not-inside: |
+              const $SAFE = [$VAR, ...];
+              child_process.execFile($SAFE, ...)
+    metadata:
+      category: security
+      technology:
+        - typescript
+        - javascript
+        - nodejs
+      cwe: "CWE-78: OS Command Injection"
+      owasp: "A03: Injection"
+      confidence: HIGH
+      likelihood: MEDIUM
+      impact: CRITICAL
+      subcategory:
+        - vuln
+      references:
+        - https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
+        - https://nodejs.org/api/child_process.html#child_process_child_process_execfile_file_args_options_callback
+
+  - id: path-traversal-taint-fs
+    message: |
+      [TAINT] Пользовательский ввод ($VAR) достигает операций с файловой системой (fs.readFile,
+      fs.createReadStream, fs.writeFile) без валидации пути.
+      Fix: Использовать path.resolve() + path.normalize() + проверку, что итоговый путь начинается
+      с разрешённой базовой директории (allowlist).
+    severity: WARNING
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern: req.params
+              - pattern: req.query
+              - pattern: req.params.$FIELD
+              - pattern: req.query.$FIELD
+              - pattern: $REQ.params.$FIELD
+              - pattern: $REQ.query.$FIELD
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: |
+                  fs.readFile($PATH, ...)
+              - pattern: |
+                  fs.readFileSync($PATH, ...)
+              - pattern: |
+                  fs.createReadStream($PATH, ...)
+              - pattern: |
+                  fs.writeFile($PATH, ...)
+              - pattern: |
+                  fs.writeFileSync($PATH, ...)
+              - pattern: |
+                  fs.unlink($PATH, ...)
+              - pattern: |
+                  fs.createWriteStream($PATH, ...)
+              - pattern: |
+                  path.join($BASE, $PATH)
+          - pattern-not: |
+              fs.readFile(path.resolve($BASE, $PATH), ...)
+          - pattern-not-inside: |
+              const $RESOLVED = path.resolve($BASE, $PATH);
+              if ($RESOLVED.startsWith($BASE)) { ... }
+    metadata:
+      category: security
+      technology:
+        - typescript
+        - javascript
+        - nodejs
+      cwe: "CWE-22: Path Traversal"
+      owasp: "A01: Broken Access Control"
+      confidence: MEDIUM
+      likelihood: MEDIUM
+      impact: HIGH
+      subcategory:
+        - vuln
+      references:
+        - https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
+        - https://nodejs.org/api/path.html
+
+  - id: open-redirect-taint-express
+    message: |
+      [TAINT] Пользовательский ввод ($VAR) попадает в res.redirect() без валидации.
+      Это может привести к Open Redirect.
+      Fix: Проверять URL по allowlist: только относительные пути или конкретные домены.
+      res.redirect(new URL(req.query.redirect, BASE_URL).toString())
+    severity: WARNING
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern: req.query
+              - pattern: req.query.$FIELD
+              - pattern: req.body.$FIELD
+              - pattern: $REQ.query.$FIELD
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: |
+                  res.redirect($URL)
+              - pattern: |
+                  $RES.redirect($URL)
+          - pattern-not: |
+              res.redirect('/$PATH')
+          - pattern-not-inside: |
+              const $ALLOWED = new URL($URL, $BASE);
+              res.redirect($ALLOWED.toString())
+    metadata:
+      category: security
+      technology:
+        - typescript
+        - javascript
+        - express
+      cwe: "CWE-601: URL Redirection to Untrusted Site"
+      owasp: "A01: Broken Access Control"
+      confidence: MEDIUM
+      likelihood: MEDIUM
+      impact: MEDIUM
+      subcategory:
+        - vuln
+      references:
+        - https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html

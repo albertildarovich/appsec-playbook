@@ -119,5 +119,5 @@
 ## Связанные разделы
 
 - [Trade-offs: Availability vs Security](../trade-offs/) — Fail Secure напрямую связан с этим компромиссом
-- [Security Smells: нарушение Secure Defaults](../security-smells/) — как заметить, что принцип нарушен
-- [Mental Models: Defense in Depth](../mental-models/) — как слои защиты работают вместе
+- Security Smells: нарушение Secure Defaults (в плане) — как заметить, что принцип нарушен
+- Mental Models: Defense in Depth (в плане) — как слои защиты работают вместе

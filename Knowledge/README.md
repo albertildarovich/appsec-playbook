@@ -11,21 +11,21 @@
 | Раздел | Описание | Статус |
 |--------|----------|--------|
 | [Secure Design](./secure-design/) | Secure Design Principles — все 12 в interview-ready формате | [OK] |
-| [Fundamentals](01-fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | [OK] |
-| [Secure SDLC & Governance](02-secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates |  |
-| [Threat Modeling](03-threat-modeling/) | STRIDE, DFD, Attack Trees, методология | [OK] |
-| [Web Security](04-web-security/) | SQLi, XSS, CSRF, SSRF, XXE, Command Injection, Deserialization | [OK] |
-| [API Security](05-api-security/) | REST, GraphQL, BOLA, Mass Assignment, API Security Top 10 | [NO] |
-| [Authentication](06-authentication/) | JWT, OAuth 2.0, OIDC, MFA, Session Management |  |
-| [Authorization](07-authorization/) | RBAC, ABAC, IDOR, BOLA, Privilege Escalation | [OK] |
-| [Cryptography](08-cryptography/) | AES, RSA, ECC, Hashing, TLS, Key Management |  |
-| [DevSecOps](09-devsecops/) | SAST, DAST, SCA, Secret Scanning, IaC | [NO] |
-| [Kubernetes](10-kubernetes/) | RBAC, Pod Security, Network Policies, Container Security | [NO] |
-| [Linux](11-linux/) | Commands, systemd, auditd, openssl | [NO] |
-| [Cloud](12-cloud/) | AWS Security, IAM, S3, Cloud Trail | [NO] |
-| [Cheatsheets](19-cheatsheets/) | Быстрые справки по всем уязвимостям | [OK] |
-| [OWASP Top 10](24-owasp-top10/) | Единый хаб по всем категориям A01–A10 | [OK] |
-| [Tools](12-tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | [NO] |
+| [Fundamentals](fundamentals/) | Security Principles, Interpreters, NIST CSF, ASVS | [OK] |
+| [Secure SDLC & Governance](secure-sdlc/) | SDLC, BSIMM, SAMM, SSDF, Security Champions, Gates |  |
+| [Threat Modeling](threat-modeling/) | STRIDE, DFD, Attack Trees, методология | [OK] |
+| [Web Security](web-security/) | SQLi, XSS, CSRF, SSRF, XXE, Command Injection, Deserialization | [OK] |
+| [API Security](api-security/) | REST, GraphQL, BOLA, Mass Assignment, API Security Top 10 | [NO] |
+| [Authentication](authentication/) | JWT, OAuth 2.0, OIDC, MFA, Session Management |  |
+| [Authorization](authorization/) | RBAC, ABAC, IDOR, BOLA, Privilege Escalation | [OK] |
+| [Cryptography](cryptography/) | AES, RSA, ECC, Hashing, TLS, Key Management |  |
+| [DevSecOps](devsecops/) | SAST, DAST, SCA, Secret Scanning, IaC | [NO] |
+| [Kubernetes](kubernetes/) | RBAC, Pod Security, Network Policies, Container Security | [NO] |
+| [Linux](linux/) | Commands, systemd, auditd, openssl | [NO] |
+| [Cloud](cloud/) | AWS Security, IAM, S3, Cloud Trail | [NO] |
+| [Cheatsheets](cheatsheets/) | Быстрые справки по всем уязвимостям | [OK] |
+| [OWASP Top 10](owasp-top10/) | Единый хаб по всем категориям A01–A10 | [OK] |
+| [Tools](tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | [NO] |
 
 ---
 

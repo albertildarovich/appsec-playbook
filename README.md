@@ -80,15 +80,15 @@
 ##  Прогресс
 
 ```
-OWASP Top 10:          ████████████████████ 85% (11/13)
-Web Security:          ████████████████████ 80%
-Authentication:        ██████████████░░░░░░ 70%
-Authorization:         ██████████░░░░░░░░░░ 50%
-Secure SDLC:           ████████████░░░░░░░░░ 60%
-Cryptography:          ████████░░░░░░░░░░░░ 40%
-DevSecOps:             ██████████░░░░░░░░░░ 50%
-Architecture Reviews:  ░░░░░░░░░░░░░░░░░░░░  0%
-Security Thinking:     ████████░░░░░░░░░░░░ 40%
+OWASP Top 10:          ████████████████████ 100% (10/10)
+Web Security:          ████████████████████ 100% (11/11)
+Authentication:        █████████████████░░░ 85%  (JWT, OAuth2/OIDC, Auth Failures)
+Authorization:         ██████████████░░░░░░ 70%  (BOLA, IDOR, BAC, PrivEsc)
+Secure SDLC:           ████████████████████ 100% (10/10)
+Cryptography:          █████░░░░░░░░░░░░░░░ 25%  (1 файл, нужно AES/RSA/ECC/TLS)
+DevSecOps:             ████████████░░░░░░░░ 60%  (SAST/DAST/SCA в одном файле)
+Architecture Reviews:  ████░░░░░░░░░░░░░░░░ 20%  (api-gateway, payments)
+Security Thinking:     ████████░░░░░░░░░░░░ 40%  (6 файлов из ~9 категорий)
 ```
 
 [Подробный трекер →](./Knowledge/roadmap/README.md)

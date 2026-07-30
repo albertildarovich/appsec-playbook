@@ -179,7 +179,7 @@ Risk = Likelihood × Impact × Exploitability
 
 | Тема | Где | Связь с Threat Modeling |
 |------|-----|------------------------|
-| **Security Principles** (Defense in Depth, Zero Trust, Least Privilege, Fail Secure, Complete Mediation) | [`01-fundamentals/security-principles.md`](../01-fundamentals/security-principles.md) | Принципы, которыми руководствуются при выборе mitigations |
-| **Insecure Design** (Secure by Design, Never Trust the Client, Reduce Attack Surface) | [`04-web-security/insecure-design.md`](../04-web-security/insecure-design.md) | Архитектурное мышление, Abuse Cases |
+| **Security Principles** (Defense in Depth, Zero Trust, Least Privilege, Fail Secure, Complete Mediation) | [`01-fundamentals/security-principles.md`](../fundamentals/security-principles.md) | Принципы, которыми руководствуются при выборе mitigations |
+| **Insecure Design** (Secure by Design, Never Trust the Client, Reduce Attack Surface) | [`04-web-security/insecure-design.md`](../web-security/insecure-design.md) | Архитектурное мышление, Abuse Cases |
 | **STRIDE** | [`stride.md`](stride.md) | 6 категорий угроз с примерами |
 

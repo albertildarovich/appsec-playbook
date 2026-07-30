@@ -246,4 +246,91 @@ models.sequelize.query(
 - **Manual Pentest** → раз в спринт (бизнес-логика)
 
 ---
-*Отчёт по модулю 15 — Semgrep*
+
+## 9. Taint-правила: продвинутый Semgrep
+
+### 9.1 Зачем нужен taint tracking?
+
+Обычные pattern-правила (`mode: pattern`) ищут совпадения в **одной точке** кода:
+- `sequelize.query("SELECT ..." + userInput)` — находит конкатенацию
+- Не видит: `const x = req.body.email; const sql = "SELECT ..." + x; sequelize.query(sql)`
+
+**Taint tracking** (`mode: taint`) отслеживает **поток данных** (data flow) от источника до sink'а через промежуточные переменные, вызовы функций и даже файлы. Это позволяет находить уязвимости, разнесённые по нескольким строкам или функциям.
+
+```
+Source (источник)           Flow (поток)            Sink (приёмник)
+    req.body.email    →    const x = email    →    sequelize.query(sql)
+    req.query.path     →    const p = path     →    fs.readFile(p)
+    req.body.url       →    const url = ...     →    res.redirect(url)
+```
+
+### 9.2 Созданные правила
+
+Созданы 2 YAML-файла с taint-правилами в директории `rules/`:
+
+#### `rules/sqli-taint.yaml` — SQL Injection (2 правила)
+
+1. **`sqli-taint-express`** — отслеживает flow от Express-источников (`req.body`, `req.params`, `req.query`) до SQL-sink'ов (`sequelize.query()`, `knex.raw()`, `pool.query()`). Исключает запросы с `{ replacements: ... }` (безопасный паттерн Sequelize).
+
+2. **`sqli-taint-string-concat`** — отслеживает flow от тех же источников до шаблонных строк и конкатенации (`` `SELECT ${x}` ``, `"SELECT" + x`). Менее точен, но ловит конкатенацию даже без прямого вызова `.query()`.
+
+**Ожидаемые находки при запуске на Juice Shop:**
+- `routes/login.ts` — `req.body.email` → `sequelize.query(...)` (1 находка)
+- `routes/search.ts` — `req.query.q` → `sequelize.query(...)` (1 находка)
+
+**Ожидаемые false positives:**
+- Конкатенация в комментариях или тестовых файлах (решается `--exclude='tests/'` и `path-ignore`)
+- Безопасная конкатенация для имён таблиц/колонок (если не из пользовательского ввода — решается allowlist)
+
+#### `rules/command-injection-taint.yaml` — Command Injection + Path Traversal + Open Redirect (3 правила)
+
+1. **`command-injection-taint-exec`** — отслеживает flow от `req.*` до `child_process.exec()`, `execSync()`, `shelljs.exec()`. Исключает `execFile()` с массивом аргументов (безопасный паттерн).
+
+2. **`path-traversal-taint-fs`** — отслеживает flow от `req.params`, `req.query` до `fs.readFile()`, `fs.writeFile()`, `fs.createReadStream()`. Исключает случаи с `path.resolve()` и проверкой `startsWith()`.
+
+3. **`open-redirect-taint-express`** — отслеживает flow от `req.query` до `res.redirect()`. Исключает статические пути (`res.redirect('/path')`).
+
+**Ожидаемые находки при запуске на Juice Shop:**
+- Path Traversal: `routes/fileServer.ts` (2-3 находки)
+- Open Redirect: `routes/redirect.ts` (1 находка)
+- Command Injection: Juice Shop не использует `child_process`, поэтому 0 находок (валидация правила на других проектах)
+
+### 9.3 Сравнение: Pattern vs Taint
+
+| Критерий | Pattern (`mode: pattern`) | Taint (`mode: taint`) |
+|----------|--------------------------|----------------------|
+| **Что ищет** | Совпадение в одном AST-узле | Путь от source до sink через любое количество промежуточных переменных |
+| **Скорость** | Быстро (миллисекунды) | Медленнее (десятки миллисекунд — секунды) |
+| **Точность** | Высокая, но ограничена контекстом | Ниже (больше false positives), но шире покрытие |
+| **Пример находки** | `sequelize.query("SELECT " + req.body.x)` | `const x = req.body.email; ... sequelize.query(sql)` |
+| **Когда использовать** | Известный конкретный паттерн (hardcoded key, eval) | Уязвимости, зависящие от потока данных (SQLi, XSS, SSRF, command injection) |
+
+### 9.4 Рекомендации по внедрению taint-правил
+
+- **CI/CD**: Taint-правила добавляют ~2-5 секунд к сканированию. Для PR это приемлемо. Для pre-commit hook — лучше только pattern-правила.
+- **Triage**: Taint-правила дают больше false positives. Настроить `paths.ignore` для тестовых файлов, миграций, конфигов.
+- **Metavariable analysis**: Комбинировать с `pattern-not` и `pattern-not-inside` для снижения шума. Например, исключать `sequelize.query($Q, { replacements: ... })` из находок SQLi — это безопасный паттерн.
+- **Стандартный набор**: OWASP Top 10 + taint-правила для проекта = хороший baseline для SAST.
+
+### 9.5 Запуск taint-правил
+
+```bash
+# Запуск только taint-правил
+semgrep --config=rules/sqli-taint.yaml \
+        --config=rules/command-injection-taint.yaml \
+        /tmp/juice-shop-src \
+        --exclude='node_modules' \
+        --exclude='frontend' \
+        --exclude='build'
+
+# Интеграция в CI/CD (GitLab CI)
+semgrep --config=auto \
+        --config=rules/sqli-taint.yaml \
+        --config=rules/command-injection-taint.yaml \
+        --sarif --output=semgrep.sarif \
+        --error
+```
+
+---
+
+*Отчёт по модулю 15 — Semgrep (обновлён: добавлены taint-правила)*

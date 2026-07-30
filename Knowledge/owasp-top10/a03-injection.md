@@ -2,7 +2,7 @@
 
 > **Суть:** Недоверенные данные передаются интерпретатору как часть команды/запроса.
 >
-> **Объединяющая концепция:** Все injection-уязвимости следуют одному паттерну — данные смешиваются с кодом. Подробнее: [`Интерпретаторы`](../01-fundamentals/interpreters.md)
+> **Объединяющая концепция:** Все injection-уязвимости следуют одному паттерну — данные смешиваются с кодом. Подробнее: [`Интерпретаторы`](../fundamentals/interpreters.md)
 
 ---
 
@@ -32,7 +32,7 @@
 
 | Тема | Конспект |
 |------|----------|
-| SQL Injection | [`web-security/sqli.md`](./web-security/sqli.md) |
-| Command Injection | [`web-security/command-injection.md`](./web-security/command-injection.md) |
-| XXE | [`web-security/xxe.md`](./web-security/xxe.md) |
-| Интерпретаторы (объединяющая концепция) | [`fundamentals/interpreters.md`](./fundamentals/interpreters.md) |
+| SQL Injection | [`web-security/sqli.md`](../web-security/sqli.md) |
+| Command Injection | [`web-security/command-injection.md`](../web-security/command-injection.md) |
+| XXE | [`web-security/xxe.md`](../web-security/xxe.md) |
+| Интерпретаторы (объединяющая концепция) | [`fundamentals/interpreters.md`](../fundamentals/interpreters.md) |

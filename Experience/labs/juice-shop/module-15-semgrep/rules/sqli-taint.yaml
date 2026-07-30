@@ -1,0 +1,101 @@
+# Semgrep Taint Rule: SQL Injection (TypeScript/JavaScript)
+# Отслеживает flow от пользовательского ввода до SQL-запроса
+# Версия: 1.0.0
+# Цель: Найти SQLi, где пользовательский ввод попадает в SQL без параметризации
+
+rules:
+  - id: sqli-taint-express
+    message: |
+      [TAINT] Пользовательский ввод ($VAR) достигает SQL-запроса без параметризации.
+      Типичный источник: req.body, req.params, req.query
+      Типичный sink: sequelize.query(), db.query(), knex.raw()
+      Fix: Использовать параметризованные запросы: `sequelize.query('SELECT * FROM users WHERE id = :id', { replacements: { id } })`
+    severity: ERROR
+    mode: taint
+    pattern-sources:
+      # Express: req.body, req.params, req.query
+      - patterns:
+          - pattern-either:
+              - pattern: req.body
+              - pattern: req.params
+              - pattern: req.query
+              - pattern: req.cookies
+              - pattern: req.headers
+              - pattern: req.body.$FIELD
+              - pattern: req.params.$FIELD
+              - pattern: req.query.$FIELD
+              - pattern: req.cookies.$FIELD
+              - pattern: req.headers.$FIELD
+          - pattern-not-inside: |
+              if ($REQ.query.$FIELD == $C) { ... }
+          - pattern-not-inside: |
+              if ($REQ.query.$FIELD === $C) { ... }
+    pattern-sinks:
+      # Sequelize raw queries
+      - patterns:
+          - pattern-either:
+              - pattern: models.sequelize.query($QUERY, ...)
+              - pattern: $DB.sequelize.query($QUERY, ...)
+              - pattern: sequelize.query($QUERY, ...)
+              - pattern: $DB.query($QUERY, ...)
+              - pattern: knex.raw($QUERY)
+              - pattern: pool.query($QUERY, ...)
+              - pattern: $CONN.query($QUERY, ...)
+              - pattern: $CONN.execute($QUERY, ...)
+          - pattern-not: models.sequelize.query($QUERY, { replacements: ... })
+          - pattern-not: $DB.query($QUERY, [...])
+          - pattern-not: $DB.query($QUERY, $ARRAY)
+    metadata:
+      category: security
+      technology:
+        - typescript
+        - javascript
+        - express
+        - sequelize
+      cwe: "CWE-89: SQL Injection"
+      owasp: "A03: Injection"
+      confidence: HIGH
+      likelihood: HIGH
+      impact: CRITICAL
+      subcategory:
+        - vuln
+      references:
+        - https://sequelize.org/docs/v6/core-concepts/raw-queries/#replacements
+        - https://owasp.org/www-project-top-ten/2021/A03_2021-Injection/
+
+  - id: sqli-taint-string-concat
+    message: |
+      [TAINT] Обнаружена конкатенация строк при формировании SQL-запроса.
+      Пользовательский ввод ($VAR) объединяется со строкой SQL через `+` или шаблонные строки.
+      Fix: Использовать параметризованные запросы вместо конкатенации строк.
+    severity: ERROR
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern-either:
+              - pattern: req.body
+              - pattern: req.params
+              - pattern: req.query
+              - pattern: req.body.$FIELD
+              - pattern: req.params.$FIELD
+              - pattern: req.query.$FIELD
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: |
+                  `$SQLSTR ${$VAR} $SQLSTR2`
+              - pattern: $SQLSTR + $VAR + $SQLSTR2
+    metadata:
+      category: security
+      technology:
+        - typescript
+        - javascript
+      cwe: "CWE-89: SQL Injection"
+      owasp: "A03: Injection"
+      confidence: MEDIUM
+      likelihood: HIGH
+      impact: CRITICAL
+      subcategory:
+        - vuln
+      references:
+        - https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html

@@ -78,4 +78,4 @@ else:
 
 ##  Полная версия
 
- [`authentication/identification-authentication-failures.md`](./authentication/identification-authentication-failures.md) — Brute Force, блокировка аккаунта vs DoS, JWT trade-offs, Refresh Token, Risk-Based Auth, interview questions
+ [`authentication/identification-authentication-failures.md`](../authentication/identification-authentication-failures.md) — Brute Force, блокировка аккаунта vs DoS, JWT trade-offs, Refresh Token, Risk-Based Auth, interview questions

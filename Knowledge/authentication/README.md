@@ -5,6 +5,8 @@
 | Файл | Описание | Статус |
 |------|----------|--------|
 | `identification-authentication-failures.md` | OWASP A07 — Username Enumeration, Timing, Brute Force, Session Fixation, JWT trade-offs, Risk-Based Auth | [OK] 100% |
+| `jwt.md` | Структура, алгоритмы, уязвимости (alg:none, confusion, kid injection), отзыв, клиентское хранение | [OK] 100% |
+| `oauth2-oidc.md` | OAuth 2.0 grant types (PKCE, Client Credentials), OIDC — ID Token, redirect_uri, state, PKCE, BFF-паттерн | [OK] 100% |
 
 ---
 
@@ -28,9 +30,8 @@
 ## План
 
 - [x] Identification & Authentication Failures (OWASP A07)
-- [ ] JWT
-- [ ] OAuth 2.0
-- [ ] OIDC
+- [x] JWT
+- [x] OAuth 2.0 + OIDC
 - [ ] MFA
 - [ ] Password Storage
 - [ ] Session Management

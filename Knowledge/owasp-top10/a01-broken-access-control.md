@@ -43,4 +43,4 @@
 
 ##  Полная версия
 
- [`authorization/broken-access-control.md`](./authorization/broken-access-control.md) — RBAC vs ABAC, Privilege Escalation, Mass Assignment, Tenant Isolation, централизованная авторизация, interview questions
+ [`authorization/broken-access-control.md`](../authorization/broken-access-control.md) — RBAC vs ABAC, Privilege Escalation, Mass Assignment, Tenant Isolation, централизованная авторизация, interview questions
