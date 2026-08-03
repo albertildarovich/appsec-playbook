@@ -14,7 +14,7 @@
 
 - 100+ инженерных документов
 - 15 тематических разделов
-- 17 лабораторных модулей OWASP Juice Shop
+- 24 лабораторных модуля OWASP Juice Shop (включая практику по ГОСТ Р 56939-2024)
 - Production-grade Secure SDLC Pipeline (GitLab CI)
 - Security Architecture Reviews
 - Threat Modeling (STRIDE)

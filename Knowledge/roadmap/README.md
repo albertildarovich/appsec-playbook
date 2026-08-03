@@ -50,13 +50,23 @@ Attack Trees           ░░░░░░░░░░░░░░░░░░░
 
 === Secure SDLC & DevSecOps ===
 Secure SDLC           ████████████████████ 100% [OK]
-CI/CD Security        ████████████████░░░░░  80%  (module-17 pipeline + devsecops)
+GitLab CI/CD          ████████████░░░░░░░░  60%  (gitlab-ci-cd.md + module-17)
+SAST Deep Dive        ████████████░░░░░░░░  60%  (sast-deep.md + module-15)
+Secret Scanning       ████████████████████ 100% [OK]  (secret-scanning.md)
 BSIMM / SAMM / SSDF   ████████████████░░░░░  80%  (теория есть, практики нет)
 
 === Supply Chain ===
-SBOM / SCA            ████████████████████ 100% [OK]
+SBOM                  ████████████████░░░░░  80%  (sbom.md, практика: syft/trivy)
+SCA                   ████████████████░░░░░  80%
 Cosign / Sigstore     ░░░░░░░░░░░░░░░░░░░░   0% [NO]
-CI/CD Pipeline Sec.   ██████░░░░░░░░░░░░░░░░  30%  (devsecops.md + module-17)
+CI/CD Pipeline Sec.   ████████████████░░░░░  80%  (devsecops.md + module-17)
+
+=== DevSecOps Practice ===
+Automation (Bash/Py)  ████████████░░░░░░░░  60%  (automation.md)
+Tool Selection (R&D)  ████████████████░░░░░  80%  (tool-selection.md)
+Banking Standards     ████████████░░░░░░░░  60%  (banking-standards.md)
+ГОСТ Р 56939-2024     ████████████████░░░░  80%  (module-24-gost-56939)
+Metrics & KPI         ████████████████████ 100% [OK]  (09-security-metrics)
 
 === Infrastructure & Cloud ===
 Kubernetes            ███████████████████░  95% [OK]
@@ -124,14 +134,23 @@ Docker                ███████████████████�
 ### Tier 5: Secure SDLC & DevSecOps
 - [x] Secure SDLC (фазы, security gates) — 10 файлов
 - [x] CI/CD Security (Pipeline, SAST/DAST/SCA) — devsecops.md + module-17
+- [x] GitLab CI/CD (stages, rules, needs, artifacts, include, extends, security gates) — gitlab-ci-cd.md
+- [x] SAST Deep Dive (AST, taint analysis, FP/FN, Semgrep custom rules) — sast-deep.md
+- [x] Secret Scanning (Gitleaks, TruffleHog, incident response) — secret-scanning.md
+- [x] Automation (Bash/Python: обработка отчётов, gate-скрипты) — automation.md
+- [x] Tool Selection (R&D: PoC, сравнение TP/FP, стоимость) — tool-selection.md
+- [x] Banking Standards (683-П, 757-П, ГОСТ 57580) — banking-standards.md
+- [x] ГОСТ Р 56939-2024 (безопасная разработка ПО, практика на Juice Shop) — module-24-gost-56939
 - [x] BSIMM (конспект)
 - [x] OWASP SAMM (конспект)
 - [x] NIST SSDF (конспект)
 
 ### Tier 6: Supply Chain Security
-- [x] SBOM / SCA
-- [ ] Cosign / Sigstore
+- [x] SBOM (SPDX vs CycloneDX, CVE/CPE/PURL/VEX, Syft/Trivy/cdxgen) — sbom.md
+- [x] SCA (Trivy, Dependency-Check, политика обновления) — devsecops.md
+- [ ] Cosign / Sigstore (подпись образов и SBOM)
 - [x] CI/CD Pipeline Security (Artifact Integrity) — devsecops.md + module-17
+- [ ] Практика: сгенерировать SBOM для проекта
 
 ### Tier 7: Infrastructure & Cloud
 - [x] Kubernetes Security (6 файлов: RBAC, Pod Security, Network Policies, CIS Benchmark, Runtime Security, Security Context)

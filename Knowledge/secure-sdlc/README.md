@@ -87,3 +87,6 @@ Phase 4: Optimization (Months 10-12)
 - **ISO 27001**: ISMS standard
 - **PCI DSS**: Payment card industry
 - **OWASP ASVS**: Verification standard
+- **ГОСТ Р 56939-2024**: Безопасная разработка ПО (российский стандарт, 8 разделов требований)
+
+**Практика по ГОСТ Р 56939-2024:** [module-24-gost-56939](../../Experience/labs/juice-shop/module-24-gost-56939/report.md) — gap analysis на Juice Shop: 20 уязвимостей сопоставлены с разделами стандарта.

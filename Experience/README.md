@@ -42,6 +42,7 @@ PortSwigger Web Security Academy
 OWASP Juice Shop
   - Все категории уязвимостей
   - Speedrun challenge
+  - ГОСТ Р 56939-2024 (практика: gap analysis 20 уязвимостей по разделам стандарта)
 
 DVWA / WebGOAT
   - Базовые уязвимости
