@@ -40,6 +40,7 @@
 | Docker Security | [Guide](Knowledge/docker-security/README.md), CIS Benchmark, Hardened Dockerfile, Trivy, Falco |
 | Authentication & Authorization | [JWT](Knowledge/authentication/jwt.md), [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md), [Overview](Knowledge/authentication/), [Authorization](Knowledge/authorization/) |
 | Secure Design | [Security Principles](Knowledge/secure-design/), [Architecture Thinking](Security%20Thinking/architecture-thinking/secure-design-principles.md) |
+| CWE Top 25 | [Чек-лист с привязкой к Semgrep/ZAP/Code Review находкам](Knowledge/cwe-top-25.md) |
 | Security Reviews | [Architecture Reviews](Engineering/architecture-reviews/), [Playbooks](Engineering/playbooks/), [ADR](Engineering/adr/) |
 
 ---
@@ -182,6 +183,7 @@ Practical implementations.
   |-- [Docker Security](Knowledge/docker-security/)
   |-- [DevSecOps](Knowledge/devsecops/)
   |-- [Cheatsheets](Knowledge/cheatsheets/)
+  |-- [CWE Top 25](Knowledge/cwe-top-25.md)
   |-- [Roadmap](Knowledge/roadmap/)
   |-- [Tools](Knowledge/tools/)
   |-- [Go Security](Knowledge/go-security/)

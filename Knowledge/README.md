@@ -24,6 +24,7 @@
 | [Linux](linux/) | Commands, systemd, auditd, openssl | [NO] |
 | [Cloud](cloud/) | AWS Security, IAM, S3, Cloud Trail | [NO] |
 | [Cheatsheets](cheatsheets/) | Быстрые справки по всем уязвимостям | [OK] |
+| [CWE Top 25](cwe-top-25.md) | Чек-лист по CWE Top 25 с привязкой к находкам Semgrep/ZAP/Code Review | [OK] |
 | [OWASP Top 10](owasp-top10/) | Единый хаб по всем категориям A01–A10 | [OK] |
 | [Tools](tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | [NO] |
 
