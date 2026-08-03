@@ -1,0 +1,41 @@
+# DevSecOps
+
+Security as Code: встраивание безопасности в CI/CD на каждом этапе — от pre-commit до production sign-off.
+
+## Структура раздела
+
+| Файл | Что внутри |
+|------|------------|
+| [devsecops.md](devsecops.md) | Полный обзор: Secret Scanning, SAST, SCA, Container Scanning, IaC Scanning, DAST. Gate policy, чек-лист внедрения, типовые ошибки, interview questions. |
+| [gitlab-ci-cd.md](gitlab-ci-cd.md) | GitLab CI/CD для security: stages, variables, needs, rules, artifacts, include, extends. Полный security-пайплайн. |
+| [sast-deep.md](sast-deep.md) | SAST deep dive: AST, taint analysis, false positive/negative, написание кастомных Semgrep-правил, сравнение с CodeQL. |
+| [sbom.md](sbom.md) | SBOM: SPDX vs CycloneDX, CVE/CPE/PURL/VEX, Syft/Trivy/cdxgen, генерация SBOM, подпись артефактов. |
+| [secret-scanning.md](secret-scanning.md) | Secret Scanning: regex vs entropy, Gitleaks, TruffleHog, incident response при утечке секрета. |
+| [automation.md](automation.md) | Автоматизация: Bash (grep/awk/sed/find/curl/jq), Python (JSON, REST, обработка отчётов Semgrep/Trivy). |
+| [tool-selection.md](tool-selection.md) | R&D: как выбирать инструменты. PoC, сравнение TP/FP, стоимость, поддержка, greenfield vs brownfield. |
+| [banking-standards.md](banking-standards.md) | Российские стандарты: 683-П, 757-П, ГОСТ 57580, ГОСТ Р 56939-2024 (безопасная разработка ПО). Как регуляторика связана с DevSecOps. |
+
+## Архитектура security-пайплайна
+
+```
+Pre-commit (секреты) -> SAST -> SCA -> SBOM -> Container Scan -> IaC Scan -> DAST -> Sign-off
+```
+
+## Чек-лист самопроверки
+
+- [ ] Secret Scanning: gitleaks в CI/CD + pre-commit hook
+- [ ] SAST: Semgrep/SonarQube на каждом MR, блокировка на CRITICAL
+- [ ] SCA: Trivy/Snyk на каждом MR, политика обновления зависимостей
+- [ ] SBOM: Syft/Trivy генерируют CycloneDX на каждом релизе
+- [ ] Container Scanning: Trivy на каждом билде образа
+- [ ] IaC Scanning: Checkov/tfsec на изменениях в k8s/Terraform
+- [ ] DAST: ZAP baseline на staging, full scan перед релизом
+- [ ] Gate policy задокументирована и согласована с командами
+
+## Связанные разделы
+
+- [Kubernetes Security](../kubernetes/README.md) — hardening K8s, runtime security
+- [Docker Security](../docker-security/README.md) — безопасная настройка контейнеров
+- [Secure SDLC](../secure-sdlc/README.md) — процесс внедрения security-практик, метрики, зрелость
+- [Module 17 — SSDLС Pipeline](../../Experience/labs/juice-shop/module-17-ssdlc/report.md) — практическая реализация пайплайна
+- [Module 24 — ГОСТ Р 56939-2024](../../Experience/labs/juice-shop/module-24-gost-56939/report.md) — практика: gap analysis по российскому стандарту безопасной разработки ПО
