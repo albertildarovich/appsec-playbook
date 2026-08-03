@@ -1,0 +1,80 @@
+# SAST Pipeline: Semgrep + SonarQube
+# Стадии: sast (Semgrep) -> test (SonarQube) -> gate (блокировка merge)
+
+stages:
+  - sast
+  - test
+  - gate
+
+variables:
+  SONAR_HOST_URL: "https://sonar.example.com"
+  SONAR_PROJECT_KEY: "demo-app"
+
+# --- L1: Semgrep, быстрый SAST на каждый MR ---
+sast-semgrep:
+  stage: sast
+  image: semgrep/semgrep:1.66.0
+  script:
+    - semgrep scan
+        --config=p/default
+        --config=p/owasp-top-ten
+        --config=rules/sql-injection.yaml
+        --config=rules/mass-assignment.yaml
+        --sarif --output=semgrep.sarif
+        --error
+        --exclude='node_modules'
+        --exclude='build'
+        --exclude='tests'
+  artifacts:
+    reports:
+      sast: semgrep.sarif
+    expire_in: 30 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# --- L2: SonarQube, глубокий анализ ---
+sonarqube-scan:
+  stage: test
+  image: sonarsource/sonar-scanner-cli:5.0
+  script:
+    - sonar-scanner
+        -Dsonar.projectKey=$SONAR_PROJECT_KEY
+        -Dsonar.sources=src
+        -Dsonar.host.url=$SONAR_HOST_URL
+        -Dsonar.token=$SONAR_TOKEN
+        -Dsonar.qualitygate.wait=true
+  artifacts:
+    expire_in: 30 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# --- L3: Gate, проверка Quality Gate ---
+sast-gate:
+  stage: gate
+  image: alpine:3.20
+  script:
+    - apk add --no-cache curl jq
+    - |
+      STATUS=$(curl -s -u "$SONAR_TOKEN:" \
+        "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=$SONAR_PROJECT_KEY" \
+        | jq -r '.projectStatus.status')
+      echo "Quality Gate status: $STATUS"
+      if [ "$STATUS" != "OK" ]; then
+        echo "Quality Gate FAILED - merge blocked"
+        exit 1
+      fi
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+# --- Комментарий в MR: триаж находок ---
+sast-triage-comment:
+  stage: gate
+  image: alpine:3.20
+  script:
+    - echo "Triage: см. артефакты semgrep.sarif и отчёт в triage.md"
+    - echo "Критерии: FP -> комментарий на MR, TP -> задача в backlog"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always

@@ -15,7 +15,7 @@ Knowledge → Engineering → Experience
 
 | Раздел | Описание | Статус |
 |--------|----------|--------|
-| [Labs](./labs/) | Лабораторные: PortSwigger, Juice Shop, DVWA, HTB | [NO] |
+| [Labs](./labs/) | Лабораторные: DevSecOps (SAST/SCA/DAST), Threat Modeling, Mobile Security, Juice Shop | [OK] |
 | [Writeups](./writeups/) | Разбор лабораторных и CVE | [NO] |
 | [Real Incidents](./incidents/) | Реальные инциденты и postmortems | [NO] |
 | [Mini Projects](./mini-projects/) | Практические проекты: расширения, инструменты, демо | [OK] |
@@ -30,6 +30,26 @@ Knowledge → Engineering → Experience
 Практические лабораторные для отработки навыков:
 
 ```
+DevSecOps
+  - SAST Pipeline (Semgrep + SonarQube, triage FP/TP)
+  - SCA Pipeline (Trivy + Dependency-Check, SBOM CycloneDX)
+  - DAST: OWASP ZAP (baseline scan)
+  - Jenkins DevSecOps (CI/CD pipeline с security gates)
+
+Secure Code Review
+  - SQLi, Mass Assignment, Hardcoded Secrets, IDOR/BOLA, SSRF
+
+Threat Modeling
+  - STRIDE-анализ, security requirements, mitigation plan
+
+Mobile Security
+  - OWASP Mobile Top 10: insecure storage, insecure communication, weak auth
+
+OWASP Juice Shop
+  - Все категории уязвимостей
+  - Speedrun challenge
+  - ГОСТ Р 56939-2024 (практика: gap analysis 20 уязвимостей по разделам стандарта)
+
 PortSwigger Web Security Academy
   - SQL Injection (все lab)
   - XSS (все lab)
@@ -38,11 +58,6 @@ PortSwigger Web Security Academy
   - XXE
   - Authentication
   - Access Control
-
-OWASP Juice Shop
-  - Все категории уязвимостей
-  - Speedrun challenge
-  - ГОСТ Р 56939-2024 (практика: gap analysis 20 уязвимостей по разделам стандарта)
 
 DVWA / WebGOAT
   - Базовые уязвимости
