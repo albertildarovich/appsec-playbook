@@ -1,0 +1,28 @@
+title: Linux sudo Privilege Escalation Detected
+id: 100015-sigma
+status: experimental
+description: Обнаружение попытки повышения привилегий через sudo на Linux (T1548.003 – Sudo and Sudo Caching)
+references:
+  - https://attack.mitre.org/techniques/T1548/003/
+tags:
+  - attack.privilege_escalation
+  - attack.defense_evasion
+  - attack.t1548.003
+author: albert
+date: 2026/08/04
+logsource:
+  product: linux
+  service: auditd
+detection:
+  selection:
+    type: 'EXECVE'
+    a0|contains: 'sudo'
+  filter_legitimate:
+    comm|contains:
+      - 'sudo'
+      - 'su'
+  condition: selection and not filter_legitimate
+falsepositives:
+  - Легитимные административные задачи (администраторы, CI/CD)
+  - Автоматизированные сценарии обслуживания
+level: medium

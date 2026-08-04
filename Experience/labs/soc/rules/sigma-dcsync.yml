@@ -1,0 +1,26 @@
+title: DCSync - Directory Replication Request
+id: 100012-sigma
+status: experimental
+description: Обнаружение запроса репликации каталога от не-DC хоста (T1003.006)
+references:
+  - https://attack.mitre.org/techniques/T1003/006/
+tags:
+  - attack.credential_access
+  - attack.t1003.006
+author: albert
+date: 2026/08/04
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4662
+    Properties|contains:
+      - '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'
+      - '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2'
+  filter:
+    SubjectUserName|endswith: '$'
+  condition: selection and not filter
+falsepositives:
+  - Легитимные DC-репликации
+level: critical

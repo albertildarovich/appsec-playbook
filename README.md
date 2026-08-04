@@ -1,26 +1,40 @@
-# Application Security Playbook
+# Security Engineering Playbook
 
-> **Engineering Portfolio of an Application Security / DevSecOps Engineer**
+> **Engineering Portfolio of a Security Engineer**
 
-Практическое инженерное портфолио, демонстрирующее мой подход к Application Security, DevSecOps и Secure SDLC.
+A practical engineering portfolio demonstrating my approach to building, assessing and operating secure software systems.
 
-В репозитории собраны реальные инженерные артефакты: архитектурные обзоры, threat models, Security Code Review, DevSecOps pipeline, лабораторные проекты, ADR, практические плейбуки и разборы инцидентов.
+This repository combines knowledge and practical experience across multiple security domains, including:
 
-Главная цель репозитория — показать **не только знания технологий, но и инженерное мышление, процесс принятия решений и подход к построению безопасной разработки.**
+- Application Security
+- Secure SDLC
+- Security Architecture
+- Threat Modeling
+- DevSecOps
+- Detection Engineering
+- Blue Team practices
+- Cloud & Container Security
+- Security Automation
+
+Rather than being a collection of notes, this repository contains engineering artifacts, architecture reviews, security design documents, laboratory exercises, detection content, case studies and practical playbooks that reflect how security is applied throughout the software development lifecycle.
+
+The primary goal of this repository is to demonstrate not only technical knowledge, but also engineering thinking, structured decision-making and a practical approach to solving security problems.
 
 ---
 
 # Highlights
 
-- 100+ инженерных документов
-- 15 тематических разделов
-- 24 лабораторных модуля OWASP Juice Shop (включая практику по ГОСТ Р 56939-2024)
+- 100+ engineering documents
+- 15+ knowledge domains
+- Complete Secure SDLC knowledge base
 - Production-grade Secure SDLC Pipeline (GitLab CI)
 - Security Architecture Reviews
 - Threat Modeling (STRIDE)
 - Security Code Review
-- DevSecOps Playbooks
-- Case Studies реальных атак
+- Security Design Reviews
+- OWASP Juice Shop laboratory (24 practical modules, including GOST R 56939-2024)
+- Detection Engineering materials
+- Incident Analysis & Case Studies
 - Open Source
 
 ---
@@ -29,123 +43,126 @@
 
 | Competency | Evidence |
 |------------|----------|
-| Secure SDLC | [Security Gates, BSIMM, SAMM, SSDF, Champions, Metrics](Knowledge/secure-sdlc/) |
-| DevSecOps | [SAST, DAST, SCA, Secret Detection, CI/CD Security](Knowledge/devsecops/devsecops.md) |
-| Threat Modeling | [STRIDE](Knowledge/threat-modeling/stride.md), [Juice Shop Threat Model](Experience/labs/juice-shop/threat-model.md), [Overview](Knowledge/threat-modeling/) |
-| Architecture Review | [API Gateway Review](Engineering/architecture-reviews/api-gateway.md), [Payments Review](Engineering/architecture-reviews/payments.md) |
-| Security Code Review | [Checklist](Engineering/code-review/review-checklist.md), [Overview](Engineering/code-review/) |
-| OWASP Top 10 | [All Categories A01–A10](Knowledge/owasp-top10/) |
-| API Security | [Overview](Knowledge/api-security/), JWT, OAuth2/OIDC, API Gateway, OWASP API Security |
-| Kubernetes Security | [Overview](Knowledge/kubernetes/), RBAC, Pod Security, Network Policies, Runtime Security |
-| Docker Security | [Guide](Knowledge/docker-security/README.md), CIS Benchmark, Hardened Dockerfile, Trivy, Falco |
-| Authentication & Authorization | [JWT](Knowledge/authentication/jwt.md), [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md), [Overview](Knowledge/authentication/), [Authorization](Knowledge/authorization/) |
-| Secure Design | [Security Principles](Knowledge/secure-design/), [Architecture Thinking](Security%20Thinking/architecture-thinking/secure-design-principles.md) |
-| CWE Top 25 | [Чек-лист с привязкой к Semgrep/ZAP/Code Review находкам](Knowledge/cwe-top-25.md) |
-| Security Reviews | [Architecture Reviews](Engineering/architecture-reviews/), [Playbooks](Engineering/playbooks/), [ADR](Engineering/adr/) |
+| Secure SDLC | Security Gates, BSIMM, SAMM, SSDF, Security Champions, Security Metrics |
+| Application Security | OWASP Top 10, OWASP API Security, Security Reviews |
+| Threat Modeling | STRIDE, Data Flow Diagrams, Trust Boundaries |
+| Security Architecture | Architecture Reviews, ADR, Security Design |
+| Security Code Review | Review methodology, Checklists, Secure Coding |
+| API Security | REST Security, JWT, OAuth2, OIDC, API Gateway |
+| Authentication & Authorization | RBAC, JWT, OAuth2/OIDC, Keycloak |
+| Vulnerability Assessment | OWASP Juice Shop Labs, Security Testing |
+| DevSecOps | SAST, DAST, SCA, Secret Detection, CI/CD Security |
+| Container Security | Docker Hardening, Trivy, Falco |
+| Kubernetes Security | RBAC, Pod Security, Network Policies |
+| Linux Security | Linux Hardening, Bash, Security Fundamentals |
+| Detection Engineering | Detection concepts, Sigma, MITRE ATT&CK |
+| Incident Analysis | Attack Case Studies, Root Cause Analysis |
+| Security Automation | GitLab CI, GitHub Actions, Security Pipelines |
 
 ---
 
 # Featured Engineering Artifacts
 
-## Production-grade Secure SDLC Pipeline
+## Secure SDLC Pipeline
 
-**Demonstrates**
+Production-grade Secure SDLC implementation demonstrating:
 
 - GitLab CI
 - Security Gates
 - SAST
+- DAST
 - SCA
 - Secret Detection
-- DAST
-- Gherkin Security Requirements
-
-➡️ [Open document](Experience/labs/juice-shop/module-17-ssdlc/report.md)
+- Security Requirements
+- Release Security Gates
 
 ---
 
-## Security Architecture Review
+## Security Architecture Reviews
 
-API Gateway security assessment using STRIDE.
+Practical architecture reviews containing:
 
-Includes
-
-- 24 identified threats
-- mitigation strategy
-- architecture recommendations
-- review checklist
-
-➡️ [Open document](Engineering/architecture-reviews/api-gateway.md)
+- Threat Modeling
+- Attack Surface Analysis
+- Security Requirements
+- Design Recommendations
+- Risk Assessment
 
 ---
 
-## Docker Security Guide
+## Threat Modeling
 
-Practical Docker hardening.
+Practical STRIDE methodology including:
 
-Includes
-
-- CIS Benchmark
-- Hardened Dockerfile
-- Trivy
-- Falco
-- BuildKit Secrets
-
-➡️ [Open document](Knowledge/docker-security/README.md)
+- Data Flow Diagrams
+- Trust Boundaries
+- Threat Identification
+- Risk Prioritization
+- Security Controls
 
 ---
 
-## Authentication & Authorization
+## Security Code Review
 
-Practical documentation covering
+Engineering methodology covering:
 
-- JWT
-- OAuth 2.0
-- OIDC
-- common vulnerabilities
-- validation checklist
-
-➡️ [JWT](Knowledge/authentication/jwt.md)
-
-➡️ [OAuth2/OIDC](Knowledge/authentication/oauth2-oidc.md)
+- Secure Coding
+- Common Vulnerabilities
+- Review Checklists
+- CWE Mapping
+- Practical Examples
 
 ---
 
-## Security Review Playbook
+## Detection Engineering
 
-Complete methodology for conducting security reviews.
+Practical detection engineering materials including:
 
-Includes
-
-- preparation
-- architecture analysis
-- threat modeling
-- reporting
-- recommendations
-
-➡️ [Open document](Engineering/playbooks/security-review.md)
+- MITRE ATT&CK Mapping
+- Sigma Rules
+- Detection Playbooks
+- Attack Chains
+- Security Telemetry
+- Detection Strategy
 
 ---
 
 ## Case Studies
 
-Analysis of real-world incidents.
+Analysis of real-world security incidents.
 
-- [Capital One SSRF](Experience/case-studies/case03-capital-one-ssrf.md)
-- [Auth0 JWT vulnerability](Experience/case-studies/case02-auth0-jwt.md)
-- [Juice Shop Authentication Bypass](Experience/case-studies/case01.md)
+Examples include:
 
-➡️ [All case studies](Experience/case-studies/)
+- Capital One SSRF
+- Auth0 JWT vulnerability
+- OWASP Juice Shop attack scenarios
+
+Each case study focuses on:
+
+- Root Cause Analysis
+- Attack Chain
+- Detection Opportunities
+- Mitigation
+- Lessons Learned
 
 ---
 
-## Mini Projects
+## Practical Labs
 
-Practical implementations.
+Hands-on security laboratories covering:
 
-- [Chrome Security Auditor Extension](Experience/mini-projects/chrome-security-auditor/)
-- [VS Code Security Auditor Extension](Experience/mini-projects/vscode-security-auditor/)
-
-➡️ [All mini projects](Experience/mini-projects/)
+- OWASP Juice Shop
+- Secure SDLC
+- Security Testing
+- Threat Modeling
+- Vulnerability Analysis
+- Active Directory
+- Windows Security
+- Sysmon
+- Wazuh
+- Elastic SIEM
+- Threat Hunting
+- Incident Response
 
 ---
 
@@ -153,91 +170,118 @@ Practical implementations.
 
 | Category | Stack |
 |-----------|------|
-| SAST | Semgrep (public + custom rules) |
-| DAST | OWASP ZAP, Nuclei |
+| SAST | Semgrep |
+| DAST | OWASP ZAP, Burp Suite Professional, Nuclei |
 | SCA | Trivy, npm audit |
 | Secret Detection | Gitleaks |
-| Container Security | Trivy |
-| Runtime Security | Falco |
-| IaC | Checkov, tfsec |
-| Kubernetes | kube-bench, CIS Benchmark |
-| Manual Testing | Burp Suite Professional |
+| Container Security | Trivy, Falco |
+| Kubernetes | kube-bench |
+| IaC Security | Checkov, tfsec |
 | CI/CD | GitLab CI, GitHub Actions |
+| Scripting | Bash, Python |
+| Detection *(Learning)* | Sigma, Wazuh, Elastic |
 
 ---
 
 # Repository Structure
 
 ```
-[Knowledge](Knowledge/)                          How security works
-  |-- [Fundamentals](Knowledge/fundamentals/)
-  |-- [Secure Design](Knowledge/secure-design/)
-  |-- [Authentication](Knowledge/authentication/)
-  |-- [Authorization](Knowledge/authorization/)
-  |-- [Threat Modeling](Knowledge/threat-modeling/)
-  |-- [OWASP Top 10](Knowledge/owasp-top10/)
-  |-- [API Security](Knowledge/api-security/)
-  |-- [Web Security](Knowledge/web-security/)
-  |-- [Cryptography](Knowledge/cryptography/)
-  |-- [Kubernetes Security](Knowledge/kubernetes/)
-  |-- [Docker Security](Knowledge/docker-security/)
-  |-- [DevSecOps](Knowledge/devsecops/)
-  |-- [Cheatsheets](Knowledge/cheatsheets/)
-  |-- [CWE Top 25](Knowledge/cwe-top-25.md)
-  |-- [Roadmap](Knowledge/roadmap/)
-  |-- [Tools](Knowledge/tools/)
-  |-- [Go Security](Knowledge/go-security/)
-  |-- [Linux Security](Knowledge/linux/)
-  |-- [Secure SDLC](Knowledge/secure-sdlc/)
+Knowledge/
+├── Fundamentals
+├── Secure SDLC
+├── Secure Design
+├── Authentication
+├── Authorization
+├── Threat Modeling
+├── Web Security
+├── API Security
+├── Cryptography
+├── OWASP Top 10
+├── Docker Security
+├── Kubernetes Security
+├── Linux Security
+├── DevSecOps
+├── Roadmaps
+└── Tools
 
-[Engineering](Engineering/)                      How I build security
-  |-- [Architecture Reviews](Engineering/architecture-reviews/)
-  |-- [Code Review](Engineering/code-review/)
-  |-- [Checklists](Engineering/checklists/)
-  |-- [Playbooks](Engineering/playbooks/)
-  |-- [ADR (Architecture Decision Records)](Engineering/adr/)
-  |-- [Architecture Patterns](Engineering/architecture-patterns/)
-  |-- [Security Decisions](Engineering/security-decisions/)
+Engineering/
+├── Architecture Reviews
+├── Code Reviews
+├── Playbooks
+├── Checklists
+├── Architecture Decision Records
+├── Security Decisions
+└── Architecture Patterns
 
-[Experience](Experience/)                        What I implemented
-  |-- [Case Studies](Experience/case-studies/)
-  |-- [Labs: OWASP Juice Shop](Experience/labs/juice-shop/)
-  |-- [Mini Projects](Experience/mini-projects/)
+Experience/
+├── Labs
+├── Case Studies
+├── Mini Projects
+└── Reports
 
-[Security Thinking](Security%20Thinking/)        How I analyze security
-  |-- [Analysis](Security%20Thinking/analysis/)
-  |-- [Trade-offs](Security%20Thinking/trade-offs/)
-  |-- [Architecture Thinking](Security%20Thinking/architecture-thinking/)
+Detection/
+├── MITRE ATT&CK
+├── Sigma
+├── Detection Rules
+├── Incident Response
+├── Threat Hunting
+└── Security Monitoring
+
+Security Thinking/
+├── Architecture Thinking
+├── Trade-offs
+├── Analysis
+└── Design Decisions
 ```
 
 ---
 
 # Engineering Principles
 
-This repository follows several principles:
+This repository follows several engineering principles:
 
-- Security should support development, not slow it down.
-- Automation is preferred over manual processes.
-- Threats are analyzed before selecting tools.
-- Security controls should be reproducible.
-- Engineering decisions should be documented.
-- Every recommendation should have technical justification.
+- Security should be integrated into development rather than added afterwards.
+- Threats should be understood before selecting security controls.
+- Prevention and detection should complement each other.
+- Automation is preferred over repetitive manual work.
+- Engineering decisions should be documented and reproducible.
+- Security recommendations should always have technical justification.
+- Security is a continuous engineering process, not a one-time activity.
 
 ---
 
 # Why this repository exists
 
-Most security repositories focus on explaining technologies.
+Many security repositories explain individual tools or technologies.
 
-This repository focuses on demonstrating engineering practice.
+This repository focuses on engineering practice.
 
-Instead of isolated notes, it contains complete engineering artifacts that can be used as references during architecture reviews, Secure SDLC implementation, DevSecOps adoption and Application Security assessments.
+It demonstrates how security decisions are made throughout the entire lifecycle of software systems—from architecture and design to implementation, deployment, detection and continuous improvement.
+
+The repository is intended to showcase engineering thinking, structured problem solving and practical security workflows rather than isolated technical notes.
+
+---
+
+# Roadmap
+
+Current areas of active development include:
+
+- Detection Engineering
+- Windows Security
+- Active Directory
+- Sysmon
+- Wazuh
+- Elastic SIEM
+- Threat Hunting
+- Incident Response
+- Cloud Security
+- Kubernetes Security
+- AI Security
 
 ---
 
 # About
 
-Repository maintained by an Application Security / DevSecOps Engineer.
+Maintained by a Security Engineer with a background in software engineering and a strong focus on secure software development, security architecture and practical security engineering.
 
-GitHub:
-https://github.com/albertildarovich
+This repository serves as a continuously evolving engineering portfolio documenting hands-on learning, practical experiments and reusable security knowledge.

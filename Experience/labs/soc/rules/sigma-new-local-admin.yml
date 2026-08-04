@@ -1,0 +1,26 @@
+title: New Local Administrator Account Created
+id: 100014-sigma
+status: experimental
+description: Обнаружение добавления пользователя в группу локальных администраторов (T1098 – Account Manipulation)
+references:
+  - https://attack.mitre.org/techniques/T1098/
+tags:
+  - attack.persistence
+  - attack.privilege_escalation
+  - attack.t1098
+author: albert
+date: 2026/08/04
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4732
+    TargetUserName: 'Administrators'
+  filter_system:
+    SubjectUserName|contains: 'SYSTEM'
+  condition: selection and not filter_system
+falsepositives:
+  - Легитимные административные действия (добавление через GPO, SCCM, MDM)
+  - Скрипты развёртывания
+level: medium
