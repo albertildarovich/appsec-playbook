@@ -179,7 +179,7 @@ Hands-on security laboratories covering:
 | IaC Security | Checkov, tfsec |
 | CI/CD | GitLab CI, GitHub Actions |
 | Scripting | Bash, Python |
-| Detection *(Learning)* | Sigma, Wazuh, Elastic |
+| Detection | Sigma, Wazuh, Elastic |
 
 ---
 
@@ -259,24 +259,6 @@ This repository focuses on engineering practice.
 It demonstrates how security decisions are made throughout the entire lifecycle of software systems—from architecture and design to implementation, deployment, detection and continuous improvement.
 
 The repository is intended to showcase engineering thinking, structured problem solving and practical security workflows rather than isolated technical notes.
-
----
-
-# Roadmap
-
-Current areas of active development include:
-
-- Detection Engineering
-- Windows Security
-- Active Directory
-- Sysmon
-- Wazuh
-- Elastic SIEM
-- Threat Hunting
-- Incident Response
-- Cloud Security
-- Kubernetes Security
-- AI Security
 
 ---
 
