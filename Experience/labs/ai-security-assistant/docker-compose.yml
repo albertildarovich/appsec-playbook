@@ -1,0 +1,33 @@
+# AI Security Assistant — local dev environment
+# Status: skeleton (Phase 0). Services will be wired in later phases.
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: ai-security-db
+    environment:
+      POSTGRES_USER: ai_security
+      POSTGRES_PASSWORD: ai_security_dev
+      POSTGRES_DB: ai_security
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_security"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # backend:
+  #   build: ./backend
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   environment:
+  #     DATABASE_URL: postgresql+psycopg://ai_security:ai_security_dev@db:5432/ai_security
+  #   ports:
+  #     - "8000:8000"
+
+volumes:
+  pgdata:

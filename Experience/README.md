@@ -50,6 +50,12 @@ OWASP Juice Shop
   - Speedrun challenge
   - ГОСТ Р 56939-2024 (практика: gap analysis 20 уязвимостей по разделам стандарта)
 
+AI Security Assistant
+  - Production-oriented AI агент для vulnerability management
+  - LLM + RAG + tool calling + MCP
+  - Security first-class: RBAC, human approval, redaction, audit logging
+  - Red teaming: prompt injection, data leakage, tool abuse
+
 PortSwigger Web Security Academy
   - SQL Injection (все lab)
   - XSS (все lab)

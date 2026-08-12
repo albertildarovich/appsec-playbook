@@ -27,6 +27,7 @@
 | [CWE Top 25](cwe-top-25.md) | Чек-лист по CWE Top 25 с привязкой к находкам Semgrep/ZAP/Code Review | [OK] |
 | [OWASP Top 10](owasp-top10/) | Единый хаб по всем категориям A01–A10 | [OK] |
 | [Tools](tools/) | Burp, Semgrep, Trivy, Gitleaks — workflow | [NO] |
+| [AI Security](ai-security/) | LLM, RAG, Agents, MCP + Securing AI (prompt injection, data leakage, excessive agency) | [OK] |
 
 ---
 

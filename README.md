@@ -35,7 +35,11 @@ The primary goal of this repository is to demonstrate not only technical knowled
 - OWASP Juice Shop laboratory (24 practical modules, including GOST R 56939-2024)
 - Detection Engineering materials
 - Incident Analysis & Case Studies
+- **AI Security Assistant** — production-oriented AI agent for vulnerability management
+  (LLM, RAG, tool calling, MCP, RBAC, human approval, audit logging)
+- **AI Security knowledge base** — LLM/agents/RAG/MCP applied to security + securing AI
 - Open Source
+
 
 ---
 
@@ -202,7 +206,8 @@ Knowledge/
 ├── Linux Security
 ├── DevSecOps
 ├── Roadmaps
-└── Tools
+├── Tools
+└── AI Security (LLM, RAG, Agents, MCP + Securing AI)
 
 Engineering/
 ├── Architecture Reviews
@@ -215,6 +220,7 @@ Engineering/
 
 Experience/
 ├── Labs
+│   └── AI Security Assistant (практический проект: backend, agent, RAG, MCP)
 ├── Case Studies
 ├── Mini Projects
 └── Reports
